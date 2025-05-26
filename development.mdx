@@ -1,6 +1,6 @@
 ---
 title: "Technical Details"
-description: "Each platform is installed on a virtual private server (KVM virtualization) fully isolated and with resources dedicated for you."
+description: "Each platform is installed on a virtual private server (KVM virtualization) fully isolated and with resources dedicated to you and with DDoS protection enabled."
 ---
 
 <Info>
@@ -8,7 +8,7 @@ description: "Each platform is installed on a virtual private server (KVM virtua
   We can provide a limited SSH account though upon request.
 </Info>
 
-### Tech Stack
+## Tech Stack
 
 By default,  all of these servers are spawned with Ubuntu OS and are optimized specifically for WordPress (LEMP stack, Fast-CGI cache, Redis):
 
@@ -21,18 +21,6 @@ By default,  all of these servers are spawned with Ubuntu OS and are optimized s
 Please note that each platform comes with a **DirectAdmin **access as well which is installed on top of the platform to enhance security and provide better performance.
 
 Here you can perform whatever operation you wish which is not natively integrated in the platform such as accessing your customers files via "**File Manager**", setup hourly/daily/weekly **backups **locally or in a offsite location etc.
-
-```bash npm
-npm i -g mintlify@latest
-```
-
-## ating Links
-
-The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
-
-```bash
-mintlify broken-links
-```
 
 ## Autoscale Configuration
 
@@ -57,19 +45,12 @@ Take a look at the demo [here](https://status.areawp.com/report/uptime/61f2fe493
 
 In addition you'll receive custom notifications via email whenever the virtual server exceeds 80% of its resources , so you can act promptly to fix the root cause or upgrade the server without causing downtime to the customer (remember that you will still have the "autoscale" that will cover you temporarily from any possible downtime)
 
-## Troubleshooting
+## Blacklist Monitor
 
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-    This may be due to an outdated version of node. Try the following:
+<Tip>
+  Blacklist option available under the [Enterprise ](https://areawp.com/pricing)plan only.
+</Tip>
 
-    1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall mintlify: `npm install -g mintlify`
-  </Accordion>
-  <Accordion title="Issue: Encountering an unknown error">
-    Solution: Go to the root of your device and delete the ~/.mintlify folder. Afterwards, run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
+This feature will alert you via email whenever your server's IP gets blacklisted in any popular RBL with a check that is performed automatically every 24 hours.
 
-Curious about what changed in the CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/mintlify?activeTab=versions)
+Take a look at the demo [here](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/).
