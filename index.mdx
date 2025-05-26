@@ -15,10 +15,10 @@ description: "AreaWP is an all-in-one WordPress platform designed specifically f
   alt="Hero Dark"
 />
 
-## **What is WaaS and how does it work?**
+## What is WaaS ?
 
-The WaaS (Website-as-a-Service) allows you to build and Sell pre-Made WordPress Sites, create site templates and offer them as turnkey solutions, Automate Sales and Deployment.\
-It's not a multi-site solution, each installation is independent and it's powered by DirectAdmin control panel behind.
+The WaaS (Website-as-a-Service) model allows you to build and Sell pre-Made WordPress Sites, create site templates and offer them as turnkey solutions, Automate Sales and Deployment.\
+Are you curious about how it's structured behind? Take a look here:
 
 <CardGroup cols={2}>
   <Card title="Technical Details" icon="pen-to-square" href="https://docs.areawp.com/technical">
@@ -26,9 +26,20 @@ It's not a multi-site solution, each installation is independent and it's powere
   </Card>
 </CardGroup>
 
+## Single Tenant vs Multi Tenant
+
+In a multi-tenant WordPress setup, a single WordPress installation serves multiple websites (or tenants), each with its own isolated space and data. In contrast, a single-tenant WordPress setup provides a dedicated WordPress installation for each website, with its own database, files, and resources. 
+
+**Overall:**\
+**Single tenant (our choice):** More secure since each customer has a separate environment. A security breach only affects one client.
+
+**Multi tenant**: Higher risk because multiple customers share the same infrastructure. If one tenant is compromised, others might be at risk.
+
+That's why we opted for **"single tenant"** deployment for our infrastructure.
+
 ## Setting up
 
-Update your docs to your brand and add valuable content for the best user conversion.
+Let's take a look at the main sections of the platform to get started quickly.
 
 <CardGroup cols={2}>
   <Card title="Customize Style" icon="palette" href="https://mintlify.com/docs/settings/global">
