@@ -21,8 +21,12 @@
             ]
           },
           {
-          "group": "Admin View",
+          "group": "Admin Setup",
             "pages": [
+              "admin/templates",
+              "admin/websites",
+              "admin/plugins",
+              "admin/domains",
               "essentials/images",
               {
                 "group": "OpenAPI",
