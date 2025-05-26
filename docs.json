@@ -22,30 +22,20 @@
             ]
           },
           {
-            "group": "Essentials",
+          "group": "API Pages",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-             "group": "API Pages",
-            "pages": [
+              "api-playground/overview",
               {
-                "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+                "group": "OpenAPI",
+                "icon": "file-json",
+                "pages": [
+                  "api-playground/openapi/setup",
+                  "api-playground/openapi/writing-openapi",
+                  "api-playground/openapi/advanced-features"
+                ]
+              }
             ]
-          }
+            }
         ]
       }
     ],
