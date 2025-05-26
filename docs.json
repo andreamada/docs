@@ -21,7 +21,6 @@
               "development"
             ]
           },
-          
           {
             "group": "Essentials",
             "pages": [
@@ -32,36 +31,23 @@
               "essentials/navigation",
               "essentials/reusable-snippets"
             ]
+          },
+          {
+             "group": "API Pages",
+            "pages": [
+              {
+                "group": "Essentials",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/settings",
+              "essentials/navigation",
+              "essentials/reusable-snippets"
+            ]
           }
         ]
-      },
-      {
-        "tab": "Hello",
-  "dropdowns": [
-    {
-      "dropdown": "Documentation",
-      "icon": "book-open",
-      "pages": [
-        "quickstart",
-        "development",
-        "navigation"
-      ]
-    },
-    {
-      "dropdown": "API References",
-      "icon": "sqaure-terminal",
-      "pages": [
-        "api-reference/get",
-        "api-reference/post",
-        "api-reference/delete"
-      ]
-    },
-    {
-      "dropdown": "Blog",
-      "href": "https://external-link.com/blog"
-    }
-  ]
-}
+      }
     ],
     "global": {
       "anchors": [
