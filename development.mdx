@@ -1,68 +1,32 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: "Technical Details"
+description: "Each platform is installed on a virtual private server (KVM virtualization) fully isolated and with resources dedicated for you."
 ---
 
 <Info>
-  **Prerequisite**: Please install Node.js (version 19 or higher) before proceeding. <br />
-  Please upgrade to ```docs.json``` before proceeding and delete the legacy ```mint.json``` file.
+  **Note**: There's no root access with the server to avoid unwanted operations and direct access to the source code of the platform itself.\
+  We can provide a limited SSH account though upon request.
 </Info>
 
-Follow these steps to install and run Mintlify on your operating system:
+### Tech Stack
 
-**Step 1**: Install Mintlify:
+By default,  all of these servers are spawned with Ubuntu OS and are optimized specifically for WordPress (LEMP stack, Fast-CGI cache, Redis):
 
-<CodeGroup>
+1. LEMP stack (**Linux, Nginx, MySQL/MariaDB, and PHP)**
+2. Fast-Cgi cache
+3. Redis
 
-  ```bash npm
-  npm i -g mintlify
-  ```
+## DirectAdmin Control Panel
 
-```bash yarn
-yarn global add mintlify
-```
+Please note that each platform comes with a **DirectAdmin **access as well which is installed on top of the platform to enhance security and provide better performance.
 
-</CodeGroup>
-
-**Step 2**: Navigate to the docs directory (where the `docs.json` file is located) and execute the following command:
-
-```bash
-mintlify dev
-```
-
-A local preview of your documentation will be available at `http://localhost:3000`.
-
-### Custom Ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. To run Mintlify on port 3333, for instance, use this command:
-
-```bash
-mintlify dev --port 3333
-```
-
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
-
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
-
-## Mintlify Versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local website doesn't align with the production version, please update the CLI:
-
-<CodeGroup>
+Here you can perform whatever operation you wish which is not natively integrated in the platform such as accessing your customers files via "**File Manager**", setup hourly/daily/weekly **backups **locally or in a offsite location etc.
 
 ```bash npm
 npm i -g mintlify@latest
 ```
 
-```bash yarn
-yarn global upgrade mintlify
-```
-
-</CodeGroup>
-
-## Validating Links
+## ating Links
 
 The CLI can assist with validating reference links made in your documentation. To identify any broken links, use the following command:
 
@@ -70,37 +34,41 @@ The CLI can assist with validating reference links made in your documentation. T
 mintlify broken-links
 ```
 
-## Deployment
+## Autoscale Configuration
 
 <Tip>
-  Unlimited editors available under the [Pro
-  Plan](https://mintlify.com/pricing) and above.
+  Autoscale option available under the [Business](https://areawp.com/pricing) and [Enterprise ](https://areawp.com/pricing)plans only.
 </Tip>
 
-If the deployment is successful, you should see the following:
+Autoscale refers to adding more resources such as CPU/RAM to your Virtual Machines based on a particular threshold as on demand. In Autoscale, resources can be upgraded when required and downgraded to original state when load goes below threshold.\
+This ensures that the Virtual Machines don’t loose their performance during peak load.\
+This is automatically configured by us for you and triggers the server whenever CPU or RAM thresold **\>= 90%** by adding respectively 1 CPU or 1GB RAM.\
+It's _free of charge_ and does not involve any other cost on your end.
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+## Uptime Monitor
 
-## Code Formatting
+<Tip>
+  Uptime option available under the [Business](https://areawp.com/pricing) and [Enterprise ](https://areawp.com/pricing)plans only.
+</Tip>
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
+This feature allows you the possibility to get a custom and unique page where you can monitor the uptime of your own server as well as CPU, RAM, disk and network usage.
+
+Take a look at the demo [here](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/).
+
+In addition you'll receive custom notifications via email whenever the virtual server exceeds 80% of its resources , so you can act promptly to fix the root cause or upgrade the server without causing downtime to the customer (remember that you will still have the "autoscale" that will cover you temporarily from any possible downtime)
 
 ## Troubleshooting
 
 <AccordionGroup>
   <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
     This may be due to an outdated version of node. Try the following:
+
     1. Remove the currently-installed version of mintlify: `npm remove -g mintlify`
     2. Upgrade to Node v19 or higher.
     3. Reinstall mintlify: `npm install -g mintlify`
   </Accordion>
-
   <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the \~/.mintlify folder. Afterwards, run `mintlify dev` again.
+    Solution: Go to the root of your device and delete the ~/.mintlify folder. Afterwards, run `mintlify dev` again.
   </Accordion>
 </AccordionGroup>
 
