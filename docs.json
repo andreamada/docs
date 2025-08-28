@@ -3,11 +3,11 @@
   "theme": "mint",
   "name": "AreaWP Documentation",
   "colors": {
-    "primary": "#16A34A",
+    "primary": "#163e49",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
