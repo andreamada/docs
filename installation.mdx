@@ -11,15 +11,41 @@ Visit [https://account.areawp.com/client/plugin/download_manager/client_main/](
 
 Unzip the AreaWP archive (.zip) file using your favorite compression utility. On Windows, right click and select "Extract All". If the zip is uploaded to or downloaded directly to a Linux server, run the following in your shell:
 
-| `unzip areawp-vx.x.x.zip` |
-| :------------------------ |
+```
+unzip areawp-vx.x.x.zip
+```
 
-3. **Web Installation**
+3. **Login in DirectAdmin **
 
-Follow these steps to install AreaWP.
+Follow now these steps in your DirectAdmin control panel.
 
-1. Upload the content to your website's path
-2. Create on DirectAdmin
-3. Point your web browser to the location where you uploaded the contents of blesta (e.g. [**https://yourdomain.com/path_to_blesta/**](https://yourdomain.com/path_to_blesta/)).
-4. Follow the on screen instructions to complete installation.
-5. Once installation completes, you'll be prompted to create your administrator user and enter your license key or start a free trial.
+1. Create a reseller package where you can create it with domain, capacity and bandwidth limitations.
+2. Create user reseller. **Note** that the user name must be only**3 characters long.** 
+3. Log in to the newly created reseller user and create a package for the user. (package name shouldbe **3 characters **as well).
+4. Create ssl wildcard for domain name using cloudflare api
+5. Create Login Keys: https://evo.site-helper.com/evo/users/keys.html#login-keys
+6. Edit the sudoers file in etc/sudoers on your server by adding the following code to the end of this file:
+
+   ```
+   USER_RESELLER ALL=(ALL) NOPASSWD: ALL
+   ```
+
+   _Replace USER_RESELLER respectively with the username created in Step 3._
+
+
+1. Create a database and import it from your folder (_file_to_import.sql)_
+2. You also upload the source code and extract the source code for the domain name.
+3. Configure the configuration file to connect the database in the **config.php** file
+   1. these are the database connection information you created
+   2. Some other information that I will explain: - Username. (This is the reseller user created in DA) - Password (this is the password of the reseller user you created when creating the reseller user) - Package. (this is the package you created in step 3 above)
+
+**You're done**\! You can connect now using these credentials
+
+<Warning>
+  Make sure to update these as soon as you login in the platform
+</Warning>
+
+```
+Username: admin@admin.com
+Password: admin1234
+```
