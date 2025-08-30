@@ -25,11 +25,14 @@
           {
           "group": "Admin Setup",
             "pages": [
-              "admin/templates",
-              "admin/websites",
-              "admin/plugins",
-              "admin/domains",
-              "essentials/images",
+              "admin/important-settings",
+              "admin/payments-setup",
+              "admin/websites-setup",
+              "admin/domains-setup",
+              "admin/packages-setup",
+              "admin/roles-setup",
+              "admin/emails-setup",
+              "admin/theme-setup",
               {
                 "group": "OpenAPI",
                 "icon": "book-open-cover",
