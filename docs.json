@@ -35,7 +35,6 @@
               "admin/theme-setup",
               {
                 "group": "OpenAPI",
-                "icon": "book-open-cover",
                 "pages": [
                   "api-playground/openapi/setup",
                   "api-playground/openapi/writing-openapi",
