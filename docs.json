@@ -23,7 +23,7 @@
             ]
           },
           {
-          "group": "Admin Setup",
+          "group": "Configuration",
             "pages": [
               "admin/important-settings",
               "admin/payments-setup",
@@ -41,6 +41,32 @@
                   "api-playground/openapi/advanced-features"
                 ]
               }
+            ]
+            },
+          {
+          "group": "Integrations",
+            "pages": [
+              "admin/important-settings",
+              "admin/payments-setup",
+              "admin/websites-setup",
+              "admin/domains-setup",
+              "admin/packages-setup",
+              "admin/roles-setup",
+              "admin/emails-setup",
+              "admin/theme-setup"
+            ]
+            },
+          {
+          "group": "Usage",
+            "pages": [
+              "admin/important-settings",
+              "admin/payments-setup",
+              "admin/websites-setup",
+              "admin/domains-setup",
+              "admin/packages-setup",
+              "admin/roles-setup",
+              "admin/emails-setup",
+              "admin/theme-setup"
             ]
             }
         ]
