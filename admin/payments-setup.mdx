@@ -1,0 +1,62 @@
+---
+title: "Payments Setup"
+description: "Payment accounts are used to store payment information Payment accounts can be of three different types: Credit Card, PayPal and ACH (Bank Transfer). Payment accounts can be used to process recurring payments."
+---
+
+## Creating a Payment Account
+
+To create a Payment Account, visit [General Setup] \> [General Overview] \> [Payments Gateway]
+
+Here you can enable respectively Bank Account, Stripe and PayPal.
+
+### Bank Account
+
+<Note>
+  This is the only payment method that requires manual approval on your end once the payment is received
+</Note>
+
+Here you can define respectively:
+
+- Bank account name
+- Bank account holder (Full name)
+- Bank account number (IBAN)
+- Bank location
+
+### Stripe Payment Gateway
+
+Enable this option if you want to integrate Stripe as payment gateway.\
+Make sure to follow the official documentation to create the API keys:\
+https://docs.stripe.com/keys
+
+Then fill the form respectively with the "**Publishable**" and "**Secret**" key.\
+Once done add a webhook endpoint in Stripe:\
+https://docs.stripe.com/development/dashboard/webhooks
+
+1. URL Endpoint must be as follows:\
+   [**https://YOURDOMAIN.COM/api/stripe/webhook**](https://YOURDOMAIN.COM/api/stripe/webhook)
+2. Add the following event: **checkout.session.completed**
+3. Fill the "**Stripe Webhook Secret**" with the key generated
+
+The final result on Stripe must look like this:
+
+<img
+  src="/images/stripe.png"
+  alt="Stripe Pn"
+  title="Stripe Pn"
+  style={{ width:"67%" }}
+/>
+
+### PayPal Payment Gateway
+
+Enable this option to accept payments via PayPal.\
+You'll need to create first of all the API to get started:\
+https://developer.paypal.com/api/rest/\\
+\
+To create these credentials, log into the **PayPal Developer Dashboard** using your business account. Navigate to "**Apps & Credentials**," create a new app, and PayPal will generate the Client ID and Secret Key for you.
+
+<Note>
+  Note: If you have a personal account with PayPal, you’ll need to convert it to a business account to generate these codes.
+</Note>
+
+Once done paste the keys generated respectively in the appropriate fields.\
+Select the "Mode" based on the one defined in PayPal (Sandbox for testing environment, Live for Production)
