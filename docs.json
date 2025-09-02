@@ -46,14 +46,11 @@
           {
           "group": "Integrations",
             "pages": [
-              "admin/important-settings",
-              "admin/payments-setup",
-              "admin/websites-setup",
-              "admin/domains-setup",
-              "admin/packages-setup",
-              "admin/roles-setup",
-              "admin/emails-setup",
-              "admin/theme-setup"
+              "integrations/mainwp",
+              "integrations/google",
+              "integrations/facebook",
+              "integrations/onesignal",
+              "integrations/custom-html-css"
             ]
             },
           {
