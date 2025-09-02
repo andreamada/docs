@@ -3,13 +3,23 @@ title: "Important Settings"
 description: "Post-Installation, there are several common settings that should be reviewed and adjusted as necessary. Time permitting, it's a good idea to go through all the settings for the system and company."
 ---
 
+## License Settings (Self-Hosted)
+
+These settings can be found under [General Setup] \> [General Overview] \> [License Settings]
+
+Make sure to paste hey your license key in order to get the script up and running.
+
 ## Company Specific
 
 These settings can be found under [General Setup] \> [General Overview] \> [Company Setup]
 
 - Set the currency to be used in the platform
 - Set your company's data
-- Enable/Disable the CMS (If you're using your own existing landing site, you can use this option to hide our CMS and redirect your customers to the register/login page)
+- Enable/Disable the CMS
+
+  <Note>
+    If you're using your own existing landing site, you can use the **Disable landing page** to hide our CMS and redirect your customers to the register/login page
+  </Note>
 
 <img
   src="/images/company_setup.png"
@@ -18,77 +28,23 @@ These settings can be found under [General Setup] \> [General Overview] \> [Comp
   style={{ width:"48%" }}
 />
 
-### Subtitles
+## Tax Settings
 
-Best use to subsection headers.
+These settings can be found under [General Setup] \> [General Overview] \> [Tax Settings]
 
-```md
-### Subtitles
-```
+If you wanna add tax management you can enable it right here:
 
-<Tip>
-  Each **title** and **subtitle** creates an anchor and also shows up on the table of contents on the right.
-</Tip>
+- Set the Tax name
+- Define the tax percentage
 
-## Text Formatting
+<img
+  src="/images/tax_settings.png"
+  alt="Tax Settings Pn"
+  title="Tax Settings Pn"
+  style={{ width:"33%" }}
+/>
 
-We support most markdown formatting. Simply add `**`, `_`, or `~` around text to format it.
+## Contact Button
 
-| Style         | How to write it   | Result            |
-| ------------- | ----------------- | ----------------- |
-| Bold          | `**bold**`        | **bold**          |
-| Italic        | `_italic_`        | _italic_          |
-| Strikethrough | `~strikethrough~` | ~~strikethrough~~ |
-
-You can combine these. For example, write `**_bold and italic_**` to get **_bold and italic_** text.
-
-You need to use HTML to write superscript and subscript text. That is, add `<sup>` or `<sub>` around your text.
-
-| Text Size   | How to write it          | Result                 |
-| ----------- | ------------------------ | ---------------------- |
-| Superscript | `<sup>superscript</sup>` | <sup>superscript</sup> |
-| Subscript   | `<sub>subscript</sub>`   | <sub>subscript</sub>   |
-
-## Linking to Pages
-
-You can add a link by wrapping text in `[]()`. You would write `[link to google](https://google.com)` to [link to google](https://google.com).
-
-Links to pages in your docs need to be root-relative. Basically, you should include the entire folder path. For example, `[link to text](/writing-content/text)` links to the page "Text" in our components section.
-
-Relative links like `[link to text](../text)` will open slower because we cannot optimize them as easily.
-
-## Blockquotes
-
-### Singleline
-
-To create a blockquote, add a `>` in front of a paragraph.
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
-```
-
-### Multiline
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-
-```md
-> Dorothy followed her through many of the beautiful rooms in her castle.
->
-> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
-```
-
-### LaTeX
-
-Mintlify supports [LaTeX](https://www.latex-project.org) through the Latex component.
-
-<Latex>
-  8 x (vk x H1 - H2) = (0,1)
-</Latex>
-
-```md
-<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
-```
+These settings can be found under [General Setup] \> [General Overview] \> [Contact Button]\
+These are shown respectively in the user's dashboard / homepage.
