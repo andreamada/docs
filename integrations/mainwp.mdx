@@ -1,0 +1,41 @@
+---
+title: "MainWP Integration"
+description: "MainWP is a free, fully functional, open-source, self-hosted WordPress® management plugin that allows you to manage multiple WordPress sites from one central dashboard securely."
+---
+
+## Enabling MainWP
+
+<Warning>
+  **MainWP Integration Notice:** Don't forget to install and activate the MainWP Child plugin in your template before uploading, or install it after template creation for proper MainWP dashboard integration.\
+  \
+  **Important Settings:** After installing MainWP Child plugin, make sure to disable "Require Password Authentication" and set "Connection Timeout" to 0 in the plugin settings for seamless integration.
+</Warning>
+
+You can enable it **free of charge** under [General Setup] \> [General Overview] \> [MainWP Integration]
+
+Once done it will automatically check if the "**MainWP dashboard**" already exists or not in your system.\
+If it doesn't click on the button displayed:
+
+<img
+  src="/images/mainwp_dash.png"
+  alt="Mainwp Dash Pn"
+  title="Mainwp Dash Pn"
+  style={{ width:"57%" }}
+/>
+
+The system will now redirect you to the templates page and will create it automatically for you (wait up to 60 secs to get it installed)
+
+1. Click now on "**MainWP API**" and create an API key. For further information please refer to the official documentation: https://mainwp.com/kb/mainwp-rest-api/
+
+   <img
+     src="/images/mainwp_api.png"
+     alt="Mainwp Api Pn"
+     title="Mainwp Api Pn"
+     style={{ width:"59%" }}
+   />
+2. Copy the **API key** (Bearer token) to a safe location and paste it in the **MainWP REST API Token** tab of your platform settings: [General Setup] \> [General Overview] \> [MainWP Integration]
+3. You're done\! You can access now MainWP dashboard directly from your left menu.
+
+   <Note>
+     If there are existing websites make sure to install **MainWP child** plugin manually on each of them before running the **Sync All** button.
+   </Note>
