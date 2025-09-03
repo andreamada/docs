@@ -49,7 +49,7 @@
               "integrations/mainwp",
               "integrations/google",
               "integrations/facebook",
-              "integrations/onesignal"
+              "integrations/onesignal-chat"
             ]
             },
           {
