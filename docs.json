@@ -55,7 +55,12 @@
           {
           "group": "Usage",
             "pages": [
-              "admin/important-settings"
+              "usage/adding-templates",
+              "usage/adding-clients",
+              "usage/adding-websites",
+              "usage/adding-plugins",
+              "usage/sending-notifications",
+              "usage/managing-orders"
             ]
             }
         ]
