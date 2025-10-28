@@ -32,15 +32,7 @@
               "admin/packages-setup",
               "admin/roles-setup",
               "admin/emails-setup",
-              "admin/theme-setup",
-              {
-                "group": "OpenAPI",
-                "pages": [
-                  "api-playground/openapi/setup",
-                  "api-playground/openapi/writing-openapi",
-                  "api-playground/openapi/advanced-features"
-                ]
-              }
+              "admin/theme-setup"
             ]
             },
           {
