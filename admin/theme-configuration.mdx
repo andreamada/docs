@@ -1,17 +1,575 @@
 ---
-title: "Customizing Theme"
-description: "Customize the look&feel of your dashboard. Define the colors and upload your own logo for a full white label experience."
+title: "Admin Panel Theme Settings"
+description: "Customize the admin dashboard appearance and branding"
+icon: "gauge"
 ---
 
-## Admin Theme
+<Info>
+**Navigation Path:** Admin Dashboard → Settings → Admin Panel Settings  
+**URL:** `/admin/AdminPanel`
+</Info>
 
-These settings can be found under [General Setup] \> [Admin Theme]
+## Overview
 
-You can pick here some default themes pre-built for you or customize any section as per your need uploading your own logo too.
+The Admin Panel Settings page allows you to customize the appearance and branding of your admin dashboard. Configure logos, colors, sidebar settings, and other visual elements to match your brand identity.
 
-<img
-  src="/images/theme_setup.png"
-  alt="Theme Setup Pn"
-  title="Theme Setup Pn"
-  style={{ width:"76%" }}
-/>
+<CardGroup cols={2}>
+  <Card title="Branding" icon="palette" color="#10b981">
+    Upload logos and set brand colors
+  </Card>
+  <Card title="Dashboard Layout" icon="table-columns" color="#0d6efd">
+    Configure sidebar and layout options
+  </Card>
+  <Card title="Visual Customization" icon="paintbrush" color="#f59e0b">
+    Customize colors and themes
+  </Card>
+  <Card title="Navigation" icon="bars" color="#8b5cf6">
+    Configure menu and navigation settings
+  </Card>
+</CardGroup>
+
+---
+
+## Logo & Branding
+
+Upload custom logos to personalize your admin dashboard.
+
+### Logo Types
+
+**Main Logo**
+
+Primary logo displayed in the admin panel header.
+
+- **Recommended Size**: 180 x 50 pixels
+- **Format**: PNG, SVG (transparent background recommended)
+- **Location**: Top left of admin dashboard
+- **Use Case**: Full color logo for light backgrounds
+
+**Favicon**
+
+Small icon displayed in browser tabs.
+
+- **Recommended Size**: 32 x 32 pixels or 64 x 64 pixels
+- **Format**: ICO, PNG
+- **Location**: Browser tab
+- **Use Case**: Simple, recognizable icon version of your logo
+
+**Login Page Logo**
+
+Logo displayed on the admin login screen.
+
+- **Recommended Size**: 200 x 80 pixels
+- **Format**: PNG, SVG
+- **Location**: Center of login page
+- **Use Case**: Can be larger, more detailed version
+
+**Sidebar Logo**
+
+Compact logo for collapsed sidebar.
+
+- **Recommended Size**: 40 x 40 pixels (square)
+- **Format**: PNG, SVG
+- **Location**: Sidebar when collapsed
+- **Use Case**: Icon or simplified logo mark
+
+<Steps>
+  <Step title="Prepare Logo Files">
+    Create logo files in recommended sizes and formats
+  </Step>
+  <Step title="Upload Main Logo">
+    Upload your primary logo for the dashboard header
+  </Step>
+  <Step title="Upload Favicon">
+    Add your favicon for browser tabs
+  </Step>
+  <Step title="Upload Login Logo">
+    Add logo for the login page
+  </Step>
+  <Step title="Upload Sidebar Logo">
+    Add compact logo for collapsed sidebar
+  </Step>
+  <Step title="Preview Changes">
+    Review how logos appear in different areas
+  </Step>
+  <Step title="Save Settings">
+    Save your configuration to apply changes
+  </Step>
+</Steps>
+
+<Tip>
+**Logo Design Tips:**
+- Use transparent backgrounds for PNG files
+- Ensure logos are readable at small sizes
+- Maintain consistent branding across all logos
+- Optimize file sizes for faster loading
+- Test logos on different screen sizes
+</Tip>
+
+---
+
+## Color Scheme
+
+Customize the admin panel colors to match your brand.
+
+### Color Settings
+
+**Primary Color**
+
+Main brand color used throughout the admin panel.
+
+- **Used For**: Buttons, links, active states, highlights
+- **Format**: Hex color code (e.g., `#3B82F6`)
+- **Recommendation**: Use your main brand color
+
+**Secondary Color**
+
+Accent color for secondary elements.
+
+- **Used For**: Secondary buttons, badges, accents
+- **Format**: Hex color code (e.g., `#8B5CF6`)
+- **Recommendation**: Complementary to primary color
+
+**Sidebar Background**
+
+Background color for the navigation sidebar.
+
+- **Used For**: Sidebar background
+- **Format**: Hex color code (e.g., `#1F2937`)
+- **Common Options**: Dark gray, navy, black, or brand color
+
+**Sidebar Text Color**
+
+Text color for sidebar menu items.
+
+- **Used For**: Menu item text
+- **Format**: Hex color code (e.g., `#FFFFFF`)
+- **Recommendation**: High contrast with sidebar background
+
+**Header Background**
+
+Background color for the top header bar.
+
+- **Used For**: Top navigation bar
+- **Format**: Hex color code (e.g., `#FFFFFF`)
+- **Common Options**: White, light gray, or brand color
+
+### Color Scheme Examples
+
+**Professional Blue:**
+- Primary: `#3B82F6` (Blue)
+- Secondary: `#10B981` (Green)
+- Sidebar BG: `#1E293B` (Dark slate)
+- Sidebar Text: `#F1F5F9` (Light gray)
+- Header BG: `#FFFFFF` (White)
+
+**Modern Dark:**
+- Primary: `#8B5CF6` (Purple)
+- Secondary: `#EC4899` (Pink)
+- Sidebar BG: `#111827` (Very dark gray)
+- Sidebar Text: `#E5E7EB` (Light gray)
+- Header BG: `#1F2937` (Dark gray)
+
+**Clean Minimal:**
+- Primary: `#0EA5E9` (Sky blue)
+- Secondary: `#F59E0B` (Amber)
+- Sidebar BG: `#F9FAFB` (Very light gray)
+- Sidebar Text: `#374151` (Dark gray)
+- Header BG: `#FFFFFF` (White)
+
+<Warning>
+**Color Accessibility:**
+- Ensure sufficient contrast between text and backgrounds
+- Test colors for readability
+- Consider colorblind users
+- Follow WCAG accessibility guidelines
+- Avoid using color alone to convey information
+</Warning>
+
+---
+
+## Sidebar Configuration
+
+Customize the navigation sidebar appearance and behavior.
+
+### Sidebar Settings
+
+**Sidebar Style**
+
+Choose how the sidebar appears.
+
+| Style | Description | Use Case |
+|-------|-------------|----------|
+| **Fixed** | Sidebar always visible | Desktop users, large screens |
+| **Collapsible** | Can be expanded/collapsed | Flexible, more screen space |
+| **Mini** | Always shows icons only | Maximum content space |
+| **Overlay** | Slides over content | Mobile-friendly |
+
+**Default State**
+
+Set whether sidebar starts expanded or collapsed.
+
+- **Expanded**: Full sidebar with text and icons (default)
+- **Collapsed**: Icons only, expands on hover
+- **Recommendation**: Expanded for desktop, collapsed for tablets
+
+**Sidebar Position**
+
+Choose sidebar location.
+
+- **Left**: Standard position (recommended)
+- **Right**: Alternative layout
+
+### Menu Organization
+
+**Menu Items**
+
+Customize which menu items appear in the sidebar:
+
+- Dashboard
+- Users
+- Websites
+- Domains
+- Billing
+- Support Tickets
+- Reports
+- Settings
+
+**Menu Grouping**
+
+Organize menu items into logical groups:
+
+- **Management**: Users, Websites, Domains
+- **Financial**: Billing, Invoices, Reports
+- **Support**: Tickets, Documentation
+- **System**: Settings, Logs, API
+
+<Tip>
+**Sidebar Best Practices:**
+- Keep menu items organized and logical
+- Use icons for better visual recognition
+- Limit top-level items to 8-10 for clarity
+- Group related items together
+- Show most-used items first
+</Tip>
+
+---
+
+## Dashboard Widgets
+
+Configure which widgets appear on the admin dashboard.
+
+### Available Widgets
+
+**Statistics Widgets:**
+- **Total Users** - User count and growth
+- **Active Websites** - Currently active websites
+- **Total Revenue** - Revenue summary
+- **Pending Tickets** - Open support tickets
+
+**Chart Widgets:**
+- **Revenue Chart** - Revenue over time
+- **User Growth** - New users over time
+- **Website Creation** - Websites created over time
+- **Ticket Volume** - Support ticket trends
+
+**Activity Widgets:**
+- **Recent Users** - Latest user registrations
+- **Recent Websites** - Recently created websites
+- **Recent Payments** - Latest transactions
+- **Recent Tickets** - Latest support tickets
+
+### Widget Configuration
+
+For each widget, you can configure:
+
+| Setting | Options |
+|---------|---------|
+| **Visibility** | Show or hide widget |
+| **Position** | Widget placement on dashboard |
+| **Size** | Small, medium, large, full-width |
+| **Refresh Rate** | How often data updates |
+
+<Steps>
+  <Step title="Select Widgets">
+    Choose which widgets to display on your dashboard
+  </Step>
+  <Step title="Arrange Layout">
+    Drag and drop widgets to organize them
+  </Step>
+  <Step title="Configure Size">
+    Set appropriate size for each widget
+  </Step>
+  <Step title="Set Refresh Rate">
+    Configure how often widgets update
+  </Step>
+  <Step title="Save Layout">
+    Save your dashboard configuration
+  </Step>
+</Steps>
+
+---
+
+## Additional Settings
+
+### Date & Time Format
+
+**Date Format**
+
+Choose how dates are displayed throughout the admin panel.
+
+| Format | Example | Region |
+|--------|---------|--------|
+| `MM/DD/YYYY` | 12/31/2024 | US |
+| `DD/MM/YYYY` | 31/12/2024 | UK, Europe |
+| `YYYY-MM-DD` | 2024-12-31 | ISO Standard |
+| `DD MMM YYYY` | 31 Dec 2024 | Readable |
+
+**Time Format**
+
+Choose 12-hour or 24-hour time display.
+
+- **12-hour**: 2:30 PM
+- **24-hour**: 14:30
+
+**Timezone**
+
+Set the default timezone for the admin panel.
+
+- **Recommendation**: Use your business location timezone
+- **Note**: Affects all timestamps and scheduled tasks
+
+### Language Settings
+
+**Admin Panel Language**
+
+Choose the language for the admin interface.
+
+- Default: English
+- Available: Multiple languages supported
+- Note: Separate from customer-facing language settings
+
+### Session Settings
+
+**Session Timeout**
+
+How long admins can be inactive before automatic logout.
+
+- **Range**: 15 minutes - 24 hours
+- **Recommended**: 30-60 minutes for security
+- **Note**: Shorter timeout = better security
+
+**Remember Me**
+
+Allow admins to stay logged in across sessions.
+
+- **Enabled**: Checkbox on login page
+- **Disabled**: Must log in each time
+- **Recommendation**: Enable for trusted devices only
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Branding Consistency" icon="palette">
+    **Maintain Brand Identity:**
+    - Use consistent colors across all logos
+    - Match your public website branding
+    - Keep logos professional and clear
+    - Use high-quality image files
+    
+    **Visual Hierarchy:**
+    - Primary color for main actions
+    - Secondary color for supporting elements
+    - Neutral colors for backgrounds
+    - High contrast for readability
+  </Accordion>
+  
+  <Accordion title="User Experience" icon="user">
+    **Optimize for Productivity:**
+    - Keep frequently used items accessible
+    - Use clear, descriptive menu labels
+    - Organize widgets logically
+    - Minimize clutter on dashboard
+    
+    **Responsive Design:**
+    - Test on different screen sizes
+    - Ensure mobile usability
+    - Use collapsible sidebar for tablets
+    - Optimize for common resolutions
+  </Accordion>
+  
+  <Accordion title="Performance" icon="gauge">
+    **Optimize Loading Speed:**
+    - Compress logo images
+    - Limit number of dashboard widgets
+    - Set appropriate refresh rates
+    - Use SVG for logos when possible
+    
+    **Resource Management:**
+    - Don't load unnecessary widgets
+    - Cache static assets
+    - Optimize image sizes
+    - Monitor dashboard performance
+  </Accordion>
+  
+  <Accordion title="Security" icon="shield">
+    **Secure Admin Access:**
+    - Set reasonable session timeouts
+    - Require strong passwords
+    - Enable two-factor authentication
+    - Log admin activities
+    
+    **Access Control:**
+    - Limit admin panel access
+    - Use role-based permissions
+    - Monitor login attempts
+    - Review access logs regularly
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Logo Not Displaying" icon="image">
+    **Issue:** Uploaded logo doesn't appear
+    
+    **Common Causes:**
+    - File size too large
+    - Unsupported file format
+    - Incorrect dimensions
+    - Cache not cleared
+    
+    **Solutions:**
+    1. Compress image file (< 500KB)
+    2. Use PNG or SVG format
+    3. Resize to recommended dimensions
+    4. Clear browser cache
+    5. Hard refresh (Ctrl+F5)
+    6. Check file permissions
+  </Accordion>
+  
+  <Accordion title="Colors Not Applying" icon="palette">
+    **Issue:** Custom colors not showing
+    
+    **Common Causes:**
+    - Invalid hex color code
+    - Cache not cleared
+    - Settings not saved
+    - CSS conflicts
+    
+    **Solutions:**
+    1. Verify hex codes are valid (e.g., #3B82F6)
+    2. Save settings again
+    3. Clear application cache
+    4. Clear browser cache
+    5. Test in incognito mode
+    6. Check for CSS overrides
+  </Accordion>
+  
+  <Accordion title="Sidebar Not Collapsing" icon="bars">
+    **Issue:** Sidebar won't collapse or expand
+    
+    **Common Causes:**
+    - JavaScript error
+    - Browser compatibility
+    - Settings conflict
+    - Cache issue
+    
+    **Solutions:**
+    1. Check browser console for errors
+    2. Try different browser
+    3. Clear browser cache
+    4. Disable browser extensions
+    5. Check sidebar settings
+    6. Reset to default settings
+  </Accordion>
+  
+  <Accordion title="Dashboard Widgets Missing" icon="table-columns">
+    **Issue:** Widgets not appearing on dashboard
+    
+    **Common Causes:**
+    - Widgets disabled in settings
+    - Permission issues
+    - Data loading errors
+    - Cache problems
+    
+    **Solutions:**
+    1. Check widget visibility settings
+    2. Verify user permissions
+    3. Review error logs
+    4. Clear dashboard cache
+    5. Reset widget layout
+    6. Check data sources
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### Logo Specifications
+
+| Logo Type | Size | Format | Notes |
+|-----------|------|--------|-------|
+| **Main Logo** | 180 x 50 px | PNG, SVG | Transparent background |
+| **Favicon** | 32 x 32 px | ICO, PNG | Simple, recognizable |
+| **Login Logo** | 200 x 80 px | PNG, SVG | Can be detailed |
+| **Sidebar Logo** | 40 x 40 px | PNG, SVG | Square, simple |
+
+### Color Palette Template
+
+```
+Primary Color:    #______  (Main brand color)
+Secondary Color:  #______  (Accent color)
+Sidebar BG:       #______  (Navigation background)
+Sidebar Text:     #______  (Menu text)
+Header BG:        #______  (Top bar background)
+```
+
+### Customization Checklist
+
+- [ ] Upload main logo
+- [ ] Upload favicon
+- [ ] Upload login page logo
+- [ ] Upload sidebar logo
+- [ ] Set primary brand color
+- [ ] Set secondary accent color
+- [ ] Configure sidebar background color
+- [ ] Set sidebar text color
+- [ ] Configure header background
+- [ ] Choose sidebar style
+- [ ] Organize menu items
+- [ ] Configure dashboard widgets
+- [ ] Set date/time format
+- [ ] Configure timezone
+- [ ] Set session timeout
+- [ ] Test on different devices
+- [ ] Clear cache and verify changes
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Configure platform-wide settings
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Control admin access levels
+  </Card>
+  <Card title="Email Settings" icon="envelope" href="/email-settings">
+    Configure email branding
+  </Card>
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Manage customer-facing settings
+  </Card>
+</CardGroup>
+
+---
+
+<Card title="Need Help?" icon="headset" href="#">
+  Contact support if you need assistance customizing your admin panel or troubleshooting display issues.
+</Card>
