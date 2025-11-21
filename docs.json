@@ -31,9 +31,9 @@
               "admin/domains-configuration",
               "admin/packages-configuration",
               "admin/autorenewal-configuration",
-              "admin/roles-settings",
-              "admin/emails-setup",
-              "admin/theme-setup"
+              "admin/roles-configuration",
+              "admin/emails-configuration",
+              "admin/theme-configuration"
             ]
             },
           {

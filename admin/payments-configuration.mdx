@@ -1,403 +1,535 @@
 ---
-title: "Payment Configuration"
-description: "Configure payment gateways and process customer payments"
-icon: "credit-card"
+title: "Hosting Plans"
+description: "Configure website packages, pricing, and service addons"
+icon: "box"
 ---
 
 <Info>
-**Navigation Path:** Admin Dashboard → Settings → General Settings → Payment Gateway
-**URL:** `/admin/GeneralOption`  
+**Navigation Path:** Admin Dashboard → Settings → Hosting Plans  
+**URL:** `/admin/ServicePackage`
 </Info>
 
 ## Overview
 
-Payment accounts are used to store payment information and process customer transactions. The platform supports three different payment types: **Bank Transfer (ACH)**, **Credit Card (Stripe)**, and **PayPal**. Payment accounts can be configured to process both one-time and recurring payments.
+The Hosting Plans page allows you to create and manage website packages, set renewal terms, configure global service pricing, manage domain pricing, and create custom addons. This is your central hub for all pricing and package configuration.
 
 <CardGroup cols={3}>
-  <Card title="Bank Account" icon="building-columns" color="#6366f1">
-    Manual bank transfer payments with account details
+  <Card title="Website Packages" icon="box" color="#10b981">
+    Create tiered hosting plans with features
   </Card>
-  <Card title="Stripe" icon="stripe" color="#635bff">
-    Automated credit card processing with Stripe
+  <Card title="Renewal Terms" icon="calendar" color="#0d6efd">
+    Set billing periods and pricing
   </Card>
-  <Card title="PayPal" icon="paypal" color="#0070ba">
-    PayPal checkout and payment processing
+  <Card title="Service Pricing" icon="dollar-sign" color="#f59e0b">
+    Configure SSL, backup, and upgrade costs
+  </Card>
+  <Card title="Domain Pricing" icon="globe" color="#8b5cf6">
+    Set registration and renewal prices per TLD
+  </Card>
+  <Card title="Custom Addons" icon="puzzle-piece" color="#ef4444">
+    Create additional services and features
   </Card>
 </CardGroup>
 
 ---
 
-## Creating a Payment Account
+## Website Packages
+
+Create up to 20 different hosting packages with customizable features and pricing.
+
+### Package Configuration
+
+Each package can include the following settings:
+
+| Setting | Description | Options |
+|---------|-------------|---------|
+| **Package Name** | Display name for the package | Text (e.g., "Starter", "Pro", "Enterprise") |
+| **Price** | Monthly cost | Currency amount |
+| **Disk Space** | Storage allocation | 150 - 99,999,999,999 MB |
+| **Description** | Package details | Text area for features list |
+| **Member Roles** | Who can purchase | Select user roles |
+| **Background Colors** | Visual styling | Two color pickers for gradient |
+| **Purchase Theme** | Enable theme selection | Toggle on/off |
+| **Backup Download** | Allow backup downloads | Toggle on/off |
+| **Control Panel Access** | DirectAdmin access | Toggle on/off |
+| **Featured Ribbon** | Highlight as recommended | Toggle on/off |
+
+### Creating a Package
 
 <Steps>
-  <Step title="Navigate to Payment Settings">
-    Go to **Admin Dashboard → Settings → General Settings** and click on the **Payment Gateway** tab
+  <Step title="Add New Package">
+    Click the "Add Package" button to create a new hosting plan
   </Step>
-  <Step title="Choose Payment Method">
-    Select the payment method you want to configure (Bank Account, Stripe, or PayPal)
+  <Step title="Set Basic Info">
+    Enter package name, price, and disk space allocation
   </Step>
-  <Step title="Enter Configuration Details">
-    Fill in the required fields for your chosen payment method
+  <Step title="Write Description">
+    Add a compelling description highlighting key features
   </Step>
-  <Step title="Test Configuration">
-    Use sandbox/test mode to verify your setup before going live
+  <Step title="Configure Features">
+    Toggle features like backup download, control panel access, etc.
   </Step>
-  <Step title="Save Settings">
-    Save your configuration to enable the payment method
+  <Step title="Set Visual Style">
+    Choose background colors and enable featured ribbon if desired
+  </Step>
+  <Step title="Select User Roles">
+    Choose which member roles can purchase this package
+  </Step>
+  <Step title="Save Package">
+    Save your configuration to make the package available
   </Step>
 </Steps>
 
----
+### Package Examples
 
-## Bank Account (ACH Transfer)
+**Starter Package:**
+- **Name**: Starter
+- **Price**: $5/month
+- **Disk**: 1,000 MB (1 GB)
+- **Features**: Basic hosting, email support
+- **Backup Download**: No
+- **Control Panel**: No
+- **Featured**: No
 
-Configure bank account details for manual payment processing via bank transfer.
+**Professional Package:**
+- **Name**: Professional
+- **Price**: $15/month
+- **Disk**: 5,000 MB (5 GB)
+- **Features**: Advanced hosting, priority support, SSL included
+- **Backup Download**: Yes
+- **Control Panel**: Yes
+- **Featured**: Yes (Most Popular)
 
-### Required Information
-
-| Field | Description | Required |
-|-------|-------------|----------|
-| **Bank Logo** | Upload your bank's logo for easy identification | No |
-| **Bank Name** | Name of the financial institution (e.g., Vietinbank, Chase Bank) | ✅ Yes |
-| **Account Holder Name** | Full legal name on the bank account | ✅ Yes |
-| **Account Number (IBAN)** | Bank account number or IBAN for international transfers | ✅ Yes |
-| **Bank Location/Branch** | Branch location or bank address | No |
-
-### Setup Instructions
-
-<Steps>
-  <Step title="Upload Bank Logo">
-    Add your bank's logo for easy identification by customers
-  </Step>
-  <Step title="Enter Bank Details">
-    Provide complete bank information including account holder name and IBAN
-  </Step>
-  <Step title="Add Branch Information">
-    Include the bank branch location or address
-  </Step>
-  <Step title="Save Configuration">
-    Your bank account will be available for customer payments
-  </Step>
-</Steps>
-
-**Capacity:** Add up to **20 bank accounts** for manual payment processing with a sortable interface.
+**Enterprise Package:**
+- **Name**: Enterprise
+- **Price**: $50/month
+- **Disk**: 20,000 MB (20 GB)
+- **Features**: Premium hosting, 24/7 support, dedicated resources
+- **Backup Download**: Yes
+- **Control Panel**: Yes
+- **Featured**: No
 
 <Tip>
-**Best Practice:** Provide clear payment instructions to customers, including reference numbers and processing times for bank transfers.
+**Package Design Tips:**
+- Create 3-5 packages to avoid overwhelming customers
+- Make the middle tier the "featured" option
+- Use clear, benefit-focused descriptions
+- Price competitively based on market research
+- Offer a clear upgrade path between tiers
 </Tip>
 
 ---
 
-## Stripe Payment Gateway
+## Renewal Terms
 
-Stripe enables secure credit card processing with industry-leading security, compliance, and global payment support.
+Configure billing periods and renewal pricing for your packages.
 
-### Configuration Parameters
+### Available Renewal Periods
 
-| Setting | Description | Format |
-|---------|-------------|--------|
-| **Enable Stripe** | Master toggle to activate Stripe payment processing | Toggle (Default: Disabled) |
-| **Display Name** | Custom label shown to customers | Text (Default: "Credit Card") |
-| **Publishable Key** | Public API key from Stripe Dashboard | `pk_live_...` or `pk_test_...` |
-| **Secret Key** | Private API key from Stripe Dashboard | `sk_live_...` or `sk_test_...` |
-| **Webhook Secret** | Webhook signing secret for event verification | `whsec_...` |
+Set pricing for different billing cycles:
 
-### Setup Instructions
+| Billing Period | Typical Discount | Use Case |
+|----------------|------------------|----------|
+| **Monthly** | 0% (base price) | Flexibility, testing |
+| **Quarterly** | 5-10% | Short-term commitment |
+| **Semi-Annual** | 10-15% | Medium-term savings |
+| **Annual** | 15-25% | Best value, customer retention |
+| **Biennial** | 20-30% | Long-term commitment |
+| **Triennial** | 25-35% | Maximum savings |
 
-<Steps>
-  <Step title="Get Stripe API Keys">
-    1. Log in to your [Stripe Dashboard](https://dashboard.stripe.com/)
-    2. Navigate to **Developers → API keys**
-    3. Copy your **Publishable key** and **Secret key**
-    4. Refer to [Stripe API Keys Documentation](https://docs.stripe.com/keys)
-  </Step>
-  
-  <Step title="Configure Webhook Endpoint">
-    1. In Stripe Dashboard, go to **Developers → Webhooks**
-    2. Click **Add endpoint**
-    3. Set the endpoint URL to:
-    ```
-    https://YOURDOMAIN.COM/api/stripe/webhook
-    ```
-    4. Select the event: `checkout.session.completed`
-    5. Copy the **Signing secret** (starts with `whsec_`)
-    6. Refer to [Stripe Webhooks Documentation](https://docs.stripe.com/development/dashboard/webhooks)
-  </Step>
-  
-  <Step title="Enter Configuration in Admin">
-    1. Enable Stripe in the Payment Gateway settings
-    2. Paste your **Publishable Key**
-    3. Paste your **Secret Key**
-    4. Paste your **Webhook Secret**
-    5. Set a custom display name (optional)
-  </Step>
-  
-  <Step title="Test in Sandbox Mode">
-    Use Stripe test keys (`pk_test_...` and `sk_test_...`) to verify your integration
-  </Step>
-  
-  <Step title="Go Live">
-    Replace test keys with live keys (`pk_live_...` and `sk_live_...`) when ready for production
-  </Step>
-</Steps>
+### Renewal Pricing Strategy
 
-### Webhook Configuration
+**Example for $10/month package:**
 
-<Note>
-**Webhook Endpoint URL Format:**
-```
-https://YOURDOMAIN.COM/api/stripe/webhook
-```
+| Period | Regular Price | Discounted Price | Savings |
+|--------|---------------|------------------|---------|
+| 1 Month | $10 | $10 | - |
+| 3 Months | $30 | $27 | 10% |
+| 6 Months | $60 | $54 | 10% |
+| 12 Months | $120 | $100 | 17% |
+| 24 Months | $240 | $192 | 20% |
+| 36 Months | $360 | $270 | 25% |
 
-**Required Event:** `checkout.session.completed`
+<Info>
+**Renewal Pricing Benefits:**
+- Encourages longer commitments
+- Improves cash flow
+- Reduces churn
+- Rewards loyal customers
+- Predictable revenue
+</Info>
 
-This webhook ensures that payment confirmations are properly processed and recorded in your system.
-</Note>
+---
 
-<Accordion title="Webhook Event Details" icon="webhook">
-The `checkout.session.completed` event is triggered when a customer successfully completes a Stripe Checkout session. This event contains:
-- Payment status
-- Customer information
-- Transaction amount
-- Payment method details
-- Session metadata
+## Global Service Pricing
 
-Your system uses this event to update order status, send confirmation emails, and trigger fulfillment processes.
-</Accordion>
+Configure pricing for additional services available across all packages.
 
-### Testing Stripe Integration
+### Service Options
 
-Use these test card numbers to verify your Stripe integration:
+**SSL Certificate**
 
-<CodeGroup>
-```bash Test Card Numbers
-# Successful payment
-4242 4242 4242 4242
+Secure socket layer certificate for HTTPS.
 
-# Requires authentication
-4000 0025 0000 3155
+- **Typical Price**: $10 - $30/year
+- **Recommended**: Include free with premium packages
 
-# Declined card
-4000 0000 0000 9995
-```
+**Website Backup**
 
-```text Test Details
-Expiry: Any future date (e.g., 12/34)
-CVC: Any 3 digits (e.g., 123)
-ZIP: Any 5 digits (e.g., 12345)
-```
-</CodeGroup>
+Automated backup service with restore capability.
+
+- **Typical Price**: $5 - $15/month
+- **Recommended**: Include with professional and enterprise packages
+
+**Disk Space Upgrade**
+
+Additional storage beyond package allocation.
+
+- **Typical Price**: $1 - $5 per GB/month
+- **Recommended**: Offer in increments (1GB, 5GB, 10GB)
+
+### Pricing Configuration
+
+| Service | Price | Billing | Notes |
+|---------|-------|---------|-------|
+| **SSL Certificate** | $15 | Annual | Or free with premium plans |
+| **Backup Service** | $10 | Monthly | Automated daily backups |
+| **Disk Upgrade (1GB)** | $2 | Monthly | Per additional GB |
+| **Disk Upgrade (5GB)** | $8 | Monthly | Bulk discount |
+| **Disk Upgrade (10GB)** | $15 | Monthly | Best value |
+
+<Tip>
+**Service Pricing Tips:**
+- Bundle services with higher-tier packages
+- Offer volume discounts for bulk purchases
+- Make SSL certificates free to encourage security
+- Price backups to cover actual storage costs
+- Consider offering free trials for services
+</Tip>
+
+---
+
+## Domain Pricing
+
+Set registration and renewal prices for each domain extension (TLD).
+
+### Domain Pricing Structure
+
+For each TLD, you can configure:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **Registration Price** | Cost to register new domain | $12.99/year |
+| **Registration VAT** | Tax on registration | $2.60 (20%) |
+| **Renewal Price** | Cost to renew domain | $14.99/year |
+| **Renewal VAT** | Tax on renewal | $3.00 (20%) |
+
+### Common TLD Pricing
+
+**Popular TLDs:**
+
+| TLD | Registration | Renewal | Notes |
+|-----|--------------|---------|-------|
+| .com | $12.99 | $14.99 | Most popular |
+| .net | $14.99 | $16.99 | Network sites |
+| .org | $13.99 | $15.99 | Organizations |
+| .io | $34.99 | $39.99 | Tech startups |
+| .co | $24.99 | $29.99 | Companies |
+
+**Premium TLDs:**
+
+| TLD | Registration | Renewal | Notes |
+|-----|--------------|---------|-------|
+| .app | $18.99 | $22.99 | Applications |
+| .dev | $15.99 | $18.99 | Developers |
+| .tech | $24.99 | $29.99 | Technology |
+| .store | $19.99 | $24.99 | E-commerce |
+| .online | $9.99 | $12.99 | Budget option |
+
+### Pricing Strategy
+
+**Cost-Plus Pricing:**
+1. Check wholesale cost from registrar (e.g., Dynadot)
+2. Add your margin (typically 20-40%)
+3. Round to .99 pricing for psychology
+4. Set renewal slightly higher than registration
+
+**Example Calculation:**
+- Wholesale cost: $8.50
+- Your margin: 40% ($3.40)
+- Base price: $11.90
+- Rounded price: $12.99
 
 <Warning>
-**Security Reminder:**
-- Never commit API keys to version control
-- Use environment variables for sensitive credentials
-- Rotate keys if they are ever exposed
-- Always test in sandbox mode before going live
+**Domain Pricing Considerations:**
+- Don't price too low - domains have real costs
+- Renewal prices should cover long-term costs
+- Consider currency fluctuations
+- Monitor competitor pricing
+- Update prices annually
 </Warning>
 
 ---
 
-## PayPal Payment Gateway
+## Custom Addons
 
-PayPal provides a trusted payment solution with global reach, buyer protection, and support for multiple currencies.
+Create up to 50 custom addons for additional services and features.
 
-### Configuration Parameters
+### Addon Configuration
 
-| Setting | Description | Options |
-|---------|-------------|---------|
-| **Enable PayPal** | Master toggle to activate PayPal payment processing | Toggle (Default: Disabled) |
-| **Display Name** | Custom label shown to customers | Text (Default: "PayPal") |
-| **Environment Mode** | Choose your PayPal environment | `sandbox` (testing) or `live` (production) |
-| **Client ID** | PayPal REST API application client ID | Text (Required) |
-| **Client Secret** | PayPal REST API application secret key | Text (Required) |
+Each addon can include:
 
-### Setup Instructions
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Addon Name** | Service name | "Priority Support" |
+| **Description** | What's included | "24/7 phone and chat support" |
+| **Price** | Cost | $20/month |
+| **Billing Period** | Monthly/Annual | Monthly |
+| **Icon** | Visual identifier | Support icon |
+| **Featured** | Highlight addon | Toggle on/off |
+
+### Addon Ideas
+
+**Support Services:**
+- Priority Support - $20/month
+- Dedicated Account Manager - $100/month
+- 24/7 Phone Support - $30/month
+
+**Performance:**
+- CDN Service - $15/month
+- Premium Bandwidth - $25/month
+- Dedicated IP Address - $5/month
+
+**Security:**
+- Advanced Security Suite - $30/month
+- Malware Scanning - $10/month
+- DDoS Protection - $50/month
+
+**Development:**
+- Staging Environment - $10/month
+- Git Integration - $5/month
+- Developer Tools Access - $15/month
+
+**Marketing:**
+- SEO Tools - $20/month
+- Email Marketing (1000 contacts) - $25/month
+- Analytics Dashboard - $15/month
 
 <Steps>
-  <Step title="Create PayPal App">
-    1. Log in to [PayPal Developer Dashboard](https://developer.paypal.com/)
-    2. Navigate to **My Apps & Credentials**
-    3. Click **Create App** under REST API apps
-    4. Enter your app name and select account type
+  <Step title="Identify Customer Needs">
+    Research what additional services your customers want
   </Step>
-  
-  <Step title="Get API Credentials">
-    1. After creating the app, you'll see your credentials
-    2. Copy the **Client ID**
-    3. Click **Show** to reveal and copy the **Secret**
-    4. Note: Sandbox and Live credentials are different
-    5. Refer to [PayPal REST API Documentation](https://developer.paypal.com/api/rest/)
+  <Step title="Create Addon">
+    Add new addon with clear name and description
   </Step>
-  
-  <Step title="Configure in Admin Panel">
-    1. Enable PayPal in the Payment Gateway settings
-    2. Select environment mode (Sandbox or Live)
-    3. Paste your **Client ID**
-    4. Paste your **Client Secret**
-    5. Set a custom display name (optional)
+  <Step title="Set Pricing">
+    Price based on value and costs
   </Step>
-  
-  <Step title="Test in Sandbox">
-    1. Use sandbox credentials to test payments
-    2. Create test accounts in PayPal Developer Dashboard
-    3. Verify payment flow and webhook notifications
+  <Step title="Configure Billing">
+    Choose monthly or annual billing
   </Step>
-  
-  <Step title="Switch to Live">
-    1. Change mode to **Live**
-    2. Replace sandbox credentials with live credentials
-    3. Test with a small real transaction
+  <Step title="Make it Visible">
+    Feature popular addons to increase sales
   </Step>
 </Steps>
-
-### PayPal Sandbox Testing
-
-<Accordion title="Using PayPal Sandbox Accounts" icon="flask">
-PayPal provides test accounts for sandbox testing:
-
-**1. Create Test Accounts:**
-- Go to PayPal Developer Dashboard → Sandbox → Accounts
-- Create a **Business Account** (merchant)
-- Create a **Personal Account** (buyer)
-
-**2. Test Payments:**
-- Use the personal account email and password to make test payments
-- Transactions appear in the business account
-- No real money is transferred
-
-**3. Verify Integration:**
-- Check that orders are created correctly
-- Confirm webhook notifications are received
-- Validate payment status updates
-</Accordion>
-
-<Note>
-**PayPal Fees:** PayPal charges transaction fees for live payments. Review [PayPal's fee structure](https://www.paypal.com/us/webapps/mpp/merchant-fees) before going live.
-</Note>
-
----
-
-## Payment Method Comparison
-
-| Feature | Bank Account | Stripe | PayPal |
-|---------|-------------|--------|--------|
-| **Processing** | Manual | Automated | Automated |
-| **Setup Complexity** | Low | Medium | Medium |
-| **Transaction Fees** | None (platform) | 2.9% + $0.30 | 2.9% + $0.30 |
-| **Recurring Payments** | ❌ | ✅ | ✅ |
-| **International** | Limited | ✅ | ✅ |
-| **Instant Confirmation** | ❌ | ✅ | ✅ |
-| **Buyer Protection** | ❌ | ✅ | ✅ |
-| **PCI Compliance** | N/A | Handled by Stripe | Handled by PayPal |
 
 ---
 
 ## Best Practices
 
-<Tip>
-**Configuration Tips:**
-- **Start with Sandbox:** Always test payment gateways in sandbox/test mode before going live
-- **Secure Your Keys:** Store API keys securely using environment variables
-- **Enable Multiple Methods:** Offer customers payment choice by enabling multiple gateways
-- **Monitor Webhooks:** Set up logging and monitoring for webhook events
-- **Regular Testing:** Periodically test your payment flow to catch issues early
-- **Update Documentation:** Keep internal documentation of your payment setup
-</Tip>
-
-<Warning>
-**Critical Considerations:**
-- **Never expose API keys** in client-side code or public repositories
-- **Test thoroughly** before switching from sandbox to live mode
-- **Monitor failed payments** and set up alerts for webhook failures
-- **Comply with regulations** including PCI DSS for card payments
-- **Have a backup** payment method in case one gateway experiences downtime
-- **Review transaction logs** regularly for suspicious activity
-</Warning>
+<AccordionGroup>
+  <Accordion title="Package Design" icon="box">
+    **Create Effective Packages:**
+    - Offer 3-5 tiers (good, better, best)
+    - Make middle tier most attractive
+    - Clear differentiation between tiers
+    - Include upgrade path
+    
+    **Pricing Psychology:**
+    - Use .99 pricing ($9.99 vs $10)
+    - Show savings on longer terms
+    - Highlight "most popular" option
+    - Display annual pricing with monthly equivalent
+  </Accordion>
+  
+  <Accordion title="Competitive Pricing" icon="dollar-sign">
+    **Market Research:**
+    - Research competitor pricing regularly
+    - Don't compete solely on price
+    - Emphasize value over cost
+    - Offer unique features
+    
+    **Value Proposition:**
+    - Bundle services for better value
+    - Include premium features in higher tiers
+    - Offer money-back guarantee
+    - Provide excellent support
+  </Accordion>
+  
+  <Accordion title="Revenue Optimization" icon="chart-line">
+    **Maximize Revenue:**
+    - Encourage annual billing with discounts
+    - Upsell addons during checkout
+    - Create limited-time promotions
+    - Offer upgrade incentives
+    
+    **Monitor Metrics:**
+    - Track conversion rates per package
+    - Analyze addon adoption
+    - Review pricing quarterly
+    - A/B test package features
+  </Accordion>
+  
+  <Accordion title="Customer Experience" icon="user">
+    **Clear Communication:**
+    - List all features clearly
+    - No hidden fees
+    - Transparent pricing
+    - Easy package comparison
+    
+    **Flexibility:**
+    - Allow package upgrades anytime
+    - Prorate when upgrading
+    - Simple downgrade process
+    - Cancel without penalty
+  </Accordion>
+</AccordionGroup>
 
 ---
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Stripe Payments Not Processing" icon="stripe">
-    **Common Issues:**
-    - Incorrect API keys (mixing test and live keys)
-    - Webhook endpoint not configured correctly
-    - Missing `checkout.session.completed` event
-    - Firewall blocking webhook requests
+  <Accordion title="Packages Not Displaying" icon="eye-slash">
+    **Issue:** Hosting packages don't appear on website
     
-    **Solutions:**
-    - Verify API keys match the environment (test vs live)
-    - Check webhook endpoint URL is accessible
-    - Confirm webhook secret is correct
-    - Review Stripe Dashboard logs for errors
-  </Accordion>
-  
-  <Accordion title="PayPal Integration Errors" icon="paypal">
-    **Common Issues:**
-    - Wrong environment mode (sandbox credentials in live mode)
-    - Incorrect Client ID or Secret
-    - App not approved for production
-    - Missing required permissions
-    
-    **Solutions:**
-    - Ensure mode matches credentials (sandbox/live)
-    - Regenerate credentials if needed
-    - Submit app for PayPal review if required
-    - Check app has payment processing permissions
-  </Accordion>
-  
-  <Accordion title="Webhook Events Not Received" icon="webhook">
-    **Common Issues:**
-    - Incorrect webhook URL
-    - SSL certificate issues
-    - Server firewall blocking requests
-    - Webhook signature verification failing
-    
-    **Solutions:**
-    - Verify webhook URL is correct and accessible
-    - Ensure SSL certificate is valid
-    - Whitelist payment gateway IPs in firewall
-    - Check webhook secret is correctly configured
-  </Accordion>
-  
-  <Accordion title="Bank Transfer Payments Not Showing" icon="building-columns">
-    **Common Issues:**
-    - Bank account not saved properly
-    - Account details incomplete
-    - Display order not set
+    **Common Causes:**
+    - Package not saved properly
+    - Member role restrictions
     - Cache not cleared
+    - Package marked as inactive
     
     **Solutions:**
-    - Re-enter and save bank account details
-    - Verify all required fields are filled
-    - Reorder accounts using drag-and-drop
-    - Clear browser and server cache
+    1. Verify package is saved and active
+    2. Check member role settings
+    3. Clear all caches
+    4. Review package visibility settings
+    5. Check theme compatibility
+  </Accordion>
+  
+  <Accordion title="Incorrect Pricing" icon="dollar-sign">
+    **Issue:** Wrong prices showing to customers
+    
+    **Common Causes:**
+    - Pricing not updated
+    - Tax calculation errors
+    - Currency conversion issues
+    - Cached pricing data
+    
+    **Solutions:**
+    1. Update pricing and save
+    2. Verify tax settings
+    3. Check currency configuration
+    4. Clear pricing cache
+    5. Test in incognito mode
+  </Accordion>
+  
+  <Accordion title="Domain Pricing Not Working" icon="globe">
+    **Issue:** Domain prices not applying correctly
+    
+    **Common Causes:**
+    - TLD not configured
+    - VAT settings incorrect
+    - Price not saved
+    - Domain API issues
+    
+    **Solutions:**
+    1. Configure pricing for all TLDs
+    2. Verify VAT percentages
+    3. Save domain pricing again
+    4. Check domain API connection
+    5. Review transaction logs
+  </Accordion>
+  
+  <Accordion title="Addons Not Available" icon="puzzle-piece">
+    **Issue:** Custom addons not showing at checkout
+    
+    **Common Causes:**
+    - Addon not enabled
+    - Package compatibility
+    - Visibility settings
+    - Cache issues
+    
+    **Solutions:**
+    1. Enable addon in settings
+    2. Check package compatibility
+    3. Review visibility rules
+    4. Clear cache
+    5. Test checkout process
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Additional Resources
+## Quick Reference
+
+### Package Comparison Template
+
+| Feature | Starter | Professional | Enterprise |
+|---------|---------|--------------|------------|
+| **Price** | $5/mo | $15/mo | $50/mo |
+| **Disk Space** | 1 GB | 5 GB | 20 GB |
+| **Bandwidth** | 10 GB | 50 GB | 200 GB |
+| **Websites** | 1 | 5 | Unlimited |
+| **SSL Certificate** | ❌ | ✅ | ✅ |
+| **Backups** | ❌ | ✅ | ✅ |
+| **Control Panel** | ❌ | ✅ | ✅ |
+| **Support** | Email | Priority | 24/7 Phone |
+
+### Pricing Checklist
+
+- [ ] Create 3-5 hosting packages
+- [ ] Set competitive pricing
+- [ ] Configure renewal terms with discounts
+- [ ] Set SSL certificate pricing
+- [ ] Configure backup service pricing
+- [ ] Set disk upgrade pricing
+- [ ] Configure domain pricing for all TLDs
+- [ ] Add VAT/tax where applicable
+- [ ] Create useful custom addons
+- [ ] Test checkout process
+- [ ] Review pricing quarterly
+
+### Recommended Margins
+
+| Service | Wholesale Cost | Retail Price | Margin |
+|---------|----------------|--------------|--------|
+| Hosting | $2-5/mo | $10-20/mo | 100-300% |
+| Domains | $8-12/yr | $12-18/yr | 20-50% |
+| SSL | $0-5/yr | $10-30/yr | 100-500% |
+| Backups | $1-3/mo | $5-15/mo | 200-400% |
+
+---
+
+## Related Documentation
 
 <CardGroup cols={2}>
-  <Card title="Stripe Documentation" icon="stripe" href="https://docs.stripe.com">
-    Official Stripe API documentation and guides
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Configure website resource limits
   </Card>
-  <Card title="PayPal Developer Docs" icon="paypal" href="https://developer.paypal.com/api/rest/">
-    PayPal REST API reference and tutorials
+  <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
+    Set up domain registration
   </Card>
-  <Card title="PCI Compliance" icon="shield-check" href="https://www.pcisecuritystandards.org/">
-    Payment Card Industry security standards
+  <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
+    Configure payment gateways
   </Card>
-  <Card title="Webhook Testing Tools" icon="webhook" href="https://webhook.site/">
-    Test and debug webhook integrations
+  <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
+    Manage automatic renewals
   </Card>
 </CardGroup>
 
 ---
 
 <Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring payment gateways or troubleshooting payment issues.
+  Contact support if you need assistance configuring hosting plans or pricing strategies.
 </Card>
