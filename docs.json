@@ -1,0 +1,93 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "AreaWP Documentation",
+  "colors": {
+    "primary": "#163e49",
+    "light": "#07C983",
+    "dark": "#163e49"
+  },
+  "favicon": "/favicon.ico",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Knowledge Base",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "tech-stack",
+              "requirements",
+              "installation"
+            ]
+          },
+          {
+          "group": "Configuration",
+            "pages": [
+              "admin/important-settings",
+              "admin/payments-setup",
+              "admin/websites-setup",
+              "admin/domains-setup",
+              "admin/packages-setup",
+              "admin/roles-setup",
+              "admin/emails-setup",
+              "admin/theme-setup"
+            ]
+            },
+          {
+          "group": "Integrations",
+            "pages": [
+              "integrations/mainwp",
+              "integrations/google",
+              "integrations/facebook",
+              "integrations/onesignal-chat"
+            ]
+            },
+          {
+          "group": "Usage",
+            "pages": [
+              "usage/adding-templates",
+              "usage/adding-clients",
+              "usage/adding-websites",
+              "usage/adding-plugins",
+              "usage/sending-notifications",
+              "usage/managing-orders"
+            ]
+            }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Documentation",
+          "href": "https://docs.areawp.com",
+          "icon": "book-open-cover"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://areawp.com/blog",
+          "icon": "newspaper"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "https://account.areawp.com/plugin/support_manager/client_tickets/add/2/"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://areawp.com/pricing"
+    }
+  }
+}
