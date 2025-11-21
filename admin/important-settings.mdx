@@ -1,49 +1,277 @@
+# General Settings Documentation
+
+**URL:** [https://siteswp.com/admin/GeneralOption](https://siteswp.com/admin/GeneralOption)
+
+**File Location:** [GeneralOption.blade.php](file:///c:/wamp64/www/src/apps/pages/admin/views/panel/settings-general/GeneralOption.blade.php)
+
 ---
-title: "Important Settings"
-description: "Post-Installation, there are several common settings that should be reviewed and adjusted as necessary. Time permitting, it's a good idea to go through all the settings for the system and company."
+
+## Overview
+
+The General Settings page is a comprehensive admin interface for configuring system-wide settings, payment gateways, company information, and integrations. The page features a tabbed interface with six main sections.
+
 ---
 
-## License Settings (Self-Hosted)
+## Navigation Tabs
 
-These settings can be found under [General Setup] \> [General Overview] \> [License Settings]\
-Make sure to paste hey your **license key** in order to get the script up and running.
+The page includes the following tabs:
+- **Contact Button** - Configure contact forms and communication channels
+- **Company Setup** - Manage company information and website settings
+- **Payment Gateway** - Configure payment methods and integrations
+- **License Settings** - Manage software licensing
+- **Cron Automation** - Set up automated tasks
+- **Language Settings** - Configure multi-language support
 
-## Company Specific
+---
 
-These settings can be found under [General Setup] \> [General Overview] \> [Company Setup]
+## 1. Contact Button Tab
 
-- Set the currency to be used in the platform
-- Set your company's data
-- Enable/Disable the CMS
+![Contact Button Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/contact_button_tab_1763752268679.png)
 
-  <Note>
-    If you're using your own existing landing site, you can use the **Disable landing page** to hide our CMS and redirect your customers to the register/login page
-  </Note>
+### Features
 
-<img
-  src="/images/company_setup.png"
-  alt="Company Setup Pn"
-  title="Company Setup Pn"
-  style={{ width:"48%" }}
-/>
+#### Contact Form Settings
+- **Enable Contact Form Request Callback** - Toggle to allow visitors to request callbacks through a contact form
+- **Enable Helpdesk & Tickets System** - Toggle to enable the helpdesk ticketing system for customer support (visible in admin menu when enabled)
 
-## Tax Settings
+#### Contact Buttons Management
+A dynamic item manager that allows you to create multiple contact buttons with the following fields:
+- **Button Title** - Display name (e.g., Facebook, WhatsApp, Telegram)
+- **Button Icon** - Upload custom icon image
+- **Contact Link** - URL for the contact method (e.g., https://wa.me/1234567890)
+- **Background Color** - Custom color picker for button styling
+- **Open in New Tab** - Toggle to control link behavior
 
-These settings can be found under [General Setup] \> [General Overview] \> [Tax Settings]
+**Maximum:** 20 contact buttons  
+**Features:** Sortable, drag-and-drop interface
 
-If you wanna add tax management you can enable it right here:
+#### Sidebar Guide
+The right sidebar provides helpful information:
+- **Popular Contact Options** with example URLs:
+  - WhatsApp: `https://wa.me/1234567890`
+  - Facebook Messenger: `https://m.me/username`
+  - Telegram: `https://t.me/username`
+  - Email: `mailto:contact@domain.com`
 
-- Set the Tax name
-- Define the tax percentage
+- **Best Practices:**
+  - Use recognizable brand colors
+  - Keep button titles short and clear
+  - Test all links before going live
+  - Limit to 3-5 contact options
 
-<img
-  src="/images/tax_settings.png"
-  alt="Tax Settings Pn"
-  title="Tax Settings Pn"
-  style={{ width:"33%" }}
-/>
+- **Color Suggestions:**
+  - WhatsApp: `#25D366`
+  - Facebook: `#1877F2`
+  - Telegram: `#0088CC`
 
-## Contact Button
+---
 
-These settings can be found under [General Setup] \> [General Overview] \> [Contact Button]\
-These are shown respectively in the user's dashboard / homepage.
+## 2. Company Setup Tab
+
+![Company Setup Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/company_setup_tab_1763752303342.png)
+
+### Company Information (Left Column)
+
+#### Currency Settings
+Select the default currency for the website:
+- USD ($)
+- EUR (€)
+- GBP (£)
+- VND (₫)
+- JPY (¥)
+- AUD (A$)
+- CAD (C$)
+
+#### Company Details
+- **Company Name** - Legal business name
+- **Company Address** - Physical business address
+- **Company City** - City location
+- **Company Phone** - Contact phone number
+- **Company Email** - Business email address
+- **VAT ID** - Tax identification number
+
+### Website Settings (Right Column)
+
+#### SEO & General Settings
+- **Allow Google bots to index** - Enable search engine indexing (recommended)
+- **Show documentation section at home page** - Toggle homepage documentation display
+- **Disable landing page (CMS) and redirect to login** - Skip landing page and go directly to login
+
+#### Tax Settings
+- **Enable Tax Management** - Master toggle for tax functionality
+  - **Tax Name** - Label for tax (e.g., VAT, GST)
+  - **Tax Amount (%)** - Percentage rate (e.g., 20)
+
+#### User Registration Settings
+- **Allow membership registration** - Enable/disable user account creation
+
+---
+
+## 3. Payment Gateway Tab
+
+![Payment Gateway Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/payment_gateway_tab_1763752316931.png)
+
+### Bank Account Information
+
+A dynamic item manager for adding multiple bank accounts with:
+- **Bank Logo** - Upload bank logo image
+- **Bank Name** - Name of financial institution (e.g., Vietinbank, Chase Bank)
+- **Account Holder Name** - Full legal name on account
+- **Account Number** - Bank account number
+- **Bank Branch** - Branch location or address
+
+**Maximum:** 20 bank accounts  
+**Features:** Sortable interface
+
+### Stripe Payment Gateway
+
+- **Enable Stripe Payment Processing** - Master toggle
+- **Display Name** - Custom label (default: "Credit Card")
+- **Publishable Key** - Public API key (pk_live_... or pk_test_...)
+- **Secret Key** - Private API key (sk_live_... or sk_test_...)
+- **Webhook Secret** - Webhook endpoint secret (whsec_...)
+
+> [!NOTE]
+> Configure your Stripe API keys to enable secure credit card processing.
+
+### PayPal Payment Gateway
+
+- **Enable PayPal Payment Processing** - Master toggle
+- **Display Name** - Custom label (default: "PayPal")
+- **Environment Mode** - Choose between:
+  - Sandbox (Testing)
+  - Live (Production)
+- **Client ID** - PayPal application client ID
+- **Client Secret** - PayPal application secret key
+
+> [!NOTE]
+> Configure PayPal credentials to enable PayPal payment processing.
+
+---
+
+## 4. License Settings Tab
+
+![License Settings Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/license_settings_tab_1763752334737.png)
+
+### License Management
+
+This tab provides software license validation and management:
+
+- **License Key Input** - Enter your AreaWP license key
+- **Validate License** - Button to verify license authenticity
+- **License Status Display** - Shows current license status and information
+- **Website Count** - Displays number of websites using the license
+
+The system uses the AreaWP License Manager for validation and includes:
+- Real-time AJAX validation
+- Domain verification
+- License information display
+- Error handling and debugging
+
+---
+
+## 5. Cron Automation Tab
+
+![Cron Automation Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/cron_automation_tab_1763752347343.png)
+
+### Automated Task Management
+
+Configure scheduled tasks and automation:
+
+- **Cron Job URL** - Endpoint for automated task execution
+- **Cron Schedule Settings** - Configure timing for automated tasks
+- **Task Management** - Enable/disable specific automated processes
+- **Execution Logs** - View history of automated task runs
+
+This section allows administrators to set up recurring tasks such as:
+- Database cleanup
+- Email notifications
+- Report generation
+- Data synchronization
+- Backup operations
+
+---
+
+## 6. Language Settings Tab
+
+![Language Settings Configuration](C:/Users/mada/.gemini/antigravity/brain/cfd041e8-6dde-4395-b5b5-24b1fb67b901/language_settings_tab_1763752359898.png)
+
+### Multi-Language Configuration
+
+Manage language support and translations:
+
+- **Default Language** - Set the primary language for the application
+- **Available Languages** - Enable/disable supported languages
+- **Language Switcher** - Configure front-end language selection
+- **Translation Management** - Manage language files and strings
+
+Features include:
+- Support for multiple languages
+- RTL (Right-to-Left) language support
+- Language-specific content management
+- Automatic language detection
+- Custom translation overrides
+
+---
+
+## Technical Details
+
+### File Structure
+- **Main Template:** `GeneralOption.blade.php` (3,585 lines)
+- **JavaScript:** `/assets/admin/js/settings.js`
+- **Form Processing:** POST method with storage arrays
+
+### Data Storage
+Settings are stored using the `Storage` facade with two main types:
+- `storage[setting][key]` - General settings
+- `storage[option][key]` - System options
+
+### AJAX Functionality
+The page includes AJAX handlers for:
+- License validation (`validate_license`)
+- Website count retrieval (`get_website_count`)
+
+### Security Features
+- CSRF protection via form tokens
+- Password fields for sensitive data (API keys, secrets)
+- Input validation and sanitization
+- Error handling with detailed logging
+
+---
+
+## Form Submission
+
+All settings are saved via a single form submission using the POST method. The form encompasses all tabs, allowing users to modify settings across multiple sections before saving.
+
+**Save Button Location:** Typically at the bottom of the page or in a fixed footer bar.
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Configuration Tips:**
+> - Always test payment gateways in sandbox/test mode before going live
+> - Keep API keys and secrets secure - never share them publicly
+> - Regularly validate your license to ensure continued support
+> - Configure at least one contact method for customer communication
+> - Enable tax management if required by your jurisdiction
+
+> [!WARNING]
+> **Important Considerations:**
+> - Changing currency settings may affect existing pricing
+> - Disabling user registration will prevent new account creation
+> - Payment gateway changes require thorough testing
+> - Cron automation requires proper server configuration
+
+---
+
+## Related Files
+
+- [GeneralOption.blade.php](file:///c:/wamp64/www/src/apps/pages/admin/views/panel/settings-general/GeneralOption.blade.php) - Main template file
+- `/assets/admin/js/settings.js` - JavaScript functionality
+- `/src/apps/license/license_checker.php` - License validation logic
+
+---
+
+*Documentation generated on 2025-11-21*
