@@ -1,38 +1,600 @@
 ---
-title: "Configuring Emails"
-description: "Basic email settings, such as whether to send HTML emails or use SMTP, email templates, and email signatures"
+title: "Email Settings"
+description: "Configure SMTP settings and customize email templates"
+icon: "envelope"
 ---
 
-## Mail Settings
+<Info>
+**Navigation Paths:**  
+Email Templates: `/admin/EmailTemplate`  
+Email Options: `/admin/EmailOption`
+</Info>
 
-Mail settings allow the choice to send emails via SMTP mail method, and whether or not to send HTML email. HTML email content can be specified alongside text content in Notifications Settings.
+## Overview
 
-This page can be reached from [Emails Setup] \> [Email Settings]
+The Email Settings pages allow you to configure your email system, including SMTP server settings and customizable email templates. Ensure reliable email delivery and maintain consistent branding across all customer communications.
 
-| Sender's name        | Define the name that you want to be shown where a client receives an email.  |
-| :------------------- | :--------------------------------------------------------------------------- |
-| Email Sent           | Set the email to be used to send the email itself.                           |
-| SMTP Username        | The SMTP user to send mail through.                                          |
-| SMTP Password        | The password for the SMTP user.                                              |
-| Email CC             | Add here a secondary email meant to used to receive notifications (optional) |
-| SMTP Host            | Set the host name used to communicate with the SMTP server.                  |
-| SMTP Port            | Sets the port used to communicate with the SMTP server.                      |
-| Content footer email | Define here the signature to be used in your emails.                         |
+<CardGroup cols={2}>
+  <Card title="SMTP Configuration" icon="server" color="#10b981">
+    Configure email server and delivery settings
+  </Card>
+  <Card title="Email Templates" icon="file-lines" color="#0d6efd">
+    Customize automated email messages
+  </Card>
+  <Card title="Sender Settings" icon="user" color="#f59e0b">
+    Set default sender name and email
+  </Card>
+  <Card title="Notifications" icon="bell" color="#8b5cf6">
+    Control which emails are sent
+  </Card>
+</CardGroup>
 
-Once filled "**Save**" the settings first before testing the connectivity.
+---
+
+## SMTP Configuration
+
+Configure your email server settings to enable email delivery from your platform.
+
+### SMTP Settings
+
+**Mail Driver**
+
+Choose how emails are sent from your platform.
+
+| Driver | Description | Use Case |
+|--------|-------------|----------|
+| **SMTP** | Standard email protocol | Most common, works with any email provider |
+| **Sendmail** | Server-based sending | Linux servers with sendmail installed |
+| **Mailgun** | Third-party service | High-volume transactional emails |
+| **SES** | Amazon Simple Email Service | AWS infrastructure |
+
+**Recommended**: SMTP for most users
+
+### SMTP Server Details
+
+Configure your SMTP server connection:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **SMTP Host** | Mail server address | `smtp.gmail.com` |
+| **SMTP Port** | Server port number | `587` (TLS) or `465` (SSL) |
+| **SMTP Username** | Email account username | `your-email@gmail.com` |
+| **SMTP Password** | Email account password | Your email password or app password |
+| **Encryption** | Security protocol | `TLS` or `SSL` |
+
+### Common SMTP Providers
+
+**Gmail:**
+- Host: `smtp.gmail.com`
+- Port: `587` (TLS) or `465` (SSL)
+- Username: Your Gmail address
+- Password: App-specific password (not your regular password)
+- Encryption: TLS or SSL
+- Note: Enable "Less secure app access" or use App Password
+
+**Outlook/Office 365:**
+- Host: `smtp.office365.com`
+- Port: `587`
+- Username: Your Outlook email
+- Password: Your Outlook password
+- Encryption: TLS
+
+**SendGrid:**
+- Host: `smtp.sendgrid.net`
+- Port: `587` or `2525`
+- Username: `apikey`
+- Password: Your SendGrid API key
+- Encryption: TLS
+
+**Mailgun:**
+- Host: `smtp.mailgun.org`
+- Port: `587`
+- Username: Your Mailgun SMTP username
+- Password: Your Mailgun SMTP password
+- Encryption: TLS
+
+<Steps>
+  <Step title="Choose Email Provider">
+    Select an SMTP provider (Gmail, SendGrid, Mailgun, etc.)
+  </Step>
+  <Step title="Get Credentials">
+    Obtain SMTP host, port, username, and password from your provider
+  </Step>
+  <Step title="Enter Settings">
+    Input all SMTP configuration details in Email Options
+  </Step>
+  <Step title="Configure Sender">
+    Set default sender name and email address
+  </Step>
+  <Step title="Test Connection">
+    Send a test email to verify configuration works
+  </Step>
+</Steps>
+
+<Warning>
+**Gmail Users:**
+- Use App Passwords instead of your regular password
+- Enable 2-factor authentication first
+- Generate App Password in Google Account settings
+- Never share your App Password
+</Warning>
+
+---
+
+## Sender Configuration
+
+Set the default sender information for all outgoing emails.
+
+### Sender Details
+
+**From Name**
+
+The name that appears in the "From" field of emails.
+
+- **Example**: "YourCompany Support", "Customer Service"
+- **Best Practice**: Use your company or brand name
+- **Avoid**: Generic names like "Admin" or "Noreply"
+
+**From Email**
+
+The email address that appears as the sender.
+
+- **Example**: `support@yourdomain.com`, `noreply@yourdomain.com`
+- **Best Practice**: Use a professional domain email
+- **Avoid**: Free email providers (Gmail, Yahoo) for business emails
+
+**Reply-To Email**
+
+Email address where customer replies are sent.
+
+- **Example**: `support@yourdomain.com`
+- **Best Practice**: Use a monitored email address
+- **Note**: Can be different from "From Email"
+
+<Tip>
+**Sender Best Practices:**
+- Use a recognizable company name
+- Use your own domain (not Gmail/Yahoo)
+- Ensure reply-to address is monitored
+- Keep sender information consistent
+- Test emails to check how they appear
+</Tip>
+
+---
 
 ## Email Templates
 
-You can customize specific templates as you wish.\
-You can do this in [Emails Setup] \> [Notification Settings]
+Customize the content and design of automated emails sent by your platform.
 
-Use the default variables and customize any template based on your needs.
+### Available Email Templates
+
+**Account & Authentication:**
+- **Welcome Email** - Sent when new user registers
+- **Email Verification** - Confirm email address
+- **Password Reset** - Reset forgotten password
+- **Account Activated** - Account approved by admin
+- **Account Suspended** - Account temporarily disabled
+
+**Website Management:**
+- **Website Created** - New website successfully created
+- **Website Suspended** - Website temporarily disabled
+- **Website Expiring Soon** - Reminder before expiration
+- **Website Expired** - Website has expired
+- **Website Deleted** - Website permanently removed
+
+**Domain Management:**
+- **Domain Registered** - Domain successfully registered
+- **Domain Expiring Soon** - Renewal reminder
+- **Domain Expired** - Domain has expired
+- **Domain Renewed** - Domain renewal confirmation
+
+**Billing & Payments:**
+- **Invoice Created** - New invoice generated
+- **Payment Received** - Payment confirmation
+- **Payment Failed** - Payment attempt unsuccessful
+- **Refund Processed** - Refund confirmation
+- **Subscription Renewed** - Auto-renewal confirmation
+
+**Support:**
+- **Ticket Created** - New support ticket opened
+- **Ticket Reply** - Response to support ticket
+- **Ticket Closed** - Support ticket resolved
+
+### Template Customization
+
+Each email template can be customized with:
+
+| Element | Description |
+|---------|-------------|
+| **Subject Line** | Email subject (supports variables) |
+| **Email Body** | Main content (HTML supported) |
+| **Header** | Top section with logo/branding |
+| **Footer** | Bottom section with links/info |
+| **Variables** | Dynamic content placeholders |
+
+### Available Variables
+
+Use these variables in your email templates to insert dynamic content:
+
+**User Variables:**
+- `{user_name}` - User's full name
+- `{user_email}` - User's email address
+- `{user_id}` - User account ID
+
+**Website Variables:**
+- `{website_name}` - Website name
+- `{website_url}` - Website URL
+- `{website_expiry}` - Expiration date
+
+**Domain Variables:**
+- `{domain_name}` - Domain name
+- `{domain_expiry}` - Domain expiration date
+
+**Billing Variables:**
+- `{invoice_number}` - Invoice ID
+- `{amount}` - Payment amount
+- `{currency}` - Currency symbol
+- `{payment_date}` - Transaction date
+
+**System Variables:**
+- `{company_name}` - Your company name
+- `{support_email}` - Support email address
+- `{platform_url}` - Platform URL
+- `{current_date}` - Today's date
+
+### Template Example
+
+**Subject**: Welcome to {company_name}, {user_name}!
+
+**Body**:
+```
+Hi {user_name},
+
+Welcome to {company_name}! We're excited to have you on board.
+
+Your account has been successfully created with the email: {user_email}
+
+You can now log in and start creating your websites.
+
+If you have any questions, feel free to contact us at {support_email}.
+
+Best regards,
+The {company_name} Team
+```
+
+<Steps>
+  <Step title="Select Template">
+    Choose the email template you want to customize
+  </Step>
+  <Step title="Edit Subject">
+    Customize the subject line with variables
+  </Step>
+  <Step title="Edit Body">
+    Write or modify the email content
+  </Step>
+  <Step title="Add Variables">
+    Insert dynamic variables where needed
+  </Step>
+  <Step title="Preview">
+    Preview the email to check formatting
+  </Step>
+  <Step title="Save Template">
+    Save your changes to activate the template
+  </Step>
+  <Step title="Send Test">
+    Send a test email to verify it looks correct
+  </Step>
+</Steps>
+
+---
 
 ## Email Notifications
 
-In this page you can define what notifications should be sent to the admin along with the email to be used:
+Control which automated emails are sent to users.
 
-- New orders email notification
-- New payments email notification
-- New registration email notification
-- New plugins pending manual activation notification
+### Notification Settings
+
+Enable or disable specific email notifications:
+
+| Notification Type | Default | Recommendation |
+|-------------------|---------|----------------|
+| **Welcome Email** | Enabled | Keep enabled |
+| **Email Verification** | Enabled | Keep enabled |
+| **Password Reset** | Enabled | Keep enabled |
+| **Website Created** | Enabled | Keep enabled |
+| **Expiration Warnings** | Enabled | Keep enabled |
+| **Payment Confirmations** | Enabled | Keep enabled |
+| **Support Ticket Updates** | Enabled | Keep enabled |
+| **Marketing Emails** | Disabled | Optional |
+
+### Notification Timing
+
+**Expiration Reminders:**
+- First reminder: 30 days before expiration
+- Second reminder: 14 days before expiration
+- Final reminder: 7 days before expiration
+- Expired notice: Day of expiration
+
+**Payment Reminders:**
+- Invoice created: Immediately
+- Payment due: 3 days before due date
+- Payment overdue: Day after due date
+- Final notice: 7 days after due date
+
+<Tip>
+**Notification Best Practices:**
+- Don't overwhelm users with too many emails
+- Send important notifications only
+- Allow users to manage preferences
+- Include unsubscribe option for marketing
+- Test notification timing
+</Tip>
+
+---
+
+## Email Deliverability
+
+Ensure your emails reach recipients' inboxes.
+
+### Improve Delivery Rates
+
+<AccordionGroup>
+  <Accordion title="SPF Records" icon="shield-check">
+    **Sender Policy Framework**
+    
+    Add SPF record to your domain's DNS to authorize email sending.
+    
+    **Example SPF Record:**
+    ```
+    v=spf1 include:_spf.google.com ~all
+    ```
+    
+    **Steps:**
+    1. Access your domain DNS settings
+    2. Add TXT record with SPF data
+    3. Wait for DNS propagation (up to 48 hours)
+    4. Test with SPF checker tool
+  </Accordion>
+  
+  <Accordion title="DKIM Signing" icon="signature">
+    **DomainKeys Identified Mail**
+    
+    Add DKIM signature to verify email authenticity.
+    
+    **Setup:**
+    1. Generate DKIM keys in your email provider
+    2. Add DKIM TXT record to DNS
+    3. Enable DKIM signing in SMTP settings
+    4. Test with DKIM validator
+  </Accordion>
+  
+  <Accordion title="DMARC Policy" icon="shield">
+    **Domain-based Message Authentication**
+    
+    Set DMARC policy to prevent email spoofing.
+    
+    **Example DMARC Record:**
+    ```
+    v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com
+    ```
+    
+    **Policies:**
+    - `p=none` - Monitor only
+    - `p=quarantine` - Mark as spam
+    - `p=reject` - Reject email
+  </Accordion>
+  
+  <Accordion title="Avoid Spam Filters" icon="filter">
+    **Best Practices:**
+    - Use professional sender name
+    - Avoid spam trigger words
+    - Include unsubscribe link
+    - Don't use all caps in subject
+    - Maintain good sender reputation
+    - Clean email list regularly
+    - Monitor bounce rates
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Testing & Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Emails Not Sending" icon="circle-xmark">
+    **Issue:** Emails are not being delivered
+    
+    **Common Causes:**
+    - Incorrect SMTP settings
+    - Wrong username/password
+    - Port blocked by firewall
+    - SSL/TLS misconfiguration
+    
+    **Solutions:**
+    1. Verify all SMTP settings are correct
+    2. Check username and password
+    3. Try different port (587 vs 465)
+    4. Test with different encryption (TLS vs SSL)
+    5. Check server firewall settings
+    6. Review email logs for errors
+  </Accordion>
+  
+  <Accordion title="Emails Going to Spam" icon="envelope-circle-check">
+    **Issue:** Emails landing in spam folder
+    
+    **Common Causes:**
+    - Missing SPF/DKIM records
+    - Poor sender reputation
+    - Spam trigger words
+    - No unsubscribe link
+    
+    **Solutions:**
+    1. Set up SPF, DKIM, and DMARC
+    2. Use professional domain email
+    3. Avoid spam trigger words
+    4. Include unsubscribe option
+    5. Warm up new email accounts
+    6. Monitor sender reputation
+  </Accordion>
+  
+  <Accordion title="Variables Not Working" icon="code">
+    **Issue:** Template variables not being replaced
+    
+    **Common Causes:**
+    - Incorrect variable syntax
+    - Variable not supported
+    - Template not saved
+    - Cache not cleared
+    
+    **Solutions:**
+    1. Check variable syntax: `{variable_name}`
+    2. Use only supported variables
+    3. Save template after changes
+    4. Clear email template cache
+    5. Send test email to verify
+  </Accordion>
+  
+  <Accordion title="Gmail App Password Issues" icon="key">
+    **Issue:** Gmail authentication failing
+    
+    **Common Causes:**
+    - Using regular password instead of App Password
+    - 2FA not enabled
+    - Less secure apps blocked
+    
+    **Solutions:**
+    1. Enable 2-factor authentication
+    2. Generate App Password in Google Account
+    3. Use App Password, not regular password
+    4. Update SMTP password in settings
+    5. Test connection again
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Email Content" icon="file-lines">
+    **Write Effective Emails:**
+    - Clear, concise subject lines
+    - Personalize with user's name
+    - Professional tone
+    - Mobile-friendly formatting
+    - Clear call-to-action
+    
+    **Avoid:**
+    - All caps in subject
+    - Excessive exclamation marks
+    - Misleading subject lines
+    - Too many links
+    - Large images
+  </Accordion>
+  
+  <Accordion title="Template Management" icon="folder">
+    **Organize Templates:**
+    - Keep templates consistent
+    - Use company branding
+    - Test on multiple devices
+    - Backup templates before changes
+    - Document customizations
+    
+    **Version Control:**
+    - Save template versions
+    - Test changes before deploying
+    - Keep original templates
+    - Document what was changed
+  </Accordion>
+  
+  <Accordion title="Compliance" icon="scale-balanced">
+    **Legal Requirements:**
+    - Include physical address
+    - Provide unsubscribe option
+    - Honor opt-out requests
+    - Follow CAN-SPAM Act
+    - GDPR compliance for EU users
+    
+    **Privacy:**
+    - Don't share email lists
+    - Secure email credentials
+    - Log email activities
+    - Respect user preferences
+  </Accordion>
+  
+  <Accordion title="Monitoring" icon="chart-line">
+    **Track Performance:**
+    - Monitor delivery rates
+    - Check open rates
+    - Track click-through rates
+    - Review bounce rates
+    - Analyze unsubscribe rates
+    
+    **Optimize:**
+    - A/B test subject lines
+    - Improve content based on data
+    - Adjust sending times
+    - Clean inactive subscribers
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### SMTP Port Guide
+
+| Port | Protocol | Encryption | Use Case |
+|------|----------|------------|----------|
+| **25** | SMTP | None | Server-to-server (often blocked) |
+| **587** | SMTP | TLS | Recommended for most users |
+| **465** | SMTP | SSL | Alternative secure option |
+| **2525** | SMTP | TLS | Backup port if 587 blocked |
+
+### Email Testing Checklist
+
+- [ ] SMTP settings configured correctly
+- [ ] Test email sends successfully
+- [ ] Email appears in inbox (not spam)
+- [ ] Sender name displays correctly
+- [ ] Reply-to address works
+- [ ] Variables populate correctly
+- [ ] Links work properly
+- [ ] Images display correctly
+- [ ] Mobile formatting looks good
+- [ ] Unsubscribe link works
+
+### Common Email Variables
+
+```
+User: {user_name}, {user_email}, {user_id}
+Website: {website_name}, {website_url}, {website_expiry}
+Domain: {domain_name}, {domain_expiry}
+Billing: {invoice_number}, {amount}, {currency}
+System: {company_name}, {support_email}, {platform_url}
+```
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Configure platform-wide settings
+  </Card>
+  <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
+    Configure renewal notifications
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Control email access permissions
+  </Card>
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Manage expiration notifications
+  </Card>
+</CardGroup>
+
+---
+
+<Card title="Need Help?" icon="headset" href="#">
+  Contact support if you need assistance configuring email settings or troubleshooting delivery issues.
+</Card>
