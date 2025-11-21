@@ -1,5 +1,5 @@
 ---
-title: "Admin Panel Settings"
+title: "Admin Theme Settings"
 description: "Customize the admin dashboard appearance and branding"
 icon: "gauge"
 ---
@@ -42,14 +42,18 @@ Upload custom logos to personalize your admin dashboard.
 | **Sidebar Logo** | 40 x 40 px | PNG, SVG | Collapsed sidebar |
 
 <Tip>
-Use transparent backgrounds and optimize file sizes (< 500KB) for best results.
+Use transparent backgrounds for PNG files and optimize file sizes (< 500KB) for best performance. Ensure logos are readable at small sizes and maintain consistent branding across all logo types.
 </Tip>
+
+<Info>
+**Logo Usage:** The main logo appears in the dashboard header, favicon in browser tabs, login logo on the authentication page, and sidebar logo when the navigation is collapsed. Each serves a specific purpose in the user experience.
+</Info>
 
 ---
 
 ## Color Scheme
 
-Customize colors to match your brand.
+Customize colors to match your brand identity.
 
 | Setting | Used For | Example |
 |---------|----------|---------|
@@ -85,9 +89,15 @@ Customize colors to match your brand.
   </Tab>
 </Tabs>
 
+<Tip>
+**Color Selection:** Choose colors that provide good contrast for readability. Test your color scheme on different screen sizes and lighting conditions. Ensure accessibility by following WCAG guidelines.
+</Tip>
+
 ---
 
 ## Sidebar Configuration
+
+Configure the navigation sidebar appearance and behavior.
 
 | Setting | Options | Recommendation |
 |---------|---------|----------------|
@@ -100,6 +110,14 @@ Customize colors to match your brand.
 - Limit to 8-10 top-level items
 - Use clear icons and labels
 
+<Info>
+**Sidebar Styles:**
+- **Fixed:** Always visible, good for desktop users
+- **Collapsible:** Can expand/collapse for flexibility
+- **Mini:** Always shows icons only for maximum space
+- **Overlay:** Slides over content, mobile-friendly
+</Info>
+
 ---
 
 ## Dashboard Widgets
@@ -111,6 +129,10 @@ Configure which widgets appear on your dashboard:
 **Activity:** Recent Users, Websites, Payments, Tickets
 
 For each widget, set visibility, position, size, and refresh rate.
+
+<Tip>
+**Widget Strategy:** Display only the most important metrics on your dashboard. Too many widgets can slow down loading and create visual clutter. Prioritize actionable data over vanity metrics.
+</Tip>
 
 ---
 
@@ -125,25 +147,137 @@ For each widget, set visibility, position, size, and refresh rate.
 - Session Timeout: 30-60 minutes recommended
 - Remember Me: Enable for trusted devices only
 
+<Warning>
+**Session Security:** Shorter session timeouts improve security but may inconvenience users. Balance security needs with user experience. Consider 30-60 minutes for admin panels.
+</Warning>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Branding Consistency" icon="palette">
+    - Use consistent colors across all logos and UI elements
+    - Match admin panel branding with public website
+    - Keep logos professional, clear, and recognizable
+    - Use high-quality image files optimized for web
+    - Maintain visual hierarchy with primary and secondary colors
+    - Test branding on different screen sizes
+    - Update branding assets when company identity changes
+  </Accordion>
+  
+  <Accordion title="User Experience" icon="user">
+    - Keep frequently used items easily accessible
+    - Use clear, descriptive menu labels
+    - Organize widgets logically by importance
+    - Minimize clutter on dashboard
+    - Test on different screen sizes and devices
+    - Use collapsible sidebar for tablets
+    - Optimize for common screen resolutions
+  </Accordion>
+  
+  <Accordion title="Performance" icon="gauge">
+    - Compress logo images before uploading
+    - Limit number of dashboard widgets (5-8 max)
+    - Set appropriate widget refresh rates
+    - Use SVG format for logos when possible
+    - Don't load unnecessary widgets
+    - Cache static assets effectively
+    - Monitor dashboard loading performance
+  </Accordion>
+  
+  <Accordion title="Accessibility" icon="universal-access">
+    - Ensure sufficient color contrast (WCAG AA minimum)
+    - Provide text alternatives for icons
+    - Support keyboard navigation
+    - Test with screen readers
+    - Don't rely on color alone to convey information
+    - Use readable font sizes (14px minimum)
+    - Provide clear focus indicators
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Logo Not Displaying" icon="image">
+    **Issue:** Uploaded logo doesn't appear
+    
+    **Solutions:**
+    1. Compress image file to under 500KB
+    2. Use PNG or SVG format only
+    3. Resize to recommended dimensions
+    4. Clear browser cache (Ctrl+F5)
+    5. Clear server/application cache
+    6. Check file permissions on server
+    7. Try re-uploading the logo
+  </Accordion>
+  
+  <Accordion title="Colors Not Applying" icon="palette">
+    **Issue:** Custom colors not showing
+    
+    **Solutions:**
+    1. Verify hex codes are valid (e.g., #3B82F6)
+    2. Save settings again
+    3. Clear application cache
+    4. Clear browser cache
+    5. Test in incognito/private mode
+    6. Check for CSS overrides in theme
+    7. Verify no conflicting custom CSS
+  </Accordion>
+  
+  <Accordion title="Sidebar Not Collapsing" icon="bars">
+    **Issue:** Sidebar won't collapse or expand
+    
+    **Solutions:**
+    1. Check browser console for JavaScript errors
+    2. Try different browser to isolate issue
+    3. Clear browser cache completely
+    4. Disable browser extensions temporarily
+    5. Check sidebar settings are saved
+    6. Reset to default sidebar settings
+    7. Update browser to latest version
+  </Accordion>
+  
+  <Accordion title="Dashboard Widgets Missing" icon="table-columns">
+    **Issue:** Widgets not appearing on dashboard
+    
+    **Solutions:**
+    1. Check widget visibility settings
+    2. Verify user has permission to view widgets
+    3. Review error logs for issues
+    4. Clear dashboard cache
+    5. Reset widget layout to default
+    6. Check data sources are accessible
+    7. Verify database connection is active
+  </Accordion>
+</AccordionGroup>
+
 ---
 
 ## Quick Reference
 
-**Customization Checklist:**
+### Customization Checklist
+
 - [ ] Upload all logos (main, favicon, login, sidebar)
 - [ ] Set primary and secondary colors
 - [ ] Configure sidebar colors and style
-- [ ] Organize menu items
+- [ ] Organize menu items logically
 - [ ] Configure dashboard widgets
 - [ ] Set date/time format and timezone
 - [ ] Configure session timeout
-- [ ] Test on different devices
+- [ ] Test on different devices and browsers
 
-**Common Issues:**
-- **Logo not showing**: Compress file, clear cache, check format
-- **Colors not applying**: Verify hex codes, save settings, clear cache
-- **Sidebar issues**: Check browser console, try different browser
-- **Widgets missing**: Check visibility settings, verify permissions
+### Logo Specifications
+
+| Logo Type | Size | Format | Notes |
+|-----------|------|--------|-------|
+| **Main Logo** | 180 x 50 px | PNG, SVG | Transparent background |
+| **Favicon** | 32 x 32 px | ICO, PNG | Simple, recognizable |
+| **Login Logo** | 200 x 80 px | PNG, SVG | Can be detailed |
+| **Sidebar Logo** | 40 x 40 px | PNG, SVG | Square, simple |
 
 ---
 

@@ -12,20 +12,20 @@ Email Options: `/admin/EmailOption`
 
 ## Overview
 
-The Email Settings pages allow you to configure your email system, including SMTP server settings and customizable email templates. Ensure reliable email delivery and maintain consistent branding across all customer communications.
+Configure your email system including SMTP server settings and customizable email templates for reliable delivery and consistent branding.
 
 <CardGroup cols={2}>
-  <Card title="SMTP Configuration" icon="server" color="#10b981">
-    Configure email server and delivery settings
+  <Card title="SMTP" icon="server" color="#10b981">
+    Email server configuration
   </Card>
-  <Card title="Email Templates" icon="file-lines" color="#0d6efd">
-    Customize automated email messages
+  <Card title="Templates" icon="file-lines" color="#0d6efd">
+    Customize automated emails
   </Card>
-  <Card title="Sender Settings" icon="user" color="#f59e0b">
-    Set default sender name and email
+  <Card title="Sender" icon="user" color="#f59e0b">
+    Default sender settings
   </Card>
   <Card title="Notifications" icon="bell" color="#8b5cf6">
-    Control which emails are sent
+    Control email sending
   </Card>
 </CardGroup>
 
@@ -33,176 +33,97 @@ The Email Settings pages allow you to configure your email system, including SMT
 
 ## SMTP Configuration
 
-Configure your email server settings to enable email delivery from your platform.
-
-### SMTP Settings
-
-**Mail Driver**
-
-Choose how emails are sent from your platform.
-
-| Driver | Description | Use Case |
-|--------|-------------|----------|
-| **SMTP** | Standard email protocol | Most common, works with any email provider |
-| **Sendmail** | Server-based sending | Linux servers with sendmail installed |
-| **Mailgun** | Third-party service | High-volume transactional emails |
-| **SES** | Amazon Simple Email Service | AWS infrastructure |
-
-**Recommended**: SMTP for most users
-
-### SMTP Server Details
-
-Configure your SMTP server connection:
+Configure your email server settings for sending automated emails.
 
 | Setting | Description | Example |
 |---------|-------------|---------|
+| **Mail Driver** | How emails are sent | SMTP (recommended) |
 | **SMTP Host** | Mail server address | `smtp.gmail.com` |
-| **SMTP Port** | Server port number | `587` (TLS) or `465` (SSL) |
-| **SMTP Username** | Email account username | `your-email@gmail.com` |
-| **SMTP Password** | Email account password | Your email password or app password |
-| **Encryption** | Security protocol | `TLS` or `SSL` |
+| **SMTP Port** | Server port | `587` (TLS) or `465` (SSL) |
+| **SMTP Username** | Email account | `your-email@gmail.com` |
+| **SMTP Password** | Account password | App password |
+| **Encryption** | Security protocol | TLS or SSL |
 
 ### Common SMTP Providers
 
-**Gmail:**
-- Host: `smtp.gmail.com`
-- Port: `587` (TLS) or `465` (SSL)
-- Username: Your Gmail address
-- Password: App-specific password (not your regular password)
-- Encryption: TLS or SSL
-- Note: Enable "Less secure app access" or use App Password
+<Tabs>
+  <Tab title="Gmail">
+    - Host: `smtp.gmail.com`
+    - Port: `587` (TLS) or `465` (SSL)
+    - Username: Gmail address
+    - Password: App-specific password
+    - Encryption: TLS or SSL
+    - Note: Enable 2FA, use App Password
+  </Tab>
+  <Tab title="Outlook">
+    - Host: `smtp.office365.com`
+    - Port: `587`
+    - Username: Outlook email
+    - Password: Outlook password
+    - Encryption: TLS
+  </Tab>
+  <Tab title="SendGrid">
+    - Host: `smtp.sendgrid.net`
+    - Port: `587` or `2525`
+    - Username: `apikey`
+    - Password: SendGrid API key
+    - Encryption: TLS
+  </Tab>
+  <Tab title="Mailgun">
+    - Host: `smtp.mailgun.org`
+    - Port: `587`
+    - Username: Mailgun SMTP username
+    - Password: Mailgun SMTP password
+    - Encryption: TLS
+  </Tab>
+</Tabs>
 
-**Outlook/Office 365:**
-- Host: `smtp.office365.com`
-- Port: `587`
-- Username: Your Outlook email
-- Password: Your Outlook password
-- Encryption: TLS
+**SMTP Configuration Steps:**
 
-**SendGrid:**
-- Host: `smtp.sendgrid.net`
-- Port: `587` or `2525`
-- Username: `apikey`
-- Password: Your SendGrid API key
-- Encryption: TLS
-
-**Mailgun:**
-- Host: `smtp.mailgun.org`
-- Port: `587`
-- Username: Your Mailgun SMTP username
-- Password: Your Mailgun SMTP password
-- Encryption: TLS
-
-<Steps>
-  <Step title="Choose Email Provider">
-    Select an SMTP provider (Gmail, SendGrid, Mailgun, etc.)
-  </Step>
-  <Step title="Get Credentials">
-    Obtain SMTP host, port, username, and password from your provider
-  </Step>
-  <Step title="Enter Settings">
-    Input all SMTP configuration details in Email Options
-  </Step>
-  <Step title="Configure Sender">
-    Set default sender name and email address
-  </Step>
-  <Step title="Test Connection">
-    Send a test email to verify configuration works
-  </Step>
-</Steps>
+1. Choose your SMTP provider (Gmail, Outlook, SendGrid, etc.)
+2. Obtain SMTP credentials (host, port, username, password)
+3. Enter configuration details in Email Settings
+4. Configure sender name and email address
+5. Send a test email to verify configuration
 
 <Warning>
-**Gmail Users:**
-- Use App Passwords instead of your regular password
-- Enable 2-factor authentication first
-- Generate App Password in Google Account settings
-- Never share your App Password
+**Gmail Users:** Use App Passwords instead of your regular password. Enable 2-factor authentication first, then generate an App Password in Google Account settings under Security.
 </Warning>
+
+<Info>
+**SMTP vs Other Methods:** SMTP is recommended for reliability and deliverability. While Sendmail and other drivers are available, SMTP provides better tracking, error handling, and compatibility.
+</Info>
 
 ---
 
 ## Sender Configuration
 
-Set the default sender information for all outgoing emails.
+Configure default sender information for all outgoing emails.
 
-### Sender Details
-
-**From Name**
-
-The name that appears in the "From" field of emails.
-
-- **Example**: "YourCompany Support", "Customer Service"
-- **Best Practice**: Use your company or brand name
-- **Avoid**: Generic names like "Admin" or "Noreply"
-
-**From Email**
-
-The email address that appears as the sender.
-
-- **Example**: `support@yourdomain.com`, `noreply@yourdomain.com`
-- **Best Practice**: Use a professional domain email
-- **Avoid**: Free email providers (Gmail, Yahoo) for business emails
-
-**Reply-To Email**
-
-Email address where customer replies are sent.
-
-- **Example**: `support@yourdomain.com`
-- **Best Practice**: Use a monitored email address
-- **Note**: Can be different from "From Email"
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **From Name** | Sender name | "YourCompany Support" |
+| **From Email** | Sender address | `support@yourdomain.com` |
+| **Reply-To Email** | Where replies go | `support@yourdomain.com` |
 
 <Tip>
-**Sender Best Practices:**
-- Use a recognizable company name
-- Use your own domain (not Gmail/Yahoo)
-- Ensure reply-to address is monitored
-- Keep sender information consistent
-- Test emails to check how they appear
+**Best Practices:** Use a recognizable company name, professional domain email (not Gmail/Yahoo), and ensure reply-to address is monitored regularly for customer responses.
 </Tip>
 
 ---
 
 ## Email Templates
 
-Customize the content and design of automated emails sent by your platform.
+Customize automated emails sent by your platform for consistent branding.
 
-### Available Email Templates
+**Available Templates:**
+- **Account**: Welcome, Verification, Password Reset, Activated, Suspended
+- **Website**: Created, Suspended, Expiring Soon, Expired, Deleted
+- **Domain**: Registered, Expiring Soon, Expired, Renewed
+- **Billing**: Invoice Created, Payment Received, Payment Failed, Refund, Subscription Renewed
+- **Support**: Ticket Created, Reply, Closed
 
-**Account & Authentication:**
-- **Welcome Email** - Sent when new user registers
-- **Email Verification** - Confirm email address
-- **Password Reset** - Reset forgotten password
-- **Account Activated** - Account approved by admin
-- **Account Suspended** - Account temporarily disabled
-
-**Website Management:**
-- **Website Created** - New website successfully created
-- **Website Suspended** - Website temporarily disabled
-- **Website Expiring Soon** - Reminder before expiration
-- **Website Expired** - Website has expired
-- **Website Deleted** - Website permanently removed
-
-**Domain Management:**
-- **Domain Registered** - Domain successfully registered
-- **Domain Expiring Soon** - Renewal reminder
-- **Domain Expired** - Domain has expired
-- **Domain Renewed** - Domain renewal confirmation
-
-**Billing & Payments:**
-- **Invoice Created** - New invoice generated
-- **Payment Received** - Payment confirmation
-- **Payment Failed** - Payment attempt unsuccessful
-- **Refund Processed** - Refund confirmation
-- **Subscription Renewed** - Auto-renewal confirmation
-
-**Support:**
-- **Ticket Created** - New support ticket opened
-- **Ticket Reply** - Response to support ticket
-- **Ticket Closed** - Support ticket resolved
-
-### Template Customization
-
-Each email template can be customized with:
+### Template Elements
 
 | Element | Description |
 |---------|-------------|
@@ -214,327 +135,205 @@ Each email template can be customized with:
 
 ### Available Variables
 
-Use these variables in your email templates to insert dynamic content:
-
-**User Variables:**
-- `{user_name}` - User's full name
-- `{user_email}` - User's email address
-- `{user_id}` - User account ID
-
-**Website Variables:**
-- `{website_name}` - Website name
-- `{website_url}` - Website URL
-- `{website_expiry}` - Expiration date
-
-**Domain Variables:**
-- `{domain_name}` - Domain name
-- `{domain_expiry}` - Domain expiration date
-
-**Billing Variables:**
-- `{invoice_number}` - Invoice ID
-- `{amount}` - Payment amount
-- `{currency}` - Currency symbol
-- `{payment_date}` - Transaction date
-
-**System Variables:**
-- `{company_name}` - Your company name
-- `{support_email}` - Support email address
-- `{platform_url}` - Platform URL
-- `{current_date}` - Today's date
+**User:** `{user_name}`, `{user_email}`, `{user_id}`  
+**Website:** `{website_name}`, `{website_url}`, `{website_expiry}`  
+**Domain:** `{domain_name}`, `{domain_expiry}`  
+**Billing:** `{invoice_number}`, `{amount}`, `{currency}`, `{payment_date}`  
+**System:** `{company_name}`, `{support_email}`, `{platform_url}`, `{current_date}`
 
 ### Template Example
 
-**Subject**: Welcome to {company_name}, {user_name}!
+**Subject:** Welcome to {company_name}, {user_name}!
 
-**Body**:
+**Body:**
 ```
 Hi {user_name},
 
 Welcome to {company_name}! We're excited to have you on board.
 
-Your account has been successfully created with the email: {user_email}
+Your account: {user_email}
 
-You can now log in and start creating your websites.
+You can now log in and start creating websites.
 
-If you have any questions, feel free to contact us at {support_email}.
+Questions? Contact us at {support_email}.
 
 Best regards,
 The {company_name} Team
 ```
 
-<Steps>
-  <Step title="Select Template">
-    Choose the email template you want to customize
-  </Step>
-  <Step title="Edit Subject">
-    Customize the subject line with variables
-  </Step>
-  <Step title="Edit Body">
-    Write or modify the email content
-  </Step>
-  <Step title="Add Variables">
-    Insert dynamic variables where needed
-  </Step>
-  <Step title="Preview">
-    Preview the email to check formatting
-  </Step>
-  <Step title="Save Template">
-    Save your changes to activate the template
-  </Step>
-  <Step title="Send Test">
-    Send a test email to verify it looks correct
-  </Step>
-</Steps>
+**Template Customization Steps:**
+
+1. Select the template you want to customize
+2. Edit the subject line using variables for personalization
+3. Write or modify the email body content
+4. Insert dynamic variables where needed
+5. Preview the template to check formatting
+6. Save the template to activate changes
+7. Send a test email to verify appearance
+
+<Tip>
+**Template Design:** Keep emails concise and scannable. Use clear calls-to-action. Include company branding. Test on mobile devices. Ensure variables are correctly formatted with curly braces.
+</Tip>
 
 ---
 
 ## Email Notifications
 
-Control which automated emails are sent to users.
+Control which automated emails are sent to customers.
 
-### Notification Settings
+| Notification | Default | Recommendation |
+|--------------|---------|----------------|
+| Welcome Email | Enabled | Keep enabled |
+| Email Verification | Enabled | Keep enabled |
+| Password Reset | Enabled | Keep enabled |
+| Website Created | Enabled | Keep enabled |
+| Expiration Warnings | Enabled | Keep enabled |
+| Payment Confirmations | Enabled | Keep enabled |
+| Support Updates | Enabled | Keep enabled |
+| Marketing | Disabled | Optional |
 
-Enable or disable specific email notifications:
+**Notification Timing:**
+- Expiration: 30, 14, 7 days before, day of
+- Payment: Invoice created, 3 days before due, day after due, 7 days after
 
-| Notification Type | Default | Recommendation |
-|-------------------|---------|----------------|
-| **Welcome Email** | Enabled | Keep enabled |
-| **Email Verification** | Enabled | Keep enabled |
-| **Password Reset** | Enabled | Keep enabled |
-| **Website Created** | Enabled | Keep enabled |
-| **Expiration Warnings** | Enabled | Keep enabled |
-| **Payment Confirmations** | Enabled | Keep enabled |
-| **Support Ticket Updates** | Enabled | Keep enabled |
-| **Marketing Emails** | Disabled | Optional |
-
-### Notification Timing
-
-**Expiration Reminders:**
-- First reminder: 30 days before expiration
-- Second reminder: 14 days before expiration
-- Final reminder: 7 days before expiration
-- Expired notice: Day of expiration
-
-**Payment Reminders:**
-- Invoice created: Immediately
-- Payment due: 3 days before due date
-- Payment overdue: Day after due date
-- Final notice: 7 days after due date
-
-<Tip>
-**Notification Best Practices:**
-- Don't overwhelm users with too many emails
-- Send important notifications only
-- Allow users to manage preferences
-- Include unsubscribe option for marketing
-- Test notification timing
-</Tip>
+<Info>
+**Email Frequency:** Balance keeping customers informed with avoiding email fatigue. Send critical notifications (security, billing) immediately. Batch less urgent updates when possible.
+</Info>
 
 ---
 
 ## Email Deliverability
 
-Ensure your emails reach recipients' inboxes.
+Improve email delivery rates and avoid spam folders.
 
-### Improve Delivery Rates
+**SPF Record** (Sender Policy Framework):
+```
+v=spf1 include:_spf.google.com ~all
+```
 
-<AccordionGroup>
-  <Accordion title="SPF Records" icon="shield-check">
-    **Sender Policy Framework**
-    
-    Add SPF record to your domain's DNS to authorize email sending.
-    
-    **Example SPF Record:**
-    ```
-    v=spf1 include:_spf.google.com ~all
-    ```
-    
-    **Steps:**
-    1. Access your domain DNS settings
-    2. Add TXT record with SPF data
-    3. Wait for DNS propagation (up to 48 hours)
-    4. Test with SPF checker tool
-  </Accordion>
-  
-  <Accordion title="DKIM Signing" icon="signature">
-    **DomainKeys Identified Mail**
-    
-    Add DKIM signature to verify email authenticity.
-    
-    **Setup:**
-    1. Generate DKIM keys in your email provider
-    2. Add DKIM TXT record to DNS
-    3. Enable DKIM signing in SMTP settings
-    4. Test with DKIM validator
-  </Accordion>
-  
-  <Accordion title="DMARC Policy" icon="shield">
-    **Domain-based Message Authentication**
-    
-    Set DMARC policy to prevent email spoofing.
-    
-    **Example DMARC Record:**
-    ```
-    v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com
-    ```
-    
-    **Policies:**
-    - `p=none` - Monitor only
-    - `p=quarantine` - Mark as spam
-    - `p=reject` - Reject email
-  </Accordion>
-  
-  <Accordion title="Avoid Spam Filters" icon="filter">
-    **Best Practices:**
-    - Use professional sender name
-    - Avoid spam trigger words
-    - Include unsubscribe link
-    - Don't use all caps in subject
-    - Maintain good sender reputation
-    - Clean email list regularly
-    - Monitor bounce rates
-  </Accordion>
-</AccordionGroup>
+**DKIM Signing** (DomainKeys Identified Mail):
+1. Generate DKIM keys in your email provider
+2. Add DKIM TXT record to your DNS
+3. Enable DKIM signing in email settings
+4. Test with DKIM validator
 
----
+**DMARC Policy**:
+```
+v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com
+```
 
-## Testing & Troubleshooting
+**Avoid Spam Filters:**
+- Use professional sender name and email
+- Avoid spam trigger words (FREE, URGENT, ACT NOW)
+- Don't use all caps in subject lines
+- Include unsubscribe link for marketing emails
+- Maintain good sender reputation
 
-<AccordionGroup>
-  <Accordion title="Emails Not Sending" icon="circle-xmark">
-    **Issue:** Emails are not being delivered
-    
-    **Common Causes:**
-    - Incorrect SMTP settings
-    - Wrong username/password
-    - Port blocked by firewall
-    - SSL/TLS misconfiguration
-    
-    **Solutions:**
-    1. Verify all SMTP settings are correct
-    2. Check username and password
-    3. Try different port (587 vs 465)
-    4. Test with different encryption (TLS vs SSL)
-    5. Check server firewall settings
-    6. Review email logs for errors
-  </Accordion>
-  
-  <Accordion title="Emails Going to Spam" icon="envelope-circle-check">
-    **Issue:** Emails landing in spam folder
-    
-    **Common Causes:**
-    - Missing SPF/DKIM records
-    - Poor sender reputation
-    - Spam trigger words
-    - No unsubscribe link
-    
-    **Solutions:**
-    1. Set up SPF, DKIM, and DMARC
-    2. Use professional domain email
-    3. Avoid spam trigger words
-    4. Include unsubscribe option
-    5. Warm up new email accounts
-    6. Monitor sender reputation
-  </Accordion>
-  
-  <Accordion title="Variables Not Working" icon="code">
-    **Issue:** Template variables not being replaced
-    
-    **Common Causes:**
-    - Incorrect variable syntax
-    - Variable not supported
-    - Template not saved
-    - Cache not cleared
-    
-    **Solutions:**
-    1. Check variable syntax: `{variable_name}`
-    2. Use only supported variables
-    3. Save template after changes
-    4. Clear email template cache
-    5. Send test email to verify
-  </Accordion>
-  
-  <Accordion title="Gmail App Password Issues" icon="key">
-    **Issue:** Gmail authentication failing
-    
-    **Common Causes:**
-    - Using regular password instead of App Password
-    - 2FA not enabled
-    - Less secure apps blocked
-    
-    **Solutions:**
-    1. Enable 2-factor authentication
-    2. Generate App Password in Google Account
-    3. Use App Password, not regular password
-    4. Update SMTP password in settings
-    5. Test connection again
-  </Accordion>
-</AccordionGroup>
+<Tip>
+**Deliverability:** Set up SPF, DKIM, and DMARC records to improve email authentication. Use a dedicated sending domain. Monitor bounce rates and spam complaints. Maintain clean email lists.
+</Tip>
 
 ---
 
 ## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Email Content" icon="file-lines">
-    **Write Effective Emails:**
-    - Clear, concise subject lines
-    - Personalize with user's name
-    - Professional tone
-    - Mobile-friendly formatting
-    - Clear call-to-action
-    
-    **Avoid:**
-    - All caps in subject
-    - Excessive exclamation marks
-    - Misleading subject lines
-    - Too many links
-    - Large images
+  <Accordion title="SMTP Configuration" icon="server">
+    - Use dedicated email service for transactional emails
+    - Keep SMTP credentials secure and confidential
+    - Use TLS encryption for security
+    - Monitor email sending limits and quotas
+    - Set up backup SMTP provider for redundancy
+    - Test email delivery regularly
+    - Keep email service credentials updated
   </Accordion>
   
-  <Accordion title="Template Management" icon="folder">
-    **Organize Templates:**
-    - Keep templates consistent
-    - Use company branding
-    - Test on multiple devices
-    - Backup templates before changes
-    - Document customizations
-    
-    **Version Control:**
-    - Save template versions
-    - Test changes before deploying
-    - Keep original templates
-    - Document what was changed
+  <Accordion title="Template Design" icon="file-lines">
+    - Keep templates concise and scannable
+    - Use clear, action-oriented subject lines
+    - Include company branding consistently
+    - Test templates on multiple email clients
+    - Ensure mobile responsiveness
+    - Use variables for personalization
+    - Include clear calls-to-action
   </Accordion>
   
-  <Accordion title="Compliance" icon="scale-balanced">
-    **Legal Requirements:**
-    - Include physical address
-    - Provide unsubscribe option
-    - Honor opt-out requests
-    - Follow CAN-SPAM Act
-    - GDPR compliance for EU users
-    
-    **Privacy:**
-    - Don't share email lists
-    - Secure email credentials
-    - Log email activities
-    - Respect user preferences
+  <Accordion title="Email Deliverability" icon="shield">
+    - Set up SPF, DKIM, and DMARC authentication
+    - Use professional domain email (not free providers)
+    - Monitor bounce rates and address issues
+    - Maintain clean email lists
+    - Avoid spam trigger words and tactics
+    - Include unsubscribe options
+    - Warm up new sending domains gradually
   </Accordion>
   
-  <Accordion title="Monitoring" icon="chart-line">
-    **Track Performance:**
-    - Monitor delivery rates
-    - Check open rates
-    - Track click-through rates
-    - Review bounce rates
-    - Analyze unsubscribe rates
+  <Accordion title="Customer Communication" icon="message">
+    - Send timely, relevant notifications
+    - Don't overwhelm with too many emails
+    - Provide clear opt-out options
+    - Respond to email replies promptly
+    - Segment emails by customer type
+    - Track email engagement metrics
+    - Continuously improve based on feedback
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Emails Not Sending" icon="envelope">
+    **Issue:** Emails are not being delivered
     
-    **Optimize:**
-    - A/B test subject lines
-    - Improve content based on data
-    - Adjust sending times
-    - Clean inactive subscribers
+    **Solutions:**
+    1. Verify SMTP settings are correct
+    2. Check username and password are accurate
+    3. Try different port (587 vs 465)
+    4. Test encryption setting (TLS vs SSL)
+    5. Check firewall isn't blocking SMTP
+    6. Verify email service account is active
+    7. Review error logs for specific issues
+  </Accordion>
+  
+  <Accordion title="Emails Going to Spam" icon="shield">
+    **Issue:** Emails landing in spam/junk folders
+    
+    **Solutions:**
+    1. Set up SPF, DKIM, and DMARC records
+    2. Use professional domain email address
+    3. Avoid spam trigger words in content
+    4. Include unsubscribe option for bulk emails
+    5. Monitor sender reputation score
+    6. Warm up new sending domain gradually
+    7. Ask customers to whitelist your email
+  </Accordion>
+  
+  <Accordion title="Variables Not Working" icon="code">
+    **Issue:** Template variables not populating with data
+    
+    **Solutions:**
+    1. Check variable syntax: `{variable_name}`
+    2. Use only supported variables for each template
+    3. Save template after making changes
+    4. Clear email template cache
+    5. Send test email to verify
+    6. Check for typos in variable names
+    7. Ensure data exists for the variable
+  </Accordion>
+  
+  <Accordion title="Gmail App Password Issues" icon="key">
+    **Issue:** Gmail authentication failing
+    
+    **Solutions:**
+    1. Enable 2-factor authentication on Google Account
+    2. Generate App Password in Google Account Security
+    3. Use App Password, not regular password
+    4. Update SMTP password in settings
+    5. Verify "Less secure app access" is not needed
+    6. Check Gmail account isn't locked
+    7. Try regenerating App Password
   </Accordion>
 </AccordionGroup>
 
@@ -542,37 +341,27 @@ Ensure your emails reach recipients' inboxes.
 
 ## Quick Reference
 
-### SMTP Port Guide
+### SMTP Ports
 
 | Port | Protocol | Encryption | Use Case |
 |------|----------|------------|----------|
 | **25** | SMTP | None | Server-to-server (often blocked) |
-| **587** | SMTP | TLS | Recommended for most users |
-| **465** | SMTP | SSL | Alternative secure option |
-| **2525** | SMTP | TLS | Backup port if 587 blocked |
+| **587** | SMTP | TLS | Recommended |
+| **465** | SMTP | SSL | Alternative |
+| **2525** | SMTP | TLS | Backup if 587 blocked |
 
-### Email Testing Checklist
+### Testing Checklist
 
 - [ ] SMTP settings configured correctly
 - [ ] Test email sends successfully
-- [ ] Email appears in inbox (not spam)
+- [ ] Email arrives in inbox (not spam)
 - [ ] Sender name displays correctly
 - [ ] Reply-to address works
-- [ ] Variables populate correctly
-- [ ] Links work properly
-- [ ] Images display correctly
+- [ ] Variables populate with data
+- [ ] Links are clickable and work
+- [ ] Images display properly
 - [ ] Mobile formatting looks good
-- [ ] Unsubscribe link works
-
-### Common Email Variables
-
-```
-User: {user_name}, {user_email}, {user_id}
-Website: {website_name}, {website_url}, {website_expiry}
-Domain: {domain_name}, {domain_expiry}
-Billing: {invoice_number}, {amount}, {currency}
-System: {company_name}, {support_email}, {platform_url}
-```
+- [ ] Unsubscribe link works (if applicable)
 
 ---
 
@@ -580,21 +369,15 @@ System: {company_name}, {support_email}, {platform_url}
 
 <CardGroup cols={2}>
   <Card title="General Settings" icon="gear" href="/general-settings">
-    Configure platform-wide settings
+    Platform-wide settings
   </Card>
   <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
-    Configure renewal notifications
+    Renewal notifications
   </Card>
   <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
-    Control email access permissions
+    Email access permissions
   </Card>
   <Card title="Website Configuration" icon="globe" href="/website-configuration">
-    Manage expiration notifications
+    Expiration notifications
   </Card>
 </CardGroup>
-
----
-
-<Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring email settings or troubleshooting delivery issues.
-</Card>

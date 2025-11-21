@@ -11,20 +11,20 @@ icon: "arrows-rotate"
 
 ## Overview
 
-The Auto-Renewal Settings page allows you to configure automatic renewal for both websites and domains. Enable auto-renewal to ensure continuous service for your customers and reduce manual renewal processing.
+Configure automatic renewal for websites and domains to ensure continuous service and reduce manual processing.
 
 <CardGroup cols={2}>
-  <Card title="Website Auto-Renewal" icon="globe" color="#10b981">
-    Automatically renew website hosting packages
+  <Card title="Website Renewal" icon="globe" color="#10b981">
+    Auto-renew hosting packages
   </Card>
-  <Card title="Domain Auto-Renewal" icon="link" color="#0d6efd">
-    Automatically renew domain registrations
+  <Card title="Domain Renewal" icon="link" color="#0d6efd">
+    Auto-renew domain registrations
   </Card>
-  <Card title="Renewal Notifications" icon="bell" color="#f59e0b">
-    Send reminders before renewal dates
+  <Card title="Notifications" icon="bell" color="#f59e0b">
+    Renewal reminders
   </Card>
-  <Card title="Payment Processing" icon="credit-card" color="#8b5cf6">
-    Automatic payment collection for renewals
+  <Card title="Payments" icon="credit-card" color="#8b5cf6">
+    Automatic payment collection
   </Card>
 </CardGroup>
 
@@ -32,160 +32,107 @@ The Auto-Renewal Settings page allows you to configure automatic renewal for bot
 
 ## Website Auto-Renewal
 
-Configure automatic renewal settings for website hosting packages.
+Enable automatic renewal for hosting packages to maintain continuous service.
 
-### Enable Website Auto-Renewal
+**Enable/Disable:** Master toggle for automatic website renewal
 
-**Auto-Renewal Status**
+**How Website Auto-Renewal Works:**
+1. System detects upcoming expiration (7-14 days before)
+2. Automatic payment processed using saved payment method
+3. If successful, website renewed for next billing period
+4. Customer receives confirmation email with new expiration date
+5. Service continues without interruption
 
-Master toggle to enable or disable automatic website renewal across the platform.
-
-- **Enabled**: Websites automatically renew before expiration
-- **Disabled**: Users must manually renew their websites
-
-### How Website Auto-Renewal Works
-
-<Steps>
-  <Step title="Renewal Date Approaches">
-    System detects upcoming website expiration (typically 7-14 days before)
-  </Step>
-  <Step title="Payment Attempt">
-    Automatic payment is processed using saved payment method
-  </Step>
-  <Step title="Renewal Processed">
-    If payment succeeds, website is renewed for the next billing period
-  </Step>
-  <Step title="Confirmation Sent">
-    Customer receives email confirmation of successful renewal
-  </Step>
-  <Step title="Service Continues">
-    Website remains active without interruption
-  </Step>
-</Steps>
-
-### Website Renewal Settings
-
-| Setting | Description | Recommended |
-|---------|-------------|-------------|
-| **Auto-Renewal** | Enable automatic website renewal | Enabled |
-| **Renewal Notice** | Days before expiration to send reminder | 7-14 days |
-| **Retry Failed Payments** | Attempt payment again if first attempt fails | Yes |
-| **Retry Attempts** | Number of payment retry attempts | 2-3 times |
-| **Retry Interval** | Days between retry attempts | 2-3 days |
+| Setting | Recommended |
+|---------|-------------|
+| **Auto-Renewal** | Enabled |
+| **Renewal Notice** | 7-14 days before |
+| **Retry Failed Payments** | Yes |
+| **Retry Attempts** | 2-3 times |
+| **Retry Interval** | 2-3 days |
 
 <Tip>
-**Website Auto-Renewal Benefits:**
-- Reduces customer churn
-- Ensures continuous service
-- Minimizes manual processing
-- Improves customer satisfaction
-- Provides predictable revenue
+**Benefits:** Auto-renewal reduces customer churn, ensures continuous service delivery, and provides predictable recurring revenue. Most customers prefer the convenience of automatic renewal.
 </Tip>
+
+<Info>
+**Customer Control:** Customers can opt-out of auto-renewal at any time from their account settings. Always respect customer preferences and send clear notifications before charging.
+</Info>
 
 ---
 
 ## Domain Auto-Renewal
 
-Configure automatic renewal settings for domain registrations.
+Enable automatic renewal for domain registrations to prevent domain loss.
 
-### Enable Domain Auto-Renewal
+**Enable/Disable:** Master toggle for automatic domain renewal
 
-**Auto-Renewal Status**
+**How Domain Auto-Renewal Works:**
+1. System detects upcoming expiration (30 days before)
+2. Automatic payment processed using saved payment method
+3. Domain renewed through registrar API (e.g., Dynadot)
+4. Customer receives confirmation with new expiration date
+5. Domain remains active and under customer control
 
-Master toggle to enable or disable automatic domain renewal across the platform.
-
-- **Enabled**: Domains automatically renew before expiration
-- **Disabled**: Users must manually renew their domains
-
-### How Domain Auto-Renewal Works
-
-<Steps>
-  <Step title="Renewal Date Approaches">
-    System detects upcoming domain expiration (typically 30 days before)
-  </Step>
-  <Step title="Payment Attempt">
-    Automatic payment is processed using saved payment method
-  </Step>
-  <Step title="Domain Renewed">
-    If payment succeeds, domain is renewed through registrar API
-  </Step>
-  <Step title="Confirmation Sent">
-    Customer receives email confirmation with new expiration date
-  </Step>
-  <Step title="Domain Remains Active">
-    Domain continues to function without interruption
-  </Step>
-</Steps>
-
-### Domain Renewal Settings
-
-| Setting | Description | Recommended |
-|---------|-------------|-------------|
-| **Auto-Renewal** | Enable automatic domain renewal | Enabled |
-| **Renewal Notice** | Days before expiration to send reminder | 30 days |
-| **Early Renewal** | Days before expiration to process renewal | 7-14 days |
-| **Grace Period** | Days after expiration before domain is released | 30 days |
-| **Retry Failed Payments** | Attempt payment again if first attempt fails | Yes |
+| Setting | Recommended |
+|---------|-------------|
+| **Auto-Renewal** | Enabled |
+| **Renewal Notice** | 30 days before |
+| **Early Renewal** | 7-14 days before expiration |
+| **Grace Period** | 30 days after expiration |
+| **Retry Failed Payments** | Yes |
 
 <Warning>
 **Domain Expiration Risks:**
 - Expired domains may be lost permanently
 - Domain can be registered by someone else
-- Email and website services will stop working
+- Email and website services stop immediately
 - Recovery can be expensive or impossible
 
-**Always enable auto-renewal for critical domains!**
+**Always enable auto-renewal for critical domains and send multiple reminders!**
 </Warning>
+
+<Tip>
+**Early Renewal:** Renew domains 7-14 days before expiration to avoid last-minute issues. This provides a buffer for payment failures and ensures domains never lapse.
+</Tip>
 
 ---
 
 ## Renewal Notifications
 
-Configure email notifications for upcoming renewals.
-
-### Notification Schedule
+Configure when customers receive renewal reminder emails.
 
 **Website Renewal Reminders:**
-- **30 days before**: First reminder
-- **14 days before**: Second reminder
-- **7 days before**: Final reminder
-- **Day of expiration**: Urgent notice
+- 30 days before: First reminder
+- 14 days before: Second reminder
+- 7 days before: Final reminder
+- Day of expiration: Urgent notice
 
 **Domain Renewal Reminders:**
-- **60 days before**: Early notice
-- **30 days before**: First reminder
-- **14 days before**: Second reminder
-- **7 days before**: Final reminder
-- **Day of expiration**: Urgent notice
+- 60 days before: Early notice
+- 30 days before: First reminder
+- 14 days before: Second reminder
+- 7 days before: Final reminder
+- Day of expiration: Urgent notice
 
-### Notification Content
-
-Each renewal reminder should include:
-- Service name (website or domain)
-- Current expiration date
+**Each reminder includes:**
+- Service name and details
+- Expiration date
 - Renewal amount
 - Payment method on file
 - Link to manage auto-renewal settings
-- Instructions for manual renewal
 
-<Tip>
-**Notification Best Practices:**
-- Send multiple reminders at different intervals
-- Make renewal process easy with direct links
-- Clearly state consequences of non-renewal
-- Provide options to update payment methods
-- Include customer support contact information
-</Tip>
+<Info>
+**Notification Strategy:** Multiple reminders ensure customers are aware of upcoming renewals. Early notices give customers time to update payment methods or cancel if needed.
+</Info>
 
 ---
 
 ## Payment Processing
 
-Configure how automatic renewal payments are handled.
+Configure how automatic payments are processed for renewals.
 
-### Payment Methods
-
-**Supported Payment Methods for Auto-Renewal:**
+**Supported for Auto-Renewal:**
 - Credit/Debit Cards (via Stripe)
 - PayPal (with billing agreement)
 - Saved payment methods
@@ -197,151 +144,120 @@ Configure how automatic renewal payments are handled.
 
 ### Failed Payment Handling
 
-**When a Renewal Payment Fails:**
+**Retry Process:**
 
-<Steps>
-  <Step title="Initial Failure">
-    First payment attempt fails (card declined, insufficient funds, etc.)
-  </Step>
-  <Step title="Customer Notification">
-    Immediate email notification about failed payment
-  </Step>
-  <Step title="Retry Attempts">
-    System retries payment after configured interval (e.g., 2-3 days)
-  </Step>
-  <Step title="Multiple Retries">
-    Up to 3 retry attempts over 7-10 days
-  </Step>
-  <Step title="Final Notice">
-    If all attempts fail, send final notice before service suspension
-  </Step>
-  <Step title="Grace Period">
-    Allow grace period for manual payment before termination
-  </Step>
-</Steps>
+1. Initial payment attempt fails
+2. Customer receives immediate notification email
+3. System retries payment after 2-3 days
+4. Multiple retry attempts (up to 3) over 7-10 days
+5. If all attempts fail, send final notice
+6. Grace period allows time for manual payment
 
-### Payment Retry Configuration
-
-| Setting | Recommended Value |
-|---------|-------------------|
+| Setting | Recommended |
+|---------|-------------|
 | **Retry Attempts** | 3 times |
-| **First Retry** | 2 days after initial failure |
-| **Second Retry** | 5 days after initial failure |
-| **Third Retry** | 7 days after initial failure |
+| **First Retry** | 2 days after failure |
+| **Second Retry** | 5 days after failure |
+| **Third Retry** | 7 days after failure |
 | **Grace Period** | 7-14 days after final failure |
 
-<Info>
-**Payment Failure Reasons:**
-- Expired credit card
-- Insufficient funds
-- Card declined by bank
-- Payment method removed
-- Billing address mismatch
-- Card security check failed
-</Info>
+<Warning>
+**Payment Failures:** Common causes include expired cards, insufficient funds, or cancelled payment methods. Always notify customers immediately when payments fail and provide easy ways to update payment information.
+</Warning>
+
+<Tip>
+**Reduce Failures:** Send card expiration reminders 30 days before cards expire. Encourage customers to keep payment methods up-to-date. Offer multiple payment options for flexibility.
+</Tip>
 
 ---
 
 ## Configuration Examples
 
-### Conservative Configuration
-
-Suitable for high-value services:
-
-| Setting | Website | Domain |
-|---------|---------|--------|
-| **Auto-Renewal** | Enabled | Enabled |
-| **First Notice** | 30 days | 60 days |
-| **Second Notice** | 14 days | 30 days |
-| **Final Notice** | 7 days | 7 days |
-| **Retry Attempts** | 3 | 3 |
-| **Grace Period** | 14 days | 30 days |
-
-### Standard Configuration
-
-Balanced approach for most platforms:
-
-| Setting | Website | Domain |
-|---------|---------|--------|
-| **Auto-Renewal** | Enabled | Enabled |
-| **First Notice** | 14 days | 30 days |
-| **Second Notice** | 7 days | 14 days |
-| **Final Notice** | 3 days | 7 days |
-| **Retry Attempts** | 2 | 3 |
-| **Grace Period** | 7 days | 14 days |
-
-### Aggressive Configuration
-
-For low-cost, high-volume services:
-
-| Setting | Website | Domain |
-|---------|---------|--------|
-| **Auto-Renewal** | Enabled | Enabled |
-| **First Notice** | 7 days | 14 days |
-| **Second Notice** | 3 days | 7 days |
-| **Final Notice** | 1 day | 3 days |
-| **Retry Attempts** | 1 | 2 |
-| **Grace Period** | 3 days | 7 days |
+<Tabs>
+  <Tab title="Conservative">
+    **Website:**
+    - First Notice: 30 days
+    - Final Notice: 7 days
+    - Retry: 3 attempts
+    - Grace: 14 days
+    
+    **Domain:**
+    - First Notice: 60 days
+    - Final Notice: 7 days
+    - Retry: 3 attempts
+    - Grace: 30 days
+  </Tab>
+  <Tab title="Standard">
+    **Website:**
+    - First Notice: 14 days
+    - Final Notice: 3 days
+    - Retry: 2 attempts
+    - Grace: 7 days
+    
+    **Domain:**
+    - First Notice: 30 days
+    - Final Notice: 7 days
+    - Retry: 3 attempts
+    - Grace: 14 days
+  </Tab>
+  <Tab title="Aggressive">
+    **Website:**
+    - First Notice: 7 days
+    - Final Notice: 1 day
+    - Retry: 1 attempt
+    - Grace: 3 days
+    
+    **Domain:**
+    - First Notice: 14 days
+    - Final Notice: 3 days
+    - Retry: 2 attempts
+    - Grace: 7 days
+  </Tab>
+</Tabs>
 
 ---
 
 ## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Auto-Renewal Strategy" icon="arrows-rotate">
-    **Enable by Default:**
-    - Turn on auto-renewal for all new services
-    - Make opt-out easy but clear
-    - Explain benefits during signup
-    - Highlight in terms of service
-    
-    **Customer Control:**
-    - Allow customers to disable auto-renewal
-    - Provide easy management interface
-    - Send confirmation when settings change
-    - Respect customer preferences
-  </Accordion>
-  
-  <Accordion title="Communication" icon="envelope">
-    **Clear Notifications:**
-    - Send timely renewal reminders
-    - Use clear, non-technical language
-    - Include all relevant details
-    - Provide action links
-    
-    **Transparency:**
-    - Clearly state renewal amounts
-    - Show next billing date
-    - Explain what happens if payment fails
-    - Provide customer support contact
+  <Accordion title="Customer Communication" icon="message">
+    - Send multiple renewal reminders (30, 14, 7 days before)
+    - Clearly communicate auto-renewal policies upfront
+    - Make it easy for customers to opt-out if desired
+    - Notify immediately when payments fail
+    - Provide clear instructions for updating payment methods
+    - Send confirmation after successful renewals
+    - Be transparent about renewal pricing
   </Accordion>
   
   <Accordion title="Payment Management" icon="credit-card">
-    **Update Payment Methods:**
-    - Remind customers to update expired cards
-    - Provide easy payment method updates
-    - Send alerts for expiring cards
-    - Offer multiple payment options
-    
-    **Handle Failures Gracefully:**
-    - Retry failed payments intelligently
-    - Provide clear failure notifications
-    - Offer manual payment options
-    - Give adequate grace periods
+    - Encourage customers to save payment methods
+    - Send card expiration reminders proactively
+    - Offer multiple payment options for flexibility
+    - Retry failed payments with reasonable intervals
+    - Provide grace period for payment issues
+    - Make payment updates easy and accessible
+    - Monitor payment failure rates and address issues
   </Accordion>
   
-  <Accordion title="Customer Retention" icon="user-check">
-    **Reduce Churn:**
-    - Make renewal process seamless
-    - Offer renewal discounts
-    - Provide value reminders
-    - Address payment issues quickly
-    
-    **Win-Back Campaigns:**
-    - Contact customers after cancellation
-    - Offer incentives to return
-    - Understand cancellation reasons
-    - Improve based on feedback
+  <Accordion title="Domain Protection" icon="shield">
+    - Always enable auto-renewal for domains by default
+    - Renew domains early (7-14 days before expiration)
+    - Provide longer grace periods for domains (30 days)
+    - Send more frequent reminders for domain renewals
+    - Educate customers about domain loss risks
+    - Offer domain lock/protection services
+    - Monitor domain expiration dates closely
+  </Accordion>
+  
+  <Accordion title="Revenue Optimization" icon="dollar-sign">
+    - Make auto-renewal opt-out instead of opt-in
+    - Offer incentives for enabling auto-renewal
+    - Provide discounts for annual auto-renewal
+    - Track renewal rates and optimize timing
+    - Reduce friction in renewal process
+    - Monitor churn and address common issues
+    - Test different notification schedules
   </Accordion>
 </AccordionGroup>
 
@@ -350,89 +266,52 @@ For low-cost, high-volume services:
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Auto-Renewal Not Working" icon="circle-xmark">
+  <Accordion title="Auto-Renewal Not Working" icon="arrows-rotate">
     **Issue:** Services not renewing automatically
-    
-    **Common Causes:**
-    - Auto-renewal disabled in settings
-    - Cron jobs not running
-    - Payment gateway issues
-    - Customer disabled auto-renewal
     
     **Solutions:**
     1. Verify auto-renewal is enabled in settings
-    2. Check cron jobs are running properly
-    3. Test payment gateway connectivity
-    4. Review customer account settings
-    5. Check system logs for errors
+    2. Check cron jobs are running on schedule
+    3. Test payment gateway connection
+    4. Review customer auto-renewal preferences
+    5. Check for error logs
+    6. Verify customer has valid payment method
   </Accordion>
   
   <Accordion title="Payment Failures" icon="credit-card">
-    **Issue:** Renewal payments consistently failing
-    
-    **Common Causes:**
-    - Expired payment methods
-    - Insufficient funds
-    - Payment gateway configuration
-    - Card security issues
+    **Issue:** Automatic payments failing frequently
     
     **Solutions:**
     1. Contact customer to update payment method
     2. Verify payment gateway is configured correctly
-    3. Check for payment processor issues
-    4. Review transaction logs
-    5. Test with a different payment method
+    3. Check transaction logs for error details
+    4. Test with different payment method
+    5. Ensure customer has sufficient funds
+    6. Verify card hasn't expired
   </Accordion>
   
   <Accordion title="Notifications Not Sending" icon="bell">
-    **Issue:** Renewal reminders not being sent
-    
-    **Common Causes:**
-    - Email service not configured
-    - Cron jobs not running
-    - Email templates missing
-    - Customer email invalid
+    **Issue:** Renewal reminder emails not being delivered
     
     **Solutions:**
-    1. Verify email service is configured
-    2. Check cron job execution
-    3. Review email templates
+    1. Verify email service is configured correctly
+    2. Check cron job execution logs
+    3. Review email templates for errors
     4. Validate customer email addresses
     5. Check spam/junk folders
+    6. Test email delivery manually
   </Accordion>
   
-  <Accordion title="Domains Expiring Despite Auto-Renewal" icon="link">
+  <Accordion title="Domains Expiring Despite Auto-Renewal" icon="globe">
     **Issue:** Domains expiring even with auto-renewal enabled
     
-    **Common Causes:**
-    - Domain API issues
-    - Insufficient registrar account balance
-    - Domain locked or on hold
-    - Renewal timing too late
-    
     **Solutions:**
-    1. Check domain registrar API status
+    1. Check domain API status and connectivity
     2. Verify registrar account has sufficient balance
-    3. Ensure domain is unlocked
-    4. Adjust renewal timing to earlier
-    5. Contact domain registrar support
-  </Accordion>
-  
-  <Accordion title="Customers Charged Incorrectly" icon="dollar-sign">
-    **Issue:** Wrong amounts charged for renewals
-    
-    **Common Causes:**
-    - Pricing not updated
-    - Tax calculation errors
-    - Discount codes not applied
-    - Currency conversion issues
-    
-    **Solutions:**
-    1. Verify current pricing is correct
-    2. Check tax calculation settings
-    3. Review discount code logic
-    4. Confirm currency settings
-    5. Issue refunds for overcharges
+    3. Ensure domain is unlocked for renewal
+    4. Adjust renewal timing to be earlier (14+ days)
+    5. Check for API rate limits or errors
+    6. Verify domain is eligible for renewal
   </Accordion>
 </AccordionGroup>
 
@@ -444,31 +323,17 @@ For low-cost, high-volume services:
 
 | Service | First Notice | Final Notice | Renewal Date | Grace Period |
 |---------|--------------|--------------|--------------|--------------|
-| **Website** | 14 days before | 3 days before | Expiration date | 7 days after |
+| **Website** | 14 days before | 3 days before | Expiration | 7 days after |
 | **Domain** | 30 days before | 7 days before | 14 days before expiration | 30 days after |
-
-### Auto-Renewal Checklist
-
-- [ ] Enable auto-renewal in settings
-- [ ] Configure renewal notice schedule
-- [ ] Set up payment retry logic
-- [ ] Create renewal email templates
-- [ ] Test renewal process end-to-end
-- [ ] Configure grace periods
-- [ ] Set up failure notifications
-- [ ] Document customer support procedures
-- [ ] Monitor renewal success rates
-- [ ] Review and optimize regularly
 
 ### Key Metrics to Monitor
 
-| Metric | Target | Action if Below Target |
-|--------|--------|------------------------|
-| **Renewal Success Rate** | > 90% | Improve payment retry logic |
-| **Payment Failure Rate** | < 10% | Send card update reminders |
-| **Auto-Renewal Opt-In** | > 80% | Make benefits clearer |
-| **Customer Churn** | < 5% | Improve retention strategies |
-| **Grace Period Usage** | < 15% | Earlier renewal reminders |
+| Metric | Target | Action if Below |
+|--------|--------|-----------------|
+| Renewal Success Rate | > 90% | Improve retry logic |
+| Payment Failure Rate | < 10% | Send card update reminders |
+| Auto-Renewal Opt-In | > 80% | Make benefits clearer |
+| Customer Churn | < 5% | Improve retention |
 
 ---
 
@@ -476,21 +341,15 @@ For low-cost, high-volume services:
 
 <CardGroup cols={2}>
   <Card title="General Settings" icon="gear" href="/general-settings">
-    Configure platform-wide settings
+    Platform-wide settings
   </Card>
   <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
-    Set up payment gateways
+    Payment gateways
   </Card>
   <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
-    Configure domain registration
+    Domain registration
   </Card>
   <Card title="Website Configuration" icon="globe" href="/website-configuration">
-    Manage website expiry settings
+    Website expiry settings
   </Card>
 </CardGroup>
-
----
-
-<Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring auto-renewal settings or troubleshooting renewal issues.
-</Card>

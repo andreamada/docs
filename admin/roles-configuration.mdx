@@ -11,20 +11,20 @@ icon: "shield-lock"
 
 ## Overview
 
-The User Roles & Permissions page allows you to create custom user roles and configure granular access permissions. Control what different users can see and do on your platform to maintain security and organize your team effectively.
+Create custom user roles and configure granular access permissions to control what different users can see and do on your platform.
 
 <CardGroup cols={2}>
-  <Card title="Role Management" icon="users" color="#10b981">
-    Create and manage custom user roles
+  <Card title="Roles" icon="users" color="#10b981">
+    Create and manage roles
   </Card>
-  <Card title="Permission Control" icon="shield-check" color="#0d6efd">
-    Set granular access permissions per role
+  <Card title="Permissions" icon="shield-check" color="#0d6efd">
+    Granular access control
   </Card>
   <Card title="Access Levels" icon="lock" color="#f59e0b">
-    Define what each role can access
+    Define role capabilities
   </Card>
   <Card title="Security" icon="shield" color="#8b5cf6">
-    Protect sensitive areas and data
+    Protect sensitive areas
   </Card>
 </CardGroup>
 
@@ -32,424 +32,248 @@ The User Roles & Permissions page allows you to create custom user roles and con
 
 ## User Roles
 
-Create and manage different user roles for your platform.
+Define different user types with specific permissions and access levels.
 
 ### Default Roles
 
-Most platforms include these standard roles:
-
 | Role | Typical Use | Access Level |
 |------|-------------|--------------|
-| **Administrator** | Platform owners, full access | Complete control |
-| **Manager** | Team leads, supervisors | Most features |
-| **Support** | Customer service team | Customer-facing features |
+| **Administrator** | Platform owners | Complete control |
+| **Manager** | Team leads | Most features |
+| **Support** | Customer service | Customer-facing features |
 | **User** | Regular customers | Basic features only |
-| **Guest** | Trial or limited users | Minimal access |
+| **Guest** | Trial users | Minimal access |
 
 ### Creating Custom Roles
 
-<Steps>
-  <Step title="Add New Role">
-    Click "Add Role" to create a new user role
-  </Step>
-  <Step title="Name the Role">
-    Choose a clear, descriptive name (e.g., "Sales Team", "Developer")
-  </Step>
-  <Step title="Set Permissions">
-    Configure which features and areas this role can access
-  </Step>
-  <Step title="Review Access">
-    Double-check permissions to ensure appropriate access
-  </Step>
-  <Step title="Save Role">
-    Save the role to make it available for assignment
-  </Step>
-</Steps>
-
-### Role Examples
-
-**Sales Team Role:**
-- View customer list
-- Create new accounts
-- Manage subscriptions
-- View reports
-- No access to: Settings, billing, user management
-
-**Developer Role:**
-- Access to API settings
-- View logs and debugging tools
-- Manage integrations
-- No access to: Billing, customer data, pricing
-
-**Accountant Role:**
-- View all financial reports
-- Manage invoices
-- Process refunds
-- Export financial data
-- No access to: Technical settings, user passwords
+1. Click "Add Role" button in the User Roles section
+2. Choose a descriptive name for the role (e.g., "Sales Team", "Technical Support")
+3. Configure feature access by selecting appropriate permissions
+4. Review all permissions to ensure they match the role's responsibilities
+5. Save the role to make it available for assignment to users
 
 <Tip>
-**Role Design Tips:**
-- Create roles based on job functions
-- Follow principle of least privilege
-- Regularly review and update permissions
-- Document what each role can do
-- Limit number of administrators
+**Role Design:** Create roles based on job functions and follow the principle of least privilege. Grant only the minimum permissions necessary for users to perform their duties effectively.
 </Tip>
+
+<Warning>
+**Security:** Be cautious when granting administrative permissions. Too many administrators can create security risks and make it difficult to track changes. Limit admin access to trusted team members only.
+</Warning>
 
 ---
 
 ## Permission Categories
 
-Permissions are organized into logical categories for easier management.
+Configure granular access control across different areas of your platform.
 
 ### Dashboard & Overview
-
-**Dashboard Access**
-
-Control access to the main dashboard and overview screens.
-
-- **Full Access**: View all dashboard widgets and statistics
-- **Limited Access**: View only relevant sections
-- **No Access**: Dashboard hidden
+- Full Access, Limited Access, or No Access to dashboard widgets
 
 ### User Management
-
-**User Permissions**
-
-Control who can manage user accounts.
-
 | Permission | Description |
 |------------|-------------|
-| **View Users** | See list of all users |
-| **Create Users** | Add new user accounts |
-| **Edit Users** | Modify existing user information |
-| **Delete Users** | Remove user accounts |
-| **Assign Roles** | Change user roles and permissions |
+| View Users | See list of all users |
+| Create Users | Add new accounts |
+| Edit Users | Modify user information |
+| Delete Users | Remove accounts |
+| Assign Roles | Change user roles |
 
 ### Website Management
-
-**Website Permissions**
-
-Control access to website creation and management.
-
 | Permission | Description |
 |------------|-------------|
-| **View Websites** | See list of all websites |
-| **Create Websites** | Create new websites |
-| **Edit Websites** | Modify website settings |
-| **Delete Websites** | Remove websites |
-| **Suspend Websites** | Temporarily disable websites |
-| **Access Control Panel** | DirectAdmin access |
+| View Websites | See all websites |
+| Create Websites | Create new websites |
+| Edit Websites | Modify settings |
+| Delete Websites | Remove websites |
+| Suspend Websites | Disable websites |
+| Access Control Panel | DirectAdmin access |
 
 ### Domain Management
-
-**Domain Permissions**
-
-Control access to domain registration and management.
-
 | Permission | Description |
 |------------|-------------|
-| **View Domains** | See list of all domains |
-| **Register Domains** | Register new domains |
-| **Manage DNS** | Edit DNS records |
-| **Transfer Domains** | Initiate domain transfers |
-| **Renew Domains** | Process domain renewals |
+| View Domains | See all domains |
+| Register Domains | Register new domains |
+| Manage DNS | Edit DNS records |
+| Transfer Domains | Initiate transfers |
+| Renew Domains | Process renewals |
 
 ### Billing & Payments
-
-**Financial Permissions**
-
-Control access to billing and payment features.
-
 | Permission | Description |
 |------------|-------------|
-| **View Invoices** | See all invoices |
-| **Create Invoices** | Generate new invoices |
-| **Process Payments** | Accept and process payments |
-| **Issue Refunds** | Process refund requests |
-| **View Reports** | Access financial reports |
-| **Manage Pricing** | Edit pricing and packages |
+| View Invoices | See all invoices |
+| Create Invoices | Generate invoices |
+| Process Payments | Accept payments |
+| Issue Refunds | Process refunds |
+| View Reports | Financial reports |
+| Manage Pricing | Edit pricing |
 
 ### Settings & Configuration
-
-**System Permissions**
-
-Control access to platform settings and configuration.
-
 | Permission | Description |
 |------------|-------------|
-| **General Settings** | Modify platform settings |
-| **Payment Gateway** | Configure payment methods |
-| **Email Settings** | Manage email configuration |
-| **API Settings** | Access API credentials |
-| **Security Settings** | Modify security options |
+| General Settings | Modify platform settings |
+| Payment Gateway | Configure payments |
+| Email Settings | Manage email config |
+| API Settings | Access API credentials |
+| Security Settings | Modify security |
 
 ### Support & Tickets
-
-**Helpdesk Permissions**
-
-Control access to support ticket system.
-
 | Permission | Description |
 |------------|-------------|
-| **View Tickets** | See all support tickets |
-| **Create Tickets** | Open new tickets |
-| **Reply to Tickets** | Respond to customer tickets |
-| **Close Tickets** | Mark tickets as resolved |
-| **Assign Tickets** | Assign tickets to team members |
-| **Delete Tickets** | Remove tickets |
+| View Tickets | See all tickets |
+| Create Tickets | Open tickets |
+| Reply to Tickets | Respond to customers |
+| Close Tickets | Mark resolved |
+| Assign Tickets | Assign to team |
+| Delete Tickets | Remove tickets |
 
----
-
-## Permission Configuration
-
-### Permission Levels
-
-For each feature, you can typically set one of these levels:
-
-**Full Access**
-- Complete control over the feature
-- Can view, create, edit, and delete
-- Access to all related settings
-
-**Read-Only Access**
-- Can view information
-- Cannot make changes
-- Useful for reporting and oversight
-
-**Limited Access**
-- Can perform specific actions only
-- Restricted to certain operations
-- Custom limitations per role
-
-**No Access**
-- Feature completely hidden
-- Cannot view or interact
-- Most secure option
-
-### Setting Permissions
-
-<Steps>
-  <Step title="Select Role">
-    Choose the role you want to configure
-  </Step>
-  <Step title="Review Categories">
-    Go through each permission category
-  </Step>
-  <Step title="Set Access Levels">
-    Choose appropriate access level for each permission
-  </Step>
-  <Step title="Test Permissions">
-    Log in as that role to verify access works correctly
-  </Step>
-  <Step title="Adjust as Needed">
-    Fine-tune permissions based on testing
-  </Step>
-</Steps>
-
----
-
-## Security Best Practices
-
-<AccordionGroup>
-  <Accordion title="Principle of Least Privilege" icon="shield">
-    **Grant Minimum Necessary Access:**
-    - Only give permissions required for job function
-    - Start with minimal access and add as needed
-    - Regularly review and remove unused permissions
-    - Don't give admin access unless absolutely necessary
-    
-    **Regular Audits:**
-    - Review user roles quarterly
-    - Remove inactive users
-    - Update permissions when roles change
-    - Document permission changes
-  </Accordion>
-  
-  <Accordion title="Role Separation" icon="users">
-    **Separate Duties:**
-    - Don't combine conflicting responsibilities
-    - Separate financial and technical access
-    - Require multiple approvals for sensitive actions
-    - Implement checks and balances
-    
-    **Examples:**
-    - Person who creates invoices shouldn't process refunds alone
-    - Developers shouldn't have billing access
-    - Support staff shouldn't modify pricing
-  </Accordion>
-  
-  <Accordion title="Access Control" icon="lock">
-    **Protect Sensitive Areas:**
-    - Limit access to payment settings
-    - Restrict API credential access
-    - Control who can delete data
-    - Monitor admin actions
-    
-    **Additional Security:**
-    - Require two-factor authentication for admins
-    - Log all permission changes
-    - Set up alerts for suspicious activity
-    - Regular security training for team
-  </Accordion>
-  
-  <Accordion title="User Lifecycle Management" icon="user-clock">
-    **Onboarding:**
-    - Assign appropriate role immediately
-    - Provide training on permissions
-    - Document what they can access
-    - Review after probation period
-    
-    **Offboarding:**
-    - Immediately revoke access when employee leaves
-    - Transfer ownership of their work
-    - Review what they had access to
-    - Change shared passwords they knew
-  </Accordion>
-</AccordionGroup>
+<Info>
+**Permission Levels:** Each permission can be set to Full Access (complete control), Read-Only (view only), Limited (specific actions), or No Access (feature hidden).
+</Info>
 
 ---
 
 ## Common Role Configurations
 
-### Customer Service Team
+<Tabs>
+  <Tab title="Customer Service">
+    - Dashboard: Limited (customer metrics)
+    - View Users: Read-only
+    - Edit Users: Limited (contact info only)
+    - View Websites: Read-only
+    - Suspend Websites: Yes
+    - Tickets: Full access
+    - Invoices: Read-only
+    - Settings: No access
+  </Tab>
+  <Tab title="Sales Team">
+    - Dashboard: Limited (sales metrics)
+    - Create Users: Yes
+    - View Users: Full
+    - Create Websites: Yes
+    - Domains: View and register
+    - Create Invoices: Yes
+    - Reports: Limited (sales only)
+    - Settings: No access
+  </Tab>
+  <Tab title="Technical Support">
+    - Dashboard: Full access
+    - View Users: Full
+    - Websites: Full access
+    - Control Panel: Yes
+    - Manage DNS: Full
+    - Tickets: Full access
+    - API Settings: Read-only
+    - Payment Gateway: No access
+  </Tab>
+  <Tab title="Finance">
+    - Dashboard: Limited (financial)
+    - View Users: Read-only
+    - Invoices: Full access
+    - Process Payments: Yes
+    - Issue Refunds: Yes
+    - Reports: Full (financial)
+    - Manage Pricing: Yes
+    - Other Settings: No access
+  </Tab>
+</Tabs>
 
-**Recommended Permissions:**
+---
 
-| Category | Access Level |
-|----------|--------------|
-| Dashboard | Limited (customer metrics only) |
-| View Users | Read-only |
-| Edit Users | Limited (contact info only) |
-| View Websites | Read-only |
-| Suspend Websites | Yes |
-| View Tickets | Full access |
-| Reply to Tickets | Full access |
-| Close Tickets | Full access |
-| View Invoices | Read-only |
-| Settings | No access |
+## Best Practices
 
-### Sales Team
-
-**Recommended Permissions:**
-
-| Category | Access Level |
-|----------|--------------|
-| Dashboard | Limited (sales metrics only) |
-| Create Users | Yes |
-| View Users | Full access |
-| Create Websites | Yes |
-| View Websites | Full access |
-| View Domains | Full access |
-| Register Domains | Yes |
-| Create Invoices | Yes |
-| View Reports | Limited (sales only) |
-| Settings | No access |
-
-### Technical Support
-
-**Recommended Permissions:**
-
-| Category | Access Level |
-|----------|--------------|
-| Dashboard | Full access |
-| View Users | Full access |
-| View Websites | Full access |
-| Edit Websites | Full access |
-| Access Control Panel | Yes |
-| Manage DNS | Full access |
-| View Tickets | Full access |
-| API Settings | Read-only |
-| General Settings | Limited |
-| Payment Gateway | No access |
-
-### Accountant/Finance
-
-**Recommended Permissions:**
-
-| Category | Access Level |
-|----------|--------------|
-| Dashboard | Limited (financial only) |
-| View Users | Read-only |
-| View Invoices | Full access |
-| Create Invoices | Yes |
-| Process Payments | Yes |
-| Issue Refunds | Yes |
-| View Reports | Full (financial) |
-| Manage Pricing | Yes |
-| Other Settings | No access |
+<AccordionGroup>
+  <Accordion title="Principle of Least Privilege" icon="shield">
+    - Grant minimum necessary access for each role
+    - Start with minimal permissions and add as needed
+    - Review permissions regularly (quarterly recommended)
+    - Remove unnecessary permissions promptly
+    - Document why each permission is granted
+    - Require justification for permission increases
+    - Audit permission usage to identify unused access
+  </Accordion>
+  
+  <Accordion title="Role Separation" icon="users">
+    - Separate conflicting responsibilities (e.g., finance and technical)
+    - Require multiple approvals for sensitive actions
+    - Don't combine financial and technical full access in one role
+    - Create specialized roles for specific functions
+    - Avoid creating "super users" with all permissions
+    - Use role hierarchy to organize permissions logically
+    - Document role responsibilities clearly
+  </Accordion>
+  
+  <Accordion title="Access Control" icon="lock">
+    - Limit payment settings access to finance team only
+    - Restrict API credentials to technical administrators
+    - Control data deletion permissions carefully
+    - Monitor admin actions with logging
+    - Require strong passwords for all admin accounts
+    - Enable two-factor authentication for sensitive roles
+    - Set up alerts for critical permission changes
+  </Accordion>
+  
+  <Accordion title="User Lifecycle Management" icon="user">
+    - Assign appropriate role immediately upon account creation
+    - Revoke all access when employee leaves organization
+    - Transfer ownership of work before removing access
+    - Change shared passwords after employee departure
+    - Review and update roles when job responsibilities change
+    - Maintain list of who has what access
+    - Conduct regular access reviews
+  </Accordion>
+</AccordionGroup>
 
 ---
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="User Can't Access Feature" icon="circle-xmark">
-    **Issue:** User reports they cannot access a feature they need
-    
-    **Common Causes:**
-    - Insufficient permissions for their role
-    - Role not assigned correctly
-    - Permission settings not saved
-    - Cache not cleared
+  <Accordion title="User Can't Access Feature" icon="lock">
+    **Issue:** User receives "access denied" or feature is hidden
     
     **Solutions:**
-    1. Verify user's assigned role
-    2. Check role permissions for that feature
-    3. Grant necessary permissions
-    4. Save changes and clear cache
-    5. Have user log out and back in
+    1. Verify user's assigned role in user management
+    2. Check role permissions for the specific feature
+    3. Grant necessary permissions to the role
+    4. Clear application cache
+    5. Have user log out and log back in
+    6. Test with different user account to isolate issue
   </Accordion>
   
-  <Accordion title="Permissions Not Applying" icon="shield-xmark">
+  <Accordion title="Permissions Not Applying" icon="shield-check">
     **Issue:** Permission changes don't take effect
-    
-    **Common Causes:**
-    - Changes not saved
-    - User session not refreshed
-    - Cache issues
-    - Browser cookies
     
     **Solutions:**
     1. Save permission changes again
-    2. User must log out and log back in
-    3. Clear application cache
-    4. Clear browser cache and cookies
-    5. Test in incognito/private mode
+    2. User must log out and back in for changes to apply
+    3. Clear application and session cache
+    4. Test in incognito/private browsing mode
+    5. Verify no conflicting permissions exist
+    6. Check for permission inheritance issues
   </Accordion>
   
   <Accordion title="Too Many Administrators" icon="users">
-    **Issue:** Security concern with multiple admin accounts
-    
-    **Common Causes:**
-    - Default admin role assigned to everyone
-    - No custom roles created
-    - Lack of permission management
+    **Issue:** Too many users have admin access
     
     **Solutions:**
-    1. Audit all users with admin access
-    2. Create appropriate custom roles
-    3. Downgrade unnecessary admin accounts
-    4. Implement role-based access control
-    5. Regular permission reviews
+    1. Audit all users with admin role
+    2. Create appropriate custom roles for specific needs
+    3. Downgrade unnecessary administrators to custom roles
+    4. Implement regular permission reviews
+    5. Document who needs admin access and why
+    6. Set up approval process for admin access
   </Accordion>
   
-  <Accordion title="User Has Wrong Permissions" icon="user-xmark">
-    **Issue:** User can access things they shouldn't
-    
-    **Common Causes:**
-    - Assigned to wrong role
-    - Role has too many permissions
-    - Multiple roles assigned
-    - Permission inheritance issues
+  <Accordion title="Role Changes Not Saving" icon="gear">
+    **Issue:** Role configuration changes don't persist
     
     **Solutions:**
-    1. Check user's assigned role(s)
-    2. Review role permissions
-    3. Remove unnecessary roles
-    4. Adjust role permissions
-    5. Verify changes took effect
+    1. Check for validation errors on save
+    2. Verify you have permission to modify roles
+    3. Clear browser cache and try again
+    4. Check server logs for errors
+    5. Ensure database connection is stable
+    6. Try creating role with different name
   </Accordion>
 </AccordionGroup>
 
@@ -459,44 +283,31 @@ For each feature, you can typically set one of these levels:
 
 ### Permission Checklist
 
-**When Creating a New Role:**
-- [ ] Choose clear, descriptive role name
+**Creating a Role:**
+- [ ] Choose clear, descriptive name
 - [ ] Define job function and responsibilities
-- [ ] List required features and access
 - [ ] Set minimum necessary permissions
-- [ ] Test role with dummy account
+- [ ] Test with dummy account before deployment
 - [ ] Document role purpose and permissions
-- [ ] Review with security team
-- [ ] Get approval before deployment
-
-**When Assigning Roles:**
-- [ ] Verify user identity
-- [ ] Confirm job function
-- [ ] Assign appropriate role
-- [ ] Provide role documentation
-- [ ] Train on permissions
-- [ ] Set review date
-- [ ] Log role assignment
+- [ ] Get approval from management
 
 **Regular Maintenance:**
 - [ ] Quarterly permission audits
-- [ ] Remove inactive users
+- [ ] Remove inactive users promptly
 - [ ] Update roles for job changes
-- [ ] Review admin access
-- [ ] Check for unused permissions
-- [ ] Update documentation
-- [ ] Security training refresher
+- [ ] Review admin access regularly
+- [ ] Update role documentation
+- [ ] Monitor permission usage
 
 ### Common Permission Combinations
 
-| Need | Permissions Required |
-|------|---------------------|
-| **View customer info** | View Users (read-only) |
-| **Create accounts** | View Users + Create Users |
-| **Manage support** | View/Reply/Close Tickets |
-| **Process orders** | View Users + Create Invoices + Process Payments |
-| **Technical support** | View/Edit Websites + Manage DNS + View Tickets |
-| **Full admin** | All permissions |
+| Need | Permissions |
+|------|-------------|
+| View customer info | View Users (read-only) |
+| Create accounts | View + Create Users |
+| Manage support | View/Reply/Close Tickets |
+| Process orders | View Users + Create Invoices + Process Payments |
+| Technical support | View/Edit Websites + Manage DNS + View Tickets |
 
 ---
 
@@ -504,21 +315,15 @@ For each feature, you can typically set one of these levels:
 
 <CardGroup cols={2}>
   <Card title="General Settings" icon="gear" href="/general-settings">
-    Configure platform-wide settings
+    Platform-wide settings
   </Card>
   <Card title="Website Configuration" icon="globe" href="/website-configuration">
-    Manage website creation settings
+    Website creation settings
   </Card>
   <Card title="Hosting Plans" icon="box" href="/hosting-plans">
-    Configure packages and pricing
+    Packages and pricing
   </Card>
   <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
-    Manage automatic renewals
+    Automatic renewals
   </Card>
 </CardGroup>
-
----
-
-<Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring user roles or permissions.
-</Card>
