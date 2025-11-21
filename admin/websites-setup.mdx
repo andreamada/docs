@@ -1,25 +1,556 @@
 ---
-title: "Configuring Websites"
-description: "Post-installation there are several common settings that should be reviewed and adjusted as necessary such as this page where you can specify and customize specific features."
+title: 'Website Configuration'
+description: 'Configure resource allocation, user limits, and website creation settings'
+icon: 'globe'
 ---
 
-## Setting up Features
+<Info>
+**Navigation Path:** Admin Dashboard → Settings → Website Configuration
+</Info>
 
-These settings can be found under [Services Setup] \> [Websites Setup]
+## Overview
 
-- Define the space for newly created websites
-- Define the bandwidth for newly created websites
-- Define after how long it should display a warning for max mandwidth
-- Define if allowing trial or not and how many days
-- Define the minimum amount before sending an email to warn the clients of low balance
-- Delete websites expired after x days
-- Define how many websites maximum per user
-- Define minimum seconds required before spawning new websites (We suggest to leave it at 60 to avoid server's overload)
-- Define after how long you wanna see websites going to expire in your admin dashboard
+The Website Configuration page is your central control panel for managing how websites are created and maintained on your platform. Configure resource limits, user restrictions, trial periods, branding elements, and automated helpdesk management.
 
-<img
-  src="/images/websites_setup.png"
-  alt="Websites Setup Pn"
-  title="Websites Setup Pn"
-  style={{ width:"55%" }}
-/>
+<CardGroup cols={3}>
+  <Card title="Resource Allocation" icon="hdd" color="#0d6efd">
+    Set disk space and bandwidth limits for websites
+  </Card>
+  <Card title="User Limitations" icon="people" color="#f59e0b">
+    Control website creation limits and delays
+  </Card>
+  <Card title="Trial & Expiry" icon="calendar-event" color="#0ea5e9">
+    Configure trial periods and expiration policies
+  </Card>
+  <Card title="Branding Assets" icon="image" color="#10b981">
+    Upload custom loading icons and visuals
+  </Card>
+  <Card title="Helpdesk Automation" icon="ticket-detailed" color="#ef4444">
+    Automate ticket cleanup and closure
+  </Card>
+</CardGroup>
+
+---
+
+## Resource Allocation
+
+Configure disk space and bandwidth limits for newly created websites.
+
+### Disk Space Configuration
+
+<ParamField path="disk" type="number" default={100} required>
+  **Disk Space per Website (MB)**
+  
+  Default storage allocated to each new website.
+  
+  - **Minimum:** 50 MB
+  - **Maximum:** 99,999 MB (~97 GB)
+  - **Recommended:** 100-500 MB for small sites, 1000+ MB for media-heavy sites
+</ParamField>
+
+### Bandwidth Management
+
+<ParamField path="bw" type="number" default={30000}>
+  **Monthly Bandwidth (MB)**
+  
+  Maximum data transfer allowed per website per month.
+  
+  - **Minimum:** 0 (unlimited)
+  - **Maximum:** Unlimited
+  - **Default:** 30,000 MB (30 GB)
+  - **Note:** Set to `0` for unlimited bandwidth
+</ParamField>
+
+<ParamField path="bw_warning" type="number" default={30000}>
+  **Bandwidth Warning Threshold (MB)**
+  
+  Send warning notifications when bandwidth usage exceeds this limit.
+  
+  - **Minimum:** 0
+  - **Purpose:** Proactive monitoring to prevent service interruptions
+  - **Recommendation:** Set to 80-90% of total bandwidth limit
+</ParamField>
+
+<Tip>
+**Resource Planning Tips:**
+- Monitor average resource usage before adjusting limits
+- Consider your server capacity when setting defaults
+- Set bandwidth warnings below the hard limit to give users time to upgrade
+- Allocate more disk space for e-commerce or media-heavy websites
+</Tip>
+
+---
+
+## User Limitations
+
+Set limits and restrictions on website creation to prevent abuse and manage system resources.
+
+### Website Quantity Limits
+
+<ParamField path="quantity_website" type="number" default={5} required>
+  **Max Websites per User**
+  
+  Maximum number of websites each user can create.
+  
+  - **Minimum:** 1
+  - **Maximum:** 99,999
+  - **Default:** 5
+  - **Use Case:** Prevent resource hogging and encourage premium upgrades
+</ParamField>
+
+### Creation Delay Protection
+
+<ParamField path="delay_create" type="number" default={60} required>
+  **Creation Delay (seconds)**
+  
+  Minimum time required between consecutive website creations.
+  
+  - **Minimum:** 1 second
+  - **Maximum:** 99,999 seconds
+  - **Default:** 60 seconds (1 minute)
+  - **Purpose:** Prevent automated abuse and reduce server load
+</ParamField>
+
+### Balance Monitoring
+
+<ParamField path="threshold" type="number" default={50} required>
+  **Balance Warning Threshold**
+  
+  Notify users when their account balance drops below this amount.
+  
+  - **Minimum:** 1
+  - **Maximum:** 99,999
+  - **Default:** 50
+  - **Purpose:** Ensure users maintain sufficient balance for services
+</ParamField>
+
+<Warning>
+**Anti-Abuse Considerations:**
+- Set reasonable website limits to prevent resource exhaustion
+- Use creation delays to prevent automated bot attacks
+- Monitor user behavior patterns for unusual activity
+- Consider implementing tiered limits based on user subscription levels
+</Warning>
+
+---
+
+## Trial & Expiry Settings
+
+Configure trial periods for new websites and manage expiration policies.
+
+### Trial Period Configuration
+
+<ParamField path="expired" type="number" default={3} required>
+  **Trial Period (days)**
+  
+  Number of days for free trial websites before requiring payment.
+  
+  - **Minimum:** 1 day
+  - **Maximum:** 99,999 days
+  - **Default:** 3 days
+  - **Common Values:** 3, 7, 14, or 30 days
+</ParamField>
+
+<ParamField path="expired_delete_delay" type="number" default={3} required>
+  **Deletion Grace Period (days)**
+  
+  Days before expired websites are permanently deleted.
+  
+  - **Minimum:** 1 day
+  - **Maximum:** 99,999 days
+  - **Default:** 3 days
+  - **Purpose:** Give users time to renew before data loss
+</ParamField>
+
+### Expiry Notifications
+
+<ParamField path="expiry_date_days" type="number" default={15} required>
+  **Expiry Warning Period (days)**
+  
+  Send expiration warnings this many days before website expiry.
+  
+  - **Minimum:** 1 day
+  - **Maximum:** 90 days
+  - **Default:** 15 days
+  - **Related:** [Website Expiry Management](/admin/WebsiteExpire)
+</ParamField>
+
+<Steps>
+  <Step title="Trial Period Begins">
+    User creates a new website and trial period starts automatically
+  </Step>
+  <Step title="Expiry Warning Sent">
+    System sends notification X days before expiration (configurable)
+  </Step>
+  <Step title="Trial Expires">
+    Website expires after trial period if not renewed
+  </Step>
+  <Step title="Grace Period">
+    Website enters grace period before permanent deletion
+  </Step>
+  <Step title="Permanent Deletion">
+    Website and all data are permanently deleted after grace period
+  </Step>
+</Steps>
+
+<Note>
+**Trial Period Best Practices:**
+- Longer trials (7-14 days) increase conversion rates
+- Send multiple reminders before expiration
+- Provide easy renewal options in notification emails
+- Consider offering trial extensions for engaged users
+</Note>
+
+---
+
+## Branding & Assets
+
+Upload custom visual assets to personalize the website creation experience.
+
+### Website Creation Loading Icon
+
+<ParamField path="setup_image" type="image">
+  **Website Creation Loading Icon**
+  
+  Icon displayed during the website creation process.
+  
+  - **Format:** PNG (recommended)
+  - **Size:** 64x64 pixels
+  - **Purpose:** Brand the loading experience
+  - **Display:** Shown while website is being provisioned
+</ParamField>
+
+<Accordion title="Image Specifications" icon="image">
+**Recommended Specifications:**
+- **Dimensions:** 64x64 pixels (exact)
+- **Format:** PNG with transparency
+- **File Size:** Under 50 KB
+- **Color Mode:** RGB or RGBA
+- **Background:** Transparent preferred
+
+**Design Tips:**
+- Use your brand logo or icon
+- Ensure visibility on both light and dark backgrounds
+- Keep design simple and recognizable at small size
+- Test animation if using animated PNG
+</Accordion>
+
+<Info>
+**Image Recommendation:** Use a 64x64px PNG image for optimal display during website creation process.
+</Info>
+
+---
+
+## Helpdesk Ticket Automation
+
+Configure automatic ticket cleanup and closure to maintain a clean helpdesk system.
+
+### Ticket Retention Management
+
+<ParamField path="retention_days" type="number" default={365}>
+  **Ticket Retention Period (days)**
+  
+  Automatically delete closed tickets after this many days.
+  
+  - **Minimum:** 0 (never delete)
+  - **Maximum:** 3,650 days (10 years)
+  - **Default:** 365 days (1 year)
+  - **Purpose:** Archive old tickets and reduce database size
+  - **Note:** Set to `0` to disable automatic deletion
+</ParamField>
+
+### Auto-Close Configuration
+
+<ParamField path="autoclose_awaiting_days" type="number" default={14}>
+  **Auto-Close Awaiting Client Tickets (days)**
+  
+  Automatically close tickets in "Awaiting Client" status after this many days.
+  
+  - **Minimum:** 0 (never auto-close)
+  - **Maximum:** 365 days
+  - **Default:** 14 days
+  - **Purpose:** Close inactive tickets waiting for client response
+  - **Note:** Set to `0` to disable auto-close
+</ParamField>
+
+<Warning>
+**Automation Notice:** Set values to `0` to disable automation for either retention or auto-close features.
+</Warning>
+
+### Automation Workflow
+
+<Steps>
+  <Step title="Ticket Created">
+    Support ticket is created by user or system
+  </Step>
+  <Step title="Status: Awaiting Client">
+    Ticket status changes to "Awaiting Client" after support response
+  </Step>
+  <Step title="Auto-Close Timer Starts">
+    Timer begins counting days since last client response
+  </Step>
+  <Step title="Auto-Close Triggered">
+    Ticket automatically closes after configured days (if enabled)
+  </Step>
+  <Step title="Retention Period">
+    Closed ticket remains in system for retention period
+  </Step>
+  <Step title="Permanent Deletion">
+    Ticket is permanently deleted after retention period expires (if enabled)
+  </Step>
+</Steps>
+
+<Tip>
+**Helpdesk Automation Best Practices:**
+- **Retention Period:** Keep tickets for at least 1 year for reference
+- **Auto-Close:** 7-14 days is typical for awaiting client tickets
+- **Notifications:** Send reminders before auto-closing tickets
+- **Exceptions:** Consider manual review for high-priority tickets
+- **Compliance:** Check data retention requirements for your industry
+</Tip>
+
+---
+
+## Configuration Examples
+
+<Tabs>
+  <Tab title="Small Business">
+    **Recommended Settings for Small Business:**
+    
+    | Setting | Value | Reason |
+    |---------|-------|--------|
+    | Disk Space | 500 MB | Adequate for business sites |
+    | Bandwidth | 50,000 MB | Moderate traffic capacity |
+    | Max Websites | 3 | Focus on quality over quantity |
+    | Trial Period | 7 days | Standard trial length |
+    | Grace Period | 7 days | Reasonable renewal window |
+    | Auto-Close | 14 days | Standard support window |
+  </Tab>
+  
+  <Tab title="Enterprise">
+    **Recommended Settings for Enterprise:**
+    
+    | Setting | Value | Reason |
+    |---------|-------|--------|
+    | Disk Space | 2,000 MB | Large sites with media |
+    | Bandwidth | 0 (unlimited) | High traffic handling |
+    | Max Websites | 50 | Multiple projects/clients |
+    | Trial Period | 30 days | Extended evaluation |
+    | Grace Period | 14 days | Longer renewal window |
+    | Auto-Close | 30 days | Extended support SLA |
+  </Tab>
+  
+  <Tab title="Budget Hosting">
+    **Recommended Settings for Budget Hosting:**
+    
+    | Setting | Value | Reason |
+    |---------|-------|--------|
+    | Disk Space | 100 MB | Minimal resource allocation |
+    | Bandwidth | 10,000 MB | Limited traffic |
+    | Max Websites | 1 | Single site per user |
+    | Trial Period | 3 days | Short trial to encourage upgrades |
+    | Grace Period | 3 days | Quick cleanup |
+    | Auto-Close | 7 days | Fast ticket resolution |
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Resource Planning" icon="hdd">
+    **Optimize Resource Allocation:**
+    - Monitor actual usage patterns before setting limits
+    - Start conservative and adjust based on data
+    - Consider server capacity and growth projections
+    - Implement tiered plans for different user levels
+    - Set bandwidth warnings at 80% of limit
+  </Accordion>
+  
+  <Accordion title="User Experience" icon="user">
+    **Balance Restrictions with Usability:**
+    - Don't make limits too restrictive for legitimate users
+    - Provide clear upgrade paths when limits are reached
+    - Send proactive notifications before limits are hit
+    - Make trial periods long enough to evaluate properly
+    - Ensure grace periods allow for payment processing delays
+  </Accordion>
+  
+  <Accordion title="Security & Abuse Prevention" icon="shield-check">
+    **Prevent System Abuse:**
+    - Implement creation delays to prevent bot attacks
+    - Monitor for unusual creation patterns
+    - Set reasonable website quantity limits
+    - Log all configuration changes
+    - Review automation settings regularly
+  </Accordion>
+  
+  <Accordion title="Automation Management" icon="robot">
+    **Configure Automation Wisely:**
+    - Test automation rules before enabling
+    - Send notifications before auto-actions
+    - Provide manual override options
+    - Keep retention periods compliant with regulations
+    - Document automation policies for users
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Technical Reference
+
+<Tabs>
+  <Tab title="File Structure">
+    ```plaintext
+    src/apps/pages/admin/views/panel/settings-service/
+    └── CreateWebOption.blade.php (389 lines)
+    
+    assets/admin/js/
+    └── settings.js
+    ```
+  </Tab>
+  
+  <Tab title="Data Storage">
+    Settings are stored using the `ST()` helper function:
+    
+    ```php
+    // Resource settings
+    builder_parameters_disk
+    builder_parameters_bw
+    builder_parameters_bw_warning
+    
+    // User limits
+    builder_limits_quantity_website
+    builder_limits_delay_create
+    builder_limits_threshold
+    
+    // Trial settings
+    builder_trial_expired
+    builder_trial_expired_delete_delay
+    builder_expiry_date_days
+    
+    // Branding
+    builder_setting_setup_image
+    
+    // Helpdesk automation
+    helpdesk_automation_retention_days
+    helpdesk_automation_autoclose_awaiting_days
+    ```
+  </Tab>
+  
+  <Tab title="Form Submission">
+    **Form Details:**
+    - **Method:** POST
+    - **Form Part:** `CreateWebOption`
+    - **Save Function:** `settingsSave(this)`
+    - **JavaScript:** `/assets/admin/js/settings.js`
+    
+    **Validation:**
+    - All number fields have min/max constraints
+    - Required fields must be filled
+    - Values are validated server-side
+  </Tab>
+  
+  <Tab title="Related Pages">
+    **Related Configuration Pages:**
+    - [General Settings](/admin/GeneralOption) - System-wide settings
+    - [Website Expiry Management](/admin/WebsiteExpire) - Expiration details
+    - Payment Gateway - Billing configuration
+    - License Settings - Software licensing
+  </Tab>
+</Tabs>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Websites Not Being Created" icon="circle-exclamation">
+    **Common Issues:**
+    - Disk space limit too low for website requirements
+    - User has reached maximum website limit
+    - Creation delay timer still active
+    - Insufficient server resources
+    
+    **Solutions:**
+    - Increase disk space allocation
+    - Raise or remove website quantity limit
+    - Check creation delay settings
+    - Monitor server capacity and upgrade if needed
+  </Accordion>
+  
+  <Accordion title="Trial Periods Not Working" icon="calendar-xmark">
+    **Common Issues:**
+    - Trial period set to 0 or very low value
+    - Expiry automation not running
+    - Cron jobs not configured
+    - Date calculation errors
+    
+    **Solutions:**
+    - Verify trial period is set to reasonable value (3-30 days)
+    - Check cron job configuration
+    - Review expiry automation logs
+    - Test with a sample website
+  </Accordion>
+  
+  <Accordion title="Helpdesk Automation Not Running" icon="ticket">
+    **Common Issues:**
+    - Automation values set to 0 (disabled)
+    - Cron jobs not executing
+    - Database connection issues
+    - Ticket status not matching criteria
+    
+    **Solutions:**
+    - Verify automation values are greater than 0
+    - Check cron job logs
+    - Test database connectivity
+    - Review ticket status workflow
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Security Considerations
+
+<Warning>
+**Critical Security Notes:**
+- Validate all input values to prevent injection attacks
+- Implement rate limiting on configuration changes
+- Log all modifications with user attribution
+- Restrict access to authorized administrators only
+- Regular backup configuration before making changes
+</Warning>
+
+<Tip>
+**Security Best Practices:**
+- Use HTTPS for all admin panel access
+- Enable two-factor authentication for admin accounts
+- Regularly review and audit configuration changes
+- Set reasonable resource limits to prevent DoS
+- Monitor for unusual configuration patterns
+</Tip>
+
+---
+
+## Quick Reference
+
+| Configuration | Default | Range | Purpose |
+|--------------|---------|-------|---------|
+| Disk Space | 100 MB | 50-99,999 MB | Storage per website |
+| Bandwidth | 30,000 MB | 0-unlimited | Monthly data transfer |
+| BW Warning | 30,000 MB | 0-unlimited | Usage alert threshold |
+| Max Websites | 5 | 1-99,999 | Sites per user |
+| Creation Delay | 60 sec | 1-99,999 sec | Anti-abuse timer |
+| Balance Threshold | 50 | 1-99,999 | Low balance warning |
+| Trial Period | 3 days | 1-99,999 days | Free trial duration |
+| Grace Period | 3 days | 1-99,999 days | Pre-deletion window |
+| Expiry Warning | 15 days | 1-90 days | Advance notice |
+| Ticket Retention | 365 days | 0-3,650 days | Archive period |
+| Auto-Close | 14 days | 0-365 days | Inactive ticket closure |
+
+---
+
+<Card title="Need Help?" icon="headset" href="#">
+  Contact support if you need assistance configuring website creation settings or troubleshooting issues.
+</Card>
