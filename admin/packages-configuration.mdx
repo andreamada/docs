@@ -1,29 +1,33 @@
 ---
-title: 'Hosting Plans'
-description: 'Configure website packages, domain pricing, and addon services'
-icon: 'box-seam'
+title: "Hosting Plans"
+description: "Configure website packages, pricing, and service addons"
+icon: "box"
 ---
 
 <Info>
-**Navigation Path:** Admin Dashboard → Settings → Hosting Plans
+**Navigation Path:** Admin Dashboard → Settings → Hosting Plans  
+**URL:** `/admin/ServicePackage`
 </Info>
 
 ## Overview
 
-The Hosting Plans page is your central hub for configuring all pricing and service offerings. Manage website hosting packages, renewal terms, domain pricing, and custom add-on services from a single interface.
+The Hosting Plans page allows you to create and manage website packages, set renewal terms, configure global service pricing, manage domain pricing, and create custom addons. This is your central hub for all pricing and package configuration.
 
-<CardGroup cols={2}>
-  <Card title="Website Packages" icon="box-seam" color="#3699ff">
-    Create and manage hosting plans with custom features and pricing
+<CardGroup cols={3}>
+  <Card title="Website Packages" icon="box" color="#10b981">
+    Create tiered hosting plans with features
   </Card>
-  <Card title="Renewal Terms" icon="calendar-range" color="#10b981">
-    Configure billing cycles and discount structures
+  <Card title="Renewal Terms" icon="calendar" color="#0d6efd">
+    Set billing periods and pricing
   </Card>
-  <Card title="Domain Pricing" icon="globe" color="#f59e0b">
-    Set custom pricing for domain registration and renewal
+  <Card title="Service Pricing" icon="dollar-sign" color="#f59e0b">
+    Configure SSL, backup, and upgrade costs
   </Card>
-  <Card title="Custom Addons" icon="plus-square" color="#0ea5e9">
-    Create additional services and upsell opportunities
+  <Card title="Domain Pricing" icon="globe" color="#8b5cf6">
+    Set registration and renewal prices per TLD
+  </Card>
+  <Card title="Custom Addons" icon="puzzle-piece" color="#ef4444">
+    Create additional services and features
   </Card>
 </CardGroup>
 
@@ -31,313 +35,129 @@ The Hosting Plans page is your central hub for configuring all pricing and servi
 
 ## Website Packages
 
-Create and configure hosting packages with customizable features, pricing, and resource allocations.
+Create up to 20 different hosting packages with customizable features and pricing.
 
-### Package Configuration Fields
+### Package Configuration
 
-<ParamField path="name" type="string" required>
-  **Package Name**
-  
-  Display name for the hosting package.
-  
-  - **Example:** `Startup`, `Business`, `Professional`, `Advanced`
-  - **Purpose:** Shown on pricing pages and customer dashboards
-  - **Best Practice:** Use clear, tier-based naming
-</ParamField>
+Each package can include the following settings:
 
-<ParamField path="price" type="currency" required>
-  **Price / Month**
-  
-  Monthly subscription price for the package.
-  
-  - **Format:** Currency value
-  - **Note:** Yearly price calculated automatically based on renewal terms
-  - **Example:** `$9.99`, `$19.99`, `$49.99`
-</ParamField>
+| Setting | Description | Options |
+|---------|-------------|---------|
+| **Package Name** | Display name for the package | Text (e.g., "Starter", "Pro", "Enterprise") |
+| **Price** | Monthly cost | Currency amount |
+| **Disk Space** | Storage allocation | 150 - 99,999,999,999 MB |
+| **Description** | Package details | Text area for features list |
+| **Member Roles** | Who can purchase | Select user roles |
+| **Background Colors** | Visual styling | Two color pickers for gradient |
+| **Purchase Theme** | Enable theme selection | Toggle on/off |
+| **Backup Download** | Allow backup downloads | Toggle on/off |
+| **Control Panel Access** | DirectAdmin access | Toggle on/off |
+| **Featured Ribbon** | Highlight as recommended | Toggle on/off |
 
-<ParamField path="disk" type="number" required>
-  **Storage (MB)**
-  
-  Disk space allocation for the package.
-  
-  - **Min:** 150 MB
-  - **Max:** 99,999,999,999 MB
-  - **Example:** `1000` (1 GB), `5000` (5 GB), `10000` (10 GB)
-  - **Recommendation:** Start with 1-5 GB for basic plans
-</ParamField>
+### Creating a Package
 
-<ParamField path="description" type="textarea">
-  **Description**
-  
-  Detailed description of package features and benefits.
-  
-  - **Format:** Multi-line text
-  - **Purpose:** Displayed on pricing pages
-  - **Best Practice:** Highlight key features and differentiators
-  - **Example:** "Perfect for small businesses. Includes SSL, daily backups, and 24/7 support."
-</ParamField>
+<Steps>
+  <Step title="Add New Package">
+    Click the "Add Package" button to create a new hosting plan
+  </Step>
+  <Step title="Set Basic Info">
+    Enter package name, price, and disk space allocation
+  </Step>
+  <Step title="Write Description">
+    Add a compelling description highlighting key features
+  </Step>
+  <Step title="Configure Features">
+    Toggle features like backup download, control panel access, etc.
+  </Step>
+  <Step title="Set Visual Style">
+    Choose background colors and enable featured ribbon if desired
+  </Step>
+  <Step title="Select User Roles">
+    Choose which member roles can purchase this package
+  </Step>
+  <Step title="Save Package">
+    Save your configuration to make the package available
+  </Step>
+</Steps>
 
-<ParamField path="roles" type="checkbox">
-  **Member Roles**
-  
-  User roles that can purchase this package.
-  
-  - **Options:** Customer roles defined in system
-  - **Default:** `c1` (standard customer)
-  - **Use Case:** Restrict premium packages to verified users
-</ParamField>
+### Package Examples
 
-<ParamField path="background_color1" type="color" required>
-  **Background Color 1**
-  
-  Primary gradient color for package card.
-  
-  - **Format:** Hex color code
-  - **Default:** `#FF00CC`
-  - **Purpose:** Visual branding on pricing page
-</ParamField>
+**Starter Package:**
+- **Name**: Starter
+- **Price**: $5/month
+- **Disk**: 1,000 MB (1 GB)
+- **Features**: Basic hosting, email support
+- **Backup Download**: No
+- **Control Panel**: No
+- **Featured**: No
 
-<ParamField path="background_color2" type="color" required>
-  **Background Color 2**
-  
-  Secondary gradient color for package card.
-  
-  - **Format:** Hex color code
-  - **Default:** `#FF00CC`
-  - **Purpose:** Creates gradient effect with Color 1
-</ParamField>
+**Professional Package:**
+- **Name**: Professional
+- **Price**: $15/month
+- **Disk**: 5,000 MB (5 GB)
+- **Features**: Advanced hosting, priority support, SSL included
+- **Backup Download**: Yes
+- **Control Panel**: Yes
+- **Featured**: Yes (Most Popular)
 
-### Package Feature Toggles
+**Enterprise Package:**
+- **Name**: Enterprise
+- **Price**: $50/month
+- **Disk**: 20,000 MB (20 GB)
+- **Features**: Premium hosting, 24/7 support, dedicated resources
+- **Backup Download**: Yes
+- **Control Panel**: Yes
+- **Featured**: No
 
-<ParamField path="enable_purchase_theme" type="switch">
-  **Enable Purchase Theme Option**
-  
-  Allow customers to purchase premium themes.
-  
-  - **Default:** Off
-  - **Impact:** Shows theme marketplace in customer dashboard
-  - **Revenue:** Additional upsell opportunity
-</ParamField>
-
-<ParamField path="enable_backup" type="switch">
-  **Enable Backup Download Option**
-  
-  Allow customers to download website backups.
-  
-  - **Default:** Off
-  - **Pricing:** Configure in Global Service Pricing section
-  - **Note:** If enabled, set backup price in right panel
-</ParamField>
-
-<ParamField path="enable_directadmin" type="switch">
-  **Enable Control Panel & PhpMyAdmin Access**
-  
-  Grant access to DirectAdmin control panel and database management.
-  
-  - **Default:** Off
-  - **Use Case:** Advanced users who need direct server access
-  - **Security:** Only enable for trusted user tiers
-</ParamField>
-
-<ParamField path="suggest" type="switch">
-  **Featured Ribbon on Pricing Page**
-  
-  Display "Featured" or "Most Popular" badge on this package.
-  
-  - **Default:** Off
-  - **Purpose:** Highlight recommended package
-  - **Best Practice:** Feature your most profitable or popular plan
-</ParamField>
-
-### Package Configuration Examples
-
-<Tabs>
-  <Tab title="Starter Package">
-    ```yaml Starter Package Configuration
-    Name: Startup
-    Price: $9.99/month
-    Storage: 1000 MB (1 GB)
-    Description: Perfect for personal blogs and small websites
-    
-    Features:
-    - Purchase Theme: ✅ Enabled
-    - Backup Download: ❌ Disabled
-    - Control Panel Access: ❌ Disabled
-    - Featured: ❌ Not Featured
-    
-    Member Roles: All customers
-    Background Colors: #3699ff → #0ea5e9 (Blue gradient)
-    ```
-  </Tab>
-  
-  <Tab title="Business Package">
-    ```yaml Business Package Configuration
-    Name: Business
-    Price: $19.99/month
-    Storage: 5000 MB (5 GB)
-    Description: Ideal for growing businesses with multiple pages
-    
-    Features:
-    - Purchase Theme: ✅ Enabled
-    - Backup Download: ✅ Enabled ($5/month)
-    - Control Panel Access: ❌ Disabled
-    - Featured: ✅ Most Popular
-    
-    Member Roles: All customers
-    Background Colors: #10b981 → #059669 (Green gradient)
-    ```
-  </Tab>
-  
-  <Tab title="Professional Package">
-    ```yaml Professional Package Configuration
-    Name: Professional
-    Price: $49.99/month
-    Storage: 15000 MB (15 GB)
-    Description: Advanced features for professional websites and agencies
-    
-    Features:
-    - Purchase Theme: ✅ Enabled
-    - Backup Download: ✅ Enabled (Included)
-    - Control Panel Access: ✅ Enabled
-    - Featured: ❌ Not Featured
-    
-    Member Roles: Verified customers only
-    Background Colors: #f59e0b → #d97706 (Orange gradient)
-    ```
-  </Tab>
-  
-  <Tab title="Enterprise Package">
-    ```yaml Enterprise Package Configuration
-    Name: Advanced
-    Price: $99.99/month
-    Storage: 50000 MB (50 GB)
-    Description: Maximum resources and priority support for enterprises
-    
-    Features:
-    - Purchase Theme: ✅ Enabled
-    - Backup Download: ✅ Enabled (Included)
-    - Control Panel Access: ✅ Enabled
-    - Featured: ❌ Not Featured
-    
-    Member Roles: Enterprise customers only
-    Background Colors: #8b5cf6 → #7c3aed (Purple gradient)
-    ```
-  </Tab>
-</Tabs>
+<Tip>
+**Package Design Tips:**
+- Create 3-5 packages to avoid overwhelming customers
+- Make the middle tier the "featured" option
+- Use clear, benefit-focused descriptions
+- Price competitively based on market research
+- Offer a clear upgrade path between tiers
+</Tip>
 
 ---
 
 ## Renewal Terms
 
-Configure billing cycles and discount structures for long-term subscriptions.
+Configure billing periods and renewal pricing for your packages.
 
-### Renewal Configuration Fields
+### Available Renewal Periods
 
-<ParamField path="name" type="string" required>
-  **Renewal Term Name**
-  
-  Display name for the billing cycle.
-  
-  - **Example:** `1 Month`, `3 Months`, `6 Months`, `1 Year`
-  - **Purpose:** Shown during checkout
-</ParamField>
+Set pricing for different billing cycles:
 
-<ParamField path="days" type="number" required>
-  **Duration (Days)**
-  
-  Length of the billing cycle in days.
-  
-  - **Min:** 1 day
-  - **Max:** 99,999,999,999 days
-  - **Common Values:**
-    - 30 days = 1 month
-    - 90 days = 3 months
-    - 180 days = 6 months
-    - 365 days = 1 year
-</ParamField>
+| Billing Period | Typical Discount | Use Case |
+|----------------|------------------|----------|
+| **Monthly** | 0% (base price) | Flexibility, testing |
+| **Quarterly** | 5-10% | Short-term commitment |
+| **Semi-Annual** | 10-15% | Medium-term savings |
+| **Annual** | 15-25% | Best value, customer retention |
+| **Biennial** | 20-30% | Long-term commitment |
+| **Triennial** | 25-35% | Maximum savings |
 
-<ParamField path="sale_offer" type="number">
-  **Discount Percentage**
-  
-  Discount applied for this billing cycle.
-  
-  - **Min:** 0%
-  - **Max:** 90%
-  - **Purpose:** Incentivize longer commitments
-  - **Example:** 10% for 6 months, 20% for 1 year
-</ParamField>
+### Renewal Pricing Strategy
 
-<ParamField path="roles" type="checkbox">
-  **Available For**
-  
-  User roles that can select this renewal term.
-  
-  - **Default:** `c1` (all customers)
-  - **Use Case:** Offer exclusive discounts to premium members
-</ParamField>
+**Example for $10/month package:**
 
-### Renewal Term Examples
+| Period | Regular Price | Discounted Price | Savings |
+|--------|---------------|------------------|---------|
+| 1 Month | $10 | $10 | - |
+| 3 Months | $30 | $27 | 10% |
+| 6 Months | $60 | $54 | 10% |
+| 12 Months | $120 | $100 | 17% |
+| 24 Months | $240 | $192 | 20% |
+| 36 Months | $360 | $270 | 25% |
 
-<CodeGroup>
-```yaml Monthly Billing
-Name: 1 Month
-Days: 30
-Discount: 0%
-Available For: All customers
-
-Calculation:
-- Package Price: $19.99/month
-- Total: $19.99 (no discount)
-```
-
-```yaml Quarterly Billing
-Name: 3 Months
-Days: 90
-Discount: 10%
-Available For: All customers
-
-Calculation:
-- Package Price: $19.99/month
-- Subtotal: $19.99 × 3 = $59.97
-- Discount: $59.97 × 10% = $5.99
-- Total: $53.98 (save $5.99)
-```
-
-```yaml Semi-Annual Billing
-Name: 6 Months
-Days: 180
-Discount: 15%
-Available For: All customers
-
-Calculation:
-- Package Price: $19.99/month
-- Subtotal: $19.99 × 6 = $119.94
-- Discount: $119.94 × 15% = $17.99
-- Total: $101.95 (save $17.99)
-```
-
-```yaml Annual Billing
-Name: 1 Year
-Days: 365
-Discount: 20%
-Available For: All customers
-
-Calculation:
-- Package Price: $19.99/month
-- Subtotal: $19.99 × 12 = $239.88
-- Discount: $239.88 × 20% = $47.98
-- Total: $191.90 (save $47.98)
-```
-</CodeGroup>
-
-<Tip>
-**Discount Strategy Tips:**
-- **Monthly:** 0% discount (baseline pricing)
-- **Quarterly:** 5-10% discount
-- **Semi-Annual:** 10-15% discount
-- **Annual:** 15-25% discount
-- **Biennial:** 25-30% discount (for enterprise)
-</Tip>
+<Info>
+**Renewal Pricing Benefits:**
+- Encourages longer commitments
+- Improves cash flow
+- Reduces churn
+- Rewards loyal customers
+- Predictable revenue
+</Info>
 
 ---
 
@@ -345,500 +165,233 @@ Calculation:
 
 Configure pricing for additional services available across all packages.
 
-### Service Pricing Fields
+### Service Options
 
-<ParamField path="ssl_price" type="currency">
-  **SSL Certificate Price**
-  
-  Global pricing for SSL certificates.
-  
-  - **Min:** $0
-  - **Max:** $99,999
-  - **Default:** $0 (free SSL via Let's Encrypt)
-  - **Use Case:** Premium SSL certificates (EV, Wildcard)
-</ParamField>
+**SSL Certificate**
 
-<ParamField path="backup_price" type="currency">
-  **Backup Download Price**
-  
-  Price for backup download service.
-  
-  - **Min:** $0
-  - **Max:** $99,999
-  - **Default:** $0
-  - **Important:** Configure per-package in left panel if enabled
-  - **Note:** Highlighted field with special styling
-</ParamField>
+Secure socket layer certificate for HTTPS.
 
-<ParamField path="upgrade_disk_price" type="currency">
-  **Disk Upgrade Price per MB**
-  
-  Cost per MB for additional storage.
-  
-  - **Min:** $0
-  - **Max:** $99,999
-  - **Default:** $2,000 (currency units)
-  - **Example:** $0.01/MB = $10/GB
-</ParamField>
+- **Typical Price**: $10 - $30/year
+- **Recommended**: Include free with premium packages
 
-<Warning>
-**Backup Pricing Important Note:**
+**Website Backup**
 
-If you set a Backup Price, you MUST configure the backup option for each package individually in the Website Packages section. Enable the "Enable Backup Download Option" switch for packages that should include this feature.
-</Warning>
+Automated backup service with restore capability.
 
-### Service Pricing Examples
+- **Typical Price**: $5 - $15/month
+- **Recommended**: Include with professional and enterprise packages
 
-<CodeGroup>
-```yaml Free SSL Model
-SSL Certificate: $0
-Backup Download: $0
-Disk Upgrade: $0.01/MB
+**Disk Space Upgrade**
 
-Strategy:
-- Free SSL via Let's Encrypt
-- Backups included in all plans
-- Free storage upgrades (up to limit)
-- Monetize through package tiers
-```
+Additional storage beyond package allocation.
 
-```yaml Premium Services Model
-SSL Certificate: $29.99/year
-Backup Download: $5/month
-Disk Upgrade: $0.02/MB
+- **Typical Price**: $1 - $5 per GB/month
+- **Recommended**: Offer in increments (1GB, 5GB, 10GB)
 
-Strategy:
-- Premium SSL for businesses
-- Backup as paid add-on
-- Charge for extra storage
-- Additional revenue streams
-```
+### Pricing Configuration
 
-```yaml Enterprise Model
-SSL Certificate: $99.99/year (EV SSL)
-Backup Download: Included
-Disk Upgrade: $0.05/MB
+| Service | Price | Billing | Notes |
+|---------|-------|---------|-------|
+| **SSL Certificate** | $15 | Annual | Or free with premium plans |
+| **Backup Service** | $10 | Monthly | Automated daily backups |
+| **Disk Upgrade (1GB)** | $2 | Monthly | Per additional GB |
+| **Disk Upgrade (5GB)** | $8 | Monthly | Bulk discount |
+| **Disk Upgrade (10GB)** | $15 | Monthly | Best value |
 
-Strategy:
-- High-value SSL certificates
-- Backups included in premium tiers
-- Premium storage pricing
-- Focus on enterprise customers
-```
-</CodeGroup>
+<Tip>
+**Service Pricing Tips:**
+- Bundle services with higher-tier packages
+- Offer volume discounts for bulk purchases
+- Make SSL certificates free to encourage security
+- Price backups to cover actual storage costs
+- Consider offering free trials for services
+</Tip>
 
 ---
 
 ## Domain Pricing
 
-Set custom pricing for domain registration and renewal by TLD (Top Level Domain).
+Set registration and renewal prices for each domain extension (TLD).
 
-### Domain Pricing Configuration
-
-<Info>
-**Pricing Override:** Leaving the price blank will use the original price from Dynadot. Only fill in prices you want to customize.
-</Info>
-
-### Pricing Fields
+### Domain Pricing Structure
 
 For each TLD, you can configure:
 
-<ParamField path="reg_price" type="currency">
-  **Sale Price (without VAT)**
-  
-  Your custom registration price before tax.
-  
-  - **Default:** Uses Dynadot price
-  - **Purpose:** Set your markup or discount
-  - **Example:** Dynadot: $10.99 → Your Price: $12.99
-</ParamField>
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **Registration Price** | Cost to register new domain | $12.99/year |
+| **Registration VAT** | Tax on registration | $2.60 (20%) |
+| **Renewal Price** | Cost to renew domain | $14.99/year |
+| **Renewal VAT** | Tax on renewal | $3.00 (20%) |
 
-<ParamField path="reg_price_vat" type="currency">
-  **Sale Price (with VAT)**
-  
-  Registration price including tax.
-  
-  - **Default:** Uses Dynadot price + VAT
-  - **Calculation:** Typically reg_price × (1 + VAT rate)
-  - **Example:** $12.99 × 1.10 = $14.29 (10% VAT)
-</ParamField>
+### Common TLD Pricing
 
-<ParamField path="renew_price" type="currency">
-  **Renewal Price**
-  
-  Annual renewal price for the domain.
-  
-  - **Default:** Uses Dynadot renewal price
-  - **Strategy:** Can be same as or different from registration
-  - **Common:** Higher renewal than registration (promotional pricing)
-</ParamField>
+**Popular TLDs:**
 
-### Domain Pricing Strategy
+| TLD | Registration | Renewal | Notes |
+|-----|--------------|---------|-------|
+| .com | $12.99 | $14.99 | Most popular |
+| .net | $14.99 | $16.99 | Network sites |
+| .org | $13.99 | $15.99 | Organizations |
+| .io | $34.99 | $39.99 | Tech startups |
+| .co | $24.99 | $29.99 | Companies |
 
-<Tabs>
-  <Tab title="Competitive Pricing">
-    **Match or Beat Market Rates**
-    
-    | TLD | Dynadot | Your Price | Strategy |
-    |-----|---------|------------|----------|
-    | .com | $10.99 | $9.99 | Loss leader |
-    | .net | $12.99 | $12.99 | Match market |
-    | .org | $11.99 | $11.99 | Match market |
-    | .io | $39.99 | $34.99 | Competitive edge |
-    
-    **Goal:** Attract customers with competitive pricing
-  </Tab>
-  
-  <Tab title="Premium Markup">
-    **Add Margin for Profit**
-    
-    | TLD | Dynadot | Your Price | Markup |
-    |-----|---------|------------|--------|
-    | .com | $10.99 | $14.99 | +36% |
-    | .net | $12.99 | $16.99 | +31% |
-    | .org | $11.99 | $15.99 | +33% |
-    | .io | $39.99 | $49.99 | +25% |
-    
-    **Goal:** Maximize profit per domain sale
-  </Tab>
-  
-  <Tab title="Bundle Pricing">
-    **Promotional Registration, Standard Renewal**
-    
-    | TLD | Registration | Renewal | Strategy |
-    |-----|--------------|---------|----------|
-    | .com | $0.99 (promo) | $14.99 | Hook customers |
-    | .net | $4.99 (promo) | $16.99 | Low entry cost |
-    | .org | $5.99 (promo) | $15.99 | Nonprofit appeal |
-    | .io | $29.99 (promo) | $49.99 | Tech audience |
-    
-    **Goal:** Acquire customers with low first-year pricing
-  </Tab>
-  
-  <Tab title="Selective Offering">
-    **Only Offer Popular TLDs**
-    
-    | TLD | Offered | Reason |
-    |-----|---------|--------|
-    | .com | ✅ Yes | Most popular |
-    | .net | ✅ Yes | Common alternative |
-    | .org | ✅ Yes | Nonprofits |
-    | .io | ✅ Yes | Tech startups |
-    | .xyz | ❌ No | Low demand |
-    | .info | ❌ No | Low margin |
-    
-    **Goal:** Focus on high-demand, high-margin TLDs
-  </Tab>
-</Tabs>
+**Premium TLDs:**
 
-<Tip>
-**Domain Pricing Best Practices:**
-- Research competitor pricing before setting rates
-- Consider promotional first-year pricing
-- Factor in Dynadot costs + desired margin
-- Update pricing quarterly based on market trends
-- Monitor conversion rates by TLD
-- Bundle domains with hosting for better value
-</Tip>
+| TLD | Registration | Renewal | Notes |
+|-----|--------------|---------|-------|
+| .app | $18.99 | $22.99 | Applications |
+| .dev | $15.99 | $18.99 | Developers |
+| .tech | $24.99 | $29.99 | Technology |
+| .store | $19.99 | $24.99 | E-commerce |
+| .online | $9.99 | $12.99 | Budget option |
+
+### Pricing Strategy
+
+**Cost-Plus Pricing:**
+1. Check wholesale cost from registrar (e.g., Dynadot)
+2. Add your margin (typically 20-40%)
+3. Round to .99 pricing for psychology
+4. Set renewal slightly higher than registration
+
+**Example Calculation:**
+- Wholesale cost: $8.50
+- Your margin: 40% ($3.40)
+- Base price: $11.90
+- Rounded price: $12.99
+
+<Warning>
+**Domain Pricing Considerations:**
+- Don't price too low - domains have real costs
+- Renewal prices should cover long-term costs
+- Consider currency fluctuations
+- Monitor competitor pricing
+- Update prices annually
+</Warning>
 
 ---
 
 ## Custom Addons
 
-Create additional services and upsell opportunities for your customers.
+Create up to 50 custom addons for additional services and features.
 
-### Addon Configuration Fields
+### Addon Configuration
 
-<ParamField path="name" type="string" required>
-  **Addon Name**
-  
-  Display name for the addon service.
-  
-  - **Example:** `Priority Support`, `SEO Optimization`, `Content Writing`
-  - **Purpose:** Shown during checkout and in customer dashboard
-</ParamField>
+Each addon can include:
 
-<ParamField path="addon_term" type="select" required>
-  **Payment Term**
-  
-  Billing frequency for the addon.
-  
-  - **Options:**
-    - `One Time` - Single payment
-    - `Monthly` - Recurring monthly charge
-    - `Yearly` - Recurring annual charge
-  - **Default:** One Time
-</ParamField>
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Addon Name** | Service name | "Priority Support" |
+| **Description** | What's included | "24/7 phone and chat support" |
+| **Price** | Cost | $20/month |
+| **Billing Period** | Monthly/Annual | Monthly |
+| **Icon** | Visual identifier | Support icon |
+| **Featured** | Highlight addon | Toggle on/off |
 
-<ParamField path="addon_price" type="currency" required>
-  **Addon Price**
-  
-  Price for the addon service.
-  
-  - **Min:** Must be greater than 0
-  - **Format:** Currency value
-  - **Example:** `$49.99`, `$99.99`, `$199.99`
-</ParamField>
+### Addon Ideas
 
-<ParamField path="linked_packages" type="checkbox">
-  **Attach to Packages**
-  
-  Select which hosting packages can purchase this addon.
-  
-  - **Options:** All created packages
-  - **Use Case:** Restrict premium addons to higher-tier plans
-  - **Example:** SEO service only for Business+ packages
-</ParamField>
+**Support Services:**
+- Priority Support - $20/month
+- Dedicated Account Manager - $100/month
+- 24/7 Phone Support - $30/month
 
-<ParamField path="addon_description" type="textarea">
-  **Description**
-  
-  Detailed description of the addon service.
-  
-  - **Format:** Multi-line text
-  - **Purpose:** Explain value proposition
-  - **Best Practice:** Highlight benefits and deliverables
-</ParamField>
+**Performance:**
+- CDN Service - $15/month
+- Premium Bandwidth - $25/month
+- Dedicated IP Address - $5/month
 
-### Custom Addon Examples
+**Security:**
+- Advanced Security Suite - $30/month
+- Malware Scanning - $10/month
+- DDoS Protection - $50/month
 
-<AccordionGroup>
-  <Accordion title="Priority Support Addon" icon="headset">
-    ```yaml Priority Support Configuration
-    Name: Priority Support
-    Payment Term: Monthly
-    Price: $29.99/month
-    Attached to: Business, Professional, Advanced
-    
-    Description:
-    Get priority email and chat support with:
-    - 1-hour response time guarantee
-    - Dedicated support agent
-    - Direct phone support
-    - Weekend and holiday support
-    - Priority ticket queue
-    
-    Value Proposition:
-    - Faster issue resolution
-    - Reduced downtime
-    - Peace of mind for critical sites
-    ```
-  </Accordion>
-  
-  <Accordion title="SEO Optimization Addon" icon="magnifying-glass">
-    ```yaml SEO Optimization Configuration
-    Name: SEO Starter Package
-    Payment Term: One Time
-    Price: $299.99
-    Attached to: All packages
-    
-    Description:
-    Professional SEO setup including:
-    - Keyword research (10 keywords)
-    - On-page optimization
-    - Meta tags and descriptions
-    - XML sitemap creation
-    - Google Search Console setup
-    - Initial SEO audit report
-    
-    Value Proposition:
-    - Improve search rankings
-    - Increase organic traffic
-    - Professional SEO foundation
-    ```
-  </Accordion>
-  
-  <Accordion title="Website Migration Addon" icon="truck">
-    ```yaml Website Migration Configuration
-    Name: Website Migration Service
-    Payment Term: One Time
-    Price: $99.99
-    Attached to: All packages
-    
-    Description:
-    Hassle-free website migration including:
-    - Full website transfer
-    - Database migration
-    - DNS configuration
-    - SSL certificate setup
-    - Testing and verification
-    - Zero downtime guarantee
-    
-    Value Proposition:
-    - Save time and effort
-    - Professional migration
-    - Risk-free transfer
-    ```
-  </Accordion>
-  
-  <Accordion title="Content Writing Addon" icon="pen">
-    ```yaml Content Writing Configuration
-    Name: Professional Content Writing
-    Payment Term: Monthly
-    Price: $199.99/month
-    Attached to: Business, Professional, Advanced
-    
-    Description:
-    Professional content creation service:
-    - 4 blog posts per month (500-800 words each)
-    - SEO-optimized content
-    - Keyword integration
-    - Original, plagiarism-free writing
-    - 2 rounds of revisions
-    - Content calendar planning
-    
-    Value Proposition:
-    - Consistent content publishing
-    - Professional writing quality
-    - SEO benefits
-    ```
-  </Accordion>
-  
-  <Accordion title="Backup & Security Addon" icon="shield">
-    ```yaml Backup & Security Configuration
-    Name: Advanced Security Suite
-    Payment Term: Monthly
-    Price: $19.99/month
-    Attached to: All packages
-    
-    Description:
-    Enhanced security and backup features:
-    - Daily automated backups (30-day retention)
-    - Malware scanning and removal
-    - Firewall protection
-    - DDoS mitigation
-    - Security monitoring
-    - One-click restore
-    
-    Value Proposition:
-    - Protect against threats
-    - Quick disaster recovery
-    - Peace of mind
-    ```
-  </Accordion>
-</AccordionGroup>
+**Development:**
+- Staging Environment - $10/month
+- Git Integration - $5/month
+- Developer Tools Access - $15/month
+
+**Marketing:**
+- SEO Tools - $20/month
+- Email Marketing (1000 contacts) - $25/month
+- Analytics Dashboard - $15/month
+
+<Steps>
+  <Step title="Identify Customer Needs">
+    Research what additional services your customers want
+  </Step>
+  <Step title="Create Addon">
+    Add new addon with clear name and description
+  </Step>
+  <Step title="Set Pricing">
+    Price based on value and costs
+  </Step>
+  <Step title="Configure Billing">
+    Choose monthly or annual billing
+  </Step>
+  <Step title="Make it Visible">
+    Feature popular addons to increase sales
+  </Step>
+</Steps>
 
 ---
 
 ## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Package Pricing Strategy" icon="dollar-sign">
-    **Creating Effective Pricing Tiers:**
+  <Accordion title="Package Design" icon="box">
+    **Create Effective Packages:**
+    - Offer 3-5 tiers (good, better, best)
+    - Make middle tier most attractive
+    - Clear differentiation between tiers
+    - Include upgrade path
     
-    1. **Good-Better-Best Model:**
-       - Offer 3-4 distinct tiers
-       - Clear differentiation between levels
-       - Feature "Most Popular" middle tier
-    
-    2. **Value-Based Pricing:**
-       - Price based on customer value, not just costs
-       - Consider target market willingness to pay
-       - Test different price points
-    
-    3. **Psychological Pricing:**
-       - Use $9.99 instead of $10.00
-       - Show savings on annual plans
-       - Highlight "Most Popular" badge
-    
-    4. **Competitive Analysis:**
-       - Research competitor pricing
-       - Position yourself strategically
-       - Differentiate on features, not just price
+    **Pricing Psychology:**
+    - Use .99 pricing ($9.99 vs $10)
+    - Show savings on longer terms
+    - Highlight "most popular" option
+    - Display annual pricing with monthly equivalent
   </Accordion>
   
-  <Accordion title="Feature Allocation" icon="list-check">
-    **Distributing Features Across Tiers:**
+  <Accordion title="Competitive Pricing" icon="dollar-sign">
+    **Market Research:**
+    - Research competitor pricing regularly
+    - Don't compete solely on price
+    - Emphasize value over cost
+    - Offer unique features
     
-    **Starter Tier:**
-    - Basic features only
-    - Limited resources
-    - Self-service support
-    - No advanced features
-    
-    **Business Tier:**
-    - All starter features
-    - Increased resources
-    - Email support
-    - Some advanced features
-    
-    **Professional Tier:**
-    - All business features
-    - High resources
-    - Priority support
-    - Most advanced features
-    
-    **Enterprise Tier:**
-    - All features unlocked
-    - Maximum resources
-    - Dedicated support
-    - Custom solutions
+    **Value Proposition:**
+    - Bundle services for better value
+    - Include premium features in higher tiers
+    - Offer money-back guarantee
+    - Provide excellent support
   </Accordion>
   
-  <Accordion title="Renewal Optimization" icon="calendar-range">
-    **Maximizing Annual Subscriptions:**
+  <Accordion title="Revenue Optimization" icon="chart-line">
+    **Maximize Revenue:**
+    - Encourage annual billing with discounts
+    - Upsell addons during checkout
+    - Create limited-time promotions
+    - Offer upgrade incentives
     
-    1. **Discount Structure:**
-       - 0% monthly (baseline)
-       - 10% quarterly
-       - 15% semi-annual
-       - 20-25% annual
-    
-    2. **Incentivize Commitment:**
-       - Offer free month on annual
-       - Include premium features
-       - Provide priority support
-       - Lock in pricing for term
-    
-    3. **Renewal Reminders:**
-       - Email 30 days before expiry
-       - Offer renewal discount
-       - Highlight value received
-       - Make renewal easy
+    **Monitor Metrics:**
+    - Track conversion rates per package
+    - Analyze addon adoption
+    - Review pricing quarterly
+    - A/B test package features
   </Accordion>
   
-  <Accordion title="Addon Strategy" icon="plus-square">
-    **Creating Profitable Addons:**
+  <Accordion title="Customer Experience" icon="user">
+    **Clear Communication:**
+    - List all features clearly
+    - No hidden fees
+    - Transparent pricing
+    - Easy package comparison
     
-    **High-Value Services:**
-    - Migration services ($99-$299)
-    - SEO optimization ($199-$499)
-    - Custom development ($500+)
-    - Content creation ($99-$299/month)
-    
-    **Recurring Revenue:**
-    - Priority support ($19-$49/month)
-    - Backup services ($5-$19/month)
-    - Security monitoring ($9-$29/month)
-    - Performance optimization ($29-$99/month)
-    
-    **One-Time Services:**
-    - Website migration
-    - Initial SEO setup
-    - Design customization
-    - Plugin installation
-  </Accordion>
-  
-  <Accordion title="Domain Pricing" icon="globe">
-    **Domain Pricing Strategies:**
-    
-    1. **Cost-Plus Pricing:**
-       - Calculate Dynadot cost
-       - Add desired margin (20-40%)
-       - Consider payment processing fees
-       - Factor in support costs
-    
-    2. **Promotional Pricing:**
-       - Low first-year price
-       - Standard renewal rate
-       - Acquire customers cheaply
-       - Profit on renewals
-    
-    3. **Bundle Discounts:**
-       - Free domain with annual hosting
-       - Discounted domain + hosting package
-       - Multi-year domain discounts
-       - Bulk domain pricing
+    **Flexibility:**
+    - Allow package upgrades anytime
+    - Prorate when upgrading
+    - Simple downgrade process
+    - Cancel without penalty
   </Accordion>
 </AccordionGroup>
 
@@ -847,154 +400,136 @@ Create additional services and upsell opportunities for your customers.
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Package Not Showing on Pricing Page" icon="eye-slash">
-    **Common Issues:**
+  <Accordion title="Packages Not Displaying" icon="eye-slash">
+    **Issue:** Hosting packages don't appear on website
+    
+    **Common Causes:**
     - Package not saved properly
     - Member role restrictions
-    - Package disabled or deleted
     - Cache not cleared
+    - Package marked as inactive
     
     **Solutions:**
-    - Verify package is saved (click Save Configuration)
-    - Check member role settings (should include target users)
-    - Ensure package is active
-    - Clear browser and server cache
-    - Check frontend template for errors
+    1. Verify package is saved and active
+    2. Check member role settings
+    3. Clear all caches
+    4. Review package visibility settings
+    5. Check theme compatibility
   </Accordion>
   
-  <Accordion title="Renewal Discounts Not Calculating" icon="percent">
-    **Common Issues:**
-    - Discount percentage set incorrectly
-    - Days calculation wrong
-    - Role restrictions preventing access
-    - JavaScript errors on checkout
+  <Accordion title="Incorrect Pricing" icon="dollar-sign">
+    **Issue:** Wrong prices showing to customers
+    
+    **Common Causes:**
+    - Pricing not updated
+    - Tax calculation errors
+    - Currency conversion issues
+    - Cached pricing data
     
     **Solutions:**
-    - Verify discount is 0-90%
-    - Check days match intended period (30, 90, 365)
-    - Ensure user role has access to term
-    - Check browser console for errors
-    - Test calculation manually
+    1. Update pricing and save
+    2. Verify tax settings
+    3. Check currency configuration
+    4. Clear pricing cache
+    5. Test in incognito mode
   </Accordion>
   
-  <Accordion title="Backup Price Not Applying" icon="database">
-    **Common Issues:**
-    - Global backup price set but package option disabled
-    - Package option enabled but no global price
-    - Conflicting pricing settings
+  <Accordion title="Domain Pricing Not Working" icon="globe">
+    **Issue:** Domain prices not applying correctly
+    
+    **Common Causes:**
+    - TLD not configured
+    - VAT settings incorrect
+    - Price not saved
+    - Domain API issues
     
     **Solutions:**
-    - Set global backup price in right panel
-    - Enable "Backup Download Option" for each package
-    - Verify both settings are configured
-    - Check package-specific pricing overrides
-    - Review customer billing details
+    1. Configure pricing for all TLDs
+    2. Verify VAT percentages
+    3. Save domain pricing again
+    4. Check domain API connection
+    5. Review transaction logs
   </Accordion>
   
-  <Accordion title="Domain Pricing Not Updating" icon="globe">
-    **Common Issues:**
-    - Dynadot API not configured
-    - Price fields left blank (using default)
-    - VAT calculation incorrect
-    - Cache not cleared
+  <Accordion title="Addons Not Available" icon="puzzle-piece">
+    **Issue:** Custom addons not showing at checkout
+    
+    **Common Causes:**
+    - Addon not enabled
+    - Package compatibility
+    - Visibility settings
+    - Cache issues
     
     **Solutions:**
-    - Configure Dynadot API in Domain API Settings
-    - Enter custom prices (blank = use Dynadot price)
-    - Verify VAT rate in system settings
-    - Clear pricing cache
-    - Test with different TLDs
-  </Accordion>
-  
-  <Accordion title="Addon Not Available for Package" icon="plus-square">
-    **Common Issues:**
-    - Addon not linked to package
-    - Package restrictions
-    - Addon price set to 0
-    - Addon disabled
-    
-    **Solutions:**
-    - Check "Attach to Packages" settings
-    - Verify package is in linked list
-    - Ensure addon price > 0
-    - Confirm addon is active
-    - Test with different packages
+    1. Enable addon in settings
+    2. Check package compatibility
+    3. Review visibility rules
+    4. Clear cache
+    5. Test checkout process
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Configuration Workflow
-
-<Steps>
-  <Step title="Create Website Packages">
-    Define your hosting tiers with pricing, storage, and features
-  </Step>
-  <Step title="Configure Renewal Terms">
-    Set up billing cycles with appropriate discounts
-  </Step>
-  <Step title="Set Global Service Pricing">
-    Configure SSL, backup, and disk upgrade pricing
-  </Step>
-  <Step title="Customize Domain Pricing">
-    Override Dynadot prices for specific TLDs (optional)
-  </Step>
-  <Step title="Add Custom Addons">
-    Create additional services for upselling
-  </Step>
-  <Step title="Test Pricing Page">
-    Verify packages display correctly on frontend
-  </Step>
-  <Step title="Monitor and Optimize">
-    Track conversions and adjust pricing as needed
-  </Step>
-</Steps>
-
----
-
 ## Quick Reference
 
-### Package Limits
+### Package Comparison Template
 
-| Setting | Min | Max | Default |
-|---------|-----|-----|---------|
-| **Packages** | 1 | 20 | - |
-| **Storage (MB)** | 150 | 99,999,999,999 | 1000 |
-| **Renewal Terms** | 1 | 20 | - |
-| **Renewal Days** | 1 | 99,999,999,999 | 30 |
-| **Discount %** | 0 | 90 | 0 |
-| **Custom Addons** | 0 | 50 | - |
+| Feature | Starter | Professional | Enterprise |
+|---------|---------|--------------|------------|
+| **Price** | $5/mo | $15/mo | $50/mo |
+| **Disk Space** | 1 GB | 5 GB | 20 GB |
+| **Bandwidth** | 10 GB | 50 GB | 200 GB |
+| **Websites** | 1 | 5 | Unlimited |
+| **SSL Certificate** | ❌ | ✅ | ✅ |
+| **Backups** | ❌ | ✅ | ✅ |
+| **Control Panel** | ❌ | ✅ | ✅ |
+| **Support** | Email | Priority | 24/7 Phone |
 
-### Common Configurations
+### Pricing Checklist
 
-| Package Type | Storage | Price | Features |
-|--------------|---------|-------|----------|
-| **Starter** | 1-2 GB | $5-10 | Basic |
-| **Business** | 5-10 GB | $15-25 | Standard |
-| **Professional** | 15-30 GB | $40-60 | Advanced |
-| **Enterprise** | 50+ GB | $80-150 | All Features |
+- [ ] Create 3-5 hosting packages
+- [ ] Set competitive pricing
+- [ ] Configure renewal terms with discounts
+- [ ] Set SSL certificate pricing
+- [ ] Configure backup service pricing
+- [ ] Set disk upgrade pricing
+- [ ] Configure domain pricing for all TLDs
+- [ ] Add VAT/tax where applicable
+- [ ] Create useful custom addons
+- [ ] Test checkout process
+- [ ] Review pricing quarterly
+
+### Recommended Margins
+
+| Service | Wholesale Cost | Retail Price | Margin |
+|---------|----------------|--------------|--------|
+| Hosting | $2-5/mo | $10-20/mo | 100-300% |
+| Domains | $8-12/yr | $12-18/yr | 20-50% |
+| SSL | $0-5/yr | $10-30/yr | 100-500% |
+| Backups | $1-3/mo | $5-15/mo | 200-400% |
 
 ---
 
 ## Related Documentation
 
 <CardGroup cols={2}>
-  <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
-    Configure Dynadot API for domain registration
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Configure website resource limits
   </Card>
-  <Card title="Website Configuration" icon="gear" href="/website-configuration">
-    Set resource limits and trial periods
+  <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
+    Set up domain registration
   </Card>
   <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
-    Configure payment gateways and methods
+    Configure payment gateways
   </Card>
-  <Card title="General Settings" icon="sliders" href="/general-settings">
-    Company information and global settings
+  <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
+    Manage automatic renewals
   </Card>
 </CardGroup>
 
 ---
 
 <Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring hosting plans, pricing strategies, or custom addons.
+  Contact support if you need assistance configuring hosting plans or pricing strategies.
 </Card>
