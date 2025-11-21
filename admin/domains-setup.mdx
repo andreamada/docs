@@ -1,29 +1,742 @@
 ---
-title: "Configuring Domains"
-description: "Add Dynadot as integration to start selling domains to your own clients following the steps described in this page."
+title: 'Domain API Settings'
+description: 'Configure domain registration API and nameserver settings'
+icon: 'globe2'
 ---
 
-## Configuring Dynadot
+<Info>
+**Navigation Path:** Admin Dashboard → Settings → Domain API Settings
+</Info>
 
-These settings can be found under [Services Setup] \> [Domains Setup]
+## Overview
 
-We added a Dynadot integration to allow you reselling domains to your final clients.\
-In order to make it work you'll need first to create an API on their panel:\
-https://www.dynadot.com/account/domain/setting/api.html\\\\
-\
-Once done, paste it directly here:
+The Domain API Settings page allows you to configure domain registration through the Dynadot API, set default nameservers for new domains, and manage Top Level Domain (TLD) lists for domain availability checking.
 
-<img
-  src="/images/domains_setup.png"
-  alt="Domains Setup Pn"
-  title="Domains Setup Pn"
-  style={{ width:"36%" }}
-/>
+<CardGroup cols={2}>
+  <Card title="Dynadot API" icon="key" color="#0d6efd">
+    Configure API token for automated domain registration
+  </Card>
+  <Card title="Nameservers" icon="server" color="#10b981">
+    Set default NS1, NS2, and CNAME records
+  </Card>
+  <Card title="TLD Configuration" icon="list-check" color="#f59e0b">
+    Manage primary and extended TLD lists
+  </Card>
+  <Card title="Domain Management" icon="globe" color="#0ea5e9">
+    Automate domain registration and DNS configuration
+  </Card>
+</CardGroup>
 
-### LTD Settings
+---
 
-In this tab you can define the LTD to check by default in the domain search as well as defining custom nameservers.
+## Dynadot API Settings
 
-### Domains Pricing
+Configure your Dynadot API token to enable automated domain registration and management.
 
-If you wanna customize the price for domains setting up your own rate, you can do it under [Services Setup] \> [Website Plans] \> [Domains]
+### API Token Configuration
+
+<ParamField path="api_token" type="string" required>
+  **API Token**
+  
+  Your Dynadot API access token for domain registration.
+  
+  - **Source:** [Dynadot API Settings](https://www.dynadot.com/account/domain/setting/api.html)
+  - **Format:** Alphanumeric string
+  - **Security:** Keep this token confidential
+  - **Purpose:** Enables automated domain registration via API
+</ParamField>
+
+### Getting Your Dynadot API Token
+
+<Steps>
+  <Step title="Log in to Dynadot">
+    Visit [Dynadot.com](https://www.dynadot.com) and log in to your account
+  </Step>
+  <Step title="Navigate to API Settings">
+    Go to **Account → Domain → Settings → API** or visit [Dynadot API Settings](https://www.dynadot.com/account/domain/setting/api.html)
+  </Step>
+  <Step title="Enable API Access">
+    If not already enabled, activate API access for your account
+  </Step>
+  <Step title="Generate API Key">
+    Create or copy your existing API key
+  </Step>
+  <Step title="Configure in Admin Panel">
+    Paste the API token into the Domain API Settings page and save
+  </Step>
+</Steps>
+
+<Info>
+**API Requirements:** You need a valid Dynadot account with API access enabled to use domain registration features.
+</Info>
+
+<Warning>
+**Security Best Practices:**
+- Never share your API token publicly
+- Store the token securely using environment variables
+- Regenerate the token if compromised
+- Restrict API access to trusted IP addresses in Dynadot settings
+- Monitor API usage for unusual activity
+</Warning>
+
+---
+
+## Default Nameservers
+
+Configure default nameservers that will be automatically assigned to newly registered domains.
+
+### Nameserver Configuration
+
+<ParamField path="ns_1" type="string" required>
+  **Primary Nameserver (NS1)**
+  
+  Default primary nameserver for new domains.
+  
+  - **Format:** `ns1.example.com` or IP address
+  - **Purpose:** Primary DNS resolution
+  - **Example:** `ns1.yourdomain.com`
+</ParamField>
+
+<ParamField path="ns_2" type="string" required>
+  **Secondary Nameserver (NS2)**
+  
+  Default secondary nameserver for new domains.
+  
+  - **Format:** `ns2.example.com` or IP address
+  - **Purpose:** Backup DNS resolution and redundancy
+  - **Example:** `ns2.yourdomain.com`
+</ParamField>
+
+### Nameserver Best Practices
+
+<Accordion title="Why Two Nameservers?" icon="server">
+**Redundancy and Reliability:**
+- **Primary (NS1):** Main DNS server for domain resolution
+- **Secondary (NS2):** Backup server if primary fails
+- **Requirement:** Most registrars require at least 2 nameservers
+- **Best Practice:** Use geographically distributed servers
+- **Uptime:** Ensures domain remains accessible if one server fails
+</Accordion>
+
+<Accordion title="Common Nameserver Providers" icon="cloud">
+**Popular DNS Providers:**
+
+| Provider | NS1 | NS2 |
+|----------|-----|-----|
+| **Cloudflare** | `ns1.cloudflare.com` | `ns2.cloudflare.com` |
+| **AWS Route 53** | `ns-xxx.awsdns-xx.com` | `ns-xxx.awsdns-xx.net` |
+| **Google Cloud DNS** | `ns-cloud-a1.googledomains.com` | `ns-cloud-a2.googledomains.com` |
+| **DigitalOcean** | `ns1.digitalocean.com` | `ns2.digitalocean.com` |
+| **Custom** | `ns1.yourdomain.com` | `ns2.yourdomain.com` |
+</Accordion>
+
+<Tip>
+**Nameserver Setup Tips:**
+- Use reliable, high-performance DNS providers
+- Consider using Cloudflare for free CDN and DDoS protection
+- Ensure nameservers are properly configured before assigning to domains
+- Test DNS propagation after configuration
+- Keep nameserver records consistent across all domains
+</Tip>
+
+---
+
+## Default CNAME Record
+
+Configure the default CNAME record that websites will point to.
+
+<ParamField path="record_domain" type="string" required>
+  **Default CNAME Record**
+  
+  Default CNAME pointing domain for websites.
+  
+  - **Format:** `yourdomain.com` (without protocol)
+  - **Purpose:** Points customer domains to your hosting infrastructure
+  - **Default:** Uses `PRIMARY_DOMAIN` variable
+  - **Example:** `hosting.yourdomain.com`
+</ParamField>
+
+### Understanding CNAME Records
+
+<Accordion title="What is a CNAME Record?" icon="link">
+**CNAME (Canonical Name) Record:**
+
+A CNAME record creates an alias from one domain name to another. In this context:
+
+- **Customer Domain:** `customer-site.com`
+- **CNAME Points To:** `hosting.yourdomain.com`
+- **Result:** Traffic to `customer-site.com` is routed to your hosting server
+
+**Example Configuration:**
+```
+customer-site.com  →  CNAME  →  hosting.yourdomain.com
+```
+
+**Benefits:**
+- Centralized hosting management
+- Easy server migration (change one record instead of many)
+- Load balancing and traffic distribution
+- SSL certificate management
+</Accordion>
+
+<Accordion title="CNAME vs A Record" icon="circle-question">
+**Key Differences:**
+
+| Feature | CNAME | A Record |
+|---------|-------|----------|
+| **Points To** | Domain name | IP address |
+| **Flexibility** | Easy to update | Requires IP changes |
+| **Use Case** | Aliasing domains | Direct IP mapping |
+| **Root Domain** | Not allowed | Allowed |
+| **Subdomain** | Allowed | Allowed |
+
+**When to Use CNAME:**
+- Pointing multiple domains to one hosting server
+- Need flexibility to change underlying IP
+- Using CDN or load balancer
+
+**When to Use A Record:**
+- Root domain configuration
+- Direct IP mapping required
+- Maximum DNS query speed
+</Accordion>
+
+---
+
+## Top Level Domain (TLD) Configuration
+
+Define which TLDs (domain extensions) are available for domain availability checking.
+
+### Primary TLD List
+
+<ParamField path="domain_check_default" type="textarea" required>
+  **Primary TLD List**
+  
+  List of primary TLDs to check for domain availability.
+  
+  - **Format:** One TLD per line, without the dot
+  - **Example:** `com`, `net`, `org`
+  - **Purpose:** Default TLDs shown in domain search
+  - **Recommendation:** Include most popular TLDs
+</ParamField>
+
+### Extended TLD List
+
+<ParamField path="domain_check_more" type="textarea">
+  **Additional TLD List**
+  
+  Additional TLDs for extended domain search.
+  
+  - **Format:** One TLD per line, without the dot
+  - **Example:** `io`, `ai`, `dev`
+  - **Purpose:** Extended search options for users
+  - **Use Case:** Niche or country-specific TLDs
+</ParamField>
+
+<Warning>
+**TLD Format Requirements:** Enter TLDs without the dot, one per line. 
+
+**Correct:**
+```
+com
+net
+org
+```
+
+**Incorrect:**
+```
+.com, .net, .org
+```
+</Warning>
+
+### Common TLD Examples
+
+<Tabs>
+  <Tab title="Popular TLDs">
+    **Most Common Domain Extensions:**
+    
+    ```text Primary TLDs
+    com
+    net
+    org
+    info
+    biz
+    co
+    io
+    me
+    us
+    ```
+    
+    **Usage:**
+    - `com` - Commercial (most popular)
+    - `net` - Network services
+    - `org` - Organizations
+    - `info` - Information sites
+    - `biz` - Business
+    - `co` - Company/Commercial
+    - `io` - Tech startups
+    - `me` - Personal brands
+    - `us` - United States
+  </Tab>
+  
+  <Tab title="Tech & Startup">
+    **Technology-Focused TLDs:**
+    
+    ```text Tech TLDs
+    io
+    ai
+    dev
+    app
+    tech
+    digital
+    cloud
+    online
+    site
+    website
+    ```
+    
+    **Popular Among:**
+    - SaaS companies
+    - Tech startups
+    - Developer tools
+    - AI/ML platforms
+    - Cloud services
+  </Tab>
+  
+  <Tab title="Country Codes">
+    **Country-Specific TLDs (ccTLDs):**
+    
+    ```text Country TLDs
+    uk
+    ca
+    au
+    de
+    fr
+    jp
+    cn
+    in
+    br
+    mx
+    ```
+    
+    **Benefits:**
+    - Local SEO advantages
+    - Trust in specific regions
+    - Country-specific branding
+    - Regulatory compliance
+  </Tab>
+  
+  <Tab title="Niche TLDs">
+    **Specialized Domain Extensions:**
+    
+    ```text Niche TLDs
+    blog
+    shop
+    store
+    agency
+    studio
+    design
+    photography
+    consulting
+    services
+    solutions
+    ```
+    
+    **Use Cases:**
+    - Industry-specific branding
+    - Clear purpose indication
+    - Memorable domain names
+    - Marketing differentiation
+  </Tab>
+</Tabs>
+
+### TLD Selection Strategy
+
+<AccordionGroup>
+  <Accordion title="Primary TLD Selection" icon="star">
+    **Choosing Primary TLDs:**
+    
+    Include TLDs that are:
+    - **Popular:** `com`, `net`, `org`, `io`
+    - **Affordable:** Check registration costs
+    - **Available:** High availability for common names
+    - **Trustworthy:** Recognized by users
+    - **SEO-Friendly:** Good search engine reputation
+    
+    **Recommended Primary List (10-15 TLDs):**
+    ```
+    com, net, org, info, biz
+    co, io, me, us, uk
+    ```
+  </Accordion>
+  
+  <Accordion title="Extended TLD Selection" icon="plus-circle">
+    **Choosing Extended TLDs:**
+    
+    Include TLDs for:
+    - **Niche Markets:** Industry-specific extensions
+    - **Geographic Targeting:** Country codes
+    - **Alternative Options:** When primary TLDs are taken
+    - **Premium Branding:** Unique extensions
+    
+    **Recommended Extended List (20-50 TLDs):**
+    ```
+    ai, dev, app, tech, digital
+    blog, shop, store, online, site
+    agency, studio, design, consulting
+    ca, au, de, fr, jp, in
+    ```
+  </Accordion>
+  
+  <Accordion title="TLD Pricing Considerations" icon="dollar-sign">
+    **Cost Factors:**
+    
+    | TLD Type | Typical Cost | Notes |
+    |----------|--------------|-------|
+    | **Generic** (.com, .net) | $10-15/year | Standard pricing |
+    | **Country Code** (.uk, .ca) | $10-30/year | Varies by country |
+    | **New gTLDs** (.io, .ai) | $20-100/year | Premium pricing |
+    | **Niche** (.blog, .shop) | $15-40/year | Moderate pricing |
+    
+    **Pricing Strategy:**
+    - Verify costs with Dynadot before adding TLDs
+    - Consider profit margins on domain sales
+    - Balance variety with affordability
+    - Update pricing regularly
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Configuration Examples
+
+<CodeGroup>
+```text Basic Configuration
+# Dynadot API Token
+api_token: abc123xyz789...
+
+# Nameservers
+ns_1: ns1.cloudflare.com
+ns_2: ns2.cloudflare.com
+
+# CNAME Record
+record_domain: hosting.yourdomain.com
+
+# Primary TLDs
+com
+net
+org
+info
+co
+
+# Extended TLDs
+io
+ai
+dev
+blog
+shop
+```
+
+```text Enterprise Configuration
+# Dynadot API Token
+api_token: enterprise_token_here...
+
+# Custom Nameservers
+ns_1: ns1.yourdomain.com
+ns_2: ns2.yourdomain.com
+
+# CNAME Record
+record_domain: hosting.enterprise.com
+
+# Primary TLDs (Popular)
+com
+net
+org
+io
+co
+uk
+us
+ca
+au
+de
+
+# Extended TLDs (Comprehensive)
+ai
+dev
+app
+tech
+digital
+cloud
+online
+site
+blog
+shop
+store
+agency
+consulting
+services
+solutions
+```
+
+```text Startup Configuration
+# Dynadot API Token
+api_token: startup_api_token...
+
+# Cloudflare Nameservers
+ns_1: ns1.cloudflare.com
+ns_2: ns2.cloudflare.com
+
+# CNAME Record
+record_domain: app.startup.io
+
+# Primary TLDs (Tech-Focused)
+com
+io
+ai
+dev
+app
+tech
+
+# Extended TLDs (Startup-Friendly)
+co
+me
+digital
+cloud
+online
+site
+startup
+ventures
+```
+</CodeGroup>
+
+---
+
+## Best Practices
+
+<Tip>
+**Domain API Configuration Tips:**
+- **Test API Token:** Verify token works before going live
+- **Use Reliable DNS:** Choose established nameserver providers
+- **Monitor API Limits:** Track Dynadot API usage and quotas
+- **Update TLD Lists:** Regularly review and update available TLDs
+- **Document Changes:** Keep records of configuration modifications
+- **Backup Settings:** Export configuration before major changes
+</Tip>
+
+<Warning>
+**Critical Considerations:**
+- **API Token Security:** Never expose token in client-side code
+- **DNS Propagation:** Allow 24-48 hours for nameserver changes
+- **TLD Availability:** Not all TLDs support all features
+- **Cost Management:** Monitor domain registration costs
+- **Compliance:** Ensure TLDs comply with local regulations
+</Warning>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="API Token Not Working" icon="key">
+    **Common Issues:**
+    - Invalid or expired API token
+    - API access not enabled in Dynadot account
+    - IP address not whitelisted
+    - Account suspended or restricted
+    
+    **Solutions:**
+    - Verify token is correctly copied (no extra spaces)
+    - Check API access is enabled in Dynadot settings
+    - Whitelist your server IP in Dynadot
+    - Contact Dynadot support for account issues
+    - Regenerate API token if necessary
+  </Accordion>
+  
+  <Accordion title="Domain Registration Failing" icon="circle-xmark">
+    **Common Issues:**
+    - Insufficient account balance
+    - Domain already registered
+    - TLD not supported by Dynadot
+    - Invalid domain name format
+    - API rate limits exceeded
+    
+    **Solutions:**
+    - Check Dynadot account balance
+    - Verify domain availability first
+    - Confirm TLD is supported by Dynadot
+    - Validate domain name format
+    - Implement rate limiting in your application
+  </Accordion>
+  
+  <Accordion title="Nameserver Issues" icon="server">
+    **Common Issues:**
+    - Nameservers not resolving
+    - DNS propagation delays
+    - Incorrect nameserver format
+    - Nameserver not responding
+    
+    **Solutions:**
+    - Test nameservers with `nslookup` or `dig`
+    - Wait 24-48 hours for DNS propagation
+    - Verify nameserver format (no http://, no trailing slash)
+    - Check nameserver provider status
+    - Use multiple DNS checkers to verify propagation
+  </Accordion>
+  
+  <Accordion title="CNAME Record Problems" icon="link">
+    **Common Issues:**
+    - CNAME not resolving
+    - Incorrect CNAME format
+    - CNAME conflicts with A record
+    - SSL certificate issues
+    
+    **Solutions:**
+    - Verify CNAME format (domain only, no protocol)
+    - Remove conflicting A records
+    - Ensure CNAME points to valid domain
+    - Configure SSL for CNAME target
+    - Test with DNS lookup tools
+  </Accordion>
+  
+  <Accordion title="TLD List Not Updating" icon="list">
+    **Common Issues:**
+    - Cache not cleared
+    - Form not saved properly
+    - Invalid TLD format
+    - Database update failed
+    
+    **Solutions:**
+    - Clear browser and server cache
+    - Verify save button was clicked
+    - Check TLD format (no dots, one per line)
+    - Review server logs for errors
+    - Test with a simple TLD list first
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Technical Reference
+
+<Tabs>
+  <Tab title="File Structure">
+    ```plaintext
+    src/apps/pages/admin/views/panel/settings-service/
+    └── DomainAPI.blade.php (437 lines)
+    
+    src/apps/classes/
+    └── DomainAPI.php
+    
+    src/apps/pages/api/controllers/
+    └── DomainAPIController.php
+    
+    assets/admin/js/
+    └── settings.js
+    ```
+  </Tab>
+  
+  <Tab title="Data Storage">
+    Settings are stored using the `ST()` helper function:
+    
+    ```php
+    // API Configuration
+    builder_domain_api_token
+    
+    // Nameserver Settings
+    builder_domain_nameservers_ns_1
+    builder_domain_nameservers_ns_2
+    builder_domain_nameservers_record_domain
+    
+    // TLD Configuration
+    builder_domain_tld_domain_check_default
+    builder_domain_tld_extended_domain_check_more
+    ```
+  </Tab>
+  
+  <Tab title="Form Submission">
+    **Form Details:**
+    - **Method:** POST
+    - **Form Part:** `DomainAPI`
+    - **Save Function:** `settingsSave(this)`
+    - **JavaScript:** `/assets/admin/js/settings.js`
+    
+    **Validation:**
+    - API token required for domain registration
+    - Nameservers validated for format
+    - TLD lists parsed line-by-line
+  </Tab>
+  
+  <Tab title="API Integration">
+    **Dynadot API Endpoints:**
+    - Domain registration
+    - Domain availability check
+    - Nameserver management
+    - DNS record configuration
+    
+    **API Documentation:**
+    - [Dynadot API Reference](https://www.dynadot.com/domain/api.html)
+    - [API Settings Page](https://www.dynadot.com/account/domain/setting/api.html)
+  </Tab>
+</Tabs>
+
+---
+
+## Security Considerations
+
+<Warning>
+**Critical Security Notes:**
+- **API Token Protection:** Store securely, never expose in frontend
+- **Access Control:** Restrict API settings to admin users only
+- **Audit Logging:** Log all configuration changes
+- **Rate Limiting:** Implement API call limits
+- **Monitoring:** Track unusual API activity
+- **Backup:** Regular backups of configuration
+</Warning>
+
+<Tip>
+**Security Best Practices:**
+- Use environment variables for API tokens
+- Enable two-factor authentication on Dynadot account
+- Regularly rotate API tokens
+- Monitor Dynadot account for unauthorized access
+- Implement IP whitelisting in Dynadot settings
+- Review API usage logs periodically
+</Tip>
+
+---
+
+## Quick Reference
+
+| Setting | Purpose | Example | Required |
+|---------|---------|---------|----------|
+| **API Token** | Dynadot authentication | `abc123xyz...` | ✅ Yes |
+| **NS1** | Primary nameserver | `ns1.cloudflare.com` | ✅ Yes |
+| **NS2** | Secondary nameserver | `ns2.cloudflare.com` | ✅ Yes |
+| **CNAME** | Default pointing domain | `hosting.yourdomain.com` | ✅ Yes |
+| **Primary TLDs** | Main domain extensions | `com, net, org` | ✅ Yes |
+| **Extended TLDs** | Additional extensions | `io, ai, dev` | ❌ No |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Dynadot API Docs" icon="book" href="https://www.dynadot.com/domain/api.html">
+    Official Dynadot API documentation and reference
+  </Card>
+  <Card title="DNS Propagation Checker" icon="magnifying-glass" href="https://www.whatsmydns.net/">
+    Check DNS propagation worldwide
+  </Card>
+  <Card title="Domain Name Tools" icon="tools" href="https://mxtoolbox.com/">
+    DNS lookup and domain diagnostic tools
+  </Card>
+  <Card title="TLD List" icon="list" href="https://data.iana.org/TLD/tlds-alpha-by-domain.txt">
+    Complete list of all TLDs from IANA
+  </Card>
+</CardGroup>
+
+---
+
+<Card title="Need Help?" icon="headset" href="#">
+  Contact support if you need assistance configuring domain API settings or troubleshooting domain registration issues.
+</Card>
