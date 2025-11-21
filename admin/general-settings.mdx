@@ -1,12 +1,12 @@
 ---
-title: 'General Settings'
-description: 'Configure your platform's core settings, company information, and system preferences'
-icon: 'gear'
+title: "General Settings"
+description: "Configure your platform's core settings, company information, and system preferences"
+icon: "gear"
 ---
 
 <Info>
-**Navigation Path:** Admin Dashboard → General Setup → General Settings  
-**URL:** `/admin/GeneralOption`
+  **Navigation Path:** Admin Dashboard → Settings → General Settings\
+  **URL:** `/admin/GeneralOption`
 </Info>
 
 ## Overview
@@ -42,23 +42,19 @@ Configure how customers can reach you through various communication channels.
 
 ### Contact Form & Helpdesk
 
-<ParamField path="contact_form_enabled" type="boolean" default={true}>
-  **Enable Contact Form**
-  
-  Show a contact form on your website for customer inquiries.
-  
-  - **Enabled**: Contact form is visible to visitors
-  - **Disabled**: Contact form is hidden
-</ParamField>
+**Enable Contact Form**
 
-<ParamField path="helpdesk_enabled" type="boolean" default={true}>
-  **Enable Helpdesk Integration**
-  
-  Integrate with your helpdesk system for ticket management.
-  
-  - **Enabled**: Customer inquiries create support tickets
-  - **Disabled**: Inquiries are sent via email only
-</ParamField>
+Show a contact form on your website for customer inquiries.
+
+- **Enabled**: Contact form is visible to visitors
+- **Disabled**: Contact form is hidden
+
+**Enable Helpdesk Integration**
+
+Integrate with your helpdesk system for ticket management.
+
+- **Enabled**: Customer inquiries create support tickets
+- **Disabled**: Inquiries are sent via email only
 
 ### Dynamic Contact Buttons
 
@@ -79,44 +75,53 @@ Add up to 20 customizable contact buttons to provide multiple ways for customers
   </Step>
 </Steps>
 
-#### Button Configuration
+#### Button Configuration Fields
 
-<ParamField path="title" type="string" required>
-  **Button Title**
-  
-  Display text for the contact button (e.g., "Chat on WhatsApp", "Send Email")
-</ParamField>
+| Field                | Description                         | Example                          |
+| -------------------- | ----------------------------------- | -------------------------------- |
+| **Button Title**     | Display text for the contact button | "Chat on WhatsApp", "Send Email" |
+| **Contact Link**     | URL or link for the contact method  | `https://wa.me/1234567890`       |
+| **Background Color** | Button background color (hex code)  | `#25D366` (WhatsApp green)       |
 
-<ParamField path="link" type="url" required>
-  **Contact Link**
-  
-  URL or link for the contact method
-  
-  **Examples:**
-  - WhatsApp: `https://wa.me/1234567890`
-  - Facebook: `https://m.me/username`
-  - Telegram: `https://t.me/username`
-  - Email: `mailto:contact@domain.com`
-</ParamField>
+**Popular Contact Link Examples:**
 
-<ParamField path="color" type="color" default="#25D366">
-  **Background Color**
-  
-  Button background color (hex code)
-  
-  **Popular Colors:**
-  - WhatsApp: `#25D366` (green)
-  - Facebook: `#1877F2` (blue)
-  - Telegram: `#0088CC` (light blue)
-  - Email: `#EA4335` (red)
-</ParamField>
+<CodeGroup>
+
+```text WhatsApp
+https://wa.me/1234567890
+```
+
+
+```text Facebook Messenger
+https://m.me/username
+```
+
+
+```text Telegram
+https://t.me/username
+```
+
+
+```text Email
+mailto:contact@domain.com
+```
+
+</CodeGroup>
+
+**Popular Brand Colors:**
+
+- WhatsApp: `#25D366` (green)
+- Facebook: `#1877F2` (blue)
+- Telegram: `#0088CC` (light blue)
+- Email: `#EA4335` (red)
 
 <Tip>
-**Best Practices:**
-- Limit to 3-5 contact options to avoid overwhelming visitors
-- Use recognizable brand colors for each platform
-- Test all links before publishing
-- Keep button titles short and clear (e.g., "WhatsApp" instead of "Contact us on WhatsApp")
+  **Best Practices:**
+
+  - Limit to 3-5 contact options to avoid overwhelming visitors
+  - Use recognizable brand colors for each platform
+  - Test all links before publishing
+  - Keep button titles short and clear (e.g., "WhatsApp" instead of "Contact us on WhatsApp")
 </Tip>
 
 ---
@@ -129,128 +134,94 @@ Configure your business information and platform-wide settings.
 
 Select your default currency for all transactions and pricing.
 
-| Currency | Symbol | Code |
-|----------|--------|------|
-| US Dollar | $ | USD |
-| Euro | € | EUR |
-| British Pound | £ | GBP |
-| Vietnamese Dong | ₫ | VND |
-| Japanese Yen | ¥ | JPY |
-| Australian Dollar | A$ | AUD |
-| Canadian Dollar | C$ | CAD |
+| Currency          | Symbol | Code |
+| ----------------- | ------ | ---- |
+| US Dollar         | $      | USD  |
+| Euro              | €      | EUR  |
+| British Pound     | £      | GBP  |
+| Vietnamese Dong   | ₫      | VND  |
+| Japanese Yen      | ¥      | JPY  |
+| Australian Dollar | A\$    | AUD  |
+| Canadian Dollar   | C\$    | CAD  |
 
 <Warning>
-Changing your currency after setting up pricing may affect existing products and services. Make this change carefully and update all pricing accordingly.
+  Changing your currency after setting up pricing may affect existing products and services. Make this change carefully and update all pricing accordingly.
 </Warning>
 
 ### Company Information
 
-<ParamField path="company_name" type="string" required>
-  **Company Name**
-  
-  Your legal business name as it appears on invoices and official documents
-</ParamField>
+Fill in your business details to appear on invoices and official communications.
 
-<ParamField path="company_address" type="string">
-  **Business Address**
-  
-  Your company's physical address
-</ParamField>
-
-<ParamField path="company_city" type="string">
-  **City**
-  
-  City where your business is located
-</ParamField>
-
-<ParamField path="company_phone" type="string">
-  **Phone Number**
-  
-  Primary contact phone number for your business
-</ParamField>
-
-<ParamField path="company_email" type="email" required>
-  **Business Email**
-  
-  Official email address for business communications
-</ParamField>
-
-<ParamField path="company_vat" type="string">
-  **VAT/Tax ID**
-  
-  Your VAT number or tax identification number (if applicable)
-</ParamField>
+| Field                | Description                               | Required |
+| -------------------- | ----------------------------------------- | -------- |
+| **Company Name**     | Your legal business name                  | ✅ Yes    |
+| **Business Address** | Your company's physical address           | No       |
+| **City**             | City where your business is located       | No       |
+| **Phone Number**     | Primary contact phone number              | No       |
+| **Business Email**   | Official email address for communications | ✅ Yes    |
+| **VAT/Tax ID**       | VAT number or tax identification number   | No       |
 
 ### Website Settings
 
-<ParamField path="robots" type="boolean" default={true}>
-  **Allow Search Engine Indexing**
-  
-  Let Google and other search engines index your website
-  
-  - **Enabled**: Your site appears in search results (recommended)
-  - **Disabled**: Your site is hidden from search engines
-</ParamField>
+Control how your website appears and behaves.
 
-<ParamField path="home_document" type="boolean" default={true}>
-  **Show Documentation Section**
-  
-  Display documentation on your homepage
-  
-  - **Enabled**: Documentation is visible to visitors
-  - **Disabled**: Documentation section is hidden
-</ParamField>
+**Allow Search Engine Indexing** (Default: Enabled)
 
-<ParamField path="disable_landing" type="boolean" default={false}>
-  **Disable Landing Page**
-  
-  Skip the landing page and redirect directly to login
-  
-  - **Enabled**: Users go straight to login page
-  - **Disabled**: Users see the landing page first
-</ParamField>
+Let Google and other search engines index your website.
+
+- **Enabled**: Your site appears in search results (recommended)
+- **Disabled**: Your site is hidden from search engines
+
+**Show Documentation Section** (Default: Enabled)
+
+Display documentation on your homepage.
+
+- **Enabled**: Documentation is visible to visitors
+- **Disabled**: Documentation section is hidden
+
+**Disable Landing Page** (Default: Disabled)
+
+Skip the landing page and redirect directly to login.
+
+- **Enabled**: Users go straight to login page
+- **Disabled**: Users see the landing page first
 
 ### Tax Management
 
-<ParamField path="tax_enabled" type="boolean" default={false}>
-  **Enable Tax Management**
-  
-  Master toggle for tax functionality across the platform
-</ParamField>
+Configure tax settings for your platform.
 
-<ParamField path="tax_name" type="string">
-  **Tax Label**
-  
-  Name of the tax (e.g., "VAT", "GST", "Sales Tax")
-</ParamField>
+**Enable Tax Management** (Default: Disabled)
 
-<ParamField path="tax_amount" type="number">
-  **Tax Rate (%)**
-  
-  Tax percentage to apply to transactions (e.g., enter "20" for 20%)
-</ParamField>
+Master toggle for tax functionality across the platform.
+
+**Tax Label**
+
+Name of the tax to display (e.g., "VAT", "GST", "Sales Tax")
+
+**Tax Rate (%)**
+
+Tax percentage to apply to transactions (e.g., enter "20" for 20%)
 
 <Tip>
-**Tax Configuration Tips:**
-- Check your local tax regulations before enabling
-- Ensure your tax rate is accurate and up-to-date
-- Consider consulting with a tax professional for complex scenarios
-- Update tax settings when regulations change
+  **Tax Configuration Tips:**
+
+  - Check your local tax regulations before enabling
+  - Ensure your tax rate is accurate and up-to-date
+  - Consider consulting with a tax professional for complex scenarios
+  - Update tax settings when regulations change
 </Tip>
 
 ### User Registration
 
-<ParamField path="register" type="boolean" default={false}>
-  **Allow User Registration**
-  
-  Enable public user account creation
-  
-  - **Enabled**: Visitors can create accounts
-  - **Disabled**: Only admins can create accounts
-</ParamField>
+**Allow User Registration** (Default: Disabled)
+
+Enable public user account creation.
+
+- **Enabled**: Visitors can create accounts
+- **Disabled**: Only admins can create accounts
 
 <Warning>
-Disabling user registration will prevent new customers from signing up. Only enable this if you want to control who can create accounts.
+  Disabling user registration will prevent new customers from signing up. Only enable this if you want to control who can create accounts.
 </Warning>
 
 ---
@@ -262,7 +233,7 @@ Disabling user registration will prevent new customers from signing up. Only ena
 </Card>
 
 <Info>
-The Payment Gateway tab allows you to configure multiple payment methods for processing customer transactions. For detailed setup instructions, API key configuration, and webhook setup, please refer to the dedicated [Payment Configuration](/payment-configuration) documentation.
+  The Payment Gateway tab allows you to configure multiple payment methods for processing customer transactions. For detailed setup instructions, API key configuration, and webhook setup, please refer to the dedicated [Payment Configuration](/payment-configuration) documentation.
 </Info>
 
 ### Quick Overview
@@ -305,25 +276,28 @@ Manage and validate your software license to ensure continued access to updates 
 ### License Information
 
 After validation, you'll see:
+
 - ✅ **License Status**: Active, Expired, or Invalid
 - ✅ **Expiration Date**: When your license expires
 - ✅ **Website Count**: Number of websites allowed under your license
 - ✅ **Domain Verification**: Confirms license is valid for your domain
 
 <Warning>
-**Important:**
-- Keep your license key secure and confidential
-- Validate your license regularly to ensure it's active
-- Renew before expiration to avoid service interruptions
-- Contact support if you encounter validation errors
+  **Important:**
+
+  - Keep your license key secure and confidential
+  - Validate your license regularly to ensure it's active
+  - Renew before expiration to avoid service interruptions
+  - Contact support if you encounter validation errors
 </Warning>
 
 <Tip>
-**License Best Practices:**
-- Set a reminder to renew your license before it expires
-- Keep a backup copy of your license key in a secure location
-- Validate your license after any major system updates
-- Contact support immediately if your license shows as invalid
+  **License Best Practices:**
+
+  - Set a reminder to renew your license before it expires
+  - Keep a backup copy of your license key in a secure location
+  - Validate your license after any major system updates
+  - Contact support immediately if your license shows as invalid
 </Tip>
 
 ---
@@ -372,16 +346,17 @@ Cron automation allows you to schedule recurring tasks that run automatically at
 </Steps>
 
 <Info>
-**Recommended Schedule:** Run cron jobs every 5-15 minutes for optimal performance. Adjust based on your specific needs and server resources.
+  **Recommended Schedule:** Run cron jobs every 5-15 minutes for optimal performance. Adjust based on your specific needs and server resources.
 </Info>
 
 <Tip>
-**Cron Setup Tips:**
-- Start with a longer interval (e.g., hourly) and adjust as needed
-- Monitor server resources to ensure cron jobs don't overload your system
-- Set up logging to track cron job execution and errors
-- Test cron jobs in a staging environment first
-- Document your cron schedule for future reference
+  **Cron Setup Tips:**
+
+  - Start with a longer interval (e.g., hourly) and adjust as needed
+  - Monitor server resources to ensure cron jobs don't overload your system
+  - Set up logging to track cron job execution and errors
+  - Test cron jobs in a staging environment first
+  - Document your cron schedule for future reference
 </Tip>
 
 ---
@@ -419,12 +394,13 @@ Configure multi-language support to serve customers in their preferred language.
 </Steps>
 
 <Tip>
-**Language Best Practices:**
-- Enable auto-detection to serve content in visitors' preferred language
-- Provide a language switcher for manual selection
-- Ensure all critical content is translated
-- Test RTL languages thoroughly if you support them
-- Keep translations up-to-date when adding new features
+  **Language Best Practices:**
+
+  - Enable auto-detection to serve content in visitors' preferred language
+  - Provide a language switcher for manual selection
+  - Ensure all critical content is translated
+  - Test RTL languages thoroughly if you support them
+  - Keep translations up-to-date when adding new features
 </Tip>
 
 ---
@@ -434,54 +410,59 @@ Configure multi-language support to serve customers in their preferred language.
 <AccordionGroup>
   <Accordion title="Configuration Management" icon="gear">
     **Keep Settings Organized:**
+
     - Document all configuration changes
     - Test settings in a staging environment first
     - Back up your configuration before major changes
     - Review settings quarterly to ensure they're still appropriate
-    
+
     **Change Management:**
+
     - Make one change at a time to identify issues easily
     - Notify your team before making significant changes
     - Keep a log of who changed what and when
     - Have a rollback plan for critical settings
   </Accordion>
-  
   <Accordion title="Security Considerations" icon="shield">
     **Protect Sensitive Information:**
+
     - Never share your license key publicly
     - Keep API keys and secrets secure
     - Use strong passwords for admin accounts
     - Enable two-factor authentication if available
-    
+
     **Access Control:**
+
     - Limit admin access to trusted team members only
     - Review admin user list regularly
     - Remove access for former employees immediately
     - Use role-based permissions when possible
   </Accordion>
-  
   <Accordion title="Performance Optimization" icon="gauge">
     **Optimize System Performance:**
+
     - Set appropriate cron job intervals
     - Monitor server resources regularly
     - Disable unused features to reduce overhead
     - Keep your software updated for performance improvements
-    
+
     **Database Maintenance:**
+
     - Run database cleanup cron jobs regularly
     - Archive old data instead of deleting
     - Monitor database size and growth
     - Optimize database tables periodically
   </Accordion>
-  
   <Accordion title="Customer Experience" icon="user">
     **Enhance User Experience:**
+
     - Provide multiple contact options
     - Keep company information up-to-date
     - Enable search engine indexing for visibility
     - Offer language options for international customers
-    
+
     **Communication:**
+
     - Respond to contact form inquiries promptly
     - Keep helpdesk tickets organized
     - Set clear expectations for response times
@@ -496,82 +477,88 @@ Configure multi-language support to serve customers in their preferred language.
 <AccordionGroup>
   <Accordion title="License Validation Fails" icon="key">
     **Issue:** License key shows as invalid or expired
-    
+
     **Common Causes:**
+
     - License has expired
     - License key entered incorrectly
     - Domain doesn't match license
     - Network connectivity issues
-    
+
     **Solutions:**
+
     1. Verify license key is copied correctly (no extra spaces)
     2. Check license expiration date
     3. Ensure domain matches the one registered for the license
     4. Try validating again after a few minutes
     5. Contact support if issue persists
   </Accordion>
-  
   <Accordion title="Cron Jobs Not Running" icon="clock">
     **Issue:** Automated tasks are not executing
-    
+
     **Common Causes:**
+
     - Cron job not configured on server
     - Incorrect cron URL
     - Server firewall blocking requests
     - Insufficient server resources
-    
+
     **Solutions:**
+
     1. Verify cron job is set up in server control panel
     2. Check cron URL is correct and accessible
     3. Review server logs for errors
     4. Ensure server has enough resources
     5. Test cron URL manually in browser
   </Accordion>
-  
   <Accordion title="Contact Buttons Not Appearing" icon="message">
     **Issue:** Contact buttons don't show on website
-    
+
     **Common Causes:**
+
     - Buttons not saved properly
     - Cache not cleared
     - Theme compatibility issues
     - JavaScript errors
-    
+
     **Solutions:**
+
     1. Save contact button configuration again
     2. Clear browser and server cache
     3. Check browser console for JavaScript errors
     4. Verify theme supports contact buttons
     5. Test on different browsers
   </Accordion>
-  
   <Accordion title="Currency Changes Not Reflecting" icon="dollar-sign">
     **Issue:** Currency change doesn't update prices
-    
+
     **Common Causes:**
+
     - Cache not cleared
     - Prices hard-coded in theme
     - Database not updated
     - Browser cache
-    
+
     **Solutions:**
+
     1. Clear all caches (browser, server, application)
     2. Refresh pricing pages
     3. Update product prices manually if needed
     4. Check theme currency settings
     5. Verify database currency field is updated
   </Accordion>
-  
   <Accordion title="Language Translations Missing" icon="language">
     **Issue:** Some text not translating correctly
-    
+
     **Common Causes:**
+
     - Translation files incomplete
     - Language not fully enabled
     - Cache issues
     - Custom text not translated
-    
+
     **Solutions:**
+
     1. Check translation files are complete
     2. Verify language is enabled in settings
     3. Clear language cache
@@ -586,24 +573,24 @@ Configure multi-language support to serve customers in their preferred language.
 
 ### Common Tasks
 
-| Task | Location | Steps |
-|------|----------|-------|
-| Add Contact Button | Contact Button tab | Add button → Enter details → Save |
-| Change Currency | Company Setup tab | Select currency → Save settings |
-| Enable Tax | Company Setup tab | Enable tax → Set rate → Save |
-| Validate License | License Settings tab | Enter key → Click validate |
-| Setup Cron | Cron Automation tab | Copy URL → Add to server cron |
-| Add Language | Language Settings tab | Select language → Upload files |
+| Task               | Location              | Steps                             |
+| ------------------ | --------------------- | --------------------------------- |
+| Add Contact Button | Contact Button tab    | Add button → Enter details → Save |
+| Change Currency    | Company Setup tab     | Select currency → Save settings   |
+| Enable Tax         | Company Setup tab     | Enable tax → Set rate → Save      |
+| Validate License   | License Settings tab  | Enter key → Click validate        |
+| Setup Cron         | Cron Automation tab   | Copy URL → Add to server cron     |
+| Add Language       | Language Settings tab | Select language → Upload files    |
 
 ### Important Settings
 
-| Setting | Default | Recommendation |
-|---------|---------|----------------|
-| Search Engine Indexing | Enabled | Keep enabled for visibility |
-| User Registration | Disabled | Enable only if needed |
-| Tax Management | Disabled | Enable based on regulations |
-| Contact Form | Enabled | Keep enabled for support |
-| Helpdesk | Enabled | Enable for ticket management |
+| Setting                | Default  | Recommendation               |
+| ---------------------- | -------- | ---------------------------- |
+| Search Engine Indexing | Enabled  | Keep enabled for visibility  |
+| User Registration      | Disabled | Enable only if needed        |
+| Tax Management         | Disabled | Enable based on regulations  |
+| Contact Form           | Enabled  | Keep enabled for support     |
+| Helpdesk               | Enabled  | Enable for ticket management |
 
 ---
 
@@ -616,7 +603,7 @@ Configure multi-language support to serve customers in their preferred language.
   <Card title="Website Configuration" icon="globe" href="/website-configuration">
     Manage website creation settings
   </Card>
-  <Card title="Domain API Settings" icon="globe2" href="/domain-api-settings">
+  <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
     Configure domain registration API
   </Card>
   <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
