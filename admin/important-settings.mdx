@@ -1,6 +1,6 @@
 ---
 title: 'General Settings'
-description: 'Configure system settings, payment gateways, and integrations'
+description: 'Configure system settings and integrations'
 icon: 'gear'
 ---
 
@@ -189,79 +189,28 @@ mailto:contact@domain.com
 
 ## Payment Gateway
 
-### Bank Account Information
+<Card title="Payment Configuration Guide" icon="credit-card" href="payment_configuration">
+  Configure payment gateways including Bank Accounts, Stripe, and PayPal. View the comprehensive **Payment Configuration** guide for detailed setup instructions, webhook configuration, and troubleshooting.
+</Card>
 
-Add up to **20 bank accounts** for manual payment processing.
+<Info>
+The Payment Gateway tab allows you to configure multiple payment methods for processing customer transactions. For detailed setup instructions, API key configuration, and webhook setup, please refer to the dedicated [Payment Configuration](payment_configuration) documentation.
+</Info>
 
-<Steps>
-  <Step title="Upload Bank Logo">
-    Add your bank's logo for easy identification
-  </Step>
-  <Step title="Enter Bank Details">
-    Provide bank name, account holder, account number, and branch
-  </Step>
-  <Step title="Save Configuration">
-    Your bank account will be available for customer payments
-  </Step>
-</Steps>
+### Quick Overview
 
-### Stripe Payment Gateway
+<CardGroup cols={3}>
+  <Card title="Bank Account" icon="building-columns" color="#6366f1">
+    Add up to 20 bank accounts for manual ACH transfers
+  </Card>
+  <Card title="Stripe" icon="stripe" color="#635bff">
+    Automated credit card processing with webhooks
+  </Card>
+  <Card title="PayPal" icon="paypal" color="#0070ba">
+    PayPal checkout with sandbox and live modes
+  </Card>
+</CardGroup>
 
-<Note>
-Stripe enables secure credit card processing with industry-leading security and compliance.
-</Note>
-
-<ParamField path="stripe_enabled" type="boolean" default={false}>
-  **Enable Stripe** - Master toggle for Stripe payments
-</ParamField>
-
-<ParamField path="stripe_custom_name" type="string" default="Credit Card">
-  Display name shown to customers
-</ParamField>
-
-<ParamField path="stripe_publishable_key" type="string" required>
-  Publishable API key (`pk_live_...` or `pk_test_...`)
-</ParamField>
-
-<ParamField path="stripe_secret_key" type="string" required>
-  Secret API key (`sk_live_...` or `sk_test_...`)
-</ParamField>
-
-<ParamField path="stripe_webhook_secret" type="string">
-  Webhook endpoint secret (`whsec_...`)
-</ParamField>
-
-### PayPal Payment Gateway
-
-<Note>
-PayPal provides a trusted payment solution with global reach and buyer protection.
-</Note>
-
-<ParamField path="paypal_enabled" type="boolean" default={false}>
-  **Enable PayPal** - Master toggle for PayPal payments
-</ParamField>
-
-<ParamField path="paypal_custom_name" type="string" default="PayPal">
-  Display name shown to customers
-</ParamField>
-
-<ParamField path="paypal_mode" type="select" default="sandbox">
-  **Environment Mode**
-  - `sandbox` - Testing environment
-  - `live` - Production environment
-</ParamField>
-
-<ParamField path="paypal_client_id" type="string" required>
-  PayPal application client ID
-</ParamField>
-
-<ParamField path="paypal_secret" type="string" required>
-  PayPal application client secret
-</ParamField>
-
-<Warning>
-Always test payment gateways in sandbox/test mode before switching to live/production mode.
-</Warning>
 
 ---
 
