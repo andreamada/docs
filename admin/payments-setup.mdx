@@ -1,61 +1,430 @@
 ---
-title: "Configuring Payments"
-description: "Payment accounts are used to store payment information Payment accounts can be of three different types: Credit Card, PayPal and ACH (Bank Transfer). Payment accounts can be used to process recurring payments."
+title: 'Payment Configuration'
+description: 'Configure payment gateways and process customer payments'
+icon: 'credit-card'
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Settings → General Settings → Payment Gateway
+</Info>
+
+## Overview
+
+Payment accounts are used to store payment information and process customer transactions. The platform supports three different payment types: **Bank Transfer (ACH)**, **Credit Card (Stripe)**, and **PayPal**. Payment accounts can be configured to process both one-time and recurring payments.
+
+<CardGroup cols={3}>
+  <Card title="Bank Account" icon="building-columns" color="#6366f1">
+    Manual bank transfer payments with account details
+  </Card>
+  <Card title="Stripe" icon="stripe" color="#635bff">
+    Automated credit card processing with Stripe
+  </Card>
+  <Card title="PayPal" icon="paypal" color="#0070ba">
+    PayPal checkout and payment processing
+  </Card>
+</CardGroup>
+
 ---
 
 ## Creating a Payment Account
 
-To create a Payment Account, visit [General Setup] \> [General Overview] \> [Payments Gateway]
+<Steps>
+  <Step title="Navigate to Payment Settings">
+    Go to **Admin Dashboard → Settings → General Settings** and click on the **Payment Gateway** tab
+  </Step>
+  <Step title="Choose Payment Method">
+    Select the payment method you want to configure (Bank Account, Stripe, or PayPal)
+  </Step>
+  <Step title="Enter Configuration Details">
+    Fill in the required fields for your chosen payment method
+  </Step>
+  <Step title="Test Configuration">
+    Use sandbox/test mode to verify your setup before going live
+  </Step>
+  <Step title="Save Settings">
+    Save your configuration to enable the payment method
+  </Step>
+</Steps>
 
-### Bank Account
+---
+
+## Bank Account (ACH Transfer)
+
+Configure bank account details for manual payment processing via bank transfer.
+
+### Required Information
+
+<ParamField path="image" type="image">
+  **Bank Logo** - Upload your bank's logo for easy identification
+</ParamField>
+
+<ParamField path="name" type="string" required>
+  **Bank Name** - Name of the financial institution (e.g., Vietinbank, Chase Bank, Wells Fargo)
+</ParamField>
+
+<ParamField path="user" type="string" required>
+  **Account Holder Name** - Full legal name on the bank account
+</ParamField>
+
+<ParamField path="number" type="string" required>
+  **Account Number (IBAN)** - Bank account number or IBAN for international transfers
+</ParamField>
+
+<ParamField path="office" type="string">
+  **Bank Location/Branch** - Branch location or bank address
+</ParamField>
+
+### Setup Instructions
+
+Add up to **20 bank accounts** for manual payment processing with a sortable interface.
+
+<Steps>
+  <Step title="Upload Bank Logo">
+    Add your bank's logo for easy identification by customers
+  </Step>
+  <Step title="Enter Bank Details">
+    Provide complete bank information including account holder name and IBAN
+  </Step>
+  <Step title="Add Branch Information">
+    Include the bank branch location or address
+  </Step>
+  <Step title="Save Configuration">
+    Your bank account will be available for customer payments
+  </Step>
+</Steps>
+
+<Tip>
+**Best Practice:** Provide clear payment instructions to customers, including reference numbers and processing times for bank transfers.
+</Tip>
+
+---
+
+## Stripe Payment Gateway
+
+Stripe enables secure credit card processing with industry-leading security, compliance, and global payment support.
+
+### Configuration Parameters
+
+<ParamField path="stripe_enabled" type="boolean" default={false}>
+  **Enable Stripe** - Master toggle to activate Stripe payment processing
+</ParamField>
+
+<ParamField path="stripe_custom_name" type="string" default="Credit Card">
+  **Display Name** - Custom label shown to customers (e.g., "Credit Card", "Visa/MasterCard")
+</ParamField>
+
+<ParamField path="stripe_publishable_key" type="string" required>
+  **Publishable Key** - Public API key from Stripe Dashboard
+  
+  Format: `pk_live_...` (production) or `pk_test_...` (testing)
+</ParamField>
+
+<ParamField path="stripe_secret_key" type="string" required>
+  **Secret Key** - Private API key from Stripe Dashboard
+  
+  Format: `sk_live_...` (production) or `sk_test_...` (testing)
+</ParamField>
+
+<ParamField path="stripe_webhook_secret" type="string" required>
+  **Webhook Secret** - Webhook signing secret for event verification
+  
+  Format: `whsec_...`
+</ParamField>
+
+### Setup Instructions
+
+<Steps>
+  <Step title="Get Stripe API Keys">
+    1. Log in to your [Stripe Dashboard](https://dashboard.stripe.com/)
+    2. Navigate to **Developers → API keys**
+    3. Copy your **Publishable key** and **Secret key**
+    4. Refer to [Stripe API Keys Documentation](https://docs.stripe.com/keys)
+  </Step>
+  
+  <Step title="Configure Webhook Endpoint">
+    1. In Stripe Dashboard, go to **Developers → Webhooks**
+    2. Click **Add endpoint**
+    3. Set the endpoint URL to:
+    ```
+    https://YOURDOMAIN.COM/api/stripe/webhook
+    ```
+    4. Select the event: `checkout.session.completed`
+    5. Copy the **Signing secret** (starts with `whsec_`)
+    6. Refer to [Stripe Webhooks Documentation](https://docs.stripe.com/development/dashboard/webhooks)
+  </Step>
+  
+  <Step title="Enter Configuration in Admin">
+    1. Enable Stripe in the Payment Gateway settings
+    2. Paste your **Publishable Key**
+    3. Paste your **Secret Key**
+    4. Paste your **Webhook Secret**
+    5. Set a custom display name (optional)
+  </Step>
+  
+  <Step title="Test in Sandbox Mode">
+    Use Stripe test keys (`pk_test_...` and `sk_test_...`) to verify your integration
+  </Step>
+  
+  <Step title="Go Live">
+    Replace test keys with live keys (`pk_live_...` and `sk_live_...`) when ready for production
+  </Step>
+</Steps>
+
+### Webhook Configuration
 
 <Note>
-  This is the only payment method that requires manual approval on your end once the payment is received
+**Webhook Endpoint URL Format:**
+```
+https://YOURDOMAIN.COM/api/stripe/webhook
+```
+
+**Required Event:** `checkout.session.completed`
+
+This webhook ensures that payment confirmations are properly processed and recorded in your system.
 </Note>
 
-Here you can define respectively:
+<Accordion title="Webhook Event Details" icon="webhook">
+The `checkout.session.completed` event is triggered when a customer successfully completes a Stripe Checkout session. This event contains:
+- Payment status
+- Customer information
+- Transaction amount
+- Payment method details
+- Session metadata
 
-- Bank account name
-- Bank account holder (Full name)
-- Bank account number (IBAN)
-- Bank location
+Your system uses this event to update order status, send confirmation emails, and trigger fulfillment processes.
+</Accordion>
 
-### Stripe Payment Gateway
+### Testing Stripe Integration
 
-Enable this option if you want to integrate Stripe as payment gateway.\
-Make sure to follow the official documentation to create the API keys:\
-https://docs.stripe.com/keys
+<CodeGroup>
+```bash Test Card Numbers
+# Successful payment
+4242 4242 4242 4242
 
-Then fill the form respectively with the "**Publishable**" and "**Secret**" key.\
-Once done add a webhook endpoint in Stripe:\
-https://docs.stripe.com/development/dashboard/webhooks
+# Requires authentication
+4000 0025 0000 3155
 
-1. URL Endpoint must be as follows:\
-   [**https://YOURDOMAIN.COM/api/stripe/webhook**](https://YOURDOMAIN.COM/api/stripe/webhook)
-2. Add the following event: **checkout.session.completed**
-3. Fill the "**Stripe Webhook Secret**" with the key generated
+# Declined card
+4000 0000 0000 9995
+```
 
-The final result on Stripe must look like this:
+```text Test Details
+Expiry: Any future date (e.g., 12/34)
+CVC: Any 3 digits (e.g., 123)
+ZIP: Any 5 digits (e.g., 12345)
+```
+</CodeGroup>
 
-<img
-  src="/images/stripe.png"
-  alt="Stripe Pn"
-  title="Stripe Pn"
-  style={{ width:"67%" }}
-/>
+<Warning>
+**Security Reminder:**
+- Never commit API keys to version control
+- Use environment variables for sensitive credentials
+- Rotate keys if they are ever exposed
+- Always test in sandbox mode before going live
+</Warning>
 
-### PayPal Payment Gateway
+---
 
-Enable this option to accept payments via PayPal.\
-You'll need to create first of all the API to get started:\
-https://developer.paypal.com/api/rest/
+## PayPal Payment Gateway
 
-\
-To create these credentials, log into the **PayPal Developer Dashboard** using your business account. Navigate to "**Apps & Credentials**," create a new app, and PayPal will generate the Client ID and Secret Key for you.
+PayPal provides a trusted payment solution with global reach, buyer protection, and support for multiple currencies.
+
+### Configuration Parameters
+
+<ParamField path="paypal_enabled" type="boolean" default={false}>
+  **Enable PayPal** - Master toggle to activate PayPal payment processing
+</ParamField>
+
+<ParamField path="paypal_custom_name" type="string" default="PayPal">
+  **Display Name** - Custom label shown to customers (e.g., "PayPal", "PayPal Express")
+</ParamField>
+
+<ParamField path="paypal_mode" type="select" default="sandbox">
+  **Environment Mode** - Choose your PayPal environment
+  - `sandbox` - Testing environment for development
+  - `live` - Production environment for real transactions
+</ParamField>
+
+<ParamField path="paypal_client_id" type="string" required>
+  **Client ID** - PayPal REST API application client ID
+</ParamField>
+
+<ParamField path="paypal_secret" type="string" required>
+  **Client Secret** - PayPal REST API application secret key
+</ParamField>
+
+### Setup Instructions
+
+<Steps>
+  <Step title="Create PayPal App">
+    1. Log in to [PayPal Developer Dashboard](https://developer.paypal.com/)
+    2. Navigate to **My Apps & Credentials**
+    3. Click **Create App** under REST API apps
+    4. Enter your app name and select account type
+  </Step>
+  
+  <Step title="Get API Credentials">
+    1. After creating the app, you'll see your credentials
+    2. Copy the **Client ID**
+    3. Click **Show** to reveal and copy the **Secret**
+    4. Note: Sandbox and Live credentials are different
+    5. Refer to [PayPal REST API Documentation](https://developer.paypal.com/api/rest/)
+  </Step>
+  
+  <Step title="Configure in Admin Panel">
+    1. Enable PayPal in the Payment Gateway settings
+    2. Select environment mode (Sandbox or Live)
+    3. Paste your **Client ID**
+    4. Paste your **Client Secret**
+    5. Set a custom display name (optional)
+  </Step>
+  
+  <Step title="Test in Sandbox">
+    1. Use sandbox credentials to test payments
+    2. Create test accounts in PayPal Developer Dashboard
+    3. Verify payment flow and webhook notifications
+  </Step>
+  
+  <Step title="Switch to Live">
+    1. Change mode to **Live**
+    2. Replace sandbox credentials with live credentials
+    3. Test with a small real transaction
+  </Step>
+</Steps>
+
+### PayPal Sandbox Testing
+
+<Accordion title="Using PayPal Sandbox Accounts" icon="flask">
+PayPal provides test accounts for sandbox testing:
+
+1. **Create Test Accounts:**
+   - Go to PayPal Developer Dashboard → Sandbox → Accounts
+   - Create a **Business Account** (merchant)
+   - Create a **Personal Account** (buyer)
+
+2. **Test Payments:**
+   - Use the personal account email and password to make test payments
+   - Transactions appear in the business account
+   - No real money is transferred
+
+3. **Verify Integration:**
+   - Check that orders are created correctly
+   - Confirm webhook notifications are received
+   - Validate payment status updates
+</Accordion>
 
 <Note>
-  Note: If you have a personal account with PayPal, you’ll need to convert it to a business account to generate these codes.
+**PayPal Fees:** PayPal charges transaction fees for live payments. Review [PayPal's fee structure](https://www.paypal.com/us/webapps/mpp/merchant-fees) before going live.
 </Note>
 
-Once done paste the keys generated respectively in the appropriate fields.\
-Select the "Mode" based on the one defined in PayPal (Sandbox for testing environment, Live for Production)
+---
+
+## Payment Method Comparison
+
+| Feature | Bank Account | Stripe | PayPal |
+|---------|-------------|--------|--------|
+| **Processing** | Manual | Automated | Automated |
+| **Setup Complexity** | Low | Medium | Medium |
+| **Transaction Fees** | None (platform) | 2.9% + $0.30 | 2.9% + $0.30 |
+| **Recurring Payments** | ❌ | ✅ | ✅ |
+| **International** | Limited | ✅ | ✅ |
+| **Instant Confirmation** | ❌ | ✅ | ✅ |
+| **Buyer Protection** | ❌ | ✅ | ✅ |
+| **PCI Compliance** | N/A | Handled by Stripe | Handled by PayPal |
+
+---
+
+## Best Practices
+
+<Tip>
+**Configuration Tips:**
+- **Start with Sandbox:** Always test payment gateways in sandbox/test mode before going live
+- **Secure Your Keys:** Store API keys securely using environment variables
+- **Enable Multiple Methods:** Offer customers payment choice by enabling multiple gateways
+- **Monitor Webhooks:** Set up logging and monitoring for webhook events
+- **Regular Testing:** Periodically test your payment flow to catch issues early
+- **Update Documentation:** Keep internal documentation of your payment setup
+</Tip>
+
+<Warning>
+**Critical Considerations:**
+- **Never expose API keys** in client-side code or public repositories
+- **Test thoroughly** before switching from sandbox to live mode
+- **Monitor failed payments** and set up alerts for webhook failures
+- **Comply with regulations** including PCI DSS for card payments
+- **Have a backup** payment method in case one gateway experiences downtime
+- **Review transaction logs** regularly for suspicious activity
+</Warning>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Stripe Payments Not Processing" icon="stripe">
+    **Common Issues:**
+    - Incorrect API keys (mixing test and live keys)
+    - Webhook endpoint not configured correctly
+    - Missing `checkout.session.completed` event
+    - Firewall blocking webhook requests
+    
+    **Solutions:**
+    - Verify API keys match the environment (test vs live)
+    - Check webhook endpoint URL is accessible
+    - Confirm webhook secret is correct
+    - Review Stripe Dashboard logs for errors
+  </Accordion>
+  
+  <Accordion title="PayPal Integration Errors" icon="paypal">
+    **Common Issues:**
+    - Wrong environment mode (sandbox credentials in live mode)
+    - Incorrect Client ID or Secret
+    - App not approved for production
+    - Missing required permissions
+    
+    **Solutions:**
+    - Ensure mode matches credentials (sandbox/live)
+    - Regenerate credentials if needed
+    - Submit app for PayPal review if required
+    - Check app has payment processing permissions
+  </Accordion>
+  
+  <Accordion title="Webhook Events Not Received" icon="webhook">
+    **Common Issues:**
+    - Incorrect webhook URL
+    - SSL certificate issues
+    - Server firewall blocking requests
+    - Webhook signature verification failing
+    
+    **Solutions:**
+    - Verify webhook URL is correct and accessible
+    - Ensure SSL certificate is valid
+    - Whitelist payment gateway IPs in firewall
+    - Check webhook secret is correctly configured
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Additional Resources
+
+<CardGroup cols={2}>
+  <Card title="Stripe Documentation" icon="stripe" href="https://docs.stripe.com">
+    Official Stripe API documentation and guides
+  </Card>
+  <Card title="PayPal Developer Docs" icon="paypal" href="https://developer.paypal.com/api/rest/">
+    PayPal REST API reference and tutorials
+  </Card>
+  <Card title="PCI Compliance" icon="shield-check" href="https://www.pcisecuritystandards.org/">
+    Payment Card Industry security standards
+  </Card>
+  <Card title="Webhook Testing Tools" icon="webhook" href="https://webhook.site/">
+    Test and debug webhook integrations
+  </Card>
+</CardGroup>
+
+---
+
+<Card title="Need Help?" icon="headset" href="#">
+  Contact support if you need assistance configuring payment gateways or troubleshooting payment issues.
+</Card>
