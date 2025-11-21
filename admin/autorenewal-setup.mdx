@@ -594,86 +594,6 @@ Configure how many days before expiration each service type should be automatica
 
 ---
 
-## Technical Reference
-
-### File Structure
-
-```
-src/apps/pages/admin/views/panel/settings-general/
-└── AutoRenewal.blade.php          # Main view file
-
-src/apps/classes/
-└── AutoRenewalService.php         # Auto-renewal processing logic
-```
-
-### Configuration Storage
-
-All settings are stored using Laravel's `Storage` facade:
-
-```php
-Storage::setting('auto_renewal_enabled')           // Master switch
-Storage::setting('auto_renewal_min_balance_after') // Balance buffer
-Storage::setting('auto_renewal_websites')          // Website toggle
-Storage::setting('auto_renewal_addons')            // Addon toggle
-Storage::setting('auto_renewal_plugins')           // Plugin toggle
-Storage::setting('auto_renewal_domains')           // Domain toggle
-Storage::setting('auto_renewal_website_threshold') // Website timing
-Storage::setting('auto_renewal_addon_threshold')   // Addon timing
-Storage::setting('auto_renewal_plugin_threshold')  // Plugin timing
-Storage::setting('auto_renewal_domain_threshold')  // Domain timing
-```
-
-### Form Submission
-
-**Form Method:** POST  
-**Form Action:** Current page URL  
-**Hidden Field:** `formPart` = `AutoRenewalSettings`
-
-### JavaScript Functions
-
-```javascript
-// Toggle master switch and update UI
-toggleMasterAutoRenewal(masterToggle)
-
-// Update status indicator in header
-updateStatusIndicator(isEnabled)
-
-// Initialize state on page load
-document.addEventListener('DOMContentLoaded', ...)
-```
-
-### Status Indicator States
-
-**Active State:**
-```html
-<div class="symbol-label bg-light-success">
-  <i class="bi bi-check-circle text-success"></i>
-</div>
-<span>Active</span>
-```
-
-**Inactive State:**
-```html
-<div class="symbol-label bg-light-warning">
-  <i class="bi bi-pause-circle text-warning"></i>
-</div>
-<span>Inactive</span>
-```
-
-### Service Processing Logic
-
-Auto-renewal processing typically runs via cron job:
-
-1. **Check Master Switch**: Verify `auto_renewal_enabled` is true
-2. **Check Service Type**: Verify specific service type is enabled
-3. **Calculate Renewal Date**: `expiration_date - threshold_days`
-4. **Check Balance**: Verify `balance >= (renewal_cost + min_balance_after)`
-5. **Process Payment**: Charge customer account
-6. **Extend Service**: Update expiration date
-7. **Send Notification**: Email customer confirmation
-
----
-
 ## Quick Reference
 
 ### Default Values
@@ -691,10 +611,10 @@ Auto-renewal processing typically runs via cron job:
 
 | Service | Icon | Color |
 |---------|------|-------|
-| Websites | bi-globe | Blue (Primary) |
-| Addons | bi-puzzle | Yellow (Warning) |
-| Plugins | bi-plugin | Green (Success) |
-| Domains | bi-globe2 | Red (Danger) |
+| Websites | Globe | Blue |
+| Addons | Puzzle | Yellow |
+| Plugins | Plugin | Green |
+| Domains | Globe2 | Red |
 
 ### Recommended Configurations
 

@@ -25,13 +25,13 @@
           {
           "group": "Configuration",
             "pages": [
-              "admin/important-settings",
-              "admin/payments-setup",
-              "admin/websites-setup",
-              "admin/domains-setup",
-              "admin/packages-setup",
-              "admin/autorenewal-setup",
-              "admin/roles-setup",
+              "admin/general-settings",
+              "admin/payments-configuration",
+              "admin/websites-configuration",
+              "admin/domains-configuration",
+              "admin/packages-configuration",
+              "admin/autorenewal-configuration",
+              "admin/roles-settings",
               "admin/emails-setup",
               "admin/theme-setup"
             ]

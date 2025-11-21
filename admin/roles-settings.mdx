@@ -436,64 +436,6 @@ Editing a role's name or color does not affect existing user assignments or perm
 
 ---
 
-## Technical Reference
-
-### File Structure
-
-```
-src/apps/pages/admin/views/panel/settings-general/
-└── PermissionOption.blade.php    # Main view file
-```
-
-### Database Models
-
-- **Role Model**: `\models\Role`
-  - Properties: `id`, `label`, `color`, `default`
-  - Methods: `all()`, `find()`, `create()`, `update()`, `delete()`
-
-- **Permission Model**: `\models\Permission`
-  - Properties: `id`, `name`, `label`
-  - Methods: `all()`, `find()`
-
-### Form Handling
-
-**Add Role Form:**
-```php
-Form::create([
-    "form"     => $form,
-    "function" => "",
-    "prefix"   => "",
-    "name"     => "role",
-    "class"    => "form-mrg",
-    "hover"    => false
-])
-```
-
-**Form Fields:**
-- `label` (text): Role name
-- `color` (color): Role color (default: #FF00FF)
-
-### JavaScript Functions
-
-- `addRoleSubmit(button)`: Handles new role creation
-- `editRole(button)`: Opens edit role modal
-- `setPermissions(button)`: Opens permissions assignment modal
-- `deleteRole(id, label)`: Handles role deletion
-
-### API Endpoints
-
-All actions are submitted via POST to the current page URL with the form data.
-
-### Styling Classes
-
-- `.role-item`: Individual role card
-- `.set-permissions-item`: Permission checkbox card
-- `.form-check-input`: Toggle switches
-- `.modal-edit-role`: Edit role modal
-- `.modal-set-permissions`: Permissions modal
-
----
-
 ## Quick Reference
 
 ### Common Tasks
@@ -513,12 +455,6 @@ All actions are submitted via POST to the current page URL with the form data.
 | Admin | 1 | System | ❌ No |
 | Member | 2 | System | ❌ No |
 | Custom Roles | Variable | Custom | ✅ Yes |
-
-### Permission Naming Convention
-
-- **Format**: `action_resource` (e.g., `create_content`, `manage_users`)
-- **Actions**: create, edit, delete, view, manage, publish
-- **Resources**: content, users, websites, domains, tickets, billing
 
 ---
 

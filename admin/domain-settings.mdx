@@ -1,7 +1,7 @@
 ---
 title: 'Domain API Settings'
 description: 'Configure domain registration API and nameserver settings'
-icon: 'server'
+icon: 'globe2'
 ---
 
 <Info>
@@ -613,71 +613,6 @@ ventures
     - Test with a simple TLD list first
   </Accordion>
 </AccordionGroup>
-
----
-
-## Technical Reference
-
-<Tabs>
-  <Tab title="File Structure">
-    ```plaintext
-    src/apps/pages/admin/views/panel/settings-service/
-    └── DomainAPI.blade.php (437 lines)
-    
-    src/apps/classes/
-    └── DomainAPI.php
-    
-    src/apps/pages/api/controllers/
-    └── DomainAPIController.php
-    
-    assets/admin/js/
-    └── settings.js
-    ```
-  </Tab>
-  
-  <Tab title="Data Storage">
-    Settings are stored using the `ST()` helper function:
-    
-    ```php
-    // API Configuration
-    builder_domain_api_token
-    
-    // Nameserver Settings
-    builder_domain_nameservers_ns_1
-    builder_domain_nameservers_ns_2
-    builder_domain_nameservers_record_domain
-    
-    // TLD Configuration
-    builder_domain_tld_domain_check_default
-    builder_domain_tld_extended_domain_check_more
-    ```
-  </Tab>
-  
-  <Tab title="Form Submission">
-    **Form Details:**
-    - **Method:** POST
-    - **Form Part:** `DomainAPI`
-    - **Save Function:** `settingsSave(this)`
-    - **JavaScript:** `/assets/admin/js/settings.js`
-    
-    **Validation:**
-    - API token required for domain registration
-    - Nameservers validated for format
-    - TLD lists parsed line-by-line
-  </Tab>
-  
-  <Tab title="API Integration">
-    **Dynadot API Endpoints:**
-    - Domain registration
-    - Domain availability check
-    - Nameserver management
-    - DNS record configuration
-    
-    **API Documentation:**
-    - [Dynadot API Reference](https://www.dynadot.com/domain/api.html)
-    - [API Settings Page](https://www.dynadot.com/account/domain/setting/api.html)
-  </Tab>
-</Tabs>
 
 ---
 
