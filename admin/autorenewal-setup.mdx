@@ -1,5 +1,725 @@
 ---
-title: 'New file'
-description: 'Description of your new file.'
+title: "Auto-Renewal Settings"
+description: "Configure automatic renewal preferences for websites, services, and domains"
+icon: "arrow-repeat"
 ---
 
+## Navigation
+
+**Admin Panel** → **Settings** → **General** → **Auto-Renewal Settings**  
+**URL:** `/admin/AutoRenewal`
+
+## Overview
+
+The Auto-Renewal Settings page provides centralized control over automatic renewal functionality for all services in your platform. Configure which services auto-renew, set renewal timing thresholds, and establish minimum balance requirements to ensure uninterrupted service for your customers.
+
+<CardGroup cols={2}>
+  <Card title="Master Control" icon="toggle-on">
+    Enable or disable auto-renewals system-wide with a single switch
+  </Card>
+  <Card title="Service Types" icon="grid-3x3-gap">
+    Configure auto-renewal for Websites, Addons, Plugins, and Domains independently
+  </Card>
+  <Card title="Renewal Timing" icon="calendar-check">
+    Set how many days before expiration renewals should be processed
+  </Card>
+  <Card title="Balance Protection" icon="wallet">
+    Ensure customers maintain minimum balance after renewals
+  </Card>
+</CardGroup>
+
+---
+
+## Master Control
+
+### Master Switch
+
+The master switch provides system-wide control over all auto-renewal functionality.
+
+<ParamField path="auto_renewal_enabled" type="boolean" default="true">
+  **Enable Auto-Renewals System-Wide**
+  
+  Controls all auto-renewal features across the platform
+  
+  - **Enabled**: Auto-renewals are active (individual services can still be toggled)
+  - **Disabled**: All auto-renewals are paused system-wide
+  - **Status Indicator**: Shows "Active" (green) or "Inactive" (yellow) in header
+</ParamField>
+
+<Info>
+When the master switch is disabled, individual service toggles remain accessible but auto-renewals won't process until the master switch is re-enabled.
+</Info>
+
+### Minimum Balance Buffer
+
+<ParamField path="auto_renewal_min_balance_after" type="number" default="10.00">
+  **Minimum Balance Buffer**
+  
+  Required remaining balance after renewal completion
+  
+  - **Format**: Decimal number (e.g., 10.00)
+  - **Currency**: USD ($)
+  - **Purpose**: Prevents renewals that would leave accounts with insufficient funds
+  - **Validation**: Must be ≥ 0
+  
+  **Example:** If set to $10.00, a renewal costing $5.00 will only process if the customer has at least $15.00 in their account.
+</ParamField>
+
+<Tip>
+Set this value based on your lowest-priced service to ensure customers always have enough balance for at least one more transaction.
+</Tip>
+
+---
+
+## Service Types
+
+Configure auto-renewal independently for each service category. Each service type can be enabled or disabled regardless of other services.
+
+### Websites
+
+<ParamField path="auto_renewal_websites" type="boolean" default="true">
+  **Website Hosting Renewals**
+  
+  Automatically renew website hosting packages before expiration
+  
+  - **Icon**: Globe (blue)
+  - **Scope**: All website hosting plans
+  - **Impact**: Prevents website downtime due to expired hosting
+</ParamField>
+
+### Addons
+
+<ParamField path="auto_renewal_addons" type="boolean" default="true">
+  **Service Add-on Renewals**
+  
+  Automatically renew service add-ons (SSL, Backup, Disk Upgrades, etc.)
+  
+  - **Icon**: Puzzle (yellow)
+  - **Scope**: All custom addons and service enhancements
+  - **Impact**: Maintains continuous addon functionality
+</ParamField>
+
+### Plugins
+
+<ParamField path="auto_renewal_plugins" type="boolean" default="true">
+  **Plugin License Renewals**
+  
+  Automatically renew plugin licenses before expiration
+  
+  - **Icon**: Plugin (green)
+  - **Scope**: All plugin subscriptions
+  - **Impact**: Prevents plugin deactivation due to expired licenses
+</ParamField>
+
+### Domains
+
+<ParamField path="auto_renewal_domains" type="boolean" default="true">
+  **Domain Registration Renewals**
+  
+  Automatically renew domain registrations before expiration
+  
+  - **Icon**: Globe2 (red)
+  - **Scope**: All registered domains
+  - **Impact**: Prevents domain loss due to expiration
+  
+  <Warning>
+  Domain renewals are critical! Expired domains may be lost permanently if not renewed in time.
+  </Warning>
+</ParamField>
+
+---
+
+## Renewal Timing
+
+Configure how many days before expiration each service type should be automatically renewed. Earlier renewal provides more buffer time for payment processing and issue resolution.
+
+### Website Renewal Threshold
+
+<ParamField path="auto_renewal_website_threshold" type="number" default="7">
+  **Website Renewal Timing**
+  
+  Days before expiration to process website renewals
+  
+  - **Range**: 1-30 days
+  - **Default**: 7 days
+  - **Recommended**: 5-7 days for standard hosting
+</ParamField>
+
+### Addon Renewal Threshold
+
+<ParamField path="auto_renewal_addon_threshold" type="number" default="7">
+  **Addon Renewal Timing**
+  
+  Days before expiration to process addon renewals
+  
+  - **Range**: 1-30 days
+  - **Default**: 7 days
+  - **Recommended**: 5-7 days to match website renewals
+</ParamField>
+
+### Plugin Renewal Threshold
+
+<ParamField path="auto_renewal_plugin_threshold" type="number" default="7">
+  **Plugin Renewal Timing**
+  
+  Days before expiration to process plugin renewals
+  
+  - **Range**: 1-30 days
+  - **Default**: 7 days
+  - **Recommended**: 7-10 days for license validation time
+</ParamField>
+
+### Domain Renewal Threshold
+
+<ParamField path="auto_renewal_domain_threshold" type="number" default="30">
+  **Domain Renewal Timing**
+  
+  Days before expiration to process domain renewals
+  
+  - **Range**: 1-90 days
+  - **Default**: 30 days
+  - **Recommended**: 30-45 days for critical domains
+  
+  <Info>
+  Domains have a longer default threshold (30 days) because domain renewals are time-sensitive and may require additional processing time with registrars.
+  </Info>
+</ParamField>
+
+---
+
+## Configuration Workflow
+
+<Steps>
+  <Step title="Enable Master Switch">
+    Turn on the master auto-renewal switch to activate the system
+  </Step>
+  <Step title="Configure Balance Buffer">
+    Set the minimum balance buffer to protect customer accounts
+  </Step>
+  <Step title="Select Service Types">
+    Enable auto-renewal for each service type you want to support
+  </Step>
+  <Step title="Set Renewal Timing">
+    Configure renewal thresholds for each service type
+  </Step>
+  <Step title="Save Configuration">
+    Click "Save Auto-Renewal Configuration" to apply changes
+  </Step>
+  <Step title="Monitor Status">
+    Check the status indicator in the header to verify the system is active
+  </Step>
+  <Step title="Test Renewals">
+    Create test scenarios to verify renewals process correctly
+  </Step>
+</Steps>
+
+---
+
+## Configuration Examples
+
+### Example 1: Conservative Configuration
+
+**Use Case:** Minimize risk, maximum customer protection
+
+```json
+{
+  "auto_renewal_enabled": true,
+  "auto_renewal_min_balance_after": 25.00,
+  "service_types": {
+    "websites": true,
+    "addons": true,
+    "plugins": true,
+    "domains": true
+  },
+  "thresholds": {
+    "websites": 10,
+    "addons": 10,
+    "plugins": 14,
+    "domains": 45
+  }
+}
+```
+
+**Benefits:**
+- Higher balance buffer prevents failed renewals
+- Longer renewal windows provide more time for issues
+- Suitable for high-value customers
+
+### Example 2: Aggressive Configuration
+
+**Use Case:** Maximize revenue, minimize manual intervention
+
+```json
+{
+  "auto_renewal_enabled": true,
+  "auto_renewal_min_balance_after": 5.00,
+  "service_types": {
+    "websites": true,
+    "addons": true,
+    "plugins": true,
+    "domains": true
+  },
+  "thresholds": {
+    "websites": 3,
+    "addons": 3,
+    "plugins": 5,
+    "domains": 15
+  }
+}
+```
+
+**Benefits:**
+- Lower balance buffer allows more renewals
+- Shorter windows reduce advance charges
+- Suitable for budget-conscious customers
+
+### Example 3: Selective Configuration
+
+**Use Case:** Only auto-renew critical services
+
+```json
+{
+  "auto_renewal_enabled": true,
+  "auto_renewal_min_balance_after": 15.00,
+  "service_types": {
+    "websites": true,
+    "addons": false,
+    "plugins": false,
+    "domains": true
+  },
+  "thresholds": {
+    "websites": 7,
+    "addons": 7,
+    "plugins": 7,
+    "domains": 30
+  }
+}
+```
+
+**Benefits:**
+- Focus on essential services (websites, domains)
+- Customers manually renew optional services
+- Reduces unexpected charges
+
+### Example 4: Domain-Only Configuration
+
+**Use Case:** Protect domains, manual renewal for everything else
+
+```json
+{
+  "auto_renewal_enabled": true,
+  "auto_renewal_min_balance_after": 20.00,
+  "service_types": {
+    "websites": false,
+    "addons": false,
+    "plugins": false,
+    "domains": true
+  },
+  "thresholds": {
+    "websites": 7,
+    "addons": 7,
+    "plugins": 7,
+    "domains": 60
+  }
+}
+```
+
+**Benefits:**
+- Prevents domain loss (most critical)
+- Extra-long domain renewal window (60 days)
+- Customers control other service renewals
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Renewal Timing Strategy" icon="calendar">
+    **Balance Customer Experience and Business Needs**
+    
+    **Shorter Thresholds (1-5 days):**
+    - Pros: Charges closer to expiration, less advance billing
+    - Cons: Less time to resolve payment issues
+    - Best for: Low-risk services, customers with auto-pay
+    
+    **Medium Thresholds (7-14 days):**
+    - Pros: Good balance of advance notice and flexibility
+    - Cons: Some customers may see charges as "too early"
+    - Best for: Standard hosting services, most use cases
+    
+    **Longer Thresholds (15-45 days):**
+    - Pros: Maximum time to resolve issues, prevents service loss
+    - Cons: Charges well in advance of expiration
+    - Best for: Critical services (domains), high-value customers
+    
+    **Recommended Defaults:**
+    - Websites: 7 days
+    - Addons: 7 days
+    - Plugins: 7-10 days
+    - Domains: 30-45 days
+  </Accordion>
+  
+  <Accordion title="Balance Buffer Configuration" icon="wallet">
+    **Set Appropriate Minimum Balance**
+    
+    **Low Buffer ($5-$10):**
+    - Allows more renewals to process
+    - Risk: Customers may have insufficient funds for next service
+    - Best for: Low-cost services, frequent top-ups
+    
+    **Medium Buffer ($10-$25):**
+    - Balanced approach for most businesses
+    - Ensures customers can afford at least one more service
+    - Best for: Standard pricing models
+    
+    **High Buffer ($25-$50):**
+    - Maximum protection against insufficient funds
+    - May prevent some legitimate renewals
+    - Best for: High-value services, enterprise customers
+    
+    **Calculation Formula:**
+    ```
+    Minimum Buffer = Lowest Service Price + Safety Margin
+    ```
+    
+    Example: If your cheapest service is $8/month, set buffer to $10-$15
+  </Accordion>
+  
+  <Accordion title="Service Type Selection" icon="grid">
+    **Choose Which Services to Auto-Renew**
+    
+    **Always Auto-Renew:**
+    - Domains (prevents permanent loss)
+    - Core hosting services (prevents downtime)
+    
+    **Consider Auto-Renewing:**
+    - SSL certificates (security continuity)
+    - Backup services (data protection)
+    - Essential plugins (functionality maintenance)
+    
+    **Optional Auto-Renewal:**
+    - Premium addons (customer preference)
+    - Experimental plugins (may not be needed)
+    - Temporary services (project-based)
+    
+    **Customer Communication:**
+    - Clearly inform customers which services auto-renew
+    - Provide opt-out options in user dashboard
+    - Send renewal reminders before processing
+  </Accordion>
+  
+  <Accordion title="Monitoring and Maintenance" icon="chart-line">
+    **Regular System Checks**
+    
+    **Daily Monitoring:**
+    - Check auto-renewal processing logs
+    - Review failed renewal attempts
+    - Monitor customer balance levels
+    
+    **Weekly Reviews:**
+    - Analyze renewal success rates
+    - Identify common failure patterns
+    - Review customer feedback
+    
+    **Monthly Analysis:**
+    - Calculate renewal revenue vs. manual renewals
+    - Assess customer satisfaction impact
+    - Adjust thresholds based on data
+    
+    **Quarterly Optimization:**
+    - Review and update balance buffer
+    - Adjust renewal timing based on payment patterns
+    - Update service type selections
+  </Accordion>
+  
+  <Accordion title="Customer Communication" icon="envelope">
+    **Keep Customers Informed**
+    
+    **Before Auto-Renewal:**
+    - Send email notification X days before renewal
+    - Include renewal date, amount, and service details
+    - Provide easy opt-out or cancellation link
+    
+    **After Auto-Renewal:**
+    - Send confirmation email with receipt
+    - Include next renewal date
+    - Provide invoice download link
+    
+    **Failed Renewals:**
+    - Immediate notification of failure
+    - Clear explanation of reason (insufficient funds, etc.)
+    - Instructions for manual renewal
+    - Grace period information
+    
+    **Transparency:**
+    - Document auto-renewal policy in Terms of Service
+    - Display renewal settings in customer dashboard
+    - Allow customers to manage preferences
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Auto-Renewals Not Processing" icon="circle-xmark">
+    **Issue:** Services are not renewing automatically despite being enabled
+    
+    **Possible Causes:**
+    - Master switch is disabled
+    - Specific service type is disabled
+    - Cron jobs not running
+    - Insufficient customer balance
+    - Payment gateway issues
+    
+    **Solutions:**
+    1. **Check Master Switch**: Verify auto_renewal_enabled is ON
+    2. **Verify Service Toggles**: Ensure specific service types are enabled
+    3. **Check Cron Jobs**: Confirm renewal cron is running (see General Settings → Cron Automation)
+    4. **Review Logs**: Check system logs for renewal processing errors
+    5. **Test Payment Gateway**: Verify payment processing is working
+    6. **Check Balance Requirements**: Ensure customers meet minimum balance buffer
+    
+    **Diagnostic Steps:**
+    ```bash
+    # Check if cron is running
+    Check: General Settings → Cron Automation → Auto-Renewal Cron
+    
+    # Review recent renewal attempts
+    Check: System Logs → Auto-Renewal Processing
+    
+    # Verify customer balances
+    Check: Users → Account Balance Reports
+    ```
+  </Accordion>
+  
+  <Accordion title="Renewals Processing Too Early/Late" icon="clock">
+    **Issue:** Renewals are charging customers at unexpected times
+    
+    **Possible Causes:**
+    - Renewal threshold configured incorrectly
+    - Timezone differences
+    - Cron schedule timing
+    
+    **Solutions:**
+    1. **Review Thresholds**: Check renewal timing settings for each service
+    2. **Verify Timezone**: Ensure server timezone matches expected timezone
+    3. **Check Cron Schedule**: Confirm when renewal cron runs
+    4. **Adjust Thresholds**: Modify days-before-expiration values
+    5. **Test with Sample**: Create test service to verify timing
+    
+    **Timing Calculation:**
+    ```
+    Renewal Date = Expiration Date - Threshold Days
+    
+    Example:
+    - Expiration: January 31, 2024
+    - Threshold: 7 days
+    - Renewal Date: January 24, 2024
+    ```
+  </Accordion>
+  
+  <Accordion title="Customers Complaining About Charges" icon="comment-exclamation">
+    **Issue:** Customers are surprised by auto-renewal charges
+    
+    **Possible Causes:**
+    - Insufficient notification emails
+    - Unclear auto-renewal policy
+    - Charges too far in advance
+    - No opt-out option provided
+    
+    **Solutions:**
+    1. **Improve Notifications**: Send reminder emails before renewal
+    2. **Update Documentation**: Clarify auto-renewal policy in ToS
+    3. **Adjust Thresholds**: Reduce days-before-expiration if too aggressive
+    4. **Provide Opt-Out**: Allow customers to disable auto-renewal per service
+    5. **Add Dashboard Controls**: Let customers manage renewal preferences
+    
+    **Best Practice Email Schedule:**
+    - 14 days before: "Upcoming renewal reminder"
+    - 7 days before: "Renewal processing soon"
+    - 1 day before: "Final reminder"
+    - Day of: "Renewal processed" (confirmation)
+  </Accordion>
+  
+  <Accordion title="Balance Buffer Preventing Renewals" icon="wallet">
+    **Issue:** Legitimate renewals are failing due to balance buffer
+    
+    **Possible Causes:**
+    - Balance buffer set too high
+    - Customer has exact amount for renewal but not buffer
+    - Multiple renewals depleting balance
+    
+    **Solutions:**
+    1. **Review Buffer Amount**: Consider lowering minimum balance buffer
+    2. **Analyze Failed Renewals**: Check how many fail due to buffer
+    3. **Customer Communication**: Explain balance requirements clearly
+    4. **Offer Auto-Topup**: Implement automatic balance replenishment
+    5. **Adjust Per Service**: Consider different buffers for different services
+    
+    **Buffer Calculation Example:**
+    ```
+    Customer Balance: $50.00
+    Renewal Cost: $45.00
+    Balance Buffer: $10.00
+    
+    Required Balance: $45.00 + $10.00 = $55.00
+    Result: Renewal FAILS (insufficient balance)
+    
+    Solution: Lower buffer to $5.00 or customer adds $5.00
+    ```
+  </Accordion>
+  
+  <Accordion title="Status Indicator Not Updating" icon="signal">
+    **Issue:** Header status shows incorrect state (Active/Inactive)
+    
+    **Possible Causes:**
+    - JavaScript not loading
+    - Browser cache issue
+    - Page not refreshed after changes
+    
+    **Solutions:**
+    1. **Refresh Page**: Reload the page to update status
+    2. **Clear Cache**: Clear browser cache and cookies
+    3. **Check Console**: Look for JavaScript errors
+    4. **Verify Settings**: Confirm master switch state in database
+    5. **Try Different Browser**: Test in another browser
+    
+    **Manual Verification:**
+    - Check database: `storage.setting.auto_renewal_enabled`
+    - Expected values: `1` (Active) or `0` (Inactive)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Technical Reference
+
+### File Structure
+
+```
+src/apps/pages/admin/views/panel/settings-general/
+└── AutoRenewal.blade.php          # Main view file
+
+src/apps/classes/
+└── AutoRenewalService.php         # Auto-renewal processing logic
+```
+
+### Configuration Storage
+
+All settings are stored using Laravel's `Storage` facade:
+
+```php
+Storage::setting('auto_renewal_enabled')           // Master switch
+Storage::setting('auto_renewal_min_balance_after') // Balance buffer
+Storage::setting('auto_renewal_websites')          // Website toggle
+Storage::setting('auto_renewal_addons')            // Addon toggle
+Storage::setting('auto_renewal_plugins')           // Plugin toggle
+Storage::setting('auto_renewal_domains')           // Domain toggle
+Storage::setting('auto_renewal_website_threshold') // Website timing
+Storage::setting('auto_renewal_addon_threshold')   // Addon timing
+Storage::setting('auto_renewal_plugin_threshold')  // Plugin timing
+Storage::setting('auto_renewal_domain_threshold')  // Domain timing
+```
+
+### Form Submission
+
+**Form Method:** POST  
+**Form Action:** Current page URL  
+**Hidden Field:** `formPart` = `AutoRenewalSettings`
+
+### JavaScript Functions
+
+```javascript
+// Toggle master switch and update UI
+toggleMasterAutoRenewal(masterToggle)
+
+// Update status indicator in header
+updateStatusIndicator(isEnabled)
+
+// Initialize state on page load
+document.addEventListener('DOMContentLoaded', ...)
+```
+
+### Status Indicator States
+
+**Active State:**
+```html
+<div class="symbol-label bg-light-success">
+  <i class="bi bi-check-circle text-success"></i>
+</div>
+<span>Active</span>
+```
+
+**Inactive State:**
+```html
+<div class="symbol-label bg-light-warning">
+  <i class="bi bi-pause-circle text-warning"></i>
+</div>
+<span>Inactive</span>
+```
+
+### Service Processing Logic
+
+Auto-renewal processing typically runs via cron job:
+
+1. **Check Master Switch**: Verify `auto_renewal_enabled` is true
+2. **Check Service Type**: Verify specific service type is enabled
+3. **Calculate Renewal Date**: `expiration_date - threshold_days`
+4. **Check Balance**: Verify `balance >= (renewal_cost + min_balance_after)`
+5. **Process Payment**: Charge customer account
+6. **Extend Service**: Update expiration date
+7. **Send Notification**: Email customer confirmation
+
+---
+
+## Quick Reference
+
+### Default Values
+
+| Setting | Default Value | Range |
+|---------|---------------|-------|
+| Master Switch | Enabled | ON/OFF |
+| Balance Buffer | $10.00 | $0.00+ |
+| Website Threshold | 7 days | 1-30 days |
+| Addon Threshold | 7 days | 1-30 days |
+| Plugin Threshold | 7 days | 1-30 days |
+| Domain Threshold | 30 days | 1-90 days |
+
+### Service Type Icons
+
+| Service | Icon | Color |
+|---------|------|-------|
+| Websites | bi-globe | Blue (Primary) |
+| Addons | bi-puzzle | Yellow (Warning) |
+| Plugins | bi-plugin | Green (Success) |
+| Domains | bi-globe2 | Red (Danger) |
+
+### Recommended Configurations
+
+| Business Type | Balance Buffer | Website | Addon | Plugin | Domain |
+|---------------|----------------|---------|-------|--------|--------|
+| Budget Hosting | $5-$10 | 3-5 days | 3-5 days | 5-7 days | 15-30 days |
+| Standard Hosting | $10-$20 | 7 days | 7 days | 7-10 days | 30 days |
+| Premium Hosting | $20-$50 | 10-14 days | 10-14 days | 14 days | 45-60 days |
+| Enterprise | $50+ | 14 days | 14 days | 14 days | 60-90 days |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/admin/GeneralOption">
+    Configure cron automation for auto-renewals
+  </Card>
+  <Card title="Hosting Plans" icon="server" href="/admin/ServicePackage">
+    Configure renewal terms and pricing
+  </Card>
+  <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
+    Set up payment gateways for processing renewals
+  </Card>
+  <Card title="Website Configuration" icon="globe" href="/admin/CreateWebOption">
+    Configure trial and expiry settings
+  </Card>
+</CardGroup>
