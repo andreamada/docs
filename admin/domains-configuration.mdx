@@ -11,20 +11,20 @@ icon: "globe"
 
 ## Overview
 
-The Domain API Settings page allows you to configure automatic domain registration through Dynadot's API. Set up nameservers, CNAME records, and manage which domain extensions (TLDs) are available for registration on your platform.
+Configure automatic domain registration through Dynadot's API, set up nameservers, CNAME records, and manage available domain extensions (TLDs).
 
 <CardGroup cols={2}>
   <Card title="Dynadot API" icon="key" color="#10b981">
-    Configure API token for domain registration
+    API token for domain registration
   </Card>
   <Card title="Nameservers" icon="server" color="#0d6efd">
-    Set default nameservers and DNS records
+    Default DNS servers
   </Card>
   <Card title="CNAME Records" icon="link" color="#f59e0b">
-    Configure CNAME for custom domains
+    Custom domain configuration
   </Card>
   <Card title="TLD Management" icon="list" color="#8b5cf6">
-    Control available domain extensions
+    Available domain extensions
   </Card>
 </CardGroup>
 
@@ -32,113 +32,59 @@ The Domain API Settings page allows you to configure automatic domain registrati
 
 ## Dynadot API Configuration
 
-Connect your Dynadot account to enable automatic domain registration.
+Configure automatic domain registration through Dynadot's domain registration API.
 
-### API Token Setup
+**Setting Up Your API Token:**
 
-**Dynadot API Token**
-
-Your API key from Dynadot for domain registration and management.
-
-<Steps>
-  <Step title="Log in to Dynadot">
-    Visit [Dynadot.com](https://www.dynadot.com) and log in to your account
-  </Step>
-  <Step title="Access API Settings">
-    Navigate to **My Account → API Settings** or visit [API Settings Page](https://www.dynadot.com/account/domain/setting/api.html)
-  </Step>
-  <Step title="Generate API Key">
-    Create a new API key or copy your existing key
-  </Step>
-  <Step title="Enter Token">
-    Paste the API token in the Domain API Settings page
-  </Step>
-  <Step title="Save Configuration">
-    Save your settings to enable domain registration
-  </Step>
-</Steps>
+1. Log in to your Dynadot account at [Dynadot.com](https://www.dynadot.com)
+2. Navigate to My Account → API Settings
+3. Generate a new API key or copy your existing key
+4. Paste the API token in the Domain API Settings page
+5. Save the configuration to enable automatic domain registration
 
 <Warning>
-**Security Important:**
-- Keep your API token confidential
-- Never share your API token publicly
-- Regenerate the token if it's ever compromised
-- Use IP restrictions in Dynadot if available
+**Security:** Keep your API token confidential and never share it publicly. If your token is compromised, regenerate it immediately in your Dynadot account and update it in your platform settings.
 </Warning>
 
-### API Resources
-
-- [Dynadot API Documentation](https://www.dynadot.com/domain/api.html)
-- [API Settings Page](https://www.dynadot.com/account/domain/setting/api.html)
-- [Domain Registration Guide](https://www.dynadot.com/domain/api.html)
+<Info>
+**API Functionality:** Once configured, the API enables automatic domain registration, renewal, DNS management, and transfer operations directly from your platform without manual intervention in Dynadot's interface.
+</Info>
 
 ---
 
 ## Nameserver Configuration
 
-Set the default nameservers that will be assigned to newly registered domains.
+Configure default nameservers that will be automatically assigned to newly registered domains.
 
-### Default Nameservers
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **NS1** | Primary nameserver | `ns1.yourdomain.com` |
+| **NS2** | Secondary nameserver | `ns2.yourdomain.com` |
+| **CNAME Domain** | Domain for CNAME records | `platform.example.com` |
 
-**Primary Nameserver (NS1)**
-
-First nameserver for domain DNS resolution.
-
-- **Format**: `ns1.yourdomain.com` or IP address
-- **Example**: `ns1.example.com`
-- **Required**: Yes
-
-**Secondary Nameserver (NS2)**
-
-Second nameserver for redundancy and reliability.
-
-- **Format**: `ns2.yourdomain.com` or IP address
-- **Example**: `ns2.example.com`
-- **Required**: Yes
-
-### CNAME Record Domain
-
-**Record Domain for CNAME**
-
-Domain used for CNAME records when pointing custom domains to your platform.
-
-- **Format**: `yourdomain.com` (without www)
-- **Example**: `platform.example.com`
-- **Purpose**: Allows users to point their domains to your service
-
-<Info>
 **How Nameservers Work:**
-
-When a domain is registered through your platform:
-1. Domain is registered via Dynadot API
-2. Nameservers (NS1 and NS2) are automatically configured
-3. DNS records point to your hosting infrastructure
-4. Domain becomes active and accessible
-</Info>
+1. Customer registers a domain through your platform
+2. Domain is registered via Dynadot API
+3. NS1 and NS2 are automatically configured for the domain
+4. DNS points to your hosting infrastructure
+5. Domain becomes active and ready to use
 
 <Tip>
-**Nameserver Best Practices:**
-- Use reliable nameserver providers
-- Ensure both NS1 and NS2 are on different servers for redundancy
-- Test nameserver configuration before going live
-- Keep nameserver settings consistent across your platform
+**Redundancy:** Use reliable nameserver providers and ensure NS1 and NS2 are on different servers for redundancy. This ensures DNS continues working even if one server fails.
 </Tip>
+
+<Info>
+**DNS Propagation:** After setting nameservers, DNS changes can take 24-48 hours to propagate globally. Inform customers about this delay when they register domains.
+</Info>
 
 ---
 
 ## TLD Management
 
-Control which domain extensions (Top-Level Domains) are available for registration.
+Configure which domain extensions (TLDs) are available for registration on your platform.
 
-### Domain Check Configuration
+**Default TLDs** (shown by default in domain search):
 
-**Default Domain Check TLDs**
-
-Domain extensions shown by default in the domain search/availability checker.
-
-**Format**: One TLD per line (without the dot)
-
-**Example:**
 ```
 com
 net
@@ -147,24 +93,8 @@ io
 co
 ```
 
-**Common TLDs:**
-- `com` - Commercial (most popular)
-- `net` - Network
-- `org` - Organization
-- `io` - Input/Output (popular for tech)
-- `co` - Company
-- `info` - Information
-- `biz` - Business
+**Extended TLDs** (shown when users click "Show More"):
 
-### Extended Domain Check
-
-**Extended Domain Check TLDs**
-
-Additional domain extensions shown when users click "Show More" or expand options.
-
-**Format**: One TLD per line (without the dot)
-
-**Example:**
 ```
 app
 dev
@@ -174,64 +104,65 @@ store
 shop
 blog
 site
-website
-cloud
 ```
 
-**Popular Extended TLDs:**
-- `app` - Applications
-- `dev` - Developers
-- `tech` - Technology
-- `online` - Online presence
-- `store` - E-commerce
-- `shop` - Shopping
-- `blog` - Blogging
-- `site` - Websites
-- `cloud` - Cloud services
+**Format**: One TLD per line (without the dot)
 
-<Info>
-**TLD Selection Strategy:**
+### Common TLDs by Category
 
-**Default TLDs** (5-10 options):
-- Most popular and recognizable extensions
-- Lower cost options
-- General-purpose domains
+| Category | TLDs |
+|----------|------|
+| **Generic** | com, net, org, info, biz |
+| **Technology** | io, tech, dev, app, cloud, ai |
+| **Business** | co, company, store, shop |
+| **Creative** | design, art, studio, media |
 
-**Extended TLDs** (10-30 options):
-- Niche-specific extensions
-- Premium or specialty TLDs
-- Industry-specific options
-</Info>
+<Tip>
+**TLD Selection:** Choose TLDs that match your target market. Popular TLDs like .com, .net, and .org should always be in the default list. Add niche TLDs to extended list based on customer demand.
+</Tip>
 
 ---
 
 ## Configuration Examples
 
-### Basic Configuration
+<Tabs>
+  <Tab title="Basic">
+    - **API Token**: Your Dynadot key
+    - **NS1**: `ns1.yourplatform.com`
+    - **NS2**: `ns2.yourplatform.com`
+    - **CNAME**: `yourplatform.com`
+    - **Default**: com, net, org, io, co
+    - **Extended**: app, dev, tech, online, store
+  </Tab>
+  <Tab title="Advanced">
+    - **API Token**: Your Dynadot key
+    - **NS1**: `ns1.yourplatform.com`
+    - **NS2**: `ns2.yourplatform.com`
+    - **CNAME**: `services.yourplatform.com`
+    - **Default**: com, net, org, io, co, app, dev, tech
+    - **Extended**: online, store, shop, blog, site, cloud, xyz, me, ai
+  </Tab>
+</Tabs>
 
-Suitable for most platforms:
+---
 
-| Setting | Value |
-|---------|-------|
-| **API Token** | Your Dynadot API key |
-| **NS1** | `ns1.yourplatform.com` |
-| **NS2** | `ns2.yourplatform.com` |
-| **CNAME Domain** | `yourplatform.com` |
-| **Default TLDs** | com, net, org, io, co |
-| **Extended TLDs** | app, dev, tech, online, store |
+## DNS Testing
 
-### Advanced Configuration
+**Check nameserver response:**
+```bash
+nslookup domain.com ns1.yourplatform.com
+dig @ns1.yourplatform.com domain.com
+host domain.com
+```
 
-For platforms with diverse offerings:
+**DNS Propagation Time:**
+- Nameserver (NS): 24-48 hours
+- A Record: 1-4 hours
+- CNAME: 1-4 hours
 
-| Setting | Value |
-|---------|-------|
-| **API Token** | Your Dynadot API key |
-| **NS1** | `ns1.yourplatform.com` |
-| **NS2** | `ns2.yourplatform.com` |
-| **CNAME Domain** | `services.yourplatform.com` |
-| **Default TLDs** | com, net, org, io, co, app, dev, tech |
-| **Extended TLDs** | online, store, shop, blog, site, website, cloud, xyz, me, ai |
+<Info>
+**Testing Tools:** Use online DNS propagation checkers like whatsmydns.net to verify DNS changes across different global locations.
+</Info>
 
 ---
 
@@ -239,59 +170,43 @@ For platforms with diverse offerings:
 
 <AccordionGroup>
   <Accordion title="API Security" icon="shield">
-    **Protect Your API Token:**
-    - Store API token securely
-    - Never commit to version control
-    - Use environment variables when possible
-    - Regenerate if compromised
-    
-    **Access Control:**
-    - Limit API permissions in Dynadot
-    - Enable IP restrictions if available
-    - Monitor API usage regularly
-    - Set up alerts for unusual activity
+    - Store API tokens securely and never commit to version control
+    - Regenerate API tokens periodically (every 6-12 months)
+    - Limit API access to only necessary operations
+    - Monitor API usage for unusual activity
+    - Set up alerts for failed API calls
+    - Keep backup of API credentials in secure location
+    - Document who has access to API credentials
   </Accordion>
   
-  <Accordion title="Nameserver Reliability" icon="server">
-    **Ensure High Availability:**
-    - Use reliable nameserver providers
-    - Configure NS1 and NS2 on different servers
-    - Test nameserver resolution regularly
-    - Monitor nameserver uptime
-    
-    **DNS Configuration:**
-    - Keep DNS records up-to-date
-    - Use appropriate TTL values
-    - Document nameserver changes
-    - Have a backup DNS provider
+  <Accordion title="DNS Configuration" icon="server">
+    - Use reliable nameserver providers with high uptime
+    - Ensure nameservers are geographically distributed
+    - Set up monitoring for nameserver availability
+    - Keep NS1 and NS2 on different servers/networks
+    - Document your DNS configuration
+    - Test DNS resolution regularly
+    - Have a backup DNS provider ready
   </Accordion>
   
-  <Accordion title="TLD Selection" icon="list">
-    **Choose Wisely:**
-    - Offer popular TLDs in default list
-    - Include industry-specific extensions
-    - Consider pricing when selecting TLDs
-    - Update list based on user demand
-    
-    **User Experience:**
-    - Don't overwhelm with too many options
-    - Group related TLDs together
-    - Show pricing for each TLD
-    - Highlight recommended options
+  <Accordion title="TLD Management" icon="list">
+    - Regularly review and update available TLDs
+    - Add new popular TLDs as they become available
+    - Remove TLDs with low demand to reduce clutter
+    - Price TLDs competitively based on market rates
+    - Highlight premium or recommended TLDs
+    - Provide clear descriptions for niche TLDs
+    - Monitor TLD registration trends
   </Accordion>
   
-  <Accordion title="Testing & Monitoring" icon="chart-line">
-    **Regular Testing:**
-    - Test domain registration flow
-    - Verify nameserver propagation
-    - Check CNAME record functionality
-    - Monitor API response times
-    
-    **Performance Monitoring:**
-    - Track registration success rates
-    - Monitor API quota usage
-    - Log failed registrations
-    - Set up error notifications
+  <Accordion title="Customer Communication" icon="message">
+    - Inform customers about DNS propagation delays
+    - Provide clear instructions for domain setup
+    - Send confirmation emails after domain registration
+    - Notify customers before domain expiration
+    - Offer support for DNS configuration issues
+    - Create documentation for common DNS tasks
+    - Set up automated reminders for renewals
   </Accordion>
 </AccordionGroup>
 
@@ -300,128 +215,58 @@ For platforms with diverse offerings:
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Domain Registration Fails" icon="circle-xmark">
+  <Accordion title="Domain Registration Fails" icon="globe">
     **Issue:** Domains cannot be registered through the platform
     
-    **Common Causes:**
-    - Invalid or expired API token
-    - Insufficient Dynadot account balance
-    - Domain already registered
-    - API rate limits exceeded
-    
     **Solutions:**
-    1. Verify API token is correct and active
-    2. Check Dynadot account balance
-    3. Confirm domain availability
-    4. Review API usage limits
-    5. Check Dynadot API status
+    1. Verify API token is correct and active in Dynadot
+    2. Check Dynadot account has sufficient balance
+    3. Confirm domain is available for registration
+    4. Review API usage limits and quotas
+    5. Check error logs for specific API error messages
+    6. Test API connection manually
+    7. Contact Dynadot support if issue persists
   </Accordion>
   
   <Accordion title="Nameservers Not Working" icon="server">
-    **Issue:** Domains not resolving to correct nameservers
-    
-    **Common Causes:**
-    - Incorrect nameserver configuration
-    - DNS propagation delay
-    - Nameserver not responding
-    - Typo in nameserver address
+    **Issue:** DNS not resolving for registered domains
     
     **Solutions:**
     1. Verify nameserver addresses are correct
     2. Wait 24-48 hours for DNS propagation
-    3. Test nameserver response with dig/nslookup
+    3. Test nameservers with dig/nslookup commands
     4. Check nameserver provider status
-    5. Verify DNS records are configured
+    5. Verify nameserver records are configured correctly
+    6. Ensure nameservers are responding to queries
+    7. Check for typos in nameserver addresses
   </Accordion>
   
-  <Accordion title="CNAME Records Not Resolving" icon="link">
-    **Issue:** Custom domains not pointing correctly
-    
-    **Common Causes:**
-    - Incorrect CNAME domain setting
-    - DNS not propagated
-    - CNAME conflicts with A records
-    - Domain not configured properly
+  <Accordion title="CNAME Not Resolving" icon="link">
+    **Issue:** CNAME records not working for custom domains
     
     **Solutions:**
-    1. Verify CNAME domain is correct
+    1. Verify CNAME domain is correct in settings
     2. Wait for DNS propagation (up to 48 hours)
-    3. Remove conflicting A records
-    4. Check DNS configuration at domain registrar
-    5. Test with DNS lookup tools
+    3. Remove conflicting A records at the same hostname
+    4. Test with DNS lookup tools (dig, nslookup)
+    5. Check CNAME target is accessible
+    6. Verify DNS zone configuration
+    7. Clear DNS cache on local machine
   </Accordion>
   
   <Accordion title="TLDs Not Appearing" icon="list">
     **Issue:** Domain extensions not showing in search
     
-    **Common Causes:**
-    - TLDs not saved properly
-    - Cache not cleared
-    - Incorrect TLD format
-    - Configuration not applied
-    
     **Solutions:**
     1. Re-enter TLDs (one per line, no dots)
-    2. Clear application cache
-    3. Verify TLD format is correct
-    4. Save configuration again
-    5. Refresh the domain search page
-  </Accordion>
-  
-  <Accordion title="API Token Invalid" icon="key">
-    **Issue:** API token shows as invalid or unauthorized
-    
-    **Common Causes:**
-    - Token expired or revoked
-    - Token copied incorrectly
-    - IP restrictions in Dynadot
-    - Account suspended
-    
-    **Solutions:**
-    1. Generate new API token in Dynadot
-    2. Copy token carefully (no extra spaces)
-    3. Check IP restriction settings
-    4. Verify Dynadot account is active
-    5. Contact Dynadot support if needed
+    2. Clear application and browser cache
+    3. Save configuration again
+    4. Refresh domain search page
+    5. Check for JavaScript errors in browser console
+    6. Verify TLD list format is correct
+    7. Test in incognito/private browsing mode
   </Accordion>
 </AccordionGroup>
-
----
-
-## Quick Reference
-
-### Common TLDs by Category
-
-| Category | TLDs |
-|----------|------|
-| **Generic** | com, net, org, info, biz |
-| **Technology** | io, tech, dev, app, cloud, ai |
-| **Business** | co, company, business, store, shop |
-| **Creative** | design, art, studio, media, agency |
-| **Regional** | us, uk, eu, asia, africa |
-| **New** | online, site, website, digital, web |
-
-### Nameserver Testing Commands
-
-```bash
-# Check nameserver response
-nslookup domain.com ns1.yourplatform.com
-
-# Detailed DNS query
-dig @ns1.yourplatform.com domain.com
-
-# Check nameserver propagation
-host domain.com
-```
-
-### DNS Propagation Time
-
-| Record Type | Typical Time |
-|-------------|--------------|
-| Nameserver (NS) | 24-48 hours |
-| A Record | 1-4 hours |
-| CNAME Record | 1-4 hours |
-| MX Record | 1-4 hours |
 
 ---
 
@@ -429,21 +274,15 @@ host domain.com
 
 <CardGroup cols={2}>
   <Card title="General Settings" icon="gear" href="/general-settings">
-    Configure platform-wide settings
+    Platform-wide settings
   </Card>
   <Card title="Website Configuration" icon="globe" href="/website-configuration">
-    Manage website creation settings
+    Website creation settings
   </Card>
   <Card title="Hosting Plans" icon="box" href="/hosting-plans">
-    Configure domain pricing and packages
+    Domain pricing
   </Card>
   <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
-    Manage domain auto-renewal
+    Domain auto-renewal
   </Card>
 </CardGroup>
-
----
-
-<Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance with domain API configuration or DNS settings.
-</Card>

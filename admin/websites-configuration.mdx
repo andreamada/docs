@@ -11,23 +11,20 @@ icon: "globe"
 
 ## Overview
 
-The Website Configuration page allows you to control how websites are created and managed on your platform. Configure resource allocations, user limitations, trial periods, branding assets, and helpdesk automation to optimize your service delivery.
+Control how websites are created and managed including resource allocations, user limitations, trial periods, branding, and helpdesk automation.
 
 <CardGroup cols={2}>
-  <Card title="Resource Allocation" icon="server" color="#10b981">
-    Set disk space and bandwidth limits for websites
+  <Card title="Resources" icon="server" color="#10b981">
+    Disk space and bandwidth
   </Card>
-  <Card title="User Limitations" icon="users" color="#0d6efd">
-    Control website creation limits and delays
+  <Card title="Limitations" icon="users" color="#0d6efd">
+    Creation limits and delays
   </Card>
   <Card title="Trial & Expiry" icon="clock" color="#f59e0b">
-    Configure trial periods and expiration settings
+    Trial periods and expiration
   </Card>
-  <Card title="Branding Assets" icon="image" color="#8b5cf6">
-    Upload custom images for website setup
-  </Card>
-  <Card title="Helpdesk Automation" icon="ticket" color="#ef4444">
-    Automate ticket management and retention
+  <Card title="Branding" icon="image" color="#8b5cf6">
+    Custom setup images
   </Card>
 </CardGroup>
 
@@ -35,42 +32,21 @@ The Website Configuration page allows you to control how websites are created an
 
 ## Resource Allocation
 
-Configure the default disk space and bandwidth allocated to each website.
+Configure default disk space and bandwidth limits for new websites.
 
-### Disk Space Settings
-
-**Default Disk Space**
-
-Amount of disk storage allocated to each website (in MB).
-
-- **Minimum**: 150 MB
-- **Maximum**: 99,999,999,999 MB
-- **Recommended**: 1,000 - 5,000 MB for standard websites
-
-### Bandwidth Settings
-
-**Monthly Bandwidth Limit**
-
-Amount of data transfer allowed per month (in MB).
-
-- **Minimum**: 150 MB
-- **Maximum**: 99,999,999,999 MB
-- **Recommended**: 10,000 - 50,000 MB depending on traffic expectations
-
-**Bandwidth Warning Threshold**
-
-Percentage at which users receive a warning about approaching their bandwidth limit.
-
-- **Range**: 0 - 100%
-- **Recommended**: 80% (users get notified at 80% usage)
+| Setting | Range | Recommended |
+|---------|-------|-------------|
+| **Disk Space (MB)** | 150 - 99,999,999,999 | 1,000 - 5,000 |
+| **Bandwidth (MB/month)** | 150 - 99,999,999,999 | 10,000 - 50,000 |
+| **Bandwidth Warning (%)** | 0 - 100 | 80% |
 
 <Tip>
-**Resource Planning Tips:**
-- Start with conservative limits and increase based on actual usage
-- Monitor resource consumption regularly
-- Set warning thresholds to prevent service interruptions
-- Consider offering tiered packages with different resource limits
+Start with conservative limits and increase based on actual usage patterns. Monitor resource consumption regularly and adjust limits to match your hosting capacity and customer needs.
 </Tip>
+
+<Info>
+**Bandwidth Warning:** When a website reaches the specified percentage of its bandwidth limit, the system will send a notification to the website owner, allowing them to upgrade before hitting the limit.
+</Info>
 
 ---
 
@@ -78,239 +54,124 @@ Percentage at which users receive a warning about approaching their bandwidth li
 
 Control how many websites users can create and how frequently.
 
-### Website Creation Limits
-
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Maximum Websites per User** | Total number of websites a user can create | Varies |
-| **Creation Delay** | Minimum time (in seconds) between website creations | 0 seconds |
-| **Threshold Limit** | Maximum concurrent website creation requests | 1 |
-
-**Maximum Websites per User**
-
-Limit the total number of websites each user can create.
-
-- **Purpose**: Prevent abuse and manage server resources
-- **Recommended**: 5-10 for standard users, unlimited for premium
-
-**Creation Delay (seconds)**
-
-Minimum waiting time between creating websites.
-
-- **Purpose**: Prevent rapid-fire website creation
-- **Recommended**: 60-300 seconds (1-5 minutes)
-
-**Threshold Limit**
-
-Maximum number of websites a user can create simultaneously.
-
-- **Purpose**: Prevent server overload
-- **Recommended**: 1 (one at a time)
+| Setting | Description | Recommended |
+|---------|-------------|-------------|
+| **Max Websites per User** | Total websites allowed | 5-10 for standard users |
+| **Creation Delay (seconds)** | Wait time between creations | 60-300 seconds |
+| **Threshold Limit** | Concurrent creations | 1 (one at a time) |
 
 <Warning>
-Setting limits too low may frustrate legitimate users. Balance security with user experience based on your platform's needs.
+**Security vs. User Experience:** Balance security with user experience. Too restrictive limits may frustrate legitimate users, while too lenient limits may allow abuse. Monitor creation patterns and adjust accordingly.
 </Warning>
+
+<Tip>
+Set creation delays to prevent automated abuse while allowing legitimate users to create multiple websites. Consider offering higher limits for premium customers or verified accounts.
+</Tip>
 
 ---
 
 ## Trial & Expiry Settings
 
-Configure trial periods and website expiration behavior.
+Configure trial periods and expiration handling for websites.
 
-### Trial Period Configuration
+| Setting | Range | Recommended |
+|---------|-------|-------------|
+| **Trial Period (days)** | 1-365 (0 = disabled) | 7-30 days |
+| **Delete After Expiry (days)** | 0-365 (0 = immediate) | 7-14 days |
+| **Default Expiry (days)** | 1-365 | 30 days |
 
-**Trial Expiration Period (days)**
-
-Number of days before a trial website expires.
-
-- **Range**: 1 - 365 days
-- **Recommended**: 7-30 days
-- **Set to 0**: Disable trial expiration
-
-**Delete After Expiration (days)**
-
-Number of days to wait before permanently deleting expired websites.
-
-- **Range**: 0 - 365 days
-- **Recommended**: 7-14 days (gives users time to renew)
-- **Set to 0**: Delete immediately upon expiration
-
-### Standard Expiry Settings
-
-**Default Expiry Period (days)**
-
-Default number of days until a paid website expires (if not renewed).
-
-- **Range**: 1 - 365 days
-- **Common**: 30, 90, 180, or 365 days
-- **Recommended**: 30 days for monthly subscriptions
-
-<Info>
-**How Expiration Works:**
+**Expiration Flow:**
 1. Website reaches expiration date
 2. Website is suspended/disabled
 3. Grace period begins (Delete After Expiration)
-4. If not renewed, website is permanently deleted
-</Info>
+4. If not renewed, permanently deleted
+
+<Warning>
+**Data Loss Prevention:** Ensure customers are aware of expiration policies. Send multiple reminders before expiration. Provide adequate grace period for renewals. Back up data before permanent deletion.
+</Warning>
 
 <Tip>
-**Expiration Best Practices:**
-- Send email reminders before expiration
-- Provide a grace period for renewals
-- Clearly communicate expiration policies to users
-- Consider auto-renewal options for paid plans
+Offer a 7-14 day grace period after expiration to allow customers time to renew. Send expiration reminders at 30, 14, 7, and 1 day before expiration. Consider offering easy renewal options.
 </Tip>
 
 ---
 
 ## Branding Assets
 
-Upload custom images to personalize the website setup experience.
-
-### Setup Image
+Customize the website creation experience with your branding.
 
 **Website Setup Image**
 
-Custom image displayed during website creation and setup process.
+Custom image displayed during website creation.
 
-**Specifications:**
-- **Recommended Size**: 1200 x 600 pixels
-- **Format**: JPG, PNG, or GIF
-- **Max File Size**: 2 MB
-- **Purpose**: Branding and visual appeal during setup
-
-**How to Upload:**
-
-<Steps>
-  <Step title="Click Upload Button">
-    Select the image upload field in the Branding Assets section
-  </Step>
-  <Step title="Choose Image">
-    Select your prepared image file from your computer
-  </Step>
-  <Step title="Preview">
-    Review the uploaded image to ensure it displays correctly
-  </Step>
-  <Step title="Save Settings">
-    Save your configuration to apply the branding
-  </Step>
-</Steps>
+- **Size**: 1200 x 600 pixels
+- **Format**: JPG, PNG, GIF
+- **Max Size**: 2 MB
+- **Use**: Branding during setup
 
 <Tip>
-**Image Best Practices:**
-- Use high-quality images that represent your brand
-- Ensure images are optimized for web (compressed)
-- Test images on different screen sizes
-- Keep branding consistent across your platform
+Use high-quality images that reflect your brand identity. Ensure images are optimized for web to maintain fast loading times. Test images on different screen sizes for responsiveness.
 </Tip>
 
 ---
 
-## Helpdesk Ticket Automation
+## Helpdesk Automation
 
-Automate ticket management to improve efficiency and reduce manual work.
+Configure automatic ticket management to improve support efficiency.
 
-### Retention Settings
+| Setting | Range | Recommended |
+|---------|-------|-------------|
+| **Ticket Retention (days)** | 1-365 | 30-90 days |
+| **Auto-Close Awaiting (days)** | 1-365 | 7-14 days |
 
-**Ticket Retention Period (days)**
-
-Number of days to keep closed tickets before automatic deletion.
-
-- **Range**: 1 - 365 days
-- **Recommended**: 30-90 days
-- **Purpose**: Maintain a clean database while preserving recent history
-
-### Auto-Close Settings
-
-**Auto-Close Awaiting Tickets (days)**
-
-Automatically close tickets that have been awaiting customer response for this many days.
-
-- **Range**: 1 - 365 days
-- **Recommended**: 7-14 days
-- **Purpose**: Prevent ticket backlog from abandoned conversations
-
-**How Auto-Close Works:**
-
-<Steps>
-  <Step title="Ticket Awaits Response">
-    Support team responds and ticket status changes to "Awaiting Customer"
-  </Step>
-  <Step title="Timer Starts">
-    Auto-close countdown begins
-  </Step>
-  <Step title="Customer Doesn't Respond">
-    If customer doesn't reply within the specified days
-  </Step>
-  <Step title="Ticket Auto-Closes">
-    System automatically closes the ticket
-  </Step>
-  <Step title="Notification Sent">
-    Customer receives notification about ticket closure
-  </Step>
-</Steps>
+**Auto-Close Process:**
+1. Ticket status changes to "Awaiting Customer"
+2. Auto-close countdown begins
+3. If no customer response within specified days
+4. System automatically closes ticket
+5. Customer receives notification
 
 <Info>
-**Automation Benefits:**
-- Reduces manual ticket management
-- Keeps helpdesk organized
-- Improves response time metrics
-- Frees up support team resources
+**Ticket Retention:** Closed tickets are kept for the specified retention period before being archived or deleted. This allows you to reference historical support interactions and maintain customer service records.
 </Info>
 
-<Warning>
-**Important Considerations:**
-- Notify customers before auto-closing tickets
-- Allow customers to reopen tickets if needed
-- Don't set auto-close periods too short
-- Monitor customer satisfaction after implementing automation
-</Warning>
+<Tip>
+Set auto-close to 7-14 days for "Awaiting Customer" tickets. Send a reminder 2 days before auto-closing. Allow customers to easily reopen closed tickets if needed.
+</Tip>
 
 ---
 
 ## Configuration Examples
 
-### Starter Plan Configuration
-
-Ideal for small websites and new users:
-
-| Setting | Value |
-|---------|-------|
-| Disk Space | 1,000 MB (1 GB) |
-| Bandwidth | 10,000 MB (10 GB) |
-| Bandwidth Warning | 80% |
-| Max Websites | 3 |
-| Creation Delay | 300 seconds (5 min) |
-| Trial Period | 14 days |
-| Delete After Expiry | 7 days |
-
-### Professional Plan Configuration
-
-For established users with higher needs:
-
-| Setting | Value |
-|---------|-------|
-| Disk Space | 5,000 MB (5 GB) |
-| Bandwidth | 50,000 MB (50 GB) |
-| Bandwidth Warning | 85% |
-| Max Websites | 10 |
-| Creation Delay | 60 seconds (1 min) |
-| Trial Period | 30 days |
-| Delete After Expiry | 14 days |
-
-### Enterprise Plan Configuration
-
-For power users and agencies:
-
-| Setting | Value |
-|---------|-------|
-| Disk Space | 20,000 MB (20 GB) |
-| Bandwidth | 200,000 MB (200 GB) |
-| Bandwidth Warning | 90% |
-| Max Websites | Unlimited |
-| Creation Delay | 0 seconds |
-| Trial Period | 30 days |
-| Delete After Expiry | 30 days |
+<Tabs>
+  <Tab title="Starter Plan">
+    - Disk: 1,000 MB (1 GB)
+    - Bandwidth: 10,000 MB (10 GB)
+    - Warning: 80%
+    - Max Websites: 3
+    - Delay: 300 sec (5 min)
+    - Trial: 14 days
+    - Delete After: 7 days
+  </Tab>
+  <Tab title="Professional">
+    - Disk: 5,000 MB (5 GB)
+    - Bandwidth: 50,000 MB (50 GB)
+    - Warning: 85%
+    - Max Websites: 10
+    - Delay: 60 sec (1 min)
+    - Trial: 30 days
+    - Delete After: 14 days
+  </Tab>
+  <Tab title="Enterprise">
+    - Disk: 20,000 MB (20 GB)
+    - Bandwidth: 200,000 MB (200 GB)
+    - Warning: 90%
+    - Max Websites: Unlimited
+    - Delay: 0 sec
+    - Trial: 30 days
+    - Delete After: 30 days
+  </Tab>
+</Tabs>
 
 ---
 
@@ -318,59 +179,43 @@ For power users and agencies:
 
 <AccordionGroup>
   <Accordion title="Resource Management" icon="server">
-    **Optimize Resource Allocation:**
-    - Monitor actual usage patterns before setting limits
-    - Start conservative and adjust based on data
-    - Set up alerts for high resource usage
-    - Regularly review and optimize allocations
-    
-    **Prevent Resource Abuse:**
-    - Implement reasonable creation delays
-    - Limit concurrent website creations
-    - Monitor for unusual activity patterns
-    - Have a process for handling abuse
+    - Monitor overall server resource usage regularly
+    - Set limits based on your actual hosting capacity
+    - Provide upgrade paths for users who need more resources
+    - Send proactive notifications when users approach limits
+    - Keep some buffer capacity for traffic spikes
+    - Review and adjust limits quarterly based on usage patterns
+    - Consider tiered plans with different resource allocations
+  </Accordion>
+  
+  <Accordion title="Trial Period Strategy" icon="clock">
+    - Offer generous trial periods to encourage signups (14-30 days)
+    - Send welcome emails with trial information and expiration dates
+    - Provide reminders at 50%, 75%, and 90% of trial period
+    - Make conversion to paid plans easy and clear
+    - Offer incentives for converting before trial ends
+    - Track trial-to-paid conversion rates
+    - Adjust trial length based on conversion data
   </Accordion>
   
   <Accordion title="User Experience" icon="user">
-    **Balance Limits with Usability:**
-    - Don't make limits so strict they frustrate users
-    - Clearly communicate limitations upfront
-    - Provide upgrade paths for users who need more
+    - Set reasonable creation limits that don't frustrate users
+    - Provide clear error messages when limits are reached
+    - Offer upgrade options when users hit limits
+    - Make resource usage visible to users
     - Send notifications before reaching limits
-    
-    **Trial Period Strategy:**
-    - Offer enough time to evaluate the service (7-30 days)
-    - Send reminder emails during trial
-    - Make conversion to paid plan easy
-    - Provide grace period before deletion
+    - Provide self-service upgrade options
+    - Respond quickly to limit increase requests
   </Accordion>
   
-  <Accordion title="Automation Efficiency" icon="robot">
-    **Helpdesk Automation:**
-    - Set reasonable auto-close periods (7-14 days)
-    - Always notify customers before auto-closing
-    - Allow ticket reopening if needed
-    - Monitor customer satisfaction metrics
-    
-    **Ticket Retention:**
-    - Keep tickets long enough for reference (30-90 days)
-    - Archive important tickets before deletion
-    - Maintain compliance with data retention policies
-    - Regular cleanup prevents database bloat
-  </Accordion>
-  
-  <Accordion title="Monitoring & Optimization" icon="chart-line">
-    **Track Key Metrics:**
-    - Average resource usage per website
-    - Website creation frequency
-    - Trial conversion rates
-    - Ticket resolution times
-    
-    **Regular Reviews:**
-    - Quarterly review of resource limits
-    - Monthly analysis of user behavior
-    - Adjust settings based on trends
-    - Test changes in staging first
+  <Accordion title="Security & Abuse Prevention" icon="shield">
+    - Implement creation delays to prevent automated abuse
+    - Monitor for unusual creation patterns
+    - Set reasonable per-user website limits
+    - Use CAPTCHA for website creation if needed
+    - Track and block abusive users
+    - Require email verification for new accounts
+    - Review creation logs regularly for suspicious activity
   </Accordion>
 </AccordionGroup>
 
@@ -379,89 +224,52 @@ For power users and agencies:
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Users Can't Create Websites" icon="circle-xmark">
+  <Accordion title="Users Can't Create Websites" icon="globe">
     **Issue:** Users receive errors when trying to create websites
-    
-    **Common Causes:**
-    - Reached maximum website limit
-    - Creation delay not elapsed
-    - Server resource constraints
-    - Account restrictions
     
     **Solutions:**
     1. Check if user has reached their website limit
-    2. Verify creation delay settings aren't too restrictive
+    2. Verify creation delay isn't too restrictive
     3. Review server resource availability
-    4. Check for any account-level restrictions
-    5. Review error logs for specific issues
+    4. Check for error messages in logs
+    5. Ensure hosting server is accessible
+    6. Verify DirectAdmin API is working
   </Accordion>
   
   <Accordion title="Websites Expiring Too Quickly" icon="clock">
-    **Issue:** Websites expire before users expect
-    
-    **Common Causes:**
-    - Trial period set too short
-    - Expiry settings misconfigured
-    - No renewal reminders sent
-    - Payment processing issues
+    **Issue:** Websites expire before users can renew
     
     **Solutions:**
-    1. Review and adjust trial period settings
-    2. Verify expiry date calculations
-    3. Set up automated renewal reminders
-    4. Check payment gateway configuration
-    5. Provide clear expiration information to users
+    1. Review trial period settings and increase if needed
+    2. Set up renewal reminders earlier (30+ days)
+    3. Check payment gateway configuration
+    4. Verify email notifications are being sent
+    5. Extend grace period for renewals
+    6. Offer easier renewal process
   </Accordion>
   
   <Accordion title="Resource Limits Not Enforcing" icon="server">
-    **Issue:** Users exceeding disk or bandwidth limits
-    
-    **Common Causes:**
-    - Limits not properly configured
-    - Monitoring not active
-    - Cache issues
-    - Legacy websites not updated
+    **Issue:** Websites exceed configured resource limits
     
     **Solutions:**
-    1. Verify resource limit settings are saved
-    2. Check monitoring system is active
+    1. Verify settings are saved correctly
+    2. Check monitoring system is active and running
     3. Clear configuration cache
-    4. Update existing websites with new limits
-    5. Review server-level quotas
+    4. Restart monitoring services
+    5. Verify DirectAdmin quota settings
+    6. Check for override settings on individual websites
   </Accordion>
   
-  <Accordion title="Helpdesk Tickets Not Auto-Closing" icon="ticket">
-    **Issue:** Old tickets remain open indefinitely
-    
-    **Common Causes:**
-    - Auto-close not enabled
-    - Cron job not running
-    - Ticket status incorrect
-    - Configuration not saved
+  <Accordion title="Setup Image Not Displaying" icon="image">
+    **Issue:** Custom branding image doesn't appear
     
     **Solutions:**
-    1. Verify auto-close settings are enabled
-    2. Check cron jobs are running properly
-    3. Review ticket status definitions
-    4. Save configuration again
-    5. Test with a sample ticket
-  </Accordion>
-  
-  <Accordion title="Branding Image Not Displaying" icon="image">
-    **Issue:** Custom setup image doesn't appear
-    
-    **Common Causes:**
-    - Image not uploaded correctly
-    - File size too large
-    - Incorrect file format
-    - Cache not cleared
-    
-    **Solutions:**
-    1. Re-upload the image
-    2. Compress image if too large
-    3. Use supported formats (JPG, PNG, GIF)
+    1. Verify image file size is under 2 MB
+    2. Check image dimensions (1200 x 600 recommended)
+    3. Ensure file format is JPG, PNG, or GIF
     4. Clear browser and server cache
-    5. Check file permissions
+    5. Re-upload the image
+    6. Check file permissions on server
   </Accordion>
 </AccordionGroup>
 
@@ -469,30 +277,24 @@ For power users and agencies:
 
 ## Quick Reference
 
+### Resource Conversion
+
+| Unit | MB | GB |
+|------|----|----|
+| 1 GB | 1,024 | 1 |
+| 5 GB | 5,120 | 5 |
+| 10 GB | 10,240 | 10 |
+| 20 GB | 20,480 | 20 |
+| 50 GB | 51,200 | 50 |
+
 ### Common Settings
 
 | Setting | Typical Range | Recommended |
 |---------|---------------|-------------|
-| Disk Space | 500 - 20,000 MB | 1,000 - 5,000 MB |
-| Bandwidth | 5,000 - 200,000 MB | 10,000 - 50,000 MB |
-| Bandwidth Warning | 70 - 90% | 80% |
-| Max Websites | 1 - 50 | 5 - 10 |
-| Creation Delay | 0 - 600 seconds | 60 - 300 seconds |
-| Trial Period | 7 - 30 days | 14 days |
-| Delete After Expiry | 3 - 30 days | 7 - 14 days |
-| Ticket Retention | 30 - 180 days | 60 - 90 days |
-| Auto-Close Tickets | 3 - 30 days | 7 - 14 days |
-
-### Resource Conversion
-
-| Unit | Megabytes (MB) | Gigabytes (GB) |
-|------|----------------|----------------|
-| 1 GB | 1,024 MB | 1 GB |
-| 5 GB | 5,120 MB | 5 GB |
-| 10 GB | 10,240 MB | 10 GB |
-| 20 GB | 20,480 MB | 20 GB |
-| 50 GB | 51,200 MB | 50 GB |
-| 100 GB | 102,400 MB | 100 GB |
+| Disk Space | 500-20,000 MB | 1,000-5,000 MB |
+| Bandwidth | 5,000-200,000 MB | 10,000-50,000 MB |
+| Max Websites | 1-50 | 5-10 |
+| Trial Period | 7-30 days | 14 days |
 
 ---
 
@@ -500,21 +302,15 @@ For power users and agencies:
 
 <CardGroup cols={2}>
   <Card title="General Settings" icon="gear" href="/general-settings">
-    Configure platform-wide settings and preferences
+    Platform-wide settings
   </Card>
   <Card title="Hosting Plans" icon="box" href="/hosting-plans">
-    Manage website packages and pricing
+    Website packages and pricing
   </Card>
   <Card title="Domain API Settings" icon="globe" href="/domain-api-settings">
-    Configure domain registration and DNS
+    Domain registration
   </Card>
   <Card title="Auto-Renewal Settings" icon="arrows-rotate" href="/auto-renewal-settings">
-    Manage automatic renewal configuration
+    Automatic renewals
   </Card>
 </CardGroup>
-
----
-
-<Card title="Need Help?" icon="headset" href="#">
-  Contact support if you need assistance configuring website settings or troubleshooting issues.
-</Card>

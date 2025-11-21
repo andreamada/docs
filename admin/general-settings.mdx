@@ -38,6 +38,8 @@ Configure essential platform settings including contact options, company informa
 
 ## Contact Options
 
+Configure how customers can reach you through various communication channels.
+
 ### Contact Form & Helpdesk
 
 | Setting | Description |
@@ -64,9 +66,15 @@ Add up to 20 customizable contact buttons (WhatsApp, Facebook, Telegram, Email, 
 **Popular Colors:**
 - WhatsApp: `#25D366`, Facebook: `#1877F2`, Telegram: `#0088CC`, Email: `#EA4335`
 
+<Tip>
+Limit to 3-5 contact options to avoid overwhelming visitors. Use recognizable brand colors and test all links before publishing.
+</Tip>
+
 ---
 
 ## Company Setup
+
+Configure your business information and platform-wide settings.
 
 ### Currency
 
@@ -75,7 +83,7 @@ Select your default currency for transactions and pricing.
 Available: USD ($), EUR (€), GBP (£), VND (₫), JPY (¥), AUD (A$), CAD (C$)
 
 <Warning>
-Changing currency after setting up pricing may affect existing products.
+Changing currency after setting up pricing may affect existing products. Make this change carefully and update all pricing accordingly.
 </Warning>
 
 ### Company Information
@@ -105,11 +113,19 @@ Changing currency after setting up pricing may affect existing products.
 | **Tax Label** | Name (e.g., "VAT", "GST", "Sales Tax") |
 | **Tax Rate (%)** | Percentage to apply (e.g., 20 for 20%) |
 
+<Tip>
+Check your local tax regulations before enabling. Ensure your tax rate is accurate and up-to-date. Consider consulting with a tax professional for complex scenarios.
+</Tip>
+
 ### User Registration
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | **Allow Registration** | Disabled | Enable public account creation |
+
+<Warning>
+Disabling user registration will prevent new customers from signing up. Only enable this if you want to control who can create accounts.
+</Warning>
 
 ---
 
@@ -118,6 +134,10 @@ Changing currency after setting up pricing may affect existing products.
 <Card title="Payment Configuration Guide" icon="credit-card" href="/payment-configuration">
   Configure Bank Accounts, Stripe, and PayPal. View the comprehensive **Payment Configuration** guide for detailed setup.
 </Card>
+
+<Info>
+The Payment Gateway tab allows you to configure multiple payment methods for processing customer transactions. For detailed setup instructions, API key configuration, and webhook setup, please refer to the dedicated [Payment Configuration](/payment-configuration) documentation.
+</Info>
 
 **Quick Overview:**
 - **Bank Account**: Up to 20 accounts for manual transfers
@@ -128,7 +148,14 @@ Changing currency after setting up pricing may affect existing products.
 
 ## License Settings
 
-Manage and validate your software license.
+Manage and validate your software license to ensure continued access to updates and support.
+
+**How to Validate Your License:**
+
+1. Enter your license key in the provided field
+2. Click the validation button to verify your license
+3. Review your license status, expiration date, and website count
+4. If your license is expired or expiring soon, renew it to maintain access
 
 **License Information Displayed:**
 - ✅ License Status (Active, Expired, Invalid)
@@ -136,46 +163,49 @@ Manage and validate your software license.
 - ✅ Website Count
 - ✅ Domain Verification
 
-<Steps>
-  <Step title="Enter License Key">Input your license key</Step>
-  <Step title="Click Validate">Verify your license</Step>
-  <Step title="Review Status">Check expiration and limits</Step>
-  <Step title="Renew if Needed">Renew before expiration</Step>
-</Steps>
-
 <Warning>
-Keep your license key secure. Validate regularly and renew before expiration to avoid service interruptions.
+**Important:**
+- Keep your license key secure and confidential
+- Validate your license regularly to ensure it's active
+- Renew before expiration to avoid service interruptions
+- Contact support if you encounter validation errors
 </Warning>
+
+<Tip>
+Set a reminder to renew your license before it expires. Keep a backup copy of your license key in a secure location. Validate your license after any major system updates.
+</Tip>
 
 ---
 
 ## Cron Automation
 
-Configure automated tasks to run on a schedule.
+Configure automated tasks to run on a schedule, improving efficiency and reducing manual work.
 
-**Common Uses:**
-- Database cleanup
-- Email notifications
-- Report generation
-- Data synchronization
+### What is Cron Automation?
 
-<Steps>
-  <Step title="Get Cron URL">Copy the cron endpoint URL</Step>
-  <Step title="Access Server">Log in to cPanel/Plesk</Step>
-  <Step title="Create Cron Job">Add new cron with URL</Step>
-  <Step title="Set Schedule">Configure frequency (e.g., every 5-15 min)</Step>
-  <Step title="Test">Verify execution</Step>
-</Steps>
+Cron automation allows you to schedule recurring tasks that run automatically at specified intervals. This is essential for database cleanup, email notifications, report generation, and data synchronization.
+
+**Setting Up Cron Jobs:**
+
+1. Copy the cron endpoint URL from the Cron Automation tab
+2. Log in to your server's control panel (cPanel, Plesk, etc.)
+3. Add a new cron job with the URL you copied
+4. Configure how often the cron should run (e.g., every hour, daily)
+5. Verify the cron job runs successfully
 
 <Info>
-**Recommended:** Run cron jobs every 5-15 minutes for optimal performance.
+**Recommended Schedule:** Run cron jobs every 5-15 minutes for optimal performance. Adjust based on your specific needs and server resources.
 </Info>
+
+<Tip>
+Start with a longer interval (e.g., hourly) and adjust as needed. Monitor server resources to ensure cron jobs don't overload your system. Set up logging to track cron job execution and errors.
+</Tip>
 
 ---
 
 ## Language Settings
 
-Configure multi-language support for your platform.
+Configure multi-language support to serve customers in their preferred language.
 
 **Features:**
 - 🌍 Multiple languages
@@ -184,13 +214,113 @@ Configure multi-language support for your platform.
 - 🔄 Auto-detection
 - ✏️ Custom translations
 
-<Steps>
-  <Step title="Select Languages">Choose which languages to enable</Step>
-  <Step title="Upload Translations">Upload language files</Step>
-  <Step title="Set Default">Choose default language</Step>
-  <Step title="Enable Auto-Detection">Optional browser-based detection</Step>
-  <Step title="Test">Verify all languages display correctly</Step>
-</Steps>
+**Language Configuration:**
+
+1. Choose which languages to enable on your platform
+2. Upload language files or use the built-in translation editor
+3. Set the default language for new visitors
+4. Optionally enable automatic language detection based on browser settings
+5. Verify all languages display correctly on your website
+
+<Tip>
+Enable auto-detection to serve content in visitors' preferred language. Provide a language switcher for manual selection. Ensure all critical content is translated. Keep translations up-to-date when adding new features.
+</Tip>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Configuration Management" icon="gear">
+    - Document all configuration changes
+    - Test settings in a staging environment first
+    - Back up your configuration before major changes
+    - Review settings quarterly to ensure they're still appropriate
+    - Make one change at a time to identify issues easily
+    - Notify your team before making significant changes
+    - Keep a log of who changed what and when
+  </Accordion>
+  
+  <Accordion title="Security Considerations" icon="shield">
+    - Never share your license key publicly
+    - Keep API keys and secrets secure
+    - Use strong passwords for admin accounts
+    - Enable two-factor authentication if available
+    - Limit admin access to trusted team members only
+    - Review admin user list regularly
+    - Remove access for former employees immediately
+  </Accordion>
+  
+  <Accordion title="Performance Optimization" icon="gauge">
+    - Set appropriate cron job intervals
+    - Monitor server resources regularly
+    - Disable unused features to reduce overhead
+    - Keep your software updated for performance improvements
+    - Run database cleanup cron jobs regularly
+    - Archive old data instead of deleting
+    - Optimize database tables periodically
+  </Accordion>
+  
+  <Accordion title="Customer Experience" icon="user">
+    - Provide multiple contact options
+    - Keep company information up-to-date
+    - Enable search engine indexing for visibility
+    - Offer language options for international customers
+    - Respond to contact form inquiries promptly
+    - Keep helpdesk tickets organized
+    - Set clear expectations for response times
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="License Validation Fails" icon="key">
+    **Issue:** License key shows as invalid or expired
+    
+    **Solutions:**
+    1. Verify license key is copied correctly (no extra spaces)
+    2. Check license expiration date
+    3. Ensure domain matches the one registered for the license
+    4. Try validating again after a few minutes
+    5. Contact support if issue persists
+  </Accordion>
+  
+  <Accordion title="Cron Jobs Not Running" icon="clock">
+    **Issue:** Automated tasks are not executing
+    
+    **Solutions:**
+    1. Verify cron job is set up in server control panel
+    2. Check cron URL is correct and accessible
+    3. Review server logs for errors
+    4. Ensure server has enough resources
+    5. Test cron URL manually in browser
+  </Accordion>
+  
+  <Accordion title="Contact Buttons Not Appearing" icon="message">
+    **Issue:** Contact buttons don't show on website
+    
+    **Solutions:**
+    1. Save contact button configuration again
+    2. Clear browser and server cache
+    3. Check browser console for JavaScript errors
+    4. Verify theme supports contact buttons
+    5. Test on different browsers
+  </Accordion>
+  
+  <Accordion title="Currency Changes Not Reflecting" icon="dollar-sign">
+    **Issue:** Currency change doesn't update prices
+    
+    **Solutions:**
+    1. Clear all caches (browser, server, application)
+    2. Refresh pricing pages
+    3. Update product prices manually if needed
+    4. Check theme currency settings
+    5. Verify database currency field is updated
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -215,28 +345,6 @@ Configure multi-language support for your platform.
 | User Registration | Disabled | Enable only if needed |
 | Tax Management | Disabled | Enable based on regulations |
 | Contact Form | Enabled | Keep enabled |
-
----
-
-## Troubleshooting
-
-**License Validation Fails:**
-- Verify key is correct (no extra spaces)
-- Check expiration date
-- Ensure domain matches license
-- Contact support if issue persists
-
-**Cron Jobs Not Running:**
-- Verify cron job configured on server
-- Check cron URL is correct
-- Review server logs
-- Test URL manually in browser
-
-**Contact Buttons Not Appearing:**
-- Save configuration again
-- Clear browser and server cache
-- Check theme compatibility
-- Verify JavaScript has no errors
 
 ---
 
