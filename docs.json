@@ -30,6 +30,7 @@
               "admin/websites-setup",
               "admin/domains-setup",
               "admin/packages-setup",
+              "admin/autorenewal-setup",
               "admin/roles-setup",
               "admin/emails-setup",
               "admin/theme-setup"

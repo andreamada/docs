@@ -1,37 +1,534 @@
 ---
-title: "Configuring Roles"
-description: "Create new roles or adjust existing one adding/removing new permissions."
+title: "User Roles & Permissions"
+description: "Manage user roles, permissions, and access control for your application"
+icon: "shield-lock"
 ---
 
-### **Adding a Role or Permission**
+## Navigation
 
-During installation three roles are created by default. To add additional roles, follow the following steps:
+**Admin Panel** → **Settings** → **General** → **User Roles & Permissions**  
+**URL:** `/admin/PermissionOption`
 
-1. Visit [Genera Setup] \> [Permissions Manager]and click the "Add Role" button. 
-2. Define a color and set the permissions for it:
+## Overview
+
+The User Roles & Permissions page provides a comprehensive interface for managing user access control through a role-based permission system. Create custom roles, assign specific permissions, and control what users can access and modify within your application.
+
+<CardGroup cols={2}>
+  <Card title="Role Management" icon="people">
+    Create, edit, and delete user roles with custom names and colors
+  </Card>
+  <Card title="Permission Control" icon="key">
+    Assign granular permissions to each role for precise access control
+  </Card>
+  <Card title="Visual Organization" icon="palette">
+    Color-code roles for easy identification and management
+  </Card>
+  <Card title="Default Roles" icon="shield-check">
+    Protected system roles (Admin, Member) cannot be deleted
+  </Card>
+</CardGroup>
+
+---
+
+## Role Management
+
+### Existing Roles
+
+View and manage all user roles in your system. Each role displays:
+
+- **Role Name**: Custom label for the role
+- **Role ID**: Unique identifier
+- **Role Color**: Visual indicator for easy identification
+- **Actions**: Edit, Permissions, Delete (for custom roles)
+
+<Info>
+Default roles (Admin, Member) are protected and cannot be deleted to ensure system stability.
+</Info>
+
+### Creating a New Role
+
+<Steps>
+  <Step title="Enter Role Details">
+    Provide a descriptive name and select a distinctive color for the role
+  </Step>
+  <Step title="Click Add Role">
+    Submit the form to create the new role
+  </Step>
+  <Step title="Assign Permissions">
+    Click the "Permissions" button on the newly created role to configure access
+  </Step>
+  <Step title="Verify Configuration">
+    Refresh the page to see the updated roles list
+  </Step>
+</Steps>
+
+#### Role Configuration Fields
+
+<ParamField path="label" type="string" required>
+  **Role Name**
+  
+  Descriptive name for the role (e.g., "Editor", "Moderator", "Support Agent")
+  
+  - Should be clear and descriptive
+  - Avoid generic names like "Role1"
+  - Use title case for consistency
+</ParamField>
+
+<ParamField path="color" type="color" required>
+  **Role Color**
+  
+  Hex color code for visual identification
+  
+  - Default: `#FF00FF`
+  - Choose distinctive colors for each role
+  - Avoid similar colors for different roles
+  - Consider accessibility (sufficient contrast)
+</ParamField>
+
+---
+
+## Permission System
+
+### Assigning Permissions
+
+<Steps>
+  <Step title="Select Role">
+    Click the "Permissions" button on any role in the roles list
+  </Step>
+  <Step title="Review Available Permissions">
+    View all available permissions in the modal dialog
+  </Step>
+  <Step title="Toggle Permissions">
+    Click on permission cards or use the switches to enable/disable permissions
+  </Step>
+  <Step title="Save Changes">
+    The system automatically saves permission changes
+  </Step>
+</Steps>
+
+### Permission Categories
+
+The system includes various permission types for different areas of the application:
+
+<AccordionGroup>
+  <Accordion title="Administrative Permissions">
+    - **Admin Panel Access**: Access to the administrative dashboard
+    - **System Settings**: Modify system-wide configuration
+    - **User Management**: Create, edit, and delete users
+    - **Role Management**: Manage roles and permissions
+  </Accordion>
+  
+  <Accordion title="Content Permissions">
+    - **Create Content**: Add new content items
+    - **Edit Content**: Modify existing content
+    - **Delete Content**: Remove content items
+    - **Publish Content**: Make content publicly visible
+  </Accordion>
+  
+  <Accordion title="Service Permissions">
+    - **Manage Websites**: Create and configure websites
+    - **Manage Domains**: Register and configure domains
+    - **Manage Packages**: Configure hosting packages
+    - **Manage Billing**: Access billing and payment information
+  </Accordion>
+  
+  <Accordion title="Support Permissions">
+    - **View Tickets**: Access support tickets
+    - **Respond to Tickets**: Reply to customer inquiries
+    - **Close Tickets**: Mark tickets as resolved
+    - **Escalate Tickets**: Escalate to higher support tiers
+  </Accordion>
+</AccordionGroup>
+
+### Available Permissions Reference
+
+Click the "Available Permissions Reference" accordion on the page to view a complete list of all permissions with their:
+
+- **Permission Label**: Human-readable name
+- **Permission Name**: System identifier (used in code)
+
+<Tip>
+Use the permissions reference to understand what each permission controls before assigning it to roles.
+</Tip>
+
+---
+
+## Editing Roles
+
+### Modify Role Details
+
+<Steps>
+  <Step title="Click Edit Button">
+    Select the "Edit" button on the role you want to modify
+  </Step>
+  <Step title="Update Information">
+    Change the role name or color in the modal dialog
+  </Step>
+  <Step title="Save Changes">
+    Submit the form to update the role
+  </Step>
+  <Step title="Refresh Page">
+    Reload to see the updated role information
+  </Step>
+</Steps>
+
+<Warning>
+Editing a role's name or color does not affect existing user assignments or permissions. Users with this role will retain their access.
+</Warning>
+
+---
+
+## Deleting Roles
+
+### Remove Custom Roles
+
+<Steps>
+  <Step title="Identify Custom Role">
+    Only custom roles (non-default) can be deleted
+  </Step>
+  <Step title="Click Delete Button">
+    Select the "Delete" button on the role
+  </Step>
+  <Step title="Confirm Deletion">
+    Confirm the action in the dialog
+  </Step>
+  <Step title="Reassign Users">
+    Users with the deleted role should be reassigned to another role
+  </Step>
+</Steps>
+
+<Warning>
+**Before Deleting a Role:**
+- Ensure no active users are assigned to this role
+- Consider archiving instead of deleting if you might need it later
+- Default roles (Admin, Member) cannot be deleted
+</Warning>
+
+---
+
+## Configuration Examples
+
+### Example 1: Content Editor Role
+
+```json
+{
+  "label": "Content Editor",
+  "color": "#10b981",
+  "permissions": [
+    "create_content",
+    "edit_content",
+    "publish_content",
+    "view_tickets"
+  ]
+}
+```
+
+**Use Case:** Team members who manage website content but don't need full admin access.
+
+### Example 2: Support Agent Role
+
+```json
+{
+  "label": "Support Agent",
+  "color": "#3b82f6",
+  "permissions": [
+    "view_tickets",
+    "respond_tickets",
+    "close_tickets",
+    "view_users"
+  ]
+}
+```
+
+**Use Case:** Customer support team members who handle tickets and user inquiries.
+
+### Example 3: Billing Manager Role
+
+```json
+{
+  "label": "Billing Manager",
+  "color": "#f59e0b",
+  "permissions": [
+    "manage_billing",
+    "view_invoices",
+    "process_payments",
+    "view_users"
+  ]
+}
+```
+
+**Use Case:** Finance team members who manage billing and payments.
+
+### Example 4: Website Manager Role
+
+```json
+{
+  "label": "Website Manager",
+  "color": "#8b5cf6",
+  "permissions": [
+    "manage_websites",
+    "manage_domains",
+    "view_packages",
+    "view_tickets"
+  ]
+}
+```
+
+**Use Case:** Technical team members who manage hosting services and websites.
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Role Design Principles" icon="lightbulb">
+    **Create Focused Roles**
+    - Design roles around specific job functions
+    - Avoid creating overly broad "super user" roles
+    - Use the principle of least privilege
+    
+    **Use Descriptive Names**
+    - Choose clear, self-explanatory role names
+    - Avoid abbreviations or internal jargon
+    - Use consistent naming conventions
+    
+    **Color Coding Strategy**
+    - Use distinct colors for different role types
+    - Consider using color families (e.g., blues for support, greens for content)
+    - Ensure sufficient contrast for accessibility
+  </Accordion>
+  
+  <Accordion title="Permission Management" icon="key">
+    **Regular Audits**
+    - Review role permissions quarterly
+    - Remove unused or outdated permissions
+    - Verify users are assigned to appropriate roles
+    
+    **Documentation**
+    - Document what each custom role is intended for
+    - Maintain a list of which teams use which roles
+    - Track permission changes for compliance
+    
+    **Testing**
+    - Test new roles in a staging environment first
+    - Verify permissions work as expected
+    - Check for unintended access grants
+  </Accordion>
+  
+  <Accordion title="Security Considerations" icon="shield">
+    **Minimize Admin Roles**
+    - Limit the number of users with admin access
+    - Create specialized roles instead of granting full admin
+    - Regularly review admin role assignments
+    
+    **Separation of Duties**
+    - Separate critical functions across different roles
+    - Avoid combining conflicting permissions
+    - Implement approval workflows for sensitive actions
+    
+    **Access Reviews**
+    - Conduct periodic access reviews
+    - Remove access for inactive users
+    - Update permissions when job roles change
+  </Accordion>
+  
+  <Accordion title="User Assignment" icon="users">
+    **Onboarding Process**
+    - Assign roles during user creation
+    - Provide role-specific training
+    - Document role responsibilities
+    
+    **Role Changes**
+    - Update roles when users change positions
+    - Remove access immediately when users leave
+    - Maintain an audit trail of role changes
+    
+    **Bulk Management**
+    - Use role assignments for team-based access
+    - Avoid individual permission overrides
+    - Standardize access patterns
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Cannot Delete a Role" icon="trash">
+    **Issue:** Delete button is not available for a role
+    
+    **Possible Causes:**
+    - Role is a default system role (Admin, Member)
+    - Role is currently assigned to active users
+    
+    **Solutions:**
+    1. Verify it's not a protected default role
+    2. Check if users are assigned to this role
+    3. Reassign users to different roles first
+    4. Try refreshing the page
+  </Accordion>
+  
+  <Accordion title="Permissions Not Saving" icon="floppy-disk">
+    **Issue:** Permission changes don't persist after saving
+    
+    **Possible Causes:**
+    - Browser cache issues
+    - Session timeout
+    - Server-side validation errors
+    
+    **Solutions:**
+    1. Clear browser cache and cookies
+    2. Log out and log back in
+    3. Check browser console for errors
+    4. Verify you have permission to modify roles
+    5. Try a different browser
+  </Accordion>
+  
+  <Accordion title="Role Not Appearing After Creation" icon="eye-slash">
+    **Issue:** Newly created role doesn't show in the list
+    
+    **Possible Causes:**
+    - Page needs to be refreshed
+    - Validation error during creation
+    - Duplicate role name
+    
+    **Solutions:**
+    1. Click "Refresh Roles & Permissions" button
+    2. Reload the page manually
+    3. Check for error messages
+    4. Ensure role name is unique
+    5. Verify all required fields are filled
+  </Accordion>
+  
+  <Accordion title="User Has Wrong Permissions" icon="user-lock">
+    **Issue:** User can access features they shouldn't
+    
+    **Possible Causes:**
+    - User assigned to multiple roles
+    - Permissions inherited from wrong role
+    - Cache not cleared after permission change
+    
+    **Solutions:**
+    1. Verify user's current role assignment
+    2. Check all permissions assigned to that role
+    3. Ask user to log out and log back in
+    4. Clear application cache
+    5. Review permission inheritance rules
+  </Accordion>
+  
+  <Accordion title="Modal Not Opening" icon="window">
+    **Issue:** Edit or Permissions modal doesn't open
+    
+    **Possible Causes:**
+    - JavaScript errors
+    - Browser compatibility issues
+    - Ad blocker interference
+    
+    **Solutions:**
+    1. Check browser console for JavaScript errors
+    2. Disable browser extensions temporarily
+    3. Try a different browser
+    4. Clear browser cache
+    5. Ensure JavaScript is enabled
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Technical Reference
+
+### File Structure
 
 ```
-User: member
-Administrator: admin
-Users Management: users_manager
-Add User: add_user
-Website Template Master: website_template_master
-Website Management: website_manager
-Website Template Management: website_template_manager
-Deposit money into account: recharge
-Accounting (Create, edit receipts and payments...): accountant
-Post an article: post
-Manage posts: post_manager
-Manage online chat messages: online_chat_manager
-Seller: seller
-Websites Sales Agent: agency
-Worker: work
-Worker Manager: work_manager
-Select user to register domain: inet_choose_user
-Client Website Management: website_manager_customer
-Technician: technicians
-Page Management: page_manager
-Service management (Email, hosting, domain): service_manager
-Demo: demo
-Website Cloning: duplicate_website
+src/apps/pages/admin/views/panel/settings-general/
+└── PermissionOption.blade.php    # Main view file
 ```
+
+### Database Models
+
+- **Role Model**: `\models\Role`
+  - Properties: `id`, `label`, `color`, `default`
+  - Methods: `all()`, `find()`, `create()`, `update()`, `delete()`
+
+- **Permission Model**: `\models\Permission`
+  - Properties: `id`, `name`, `label`
+  - Methods: `all()`, `find()`
+
+### Form Handling
+
+**Add Role Form:**
+```php
+Form::create([
+    "form"     => $form,
+    "function" => "",
+    "prefix"   => "",
+    "name"     => "role",
+    "class"    => "form-mrg",
+    "hover"    => false
+])
+```
+
+**Form Fields:**
+- `label` (text): Role name
+- `color` (color): Role color (default: #FF00FF)
+
+### JavaScript Functions
+
+- `addRoleSubmit(button)`: Handles new role creation
+- `editRole(button)`: Opens edit role modal
+- `setPermissions(button)`: Opens permissions assignment modal
+- `deleteRole(id, label)`: Handles role deletion
+
+### API Endpoints
+
+All actions are submitted via POST to the current page URL with the form data.
+
+### Styling Classes
+
+- `.role-item`: Individual role card
+- `.set-permissions-item`: Permission checkbox card
+- `.form-check-input`: Toggle switches
+- `.modal-edit-role`: Edit role modal
+- `.modal-set-permissions`: Permissions modal
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| Create Role | Add New Role → Enter Name & Color → Add Role |
+| Assign Permissions | Select Role → Permissions → Toggle Switches → Auto-Save |
+| Edit Role | Select Role → Edit → Update Details → Save |
+| Delete Role | Select Role → Delete → Confirm |
+| View Permissions | Expand "Available Permissions Reference" accordion |
+
+### Default Roles
+
+| Role | ID | Color | Can Delete? |
+|------|----|----|-------------|
+| Admin | 1 | System | ❌ No |
+| Member | 2 | System | ❌ No |
+| Custom Roles | Variable | Custom | ✅ Yes |
+
+### Permission Naming Convention
+
+- **Format**: `action_resource` (e.g., `create_content`, `manage_users`)
+- **Actions**: create, edit, delete, view, manage, publish
+- **Resources**: content, users, websites, domains, tickets, billing
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/admin/GeneralOption">
+    Configure system-wide settings
+  </Card>
+  <Card title="User Management" icon="users" href="/admin/Users">
+    Manage user accounts and assignments
+  </Card>
+</CardGroup>
