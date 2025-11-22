@@ -1,57 +1,369 @@
 ---
-title: "Introduction"
-description: "AreaWP is an all-in-one WordPress platform designed specifically for agencies and WordPress professionals. It offers a comprehensive suite of tools, including site managements, white-label hosting and automation solutions."
+title: "Welcome to AreaWP"
+description: "The all-in-one WordPress-as-a-Service platform for agencies and professionals"
+icon: "house"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
+<Info>
+**AreaWP** is a comprehensive WordPress-as-a-Service (WaaS) platform designed specifically for agencies, freelancers, and WordPress professionals who want to offer managed WordPress hosting to their clients.
+</Info>
 
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+## What is WordPress-as-a-Service (WaaS)?
 
-## What is WaaS ?
+WordPress-as-a-Service is a business model that allows you to offer fully managed WordPress hosting to your clients under your own brand. AreaWP provides the complete infrastructure, automation tools, and management systems you need to run a professional WordPress hosting business.
 
-The WaaS (Website-as-a-Service) model allows you to build and Sell pre-Made WordPress Sites, create site templates and offer them as turnkey solutions, Automate Sales and Deployment.\
-Are you curious about how it's structured behind? Take a look here:
-
-<CardGroup cols={2}>
-  <Card title="Technical Details" icon="pen-to-square" href="https://docs.areawp.com/technical">
-    Take a look at the tech stack behind right here
+<CardGroup cols={3}>
+  <Card title="White-Label Platform" icon="palette" color="#0d6efd">
+    Fully customizable branding
+  </Card>
+  <Card title="Automated Management" icon="robot" color="#198754">
+    Automated site creation & updates
+  </Card>
+  <Card title="Client Portal" icon="users" color="#ffc107">
+    Self-service customer dashboard
   </Card>
 </CardGroup>
 
-## Single Tenant vs Multi Tenant
+---
 
-In a multi-tenant WordPress setup, a single WordPress installation serves multiple websites (or tenants), each with its own isolated space and data. In contrast, a single-tenant WordPress setup provides a dedicated WordPress installation for each website, with its own database, files, and resources. 
+## Platform Architecture
 
-**Overall:**\
-**Single tenant (our choice):** More secure since each customer has a separate environment. A security breach only affects one client.
+### Single Tenant vs Multi Tenant
 
-**Multi tenant**: Higher risk because multiple customers share the same infrastructure. If one tenant is compromised, others might be at risk.
+Understanding the architecture model is crucial for choosing the right deployment:
 
-That's why we opted for **"single tenant"** deployment for our infrastructure.
+<Tabs>
+  <Tab title="Single Tenant (Recommended)">
+    **Dedicated Infrastructure**
+    
+    Each AreaWP installation runs on its own dedicated server with isolated resources.
+    
+    **Advantages:**
+    - Complete resource isolation
+    - Enhanced security and privacy
+    - Full control over server configuration
+    - Predictable performance
+    - No "noisy neighbor" issues
+    - Customizable server specifications
+    
+    **Best For:**
+    - Agencies with 50+ clients
+    - High-traffic websites
+    - Enterprise clients
+    - Security-sensitive applications
+    - Custom infrastructure requirements
+    
+    **Available In:**
+    - Self-Hosted Edition
+    - Hosted Edition (VPS per customer)
+  </Tab>
+  
+  <Tab title="Multi Tenant">
+    **Shared Infrastructure**
+    
+    Multiple AreaWP customers share the same server infrastructure with resource allocation.
+    
+    **Advantages:**
+    - Lower initial cost
+    - Easier to get started
+    - Managed infrastructure
+    - Automatic scaling
+    - Reduced maintenance overhead
+    
+    **Considerations:**
+    - Shared resources
+    - Limited customization
+    - Potential performance variability
+    - Standard configurations
+    
+    **Best For:**
+    - Small agencies (under 50 clients)
+    - Startups and freelancers
+    - Testing and development
+    - Budget-conscious deployments
+    
+    **Available In:**
+    - Hosted Edition only
+  </Tab>
+</Tabs>
 
-## Setting up
+<Tip>
+**Recommendation:** For production environments with serious business requirements, we strongly recommend the **Single Tenant** architecture for optimal performance, security, and control.
+</Tip>
 
-Let's take a look at the main sections of the platform to get started quickly.
+---
+
+## Key Features
+
+### Platform Capabilities
+
+<AccordionGroup>
+  <Accordion title="Automated Website Management" icon="wand-magic-sparkles">
+    - One-click WordPress installation
+    - Automatic WordPress core updates
+    - Plugin and theme management
+    - Automated backups and restoration
+    - Bulk operations across multiple sites
+    - Template-based site creation
+    - Clone and migration tools
+  </Accordion>
+  
+  <Accordion title="Client Management" icon="users">
+    - Customer portal with self-service features
+    - User role management and permissions
+    - Client billing and invoicing
+    - Package and subscription management
+    - Domain management integration
+    - Support ticket system
+    - Client communication tools
+  </Accordion>
+  
+  <Accordion title="White-Label Branding" icon="palette">
+    - Custom logo and colors
+    - Branded email templates
+    - Custom domain for client portal
+    - Personalized dashboard theme
+    - Custom CSS and styling
+    - Branded documentation
+    - Remove AreaWP branding
+  </Accordion>
+  
+  <Accordion title="Business Automation" icon="robot">
+    - Automated billing and renewals
+    - Payment gateway integration (PayPal, Stripe)
+    - Subscription management
+    - Automated expiration notifications
+    - Order processing automation
+    - Task scheduling and cron jobs
+    - API integrations
+  </Accordion>
+  
+  <Accordion title="Performance & Security" icon="shield-check">
+    - LEMP stack optimization
+    - FastCGI caching
+    - Redis object caching
+    - SSL certificate automation
+    - DDoS protection
+    - Malware scanning
+    - Firewall management
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Getting Started
+
+Follow these essential steps to set up your AreaWP platform:
+
+### 1. Customize Your Theme
+
+Make the platform your own by customizing the visual appearance.
+
+<Card title="Theme Setup" icon="brush" href="/admin/theme-setup">
+  Customize your dashboard theme, colors, logo, and branding to match your agency identity.
+</Card>
+
+**What You'll Configure:**
+- Platform logo and favicon
+- Color scheme and theme
+- Custom CSS styling
+- Email template branding
+- Client portal appearance
+
+---
+
+### 2. Configure Important Settings
+
+Define the core settings that control how your platform operates.
+
+<Card title="Important Settings" icon="gear" href="/admin/important-settings">
+  Set up basic platform settings including domain configuration, email settings, and system preferences.
+</Card>
+
+**Key Settings:**
+- Primary domain configuration
+- System email addresses
+- DirectAdmin integration
+- Server connection details
+- Default language and timezone
+- Security settings
+
+---
+
+### 3. Set Up Payment Gateways
+
+Enable payment processing to accept customer payments automatically.
+
+<Card title="Payments Gateway" icon="credit-card" href="/admin/payments-setup">
+  Integrate PayPal and Stripe for seamless payment processing and automated billing.
+</Card>
+
+**Payment Features:**
+- PayPal integration
+- Stripe payment processing
+- Automated recurring billing
+- Invoice generation
+- Payment notifications
+- Refund management
+
+---
+
+### 4. Create Hosting Packages
+
+Define your hosting plans with features and pricing.
+
+<Card title="Packages Setup" icon="box" href="/admin/websites-setup">
+  Create and configure hosting packages with specific features, resources, and pricing tiers.
+</Card>
+
+**Package Configuration:**
+- Package name and description
+- Storage and bandwidth limits
+- Number of websites allowed
+- Plugin and theme access
+- Pricing and billing cycle
+- Trial period options
+- Feature restrictions
+
+---
+
+## Platform Editions
+
+### Choose Your Deployment Model
+
+<Tabs>
+  <Tab title="Self-Hosted Edition">
+    **Full Control & Ownership**
+    
+    Install AreaWP on your own server infrastructure.
+    
+    **Includes:**
+    - Complete source code access
+    - Full server control
+    - Unlimited websites
+    - Unlimited clients
+    - No monthly fees (one-time license)
+    - Custom modifications allowed
+    - Direct database access
+    
+    **Requirements:**
+    - DirectAdmin server
+    - PHP 8.3+
+    - MySQL/MariaDB
+    - ionCube loader
+    - Technical expertise
+    
+    **Best For:**
+    - Established agencies
+    - Custom requirements
+    - Maximum control needed
+    - Long-term cost savings
+  </Tab>
+  
+  <Tab title="Hosted Edition">
+    **Managed & Hassle-Free**
+    
+    We manage the infrastructure while you focus on your clients.
+    
+    **Includes:**
+    - Fully managed servers
+    - Automatic updates
+    - DDoS protection
+    - Daily backups
+    - 24/7 monitoring
+    - Technical support
+    - Uptime guarantee
+    
+    **Plans Available:**
+    - **Starter:** Up to 50 websites
+    - **Business:** Up to 200 websites + autoscaling
+    - **Enterprise:** Unlimited + dedicated resources
+    
+    **Best For:**
+    - Quick deployment
+    - No server management
+    - Guaranteed uptime
+    - Scalable growth
+  </Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+<Steps>
+  <Step title="Review Technical Details">
+    Understand the technology stack and infrastructure behind AreaWP.
+    
+    [View Tech Stack →](/tech-stack)
+  </Step>
+  
+  <Step title="Check Requirements">
+    Ensure your server meets all necessary requirements for installation.
+    
+    [View Requirements →](/requirements)
+  </Step>
+  
+  <Step title="Install AreaWP">
+    Follow the step-by-step installation guide to get your platform running.
+    
+    [Installation Guide →](/installation)
+  </Step>
+  
+  <Step title="Configure Settings">
+    Set up your platform with essential configurations and customizations.
+    
+    [General Settings →](/admin/general-settings)
+  </Step>
+</Steps>
+
+---
+
+## Support & Resources
 
 <CardGroup cols={2}>
-  <Card title="Customize Theme" icon="palette" href="https://docs.areawp.com/admin/theme-setup">
-    Customize your dashboard theme as per your needs
+  <Card title="Documentation" icon="book" href="/admin/general-settings">
+    Comprehensive guides and tutorials
   </Card>
-  <Card title="Important Settings" icon="code" href="https://docs.areawp.com/admin/important-settings">
-    Define and setup the basic settings of your platform
+  <Card title="Support Portal" icon="headset" href="https://support.areawp.com">
+    Get help from our support team
   </Card>
-  <Card title="Payments Gateway" icon="screwdriver-wrench" href="https://docs.areawp.com/admin/payments-setup">
-    Integrate PayPal and Stripe in your platform for a seamless experience
+  <Card title="Community Forum" icon="comments" href="https://community.areawp.com">
+    Connect with other users
   </Card>
-  <Card title="Packages Setup" icon="stars" href="https://docs.areawp.com/admin/websites-setup">
-    Define the features and prices of your hosting plans
+  <Card title="Video Tutorials" icon="video" href="https://www.youtube.com/@areawp">
+    Watch step-by-step guides
   </Card>
 </CardGroup>
+
+---
+
+## Why Choose AreaWP?
+
+<AccordionGroup>
+  <Accordion title="Built for WordPress Professionals" icon="wordpress">
+    AreaWP is designed specifically for agencies and professionals who understand WordPress and want to offer managed hosting services. Every feature is tailored to the needs of WordPress experts serving clients.
+  </Accordion>
+  
+  <Accordion title="Complete White-Label Solution" icon="tag">
+    Your brand, your platform. AreaWP provides complete white-labeling capabilities, allowing you to present a fully branded experience to your clients without any mention of AreaWP.
+  </Accordion>
+  
+  <Accordion title="Automation at Scale" icon="gears">
+    Manage hundreds of WordPress sites efficiently with powerful automation tools. From site creation to updates, backups to billing - everything can be automated.
+  </Accordion>
+  
+  <Accordion title="Proven Technology Stack" icon="server">
+    Built on industry-standard LEMP stack with FastCGI caching, Redis, and DirectAdmin. Battle-tested infrastructure that delivers performance and reliability.
+  </Accordion>
+  
+  <Accordion title="Flexible Deployment Options" icon="cloud">
+    Choose between self-hosted for maximum control or fully managed hosting for convenience. Scale from a few clients to thousands with the same platform.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Info>
+**Ready to get started?** Check out our [Technical Details](/tech-stack) to understand the infrastructure, review the [Requirements](/requirements), and follow our [Installation Guide](/installation) to launch your platform.
+</Info>
