@@ -1,0 +1,339 @@
+---
+title: "IP Address Management"
+description: "Manage user IP assignments, server configurations, and network settings"
+icon: "hdd-network"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → IP Address Management  
+**URL:** `/admin/IPManager`
+</Info>
+
+## Overview
+
+The IP Address Management page allows you to manage DirectAdmin IP assignments for user accounts, configure default IPs, and perform bulk IP migration operations.
+
+<CardGroup cols={2}>
+  <Card title="User IP Assignments" icon="people" color="#198754">
+    View and manage user IP allocations
+  </Card>
+  <Card title="IP Configuration" icon="gear" color="#ffc107">
+    Configure default IP settings
+  </Card>
+  <Card title="Bulk Operations" icon="arrows-rotate" color="#0dcaf0">
+    Move users between IPs
+  </Card>
+  <Card title="Sync from Server" icon="arrow-clockwise" color="#0d6efd">
+    Synchronize IP data
+  </Card>
+</CardGroup>
+
+---
+
+## User IP Assignments
+
+### Viewing User IPs
+
+The user IP list displays all customer accounts with their assigned IPs:
+
+| Column | Description |
+|--------|-------------|
+| **Checkbox** | Select for bulk operations |
+| **ID** | User account ID |
+| **User Information** | Name and email address |
+| **DA User / IP** | DirectAdmin username and assigned IP |
+| **Domains** | List of domains owned by user |
+
+### Filtering Users
+
+**Search by Domain:**
+- Enter domain name in search field
+- Results filter in real-time
+- Searches across all user domains
+
+**Filter by IP Address:**
+- Select IP from dropdown
+- Shows only users on that IP
+- Displays user count per IP
+- Default IP marked with ⭐ star
+
+<Tip>
+**Quick Identification:** The default IP is marked with a star (⭐) in the filter dropdown, making it easy to identify your primary IP address.
+</Tip>
+
+---
+
+## IP Configuration
+
+### Server Information
+
+Displays current server configuration:
+- **Server IP:** Primary server IP address
+- **Active IPs:** Total number of available IPs
+- **Network Status:** Current network state
+
+### Default IP Settings
+
+Set the default IP address for new user accounts:
+
+1. View list of available IPs
+2. See user count for each IP
+3. Select radio button for desired default IP
+4. Click **Save IP Configuration**
+5. New users will be assigned to this IP
+
+**IP Information Displayed:**
+- IP address
+- Number of users currently assigned
+- Default IP indicator (star icon)
+
+<Info>
+**Default IP Purpose:** The default IP is automatically assigned to new user accounts when they are created. This helps distribute users across available IPs.
+</Info>
+
+---
+
+## Bulk IP Operations
+
+### Moving Users Between IPs
+
+Transfer multiple users from one IP to another:
+
+1. **Select Users:**
+   - Check individual users
+   - Or use "Check All" to select all
+
+2. **Choose Target IP:**
+   - Select new IP from "Switch selected users to IP" dropdown
+   - View user count for each IP to balance load
+
+3. **Process Transfer:**
+   - System processes users sequentially
+   - Status updates for each user
+   - Automatic DirectAdmin account migration
+
+<Warning>
+**Migration Impact:** Moving users between IPs requires DirectAdmin account reconfiguration. This may cause brief service interruption for affected users.
+</Warning>
+
+### Sync IP from Server
+
+Synchronize IP assignments from DirectAdmin:
+
+1. Click **Sync IP from Server** button
+2. System queries DirectAdmin for each user
+3. Updates database with current IP assignments
+4. Displays sync status for each user
+
+**Sync Process:**
+- Retrieves actual IP from DirectAdmin
+- Updates platform database
+- Verifies DirectAdmin account exists
+- Shows success/error for each user
+
+---
+
+## DirectAdmin Integration
+
+### How IP Assignment Works
+
+**User Creation:**
+1. New user account created in platform
+2. DirectAdmin account created automatically
+3. User assigned to default IP
+4. IP stored in user storage data
+
+**IP Migration:**
+1. User selected for IP change
+2. DirectAdmin API called to move account
+3. Account recreated on new IP
+4. Database updated with new IP
+
+**Sync Operation:**
+1. Platform queries DirectAdmin
+2. Retrieves current IP for each user
+3. Compares with database
+4. Updates mismatches
+
+<Info>
+**DirectAdmin Username:** Each user has a DirectAdmin username stored in their account. This is used for all server operations and IP management.
+</Info>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="IP Distribution" icon="network-wired">
+    - Distribute users evenly across available IPs
+    - Monitor IP usage and balance load
+    - Reserve IPs for specific purposes if needed
+    - Document IP allocation strategy
+    - Plan for IP expansion as user base grows
+    - Keep default IP on least-loaded server
+    - Review IP distribution quarterly
+  </Accordion>
+  
+  <Accordion title="Migration Planning" icon="arrows-left-right">
+    - Schedule IP migrations during off-peak hours
+    - Notify affected users before migration
+    - Test migration with small batch first
+    - Monitor for issues during migration
+    - Have rollback plan ready
+    - Document migration procedures
+    - Keep migration logs
+  </Accordion>
+  
+  <Accordion title="IP Management" icon="gear">
+    - Regularly sync IPs from DirectAdmin
+    - Verify IP assignments match DirectAdmin
+    - Monitor for orphaned accounts
+    - Keep IP configuration documented
+    - Review default IP periodically
+    - Track IP capacity and usage
+    - Plan for additional IPs proactively
+  </Accordion>
+  
+  <Accordion title="Troubleshooting" icon="wrench">
+    - Check DirectAdmin API connectivity
+    - Verify user has DirectAdmin account
+    - Ensure IP is configured in DirectAdmin
+    - Review DirectAdmin error logs
+    - Test IP accessibility
+    - Verify DNS configuration
+    - Check firewall rules
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="User Not Showing IP" icon="eye-slash">
+    **Issue:** User account doesn't display IP address
+    
+    **Solutions:**
+    1. Click "Sync IP from Server"
+    2. Verify user has DirectAdmin account
+    3. Check DirectAdmin API connection
+    4. Review user storage data
+    5. Manually assign IP if needed
+    6. Check DirectAdmin user exists
+    7. Recreate DirectAdmin account
+  </Accordion>
+  
+  <Accordion title="IP Migration Fails" icon="xmark">
+    **Issue:** Cannot move user to different IP
+    
+    **Solutions:**
+    1. Verify target IP exists in DirectAdmin
+    2. Check DirectAdmin API credentials
+    3. Ensure target IP has capacity
+    4. Review DirectAdmin error logs
+    5. Try manual migration via DirectAdmin
+    6. Check user account permissions
+    7. Verify IP is not blacklisted
+  </Accordion>
+  
+  <Accordion title="Sync Errors" icon="arrow-clockwise">
+    **Issue:** IP sync from server fails
+    
+    **Solutions:**
+    1. Check DirectAdmin API connectivity
+    2. Verify DirectAdmin credentials
+    3. Ensure DirectAdmin service is running
+    4. Check network connectivity
+    5. Review API rate limits
+    6. Try syncing individual users
+    7. Check DirectAdmin logs
+  </Accordion>
+  
+  <Accordion title="Mismatched IPs" icon="triangle-exclamation">
+    **Issue:** Platform IP doesn't match DirectAdmin
+    
+    **Solutions:**
+    1. Run "Sync IP from Server"
+    2. Verify which IP is correct
+    3. Update platform database if needed
+    4. Check for recent migrations
+    5. Review DirectAdmin account history
+    6. Manually correct if necessary
+    7. Document discrepancy
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## IP Management Workflow
+
+### Adding New IP Address
+
+**In DirectAdmin:**
+1. Add new IP to DirectAdmin
+2. Configure IP settings
+3. Assign IP to admin account
+4. Verify IP is accessible
+
+**In Platform:**
+1. IP appears automatically in dropdown
+2. Set as default if desired
+3. Begin assigning users to new IP
+4. Monitor IP usage
+
+### Balancing IP Load
+
+**Review Current Distribution:**
+1. Check user count per IP in filter dropdown
+2. Identify overloaded IPs
+3. Select users from busy IP
+4. Move to less-loaded IP
+5. Verify migration successful
+
+**Monitoring:**
+- Track users per IP
+- Monitor server load per IP
+- Review bandwidth usage
+- Check for IP-specific issues
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| **Set Default IP** | Select IP radio button → Save IP Configuration |
+| **Move Users** | Select users → Choose target IP → Confirm |
+| **Sync IPs** | Click Sync IP from Server → Wait for completion |
+| **Filter by IP** | Select IP from dropdown → View filtered list |
+| **Search Domain** | Enter domain in search → Results filter automatically |
+
+### IP Status Indicators
+
+| Indicator | Meaning |
+|-----------|---------|
+| **⭐ Star** | Default IP for new users |
+| **Green Check** | DirectAdmin account exists |
+| **Red X** | No DirectAdmin account |
+| **Loading Spinner** | Sync in progress |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customer accounts
+  </Card>
+  <Card title="Server Migration" icon="arrow-left-right" href="/server-migration">
+    Server migration tools
+  </Card>
+  <Card title="Server Manager" icon="server" href="/server-manager">
+    Server configuration
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create websites
+  </Card>
+</CardGroup>

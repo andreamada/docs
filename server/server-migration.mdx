@@ -1,0 +1,426 @@
+---
+title: "Server Migration Tools"
+description: "Manage server migrations, account transfers, and website relocations"
+icon: "arrow-left-right"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Server Migration Tools  
+**URL:** `/admin/MoveServer`
+</Info>
+
+<Warning>
+**⚠️ Critical Warning:** Run these actions ONLY when switching servers! These operations can permanently affect user data and websites. Always backup before proceeding.
+</Warning>
+
+## Overview
+
+The Server Migration Tools page provides utilities for migrating your entire platform to a new server, including user accounts, DirectAdmin accounts, websites, and configurations.
+
+<CardGroup cols={2}>
+  <Card title="User Accounts" icon="people" color="#198754">
+    Manage and delete user accounts
+  </Card>
+  <Card title="DirectAdmin Accounts" icon="server" color="#0dcaf0">
+    Check and create DA accounts
+  </Card>
+  <Card title="Website Setup" icon="globe" color="#ffc107">
+    Reinstall and migrate websites
+  </Card>
+  <Card title="Bulk Operations" icon="layer-group" color="#dc3545">
+    Bulk email changes and deletions
+  </Card>
+</CardGroup>
+
+---
+
+## User Accounts Management
+
+### Viewing User Accounts
+
+The user accounts list displays all platform users:
+
+| Column | Description |
+|--------|-------------|
+| **Checkbox** | Select for bulk deletion |
+| **ID** | User account ID |
+| **User Information** | Name and email |
+| **Status** | Processing status |
+
+<Info>
+**Admin Protection:** The admin account (ID: 1) is automatically excluded from all operations to prevent accidental deletion.
+</Info>
+
+### Deleting User Accounts
+
+**Bulk Delete Process:**
+
+1. Select users to delete using checkboxes
+2. Click **Delete Selected** button
+3. Confirm deletion (irreversible)
+4. System deletes:
+   - User account data
+   - Associated websites
+   - DirectAdmin accounts
+   - All user files
+
+<Warning>
+**Permanent Deletion:** This action cannot be undone. All user data, websites, and files will be permanently removed. Always backup before deleting accounts.
+</Warning>
+
+---
+
+## DirectAdmin Accounts
+
+### Checking DirectAdmin Accounts
+
+View which users have DirectAdmin accounts created:
+
+| Column | Description |
+|--------|-------------|
+| **ID** | Sequential number |
+| **User Information** | Name and email |
+| **DirectAdmin Account** | DA username or "No DA account" |
+
+**Account Status:**
+- ✅ **Green Check:** DirectAdmin account exists
+- **Gray Text:** No DirectAdmin account created
+
+### Creating DirectAdmin Accounts
+
+**Bulk Create Process:**
+
+1. Click **Check & Create** button
+2. System processes each user sequentially
+3. For users without DA account:
+   - Creates DirectAdmin user account
+   - Assigns to appropriate IP
+   - Sets up account permissions
+   - Configures account settings
+4. Status updates for each user
+
+<Tip>
+**When to Use:** Use this after migrating database to new server or when DirectAdmin accounts are missing for existing users.
+</Tip>
+
+---
+
+## Website Setup & Migration
+
+### Website Reinstallation
+
+Reinstall all websites on the new server:
+
+| Column | Description |
+|--------|-------------|
+| **ID** | Sequential number |
+| **Website** | Domain name and type |
+| **Status** | Setup progress |
+
+**Website Types:**
+- 🎨 **Template Site:** Orange palette icon
+- 🌐 **Client Site:** Green globe icon
+
+### Starting Website Setup
+
+1. Click **Start Setup** button
+2. System processes each website:
+   - Creates hosting account
+   - Sets up database
+   - Installs WordPress
+   - Configures domain
+   - Applies theme and plugins
+   - Sets up SSL if configured
+3. Status updates in real-time
+4. Errors logged in error section
+
+<Info>
+**Sequential Processing:** Websites are set up one at a time to avoid server overload and ensure proper configuration for each site.
+</Info>
+
+### Setup Error Logging
+
+If errors occur during setup:
+- Error section appears automatically
+- Lists failed websites
+- Shows error messages
+- Allows retry or manual intervention
+
+---
+
+## Bulk Email Change
+
+### Changing Template Website Emails
+
+Update admin email for all template websites:
+
+1. Enter new email address in field
+2. Click **Apply Change** button
+3. System updates each template website:
+   - Changes WordPress admin email
+   - Updates user login email
+   - Preserves other settings
+4. Status shows for each website
+
+**Use Cases:**
+- Migrating to new admin email
+- Consolidating template management
+- Updating after email provider change
+
+<Tip>
+**Template Sites Only:** This operation only affects template websites (those with `app_name` set). Client websites are not affected.
+</Tip>
+
+---
+
+## Website Lists Export
+
+### Exporting Domain Lists
+
+Copy lists of domains for migration or backup:
+
+**Client Websites:**
+- Lists all client-created websites
+- Space-separated domain list
+- Click to select all
+- Shows total count
+
+**Template Websites:**
+- Lists all template websites
+- Space-separated domain list
+- Click to select all
+- Shows total count
+
+**Use Cases:**
+- DNS migration planning
+- Backup documentation
+- Server transfer preparation
+- Audit and inventory
+
+---
+
+## Bulk Website Deletion
+
+### Deleting Multiple Websites
+
+**Quick Select Options:**
+- **Select All Templates:** Check all template sites
+- **Select All Client Sites:** Check all client sites
+- **Select All:** Check everything
+
+**Deletion Process:**
+
+1. Select websites using checkboxes or quick select
+2. Click **Delete Selected** button
+3. Confirm deletion (irreversible)
+4. System deletes:
+   - Website files
+   - Databases
+   - DirectAdmin domains
+   - SSL certificates
+   - Email accounts
+
+<Warning>
+**Irreversible Action:** Deleted websites cannot be recovered. All files, databases, and configurations are permanently removed. Backup critical data first.
+</Warning>
+
+---
+
+## Server Migration Workflow
+
+### Complete Migration Process
+
+**1. Preparation (Old Server):**
+- [ ] Backup all databases
+- [ ] Export user lists
+- [ ] Export website lists
+- [ ] Document current configuration
+- [ ] Note all IP addresses
+- [ ] Save DirectAdmin settings
+
+**2. New Server Setup:**
+- [ ] Install DirectAdmin
+- [ ] Configure IP addresses
+- [ ] Set up DNS
+- [ ] Install required software
+- [ ] Configure firewall
+- [ ] Test connectivity
+
+**3. Data Migration:**
+- [ ] Import database to new server
+- [ ] Copy website files
+- [ ] Transfer email data
+- [ ] Migrate SSL certificates
+
+**4. Platform Setup (New Server):**
+- [ ] Install platform application
+- [ ] Configure database connection
+- [ ] Set up DirectAdmin API
+- [ ] Configure domain settings
+
+**5. Account Recreation:**
+- [ ] Run "Check & Create" for DirectAdmin accounts
+- [ ] Verify all accounts created
+- [ ] Check IP assignments
+- [ ] Test account access
+
+**6. Website Setup:**
+- [ ] Run "Start Setup" for websites
+- [ ] Monitor setup progress
+- [ ] Review error logs
+- [ ] Fix failed setups manually
+- [ ] Verify all sites accessible
+
+**7. Verification:**
+- [ ] Test user logins
+- [ ] Check website functionality
+- [ ] Verify email delivery
+- [ ] Test DirectAdmin access
+- [ ] Confirm DNS resolution
+
+**8. Cleanup (Old Server):**
+- [ ] Keep old server running for 7-14 days
+- [ ] Monitor for missed data
+- [ ] Redirect DNS gradually
+- [ ] Archive old server data
+- [ ] Decommission old server
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Migration Planning" icon="clipboard-list">
+    - Plan migration during low-traffic period
+    - Notify all users in advance
+    - Prepare detailed migration checklist
+    - Have rollback plan ready
+    - Test migration process on staging
+    - Document every step
+    - Keep old server accessible during transition
+  </Accordion>
+  
+  <Accordion title="Data Safety" icon="shield">
+    - Backup everything before starting
+    - Verify backup integrity
+    - Keep multiple backup copies
+    - Store backups off-server
+    - Test backup restoration
+    - Document backup locations
+    - Maintain backup for 30+ days post-migration
+  </Accordion>
+  
+  <Accordion title="Testing" icon="check-circle">
+    - Test each component after migration
+    - Verify user account access
+    - Check website functionality
+    - Test email delivery
+    - Verify database connections
+    - Check SSL certificates
+    - Test all integrations
+  </Accordion>
+  
+  <Accordion title="Communication" icon="message">
+    - Notify users before migration
+    - Provide migration timeline
+    - Send progress updates
+    - Communicate any issues promptly
+    - Provide support during transition
+    - Send completion confirmation
+    - Gather feedback post-migration
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="DirectAdmin Account Creation Fails" icon="server">
+    **Issue:** Cannot create DirectAdmin accounts
+    
+    **Solutions:**
+    1. Verify DirectAdmin API credentials
+    2. Check DirectAdmin service is running
+    3. Ensure IP addresses are configured
+    4. Review DirectAdmin error logs
+    5. Check server resource availability
+    6. Verify user data is complete
+    7. Try creating accounts manually
+  </Accordion>
+  
+  <Accordion title="Website Setup Fails" icon="globe">
+    **Issue:** Website installation unsuccessful
+    
+    **Solutions:**
+    1. Check error log for specific issue
+    2. Verify DirectAdmin account exists
+    3. Ensure database can be created
+    4. Check disk space availability
+    5. Verify WordPress files accessible
+    6. Review file permissions
+    7. Try manual WordPress installation
+  </Accordion>
+  
+  <Accordion title="Email Change Not Working" icon="envelope">
+    **Issue:** Bulk email change fails
+    
+    **Solutions:**
+    1. Verify new email format is valid
+    2. Check WordPress database connection
+    3. Ensure websites are accessible
+    4. Review error messages
+    5. Try changing individual sites
+    6. Check WordPress admin access
+    7. Verify database permissions
+  </Accordion>
+  
+  <Accordion title="Data Loss After Migration" icon="triangle-exclamation">
+    **Issue:** Some data missing after migration
+    
+    **Solutions:**
+    1. Check backup for missing data
+    2. Verify migration completed fully
+    3. Review migration logs
+    4. Check old server for data
+    5. Restore from backup if needed
+    6. Document what's missing
+    7. Contact support if critical
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### Migration Checklist
+
+| Phase | Key Actions |
+|-------|-------------|
+| **Pre-Migration** | Backup, document, notify users |
+| **Server Setup** | Install software, configure network |
+| **Data Transfer** | Copy files, import databases |
+| **Account Setup** | Create DA accounts, verify access |
+| **Website Setup** | Install sites, configure domains |
+| **Testing** | Verify functionality, test access |
+| **Go-Live** | Update DNS, monitor closely |
+| **Post-Migration** | Support users, archive old server |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="IP Manager" icon="hdd-network" href="/ip-manager">
+    Manage IP assignments
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage user accounts
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create websites
+  </Card>
+  <Card title="Server Manager" icon="server" href="/server-manager">
+    Server configuration
+  </Card>
+</CardGroup>

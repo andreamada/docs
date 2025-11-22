@@ -59,9 +59,9 @@
           {
           "group": "Server Management",
             "pages": [
-              "server/wordpress-management",
-              "usage/users-manager",
-              "usage/websites-manager",
+              "server/wordpress-manager",
+              "server/ip-manager",
+              "server/server-migration",
               "usage/plugins-manager",
               "usage/orders-manager",
               "usage/invoices-manager"
