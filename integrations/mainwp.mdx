@@ -1,41 +1,349 @@
 ---
 title: "MainWP"
-description: "MainWP is a free, fully functional, open-source, self-hosted WordPress® management plugin that allows you to manage multiple WordPress sites from one central dashboard securely."
+description: "Integrate MainWP for centralized WordPress site management"
+icon: "wordpress"
 ---
 
-## Enabling MainWP
+<Info>
+**Navigation Path:** Admin Dashboard → Integrations → MainWP
+</Info>
+
+## Overview
+
+MainWP is a free, fully functional, open-source, self-hosted WordPress® management plugin that allows you to manage multiple WordPress sites from one central dashboard securely.
+
+<CardGroup cols={2}>
+  <Card title="Centralized Management" icon="gauge-high" color="#7FB100">
+    Manage all WordPress sites from one dashboard
+  </Card>
+  <Card title="Auto-Sync" icon="arrows-rotate" color="#7FB100">
+    Automatic synchronization of sites and clients
+  </Card>
+  <Card title="Bulk Operations" icon="layer-group" color="#7FB100">
+    Update plugins, themes across all sites
+  </Card>
+  <Card title="Monitoring" icon="chart-line" color="#7FB100">
+    Track uptime, security, and performance
+  </Card>
+</CardGroup>
+
+---
+
+## What is MainWP?
+
+MainWP enables you to manage multiple WordPress websites from a single dashboard. Key features include:
+
+- **Centralized Dashboard:** Control all sites from one location
+- **Bulk Updates:** Update plugins, themes, and WordPress core across all sites
+- **Security Monitoring:** Track security issues and vulnerabilities
+- **Backup Management:** Schedule and manage backups
+- **Uptime Monitoring:** Monitor site availability
+- **Client Management:** Organize sites by client
+- **Performance Tracking:** Monitor site speed and performance
+
+### Integration Benefits
+
+By integrating MainWP with your hosting platform:
+
+- Automatically sync new websites to MainWP
+- Manage customer websites without manual addition
+- Access MainWP dashboard directly from your admin panel
+- Streamline WordPress management workflow
+- Provide better support with centralized access
+
+---
+
+## Setting Up MainWP Integration
+
+### Prerequisites
+
+Before configuring the integration:
+
+1. **MainWP Dashboard:** Install MainWP on a WordPress site
+2. **MainWP Child Plugin:** Will be installed automatically on new sites
+3. **REST API Access:** MainWP REST API must be enabled
+4. **API Token:** Generate from MainWP dashboard
+
+### Configuration Steps
+
+**1. Enable MainWP REST API**
+
+1. Log in to your MainWP Dashboard WordPress site
+2. Navigate to **MainWP → Settings → REST API**
+3. Click **Enable REST API**
+4. Click **Create API Key** or **Add New**
+5. Enter a description (e.g., "Hosting Platform Integration")
+6. Set permissions (select all for full integration)
+7. Click **Generate** to create the API key
+8. Copy the **Bearer Token** (starts with `Bearer `)
+
+<Info>
+For detailed MainWP REST API setup, refer to the official documentation: [https://mainwp.com/kb/mainwp-rest-api/](https://mainwp.com/kb/mainwp-rest-api/)
+</Info>
+
+**2. Configure Integration in Your Platform**
+
+1. Navigate to **Admin Dashboard → Integrations → MainWP**
+2. Paste your **MainWP REST API Token** (Bearer token)
+3. Enter your **MainWP Dashboard URL** (e.g., `https://mainwp.yourdomain.com`)
+4. Click **Save** to activate the integration
+5. Click **Test Connection** to verify setup
+
+**3. Verify Integration**
+
+1. Access MainWP dashboard from your admin menu
+2. Check that existing sites appear in MainWP
+3. Create a test website in your platform
+4. Verify it automatically appears in MainWP
+5. Confirm MainWP Child plugin is installed on new sites
 
 <Warning>
-  **MainWP Integration Notice:** Don't forget to install and activate the MainWP Child plugin in your template before uploading it or install it after the template creation for a proper integration.\
-  \
-  **Important Settings:** After installing MainWP Child plugin, make sure to disable "Require Password Authentication" and set "Connection Timeout" to 0 in the plugin settings for a seamless integration.
+**Existing Websites:** If you have existing websites created before enabling MainWP integration, you must manually install the MainWP Child plugin on each site before they can be managed through MainWP.
 </Warning>
 
-You can enable it **free of charge** under [General Setup] \> [General Overview] \> [MainWP Integration]
+<Tip>
+**Manual Sync:** Use the **Sync All** button in MainWP to manually synchronize all websites. This is useful after enabling the integration for the first time or if automatic sync fails.
+</Tip>
 
-Once done it will automatically check if the "**MainWP dashboard**" already exists or not in your system.\
-If it doesn't click on the button displayed:
+---
 
-<img
-  src="/images/mainwp_dash.png"
-  alt="Mainwp Dash Pn"
-  title="Mainwp Dash Pn"
-  style={{ width:"57%" }}
-/>
+## How Auto-Sync Works
 
-The system will now redirect you to the templates page and will create it automatically for you (wait up to 60 secs to get it installed)
+### New Website Creation
 
-1. Click now on "**MainWP API**" and create an API key. For further information please refer to the official documentation: https://mainwp.com/kb/mainwp-rest-api/
+When a customer creates a new website:
 
-   <img
-     src="/images/mainwp_api.png"
-     alt="Mainwp Api Pn"
-     title="Mainwp Api Pn"
-     style={{ width:"59%" }}
-   />
-2. Copy the **API key** (Bearer token) to a safe location and paste it in the **MainWP REST API Token** tab of your platform settings: [General Setup] \> [General Overview] \> [MainWP Integration]
-3. You're done\! You can access now MainWP dashboard directly from your left menu and all of your new clients/websites will be automatically synchronized.
+1. Website is provisioned on your hosting server
+2. WordPress is installed automatically
+3. MainWP Child plugin is installed and activated
+4. Site is automatically added to your MainWP dashboard
+5. Connection is established between child site and MainWP
+6. Site appears in MainWP within minutes
 
-   <Note>
-     If there are existing websites make sure to install **MainWP child** plugin manually on each of them before running the **Sync All** button.
-   </Note>
+### Client Synchronization
+
+Customer accounts are synchronized with MainWP:
+
+- **New Clients:** Automatically added to MainWP as clients
+- **Client Websites:** Grouped under respective client in MainWP
+- **Client Information:** Name, email, and contact details synced
+- **Organization:** Sites organized by client for easy management
+
+### What Gets Synced
+
+| Data | Synced | Notes |
+|------|--------|-------|
+| **Website URL** | ✅ Yes | Primary domain |
+| **WordPress Admin** | ✅ Yes | Admin credentials |
+| **Client Name** | ✅ Yes | Customer account name |
+| **Client Email** | ✅ Yes | Customer email address |
+| **Site Status** | ✅ Yes | Active, suspended, etc. |
+| **Hosting Package** | ❌ No | Platform-specific |
+| **Billing Info** | ❌ No | Platform-specific |
+
+---
+
+## Using MainWP Dashboard
+
+### Accessing MainWP
+
+**From Your Platform:**
+1. Click **MainWP** in your admin sidebar
+2. You'll be redirected to your MainWP dashboard
+3. All managed sites appear in the dashboard
+
+**Direct Access:**
+1. Navigate to your MainWP dashboard URL
+2. Log in with your WordPress credentials
+3. Access all MainWP features
+
+### Common MainWP Tasks
+
+**Bulk Plugin Updates:**
+1. Go to **MainWP → Plugins**
+2. Select sites to update
+3. Choose plugins to update
+4. Click **Update Selected**
+
+**Bulk Theme Updates:**
+1. Go to **MainWP → Themes**
+2. Select sites to update
+3. Choose themes to update
+4. Click **Update Selected**
+
+**WordPress Core Updates:**
+1. Go to **MainWP → Sites**
+2. Select sites to update
+3. Click **Update WordPress**
+4. Confirm update
+
+**Security Scans:**
+1. Install MainWP Security extension
+2. Go to **MainWP → Security**
+3. Run security scans across all sites
+4. Review and fix issues
+
+---
+
+## Configuration Settings
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| **MainWP REST API Token** | Bearer token from MainWP dashboard | `Bearer abc123...` |
+| **MainWP Dashboard URL** | URL of your MainWP installation | `https://mainwp.yourdomain.com` |
+| **Auto-Sync** | Automatically sync new sites | Enabled (default) |
+| **Sync Interval** | How often to sync data | Every 5 minutes |
+| **Install Child Plugin** | Auto-install on new sites | Enabled (default) |
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="MainWP Setup" icon="wordpress">
+    - Install MainWP on a dedicated WordPress site
+    - Use a strong, unique password for MainWP dashboard
+    - Enable two-factor authentication on MainWP
+    - Keep MainWP dashboard and extensions updated
+    - Use SSL/HTTPS for MainWP dashboard
+    - Restrict access to MainWP dashboard by IP if possible
+    - Regularly backup your MainWP dashboard
+  </Accordion>
+  
+  <Accordion title="Site Management" icon="layer-group">
+    - Organize sites by client using MainWP tags
+    - Create site groups for bulk operations
+    - Use descriptive site names for easy identification
+    - Regularly update plugins and themes
+    - Monitor site uptime and performance
+    - Set up automated backups through MainWP
+    - Review security scans regularly
+  </Accordion>
+  
+  <Accordion title="Security" icon="shield">
+    - Keep MainWP Child plugin updated on all sites
+    - Use unique admin credentials for each site
+    - Enable security features in MainWP extensions
+    - Monitor for vulnerabilities across all sites
+    - Implement security hardening on child sites
+    - Use MainWP Security extension for scans
+    - Rotate API tokens periodically
+  </Accordion>
+  
+  <Accordion title="Performance" icon="gauge">
+    - Limit number of sites per MainWP dashboard (max 100-200)
+    - Use MainWP on a fast, reliable server
+    - Optimize MainWP database regularly
+    - Schedule bulk updates during off-peak hours
+    - Monitor MainWP dashboard performance
+    - Use caching on MainWP dashboard
+    - Consider multiple MainWP dashboards for large deployments
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Connection Failed" icon="link-slash">
+    **Issue:** Cannot connect to MainWP dashboard
+    
+    **Solutions:**
+    1. Verify MainWP REST API is enabled
+    2. Check API token is correct (includes "Bearer ")
+    3. Ensure MainWP dashboard URL is correct
+    4. Verify MainWP dashboard is accessible
+    5. Check firewall isn't blocking API requests
+    6. Test MainWP dashboard URL in browser
+    7. Regenerate API token and try again
+  </Accordion>
+  
+  <Accordion title="Sites Not Syncing" icon="arrows-rotate">
+    **Issue:** New websites not appearing in MainWP
+    
+    **Solutions:**
+    1. Verify auto-sync is enabled in settings
+    2. Check MainWP Child plugin is installed on site
+    3. Click "Sync All" button in MainWP
+    4. Verify site is accessible and WordPress is running
+    5. Check MainWP dashboard logs for errors
+    6. Ensure site admin credentials are correct
+    7. Manually add site to MainWP as test
+  </Accordion>
+  
+  <Accordion title="Child Plugin Not Installing" icon="plug">
+    **Issue:** MainWP Child plugin not auto-installing
+    
+    **Solutions:**
+    1. Verify auto-install is enabled in settings
+    2. Check WordPress site is accessible
+    3. Ensure WordPress has write permissions
+    4. Manually install MainWP Child plugin
+    5. Check for plugin conflicts
+    6. Review WordPress error logs
+    7. Test with a fresh WordPress installation
+  </Accordion>
+  
+  <Accordion title="Existing Sites Not Managed" icon="globe">
+    **Issue:** Pre-existing websites not in MainWP
+    
+    **Solutions:**
+    1. Install MainWP Child plugin manually on each site
+    2. Use MainWP's "Add New Site" feature
+    3. Enter site URL and admin credentials
+    4. Click "Add Site" to connect
+    5. Verify connection is successful
+    6. Repeat for all existing sites
+    7. Use "Sync All" after adding all sites
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## MainWP Extensions
+
+Enhance MainWP with powerful extensions:
+
+| Extension | Purpose | Recommended |
+|-----------|---------|-------------|
+| **Advanced Uptime Monitor** | Monitor site availability | ✅ Yes |
+| **Backups** | Automated backup management | ✅ Yes |
+| **Security** | Security scanning and hardening | ✅ Yes |
+| **Performance** | Site speed monitoring | Recommended |
+| **Client Reports** | Generate client reports | Optional |
+| **Code Snippets** | Manage code snippets | Optional |
+| **Google Analytics** | Track site analytics | Optional |
+
+<Info>
+**Extensions:** Most MainWP extensions are premium. Evaluate which extensions provide value for your specific use case before purchasing.
+</Info>
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Website creation settings
+  </Card>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Platform configuration
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Access control
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package configuration
+  </Card>
+</CardGroup>
+
+---
+
+## External Resources
+
+- [MainWP Official Website](https://mainwp.com/)
+- [MainWP REST API Documentation](https://mainwp.com/kb/mainwp-rest-api/)
+- [MainWP Knowledge Base](https://mainwp.com/support/)
+- [MainWP Extensions](https://mainwp.com/mainwp-extensions/)
+- [MainWP Community](https://meta.mainwp.com/)

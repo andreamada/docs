@@ -1,20 +1,325 @@
 ---
 title: "Google Ads & reCAPTCHA"
-description: "Enable Google Ads to track your activities and reCAPTCHA in your registration form."
+description: "Configure Google Ads conversion tracking and reCAPTCHA spam protection"
+icon: "google"
 ---
 
-## Enabling Google Ads
+<Info>
+**Navigation Path:** Admin Dashboard → Integrations → Google
+</Info>
 
-You can enable it under [Marketing Tools] \> [Integrations Setup] \> [Google Ads & reCAPTCHA]
+## Overview
 
-Retrieve your code and paste it directly here.
+Integrate Google services to track conversions, enable remarketing, and protect your platform from spam and bots.
 
-## Enabling reCAPTCHA
+<CardGroup cols={2}>
+  <Card title="Google Ads" icon="rectangle-ad" color="#4285F4">
+    Conversion tracking and remarketing
+  </Card>
+  <Card title="reCAPTCHA" icon="shield-check" color="#34A853">
+    Spam and bot protection
+  </Card>
+</CardGroup>
 
-The platform already comes with a basic captcha system, though if you want to enforce it and use a stronger version you can opt for Google reCAPTCHA by enabling it directly here.\
-Make sure to create first the API keys:\
-https://www.google.com/recaptcha/admin/create?hl=it\\\\
-\
-Then paste respectively the **Site Key** and **Secret Key** before saving.
+---
 
-It's all set now\! You'll see the reCAPTCHA during the registration form for your clients.
+## Google Ads Integration
+
+Track conversions and enable remarketing campaigns for your hosting platform.
+
+### What is Google Ads?
+
+Google Ads (formerly Google AdWords) is Google's online advertising platform. By integrating Google Ads, you can:
+
+- Track conversions from your advertising campaigns
+- Measure ROI on your ad spend
+- Create remarketing audiences
+- Optimize campaigns based on actual sales data
+
+### Configuration
+
+| Setting | Description | Format |
+|---------|-------------|--------|
+| **Google Ads Conversion ID** | Your Google Ads account conversion tracking ID | `AW-XXXXXXXXXX` |
+| **Google Ads Conversion Label** | Specific conversion action label | Alphanumeric string |
+
+### Getting Your Google Ads Credentials
+
+1. Log in to your [Google Ads account](https://ads.google.com)
+2. Navigate to **Tools & Settings → Measurement → Conversions**
+3. Click **+ New Conversion Action**
+4. Select **Website** as the conversion source
+5. Configure your conversion action (e.g., "Purchase", "Sign Up")
+6. Click **Create and Continue**
+7. Copy your **Conversion ID** (format: `AW-XXXXXXXXXX`)
+8. Copy your **Conversion Label** from the tracking code
+9. Paste both values into your platform's Google integration settings
+
+### Setting Up Conversion Tracking
+
+1. Create a conversion action in Google Ads for key events:
+   - Website purchases
+   - Account registrations
+   - Package upgrades
+   - Domain registrations
+
+2. Enter your Conversion ID and Label in the integration settings
+
+3. The platform will automatically fire conversion events when:
+   - Customers complete a purchase
+   - New accounts are created
+   - Subscriptions are activated
+
+4. Verify conversions are tracking in Google Ads → Tools → Conversions
+
+<Tip>
+**Multiple Conversions:** Create separate conversion actions for different events (purchases, signups, upgrades) to track each independently. Use different conversion labels for each action.
+</Tip>
+
+<Info>
+**Conversion Value:** The platform automatically sends the transaction value to Google Ads, allowing you to track revenue and calculate ROI accurately.
+</Info>
+
+---
+
+## Google reCAPTCHA
+
+Protect your platform from spam, bots, and automated abuse with Google reCAPTCHA.
+
+### What is reCAPTCHA?
+
+Google reCAPTCHA is a free service that protects your website from spam and abuse. It uses advanced risk analysis to distinguish humans from bots.
+
+**reCAPTCHA Versions:**
+
+- **reCAPTCHA v2:** "I'm not a robot" checkbox
+- **reCAPTCHA v3:** Invisible, scores user interactions (recommended)
+
+### Configuration
+
+| Setting | Description | Format |
+|---------|-------------|--------|
+| **reCAPTCHA Site Key** | Public key for your domain | Alphanumeric string (40 chars) |
+| **reCAPTCHA Secret Key** | Private key for verification | Alphanumeric string (40 chars) |
+| **reCAPTCHA Version** | v2 or v3 | Select from dropdown |
+
+### Getting reCAPTCHA Keys
+
+1. Go to [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin)
+2. Click **+** to create a new site
+3. Enter a **Label** (e.g., "My Hosting Platform")
+4. Select **reCAPTCHA type**:
+   - **reCAPTCHA v3** (recommended for seamless UX)
+   - **reCAPTCHA v2** ("I'm not a robot" checkbox)
+5. Add your **Domains** (e.g., `yourdomain.com`)
+6. Accept the reCAPTCHA Terms of Service
+7. Click **Submit**
+8. Copy your **Site Key** (public)
+9. Copy your **Secret Key** (private)
+10. Paste both keys into your platform's Google integration settings
+
+### Where reCAPTCHA is Applied
+
+reCAPTCHA protects the following forms:
+
+- **Registration:** New account signup
+- **Login:** User authentication
+- **Contact Form:** Customer inquiries
+- **Password Reset:** Account recovery
+- **Checkout:** Payment processing
+
+<Warning>
+**Secret Key Security:** Keep your reCAPTCHA Secret Key confidential. Never expose it in client-side code or public repositories. It's used server-side to verify reCAPTCHA responses.
+</Warning>
+
+<Tip>
+**reCAPTCHA v3 Recommended:** Use reCAPTCHA v3 for better user experience. It works invisibly in the background and only challenges suspicious traffic. v2 requires user interaction for every submission.
+</Tip>
+
+---
+
+## Configuration Examples
+
+<Tabs>
+  <Tab title="Google Ads Only">
+    **Use Case:** Track conversions without spam protection
+    
+    - **Conversion ID**: `AW-123456789`
+    - **Conversion Label**: `abc123DEF456`
+    - **reCAPTCHA**: Not configured
+    
+    **Best For:** Platforms with low spam, focused on ad tracking
+  </Tab>
+  
+  <Tab title="reCAPTCHA Only">
+    **Use Case:** Spam protection without ad tracking
+    
+    - **Google Ads**: Not configured
+    - **Site Key**: `6LcXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+    - **Secret Key**: `6LcYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY`
+    - **Version**: reCAPTCHA v3
+    
+    **Best For:** Platforms experiencing spam/bot issues
+  </Tab>
+  
+  <Tab title="Complete Setup">
+    **Use Case:** Full Google integration
+    
+    **Google Ads:**
+    - **Conversion ID**: `AW-123456789`
+    - **Conversion Label**: `abc123DEF456`
+    
+    **reCAPTCHA:**
+    - **Site Key**: `6LcXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX`
+    - **Secret Key**: `6LcYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY`
+    - **Version**: reCAPTCHA v3
+    
+    **Best For:** Production platforms running ads
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Conversion Tracking" icon="chart-line">
+    - Create separate conversion actions for different goals
+    - Set appropriate conversion values for accurate ROI
+    - Test conversions before launching campaigns
+    - Monitor conversion data regularly in Google Ads
+    - Use conversion data to optimize ad targeting
+    - Set up conversion goals in Google Analytics too
+    - Track micro-conversions (signups) and macro-conversions (purchases)
+  </Accordion>
+  
+  <Accordion title="reCAPTCHA Configuration" icon="shield">
+    - Use reCAPTCHA v3 for better user experience
+    - Set appropriate score threshold (0.5 recommended)
+    - Monitor reCAPTCHA analytics for bot activity
+    - Whitelist trusted IPs if needed
+    - Test forms after enabling reCAPTCHA
+    - Have fallback for users who fail reCAPTCHA
+    - Keep secret key secure and rotate periodically
+  </Accordion>
+  
+  <Accordion title="Privacy & Compliance" icon="user-shield">
+    - Add Google services to your privacy policy
+    - Inform users about reCAPTCHA data collection
+    - Comply with GDPR and regional privacy laws
+    - Provide opt-out mechanisms where required
+    - Review Google's data processing terms
+    - Keep privacy policy updated
+    - Consider cookie consent requirements
+  </Accordion>
+  
+  <Accordion title="Performance" icon="gauge">
+    - Load reCAPTCHA asynchronously to avoid blocking
+    - Monitor page load times after integration
+    - Use reCAPTCHA v3 to reduce user friction
+    - Cache reCAPTCHA scripts when possible
+    - Test on mobile devices for performance
+    - Monitor Core Web Vitals impact
+    - Optimize third-party script loading
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Conversions Not Tracking" icon="chart-line">
+    **Issue:** Google Ads not recording conversions
+    
+    **Solutions:**
+    1. Verify Conversion ID format is correct (`AW-XXXXXXXXXX`)
+    2. Check Conversion Label matches Google Ads
+    3. Ensure conversion action is active in Google Ads
+    4. Test with Google Tag Assistant Chrome extension
+    5. Check browser console for JavaScript errors
+    6. Verify conversion fires on thank-you/confirmation page
+    7. Wait 24-48 hours for data to appear in Google Ads
+  </Accordion>
+  
+  <Accordion title="reCAPTCHA Not Showing" icon="shield-check">
+    **Issue:** reCAPTCHA not appearing on forms
+    
+    **Solutions:**
+    1. Verify Site Key and Secret Key are correct
+    2. Check domain is registered in reCAPTCHA console
+    3. Ensure reCAPTCHA version is selected
+    4. Clear browser and server cache
+    5. Check browser console for JavaScript errors
+    6. Verify reCAPTCHA script is loading
+    7. Test in incognito mode
+  </Accordion>
+  
+  <Accordion title="reCAPTCHA Blocking Legitimate Users" icon="user-xmark">
+    **Issue:** Real users failing reCAPTCHA verification
+    
+    **Solutions:**
+    1. Switch from v2 to v3 for better UX
+    2. Lower score threshold in v3 (try 0.3-0.5)
+    3. Check reCAPTCHA analytics for false positives
+    4. Whitelist known good IP addresses
+    5. Provide alternative verification method
+    6. Review reCAPTCHA settings in Google console
+    7. Contact Google support if issue persists
+  </Accordion>
+  
+  <Accordion title="Domain Not Authorized" icon="globe">
+    **Issue:** reCAPTCHA error about unauthorized domain
+    
+    **Solutions:**
+    1. Add your domain to reCAPTCHA console
+    2. Include both www and non-www versions
+    3. Add staging/development domains if testing
+    4. Wait a few minutes after adding domain
+    5. Verify domain spelling is correct
+    6. Check for typos in Site Key
+    7. Regenerate keys if issue persists
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Testing Your Integration
+
+**Google Ads Testing:**
+
+- [ ] Conversion ID and Label configured
+- [ ] Complete a test purchase/signup
+- [ ] Check Google Ads → Tools → Conversions
+- [ ] Verify conversion appears (may take 24-48 hours)
+- [ ] Confirm conversion value is correct
+- [ ] Test on different browsers and devices
+
+**reCAPTCHA Testing:**
+
+- [ ] Site Key and Secret Key configured
+- [ ] reCAPTCHA badge appears on forms
+- [ ] Submit form successfully as legitimate user
+- [ ] Verify form submission works
+- [ ] Test with automated tools (should be blocked)
+- [ ] Check reCAPTCHA admin console for analytics
+- [ ] Test on mobile devices
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Platform configuration
+  </Card>
+  <Card title="Email Settings" icon="envelope" href="/email-settings">
+    Email notifications
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Access control
+  </Card>
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Website settings
+  </Card>
+</CardGroup>

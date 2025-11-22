@@ -1,13 +1,383 @@
 ---
-title: "Facebook"
-description: "Enable Facebook Manager to track your activities."
+title: "Facebook Pixel"
+description: "Configure Facebook Pixel for conversion tracking and remarketing"
+icon: "facebook"
 ---
 
-## Enabling Facebook Manager
+<Info>
+**Navigation Path:** Admin Dashboard → Integrations → Facebook
+</Info>
 
-You can enable it under [Marketing Tools] \> [Integrations Setup] \> [Facebook Track Code]
+## Overview
 
-Retrieve your code by generating it here:\
-https://developers.facebook.com/apps/
+Facebook Pixel is a piece of code that helps you track conversions from Facebook ads, optimize ads, build targeted audiences, and remarket to people who have already taken action on your website.
 
-And fill all the required fields.
+<CardGroup cols={2}>
+  <Card title="Conversion Tracking" icon="chart-line" color="#1877F2">
+    Track purchases and signups
+  </Card>
+  <Card title="Custom Audiences" icon="users" color="#1877F2">
+    Build remarketing audiences
+  </Card>
+  <Card title="Optimization" icon="bullseye" color="#1877F2">
+    Optimize ad delivery
+  </Card>
+  <Card title="Analytics" icon="chart-bar" color="#1877F2">
+    Measure campaign performance
+  </Card>
+</CardGroup>
+
+---
+
+## What is Facebook Pixel?
+
+Facebook Pixel is an analytics tool that allows you to measure the effectiveness of your advertising by understanding the actions people take on your website.
+
+### Key Benefits
+
+- **Track Conversions:** Measure purchases, signups, and other valuable actions
+- **Optimize Ads:** Automatically optimize ads for conversions
+- **Build Audiences:** Create custom audiences for remarketing
+- **Measure ROI:** Track return on ad spend accurately
+- **Cross-Device Tracking:** Track users across devices
+- **Dynamic Ads:** Show personalized ads based on browsing behavior
+
+---
+
+## Configuration
+
+| Setting | Description | Format |
+|---------|-------------|--------|
+| **Facebook Pixel ID** | Your unique Pixel identifier | 15-16 digit number |
+
+### Getting Your Facebook Pixel ID
+
+1. Log in to [Facebook Business Manager](https://business.facebook.com/)
+2. Navigate to **Business Settings → Data Sources → Pixels**
+3. If you don't have a Pixel, click **Add** to create one
+4. Enter a name for your Pixel (e.g., "Hosting Platform Pixel")
+5. Enter your website URL
+6. Click **Continue** and then **Set Up Pixel**
+7. Copy your **Pixel ID** (15-16 digit number)
+8. Paste the Pixel ID into your platform's Facebook integration settings
+9. Save the configuration
+
+<Info>
+**One Pixel Per Business:** You only need one Pixel per business. The same Pixel can track events across multiple domains and campaigns.
+</Info>
+
+<Tip>
+**Facebook Pixel Helper:** Install the [Facebook Pixel Helper](https://chrome.google.com/webstore/detail/facebook-pixel-helper/) Chrome extension to verify your Pixel is working correctly.
+</Tip>
+
+---
+
+## Tracked Events
+
+The platform automatically tracks the following Facebook Pixel standard events:
+
+### Standard Events
+
+| Event | When It Fires | Purpose |
+|-------|---------------|---------|
+| **PageView** | Every page load | Track overall traffic |
+| **ViewContent** | Product/package page view | Track interest |
+| **AddToCart** | Package added to cart | Track consideration |
+| **InitiateCheckout** | Checkout page visit | Track purchase intent |
+| **Purchase** | Order completion | Track conversions |
+| **Lead** | Account registration | Track signups |
+| **CompleteRegistration** | Account activated | Track activations |
+
+### Event Parameters
+
+Each event includes valuable data:
+
+- **Value:** Transaction amount (for purchases)
+- **Currency:** Currency code (USD, EUR, etc.)
+- **Content Name:** Package or product name
+- **Content Category:** Product category
+- **Content IDs:** Unique identifiers
+
+<Info>
+**Automatic Tracking:** All standard events are tracked automatically once you configure your Pixel ID. No additional setup required.
+</Info>
+
+---
+
+## Using Facebook Pixel Data
+
+### 1. Conversion Tracking
+
+**View Conversions:**
+1. Go to **Facebook Ads Manager → Measure & Report → Events Manager**
+2. Select your Pixel
+3. View tracked events and conversions
+4. Analyze conversion data by time, device, and source
+
+**Set Up Conversion Events:**
+1. In Events Manager, click **Aggregated Event Measurement**
+2. Configure your domain
+3. Prioritize conversion events (up to 8)
+4. Set value optimization for Purchase events
+
+### 2. Custom Audiences
+
+**Create Remarketing Audiences:**
+1. Go to **Audiences** in Business Manager
+2. Click **Create Audience → Custom Audience**
+3. Select **Website** as source
+4. Choose your Pixel
+5. Define audience rules:
+   - **All Website Visitors:** Everyone who visited
+   - **Specific Pages:** Visitors to certain pages
+   - **Visitors by Time:** Last 30, 60, 90 days
+   - **Event-Based:** People who completed specific events
+
+**Example Audiences:**
+- Visitors who viewed packages but didn't purchase
+- Customers who purchased in last 30 days
+- Visitors who abandoned checkout
+- People who registered but didn't activate
+
+### 3. Lookalike Audiences
+
+**Create Lookalike Audiences:**
+1. Create a custom audience first (e.g., purchasers)
+2. Go to **Audiences → Create Audience → Lookalike Audience**
+3. Select source audience (your custom audience)
+4. Choose target country
+5. Select audience size (1-10%, 1% is most similar)
+6. Click **Create Audience**
+
+### 4. Ad Optimization
+
+**Optimize for Conversions:**
+1. Create a new ad campaign
+2. Choose **Conversions** as objective
+3. Select your Pixel
+4. Choose conversion event (Purchase, Lead, etc.)
+5. Facebook will optimize ad delivery for that event
+
+---
+
+## Configuration Examples
+
+<Tabs>
+  <Tab title="Basic Setup">
+    **Use Case:** Track basic conversions
+    
+    - **Pixel ID**: `123456789012345`
+    - **Events**: PageView, Purchase, Lead
+    - **Audiences**: Not configured yet
+    
+    **Best For:** Getting started with Facebook Pixel
+  </Tab>
+  
+  <Tab title="E-commerce Focus">
+    **Use Case:** Optimize for sales
+    
+    - **Pixel ID**: `123456789012345`
+    - **Priority Events**: Purchase, InitiateCheckout, AddToCart
+    - **Audiences**: Cart abandoners, purchasers
+    - **Campaigns**: Dynamic product ads
+    
+    **Best For:** Platforms focused on conversions
+  </Tab>
+  
+  <Tab title="Lead Generation">
+    **Use Case:** Focus on signups
+    
+    - **Pixel ID**: `123456789012345`
+    - **Priority Events**: Lead, CompleteRegistration
+    - **Audiences**: Registrants, non-converters
+    - **Campaigns**: Lead generation ads
+    
+    **Best For:** Growing user base
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Pixel Implementation" icon="code">
+    - Install Pixel on all pages of your website
+    - Verify Pixel is firing correctly with Pixel Helper
+    - Test all events before launching campaigns
+    - Use standard events when possible (better optimization)
+    - Include value and currency for Purchase events
+    - Keep Pixel code updated
+    - Monitor Pixel health in Events Manager
+  </Accordion>
+  
+  <Accordion title="Audience Building" icon="users">
+    - Create audiences for different stages of funnel
+    - Use appropriate time windows (30-180 days)
+    - Exclude converters from remarketing campaigns
+    - Build lookalike audiences from best customers
+    - Segment audiences by behavior and value
+    - Refresh audiences regularly
+    - Test different audience sizes
+  </Accordion>
+  
+  <Accordion title="Campaign Optimization" icon="bullseye">
+    - Let Pixel collect data before optimizing (50+ conversions)
+    - Use conversion optimization objective
+    - Set appropriate conversion windows
+    - Test different ad creatives and audiences
+    - Monitor cost per conversion
+    - Use dynamic ads for remarketing
+    - A/B test campaigns regularly
+  </Accordion>
+  
+  <Accordion title="Privacy & Compliance" icon="shield">
+    - Add Facebook Pixel to privacy policy
+    - Comply with GDPR and regional laws
+    - Implement cookie consent where required
+    - Use Aggregated Event Measurement for iOS 14+
+    - Verify domain in Business Manager
+    - Review data processing terms
+    - Provide opt-out mechanisms
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Pixel Not Firing" icon="circle-xmark">
+    **Issue:** Facebook Pixel not tracking events
+    
+    **Solutions:**
+    1. Verify Pixel ID is correct (15-16 digits)
+    2. Check Pixel ID is saved in integration settings
+    3. Clear browser and server cache
+    4. Test with Facebook Pixel Helper extension
+    5. Check browser console for JavaScript errors
+    6. Verify Pixel code is loading on page
+    7. Test in incognito mode
+  </Accordion>
+  
+  <Accordion title="Events Not Showing in Events Manager" icon="chart-line">
+    **Issue:** Events tracked but not appearing in Facebook
+    
+    **Solutions:**
+    1. Wait 20-30 minutes for data to appear
+    2. Check Events Manager for your Pixel
+    3. Verify events are configured correctly
+    4. Check for ad blockers interfering
+    5. Ensure user hasn't opted out of tracking
+    6. Test with Pixel Helper to confirm firing
+    7. Review Pixel diagnostics in Events Manager
+  </Accordion>
+  
+  <Accordion title="Purchase Value Incorrect" icon="dollar-sign">
+    **Issue:** Wrong conversion values in Facebook
+    
+    **Solutions:**
+    1. Verify currency code is set correctly
+    2. Check value parameter is being sent
+    3. Ensure value is numeric (not formatted)
+    4. Test purchase flow and check Pixel Helper
+    5. Review Events Manager for value data
+    6. Check for JavaScript errors on confirmation page
+    7. Verify value matches actual transaction
+  </Accordion>
+  
+  <Accordion title="iOS 14+ Tracking Issues" icon="mobile">
+    **Issue:** Limited tracking on iOS devices
+    
+    **Solutions:**
+    1. Verify domain in Facebook Business Manager
+    2. Configure Aggregated Event Measurement
+    3. Prioritize your 8 most important events
+    4. Use conversion API for server-side tracking
+    5. Inform users about iOS 14+ limitations
+    6. Focus on Android and web conversions
+    7. Consider alternative attribution models
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Testing Your Pixel
+
+**Testing Checklist:**
+
+- [ ] Pixel ID configured in integration settings
+- [ ] Facebook Pixel Helper shows Pixel is active
+- [ ] PageView event fires on all pages
+- [ ] ViewContent fires on package pages
+- [ ] InitiateCheckout fires on checkout page
+- [ ] Purchase event fires on order confirmation
+- [ ] Purchase value and currency are correct
+- [ ] Lead event fires on registration
+- [ ] Events appear in Events Manager (wait 20-30 min)
+- [ ] Test on different browsers and devices
+- [ ] Verify mobile tracking works
+
+**Test Purchase Flow:**
+1. Visit your website
+2. View a hosting package (ViewContent)
+3. Add to cart (AddToCart)
+4. Go to checkout (InitiateCheckout)
+5. Complete purchase (Purchase)
+6. Check Pixel Helper at each step
+7. Verify all events in Events Manager
+
+---
+
+## Advanced Features
+
+### Conversion API
+
+For more accurate tracking, consider implementing Facebook Conversion API:
+
+- **Server-Side Tracking:** Track events from your server
+- **Better Accuracy:** Bypass ad blockers and browser restrictions
+- **iOS 14+ Compatibility:** Improve tracking on iOS devices
+- **Deduplication:** Combine with Pixel for best results
+
+<Info>
+**Conversion API:** Requires additional development. Contact your developer to implement server-side tracking for improved accuracy.
+</Info>
+
+### Dynamic Ads
+
+Use Pixel data for dynamic product ads:
+
+- Show personalized ads based on browsing history
+- Automatically promote relevant packages
+- Retarget cart abandoners with specific products
+- Increase conversion rates with relevant ads
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Google Ads & reCAPTCHA" icon="google" href="/integration-google">
+    Google integrations
+  </Card>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Platform configuration
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package configuration
+  </Card>
+  <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
+    Payment gateways
+  </Card>
+</CardGroup>
+
+---
+
+## External Resources
+
+- [Facebook Pixel Documentation](https://www.facebook.com/business/help/742478679120153)
+- [Facebook Events Manager](https://www.facebook.com/events_manager2)
+- [Facebook Pixel Helper](https://chrome.google.com/webstore/detail/facebook-pixel-helper/)
+- [Facebook Business Manager](https://business.facebook.com/)
+- [Aggregated Event Measurement](https://www.facebook.com/business/help/331612538028890)
