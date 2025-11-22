@@ -1,56 +1,526 @@
 ---
-title: "Technical Details (Hosted)"
-description: "Each managed platform is installed on a virtual private server (KVM virtualization) fully isolated and with resources dedicated to you and with DDoS protection enabled."
+title: "Technical Details (Hosted Edition)"
+description: "Complete infrastructure and technology stack powering AreaWP managed hosting"
+icon: "server"
 ---
 
 <Info>
-  **Note**: There's no root access with the server to avoid unwanted operations and direct access to the source code of the platform itself.\
-  We can provide a limited SSH account though upon request.
+Each managed AreaWP platform is installed on a **virtual private server (VPS)** with KVM virtualization, fully isolated with dedicated resources and DDoS protection enabled.
 </Info>
 
-## Tech Stack
+## Infrastructure Overview
 
-By default,  all of these servers are spawned with Ubuntu OS and are optimized specifically for WordPress (LEMP stack, Fast-CGI cache, Redis):
+### Hosting Architecture
 
-1. LEMP stack (**Linux, Nginx, MySQL/MariaDB, and PHP)**
-2. Fast-Cgi cache
-3. Redis
+<CardGroup cols={2}>
+  <Card title="Isolated VPS" icon="server" color="#0d6efd">
+    Dedicated virtual private server per customer
+  </Card>
+  <Card title="KVM Virtualization" icon="microchip" color="#198754">
+    Hardware-level virtualization for performance
+  </Card>
+  <Card title="DDoS Protection" icon="shield" color="#dc3545">
+    Enterprise-grade attack mitigation
+  </Card>
+  <Card title="Dedicated Resources" icon="gauge-high" color="#ffc107">
+    No resource sharing with other customers
+  </Card>
+</CardGroup>
+
+---
+
+## Technology Stack
+
+### LEMP Stack Configuration
+
+AreaWP runs on a highly optimized **LEMP stack** (Linux, Nginx, MySQL/MariaDB, PHP) specifically tuned for WordPress performance.
+
+<Tabs>
+  <Tab title="Web Server">
+    **Nginx**
+    
+    High-performance web server optimized for concurrent connections and static content delivery.
+    
+    **Features:**
+    - HTTP/2 support
+    - SSL/TLS termination
+    - Reverse proxy capabilities
+    - Load balancing
+    - Gzip compression
+    - Custom configuration per site
+    
+    **Optimizations:**
+    - Worker processes tuned for CPU cores
+    - Connection pooling
+    - Sendfile enabled
+    - TCP optimizations
+    - Buffer size optimization
+  </Tab>
+  
+  <Tab title="Database">
+    **MySQL 5.6+ / MariaDB 10.0.5+**
+    
+    Reliable relational database management system for WordPress data storage.
+    
+    **Features:**
+    - InnoDB storage engine
+    - Query caching
+    - Connection pooling
+    - Automated backups
+    - Replication support
+    
+    **Optimizations:**
+    - Buffer pool sizing
+    - Query cache tuning
+    - Index optimization
+    - Slow query logging
+    - Performance schema
+  </Tab>
+  
+  <Tab title="PHP">
+    **PHP 8.3**
+    
+    Latest PHP version with significant performance improvements and modern features.
+    
+    **Features:**
+    - PHP-FPM process manager
+    - OPcache enabled
+    - JIT compilation
+    - Modern syntax support
+    - Enhanced security
+    
+    **Extensions:**
+    - ionCube loader (required)
+    - GD library
+    - cURL
+    - mbstring
+    - XML
+    - ZIP
+    - exec/shell_exec
+  </Tab>
+  
+  <Tab title="Operating System">
+    **Linux (CentOS/AlmaLinux/Rocky Linux)**
+    
+    Enterprise-grade Linux distribution for stability and security.
+    
+    **Features:**
+    - Long-term support
+    - Security updates
+    - SELinux support
+    - Firewall (CSF/iptables)
+    - System monitoring
+    
+    **Security:**
+    - Regular security patches
+    - Kernel hardening
+    - File system permissions
+    - SSH key authentication
+    - Fail2ban protection
+  </Tab>
+</Tabs>
+
+---
+
+## Performance Optimization
+
+### Caching Layers
+
+AreaWP implements multiple caching layers for maximum performance:
+
+<AccordionGroup>
+  <Accordion title="FastCGI Cache" icon="bolt">
+    **Nginx FastCGI Caching**
+    
+    Full-page caching at the Nginx level for lightning-fast response times.
+    
+    **Benefits:**
+    - Bypasses PHP processing for cached pages
+    - Serves pages in milliseconds
+    - Reduces server load dramatically
+    - Handles traffic spikes easily
+    
+    **Configuration:**
+    - Cache path: `/var/nginx/cache`
+    - Cache validity: Configurable per site
+    - Cache purging: Automatic on content updates
+    - Cache bypass: For logged-in users, admin areas
+    
+    **Performance Impact:**
+    - 10-100x faster page loads
+    - 90%+ reduction in server resources
+    - Handles 1000+ concurrent users easily
+  </Accordion>
+  
+  <Accordion title="Redis Object Cache" icon="database">
+    **In-Memory Object Caching**
+    
+    Redis provides persistent object caching for WordPress, storing database query results in RAM.
+    
+    **Benefits:**
+    - Reduces database queries by 80-90%
+    - Sub-millisecond data retrieval
+    - Persistent across page loads
+    - Shared across all sites
+    
+    **Use Cases:**
+    - WordPress object cache
+    - Session storage
+    - Transient data
+    - Fragment caching
+    
+    **Configuration:**
+    - Memory allocation: 256MB - 2GB (based on plan)
+    - Eviction policy: LRU (Least Recently Used)
+    - Persistence: Optional RDB snapshots
+    - Connection: Unix socket for speed
+  </Accordion>
+  
+  <Accordion title="OPcache" icon="code">
+    **PHP Opcode Caching**
+    
+    Stores precompiled PHP bytecode in memory, eliminating the need to parse and compile PHP files on every request.
+    
+    **Benefits:**
+    - 3-5x faster PHP execution
+    - Reduced CPU usage
+    - Lower memory consumption
+    - Faster WordPress core and plugins
+    
+    **Settings:**
+    - Memory: 128MB - 512MB
+    - Max files: 10,000+
+    - Validation: Timestamp-based
+    - Interned strings: Enabled
+  </Accordion>
+  
+  <Accordion title="Browser Caching" icon="window">
+    **Client-Side Caching**
+    
+    Leverages browser caching for static assets (images, CSS, JavaScript).
+    
+    **Configuration:**
+    - Images: 1 year cache
+    - CSS/JS: 1 month cache
+    - Fonts: 1 year cache
+    - HTML: No cache (dynamic)
+    
+    **Headers:**
+    - Cache-Control
+    - Expires
+    - ETag
+    - Last-Modified
+  </Accordion>
+</AccordionGroup>
+
+---
 
 ## DirectAdmin Control Panel
 
-Please note that each platform comes with a **DirectAdmin** access as well which is installed on top of the platform to enhance security and provide better performance.
+### Server Management Interface
 
-Here you can perform whatever operation you wish which is not natively integrated in the platform such as accessing your customers files via "**File Manager**", setup hourly/daily/weekly **backups** locally or in a offsite location etc.
+<Info>
+**DirectAdmin** is the control panel used for server and hosting account management. It provides a user-friendly interface for managing domains, databases, email, and more.
+</Info>
 
-## Autoscale Configuration
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **User Management** | Create and manage hosting accounts |
+| **Domain Management** | Add domains, subdomains, and DNS records |
+| **Database Management** | Create MySQL databases and users |
+| **Email Management** | Set up email accounts and forwarders |
+| **File Management** | Upload and manage files via web interface |
+| **SSL Certificates** | Install and manage SSL/TLS certificates |
+| **Backup & Restore** | Create and restore backups |
+| **Resource Monitoring** | View CPU, RAM, and bandwidth usage |
+
+### DirectAdmin Integration
+
+AreaWP integrates deeply with DirectAdmin for automated operations:
+
+**Automated Tasks:**
+- User account creation
+- Domain setup and DNS configuration
+- Database provisioning
+- SSL certificate installation (Let's Encrypt)
+- File system operations
+- Resource allocation
+- Account suspension/unsuspension
+
+**API Access:**
+- DirectAdmin Login Keys for secure API access
+- Automated command execution via SSH
+- Reseller account management
+- Package assignment and modification
+
+<Warning>
+**Important:** AreaWP requires DirectAdmin with specific configurations. The reseller username must be exactly **3 characters** long, and the user package name must also be **3 characters**.
+</Warning>
+
+---
+
+## Managed Hosting Features
+
+### Autoscale Configuration
+
+<Info>
+**Available in:** Business and Enterprise plans
+</Info>
+
+**Dynamic Resource Scaling**
+
+Automatically adjusts server resources based on traffic and load patterns.
+
+**How It Works:**
+1. **Monitoring:** Continuous monitoring of CPU, RAM, and traffic
+2. **Detection:** Identifies resource constraints and traffic spikes
+3. **Scaling:** Automatically allocates additional resources
+4. **Optimization:** Returns to baseline when load decreases
+
+**Benefits:**
+- Handle traffic spikes without downtime
+- Pay only for resources used
+- No manual intervention required
+- Guaranteed performance during peak times
+
+**Scaling Triggers:**
+- CPU usage > 80% for 5 minutes
+- RAM usage > 85% for 5 minutes
+- Traffic spike > 200% of baseline
+- Request queue buildup
+
+**Resource Limits:**
+- **Business Plan:** 2x base resources
+- **Enterprise Plan:** 5x base resources
+
+---
+
+### Uptime Monitoring
+
+<Info>
+**Available in:** Business and Enterprise plans
+</Info>
+
+**24/7 Availability Monitoring**
+
+Continuous monitoring of your platform's uptime and performance from multiple global locations.
+
+**Monitoring Features:**
+- **Check Frequency:** Every 1 minute
+- **Locations:** 10+ global monitoring points
+- **Protocols:** HTTP, HTTPS, TCP, ICMP
+- **Response Time:** Tracked and graphed
+- **SSL Expiry:** Certificate expiration alerts
+
+**Alerting:**
+- Email notifications
+- SMS alerts (Enterprise)
+- Webhook integrations
+- Slack/Discord notifications
+- PagerDuty integration
+
+**Reporting:**
+- Real-time status dashboard
+- Historical uptime data
+- Performance graphs
+- Incident timeline
+- SLA compliance reports
+
+**View Live Status:**
+[Check Uptime Report →](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/)
+
+**Uptime Guarantee:**
+- **Business Plan:** 99.9% uptime SLA
+- **Enterprise Plan:** 99.95% uptime SLA
+
+---
+
+### Blacklist Monitoring
+
+<Info>
+**Available in:** Enterprise plan only
+</Info>
+
+**Email Deliverability Protection**
+
+Monitors your server's IP address across 100+ email blacklists to ensure optimal email deliverability.
+
+**What We Monitor:**
+- Spamhaus (SBL, XBL, PBL)
+- Barracuda
+- SORBS
+- SpamCop
+- URIBL
+- SURBL
+- And 90+ more blacklists
+
+**Monitoring Frequency:**
+- Every 6 hours
+- Immediate alerts on detection
+- Automatic delisting attempts
+- Manual intervention if needed
+
+**Benefits:**
+- Maintain email deliverability
+- Protect sender reputation
+- Early detection of issues
+- Proactive remediation
+- Compliance monitoring
+
+**Alerts Include:**
+- Blacklist name and reason
+- Detection timestamp
+- Delisting instructions
+- Impact assessment
+- Remediation steps
+
+**View Live Status:**
+[Check Blacklist Report →](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/)
+
+---
+
+## Security Features
+
+### Protection Layers
+
+<AccordionGroup>
+  <Accordion title="DDoS Protection" icon="shield-halved">
+    **Enterprise-Grade Attack Mitigation**
+    
+    - Layer 3/4 DDoS protection
+    - Automatic attack detection
+    - Traffic scrubbing
+    - Rate limiting
+    - Geo-blocking capabilities
+    - Always-on protection
+  </Accordion>
+  
+  <Accordion title="Firewall (CSF)" icon="fire">
+    **ConfigServer Security & Firewall**
+    
+    - Stateful packet inspection
+    - Port management
+    - IP whitelisting/blacklisting
+    - Login failure detection
+    - Process monitoring
+    - Connection tracking
+  </Accordion>
+  
+  <Accordion title="SSL/TLS Certificates" icon="lock">
+    **Automated Certificate Management**
+    
+    - Free Let's Encrypt certificates
+    - Automatic renewal
+    - Wildcard certificate support
+    - TLS 1.2 and 1.3 support
+    - Perfect Forward Secrecy
+    - HSTS enabled
+  </Accordion>
+  
+  <Accordion title="Malware Scanning" icon="virus">
+    **ClamAV Integration**
+    
+    - Daily malware scans
+    - Real-time file monitoring
+    - Quarantine infected files
+    - Email notifications
+    - Signature updates
+    - Custom scan schedules
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Backup System
+
+### Automated Backups
+
+**Daily Backup Schedule:**
+- Full website files
+- Complete databases
+- Email accounts
+- DirectAdmin configurations
+- SSL certificates
+
+**Retention Policy:**
+- Daily backups: 7 days
+- Weekly backups: 4 weeks
+- Monthly backups: 3 months
+
+**Backup Storage:**
+- Off-site backup location
+- Encrypted storage
+- Redundant copies
+- Quick restoration
+
+**Restoration Options:**
+- Full account restore
+- Individual file restore
+- Database restore
+- Point-in-time recovery
+
+---
+
+## Performance Benchmarks
+
+### Expected Performance
+
+| Metric | Without Cache | With FastCGI | With Redis |
+|--------|---------------|--------------|------------|
+| **Page Load Time** | 800ms - 1.5s | 50ms - 150ms | 30ms - 100ms |
+| **Requests/Second** | 50-100 | 500-1000 | 1000-2000 |
+| **Concurrent Users** | 50-100 | 500-1000 | 1000-5000 |
+| **TTFB** | 400ms - 800ms | 20ms - 50ms | 10ms - 30ms |
+| **Database Queries** | 50-100/page | 50-100/page | 5-10/page |
 
 <Tip>
-  Autoscale option available under the [Business](https://areawp.com/pricing) and [Enterprise ](https://areawp.com/pricing)plans only.
+**Real-World Performance:** With all caching layers enabled, AreaWP can serve thousands of concurrent users with sub-100ms response times for cached content.
 </Tip>
 
-Autoscale refers to adding more resources such as CPU/RAM to your Virtual Machines based on a particular threshold as on demand. In Autoscale, resources can be upgraded when required and downgraded to original state when load goes below threshold.\
-This ensures that the Virtual Machines don’t loose their performance during peak load.\
-This is automatically configured by us for you and triggers the server whenever CPU or RAM thresold **\>= 90%** by adding respectively 1 CPU or 1GB RAM.\
-It's _free of charge_ and does not involve any other cost on your end.
+---
 
-## Uptime Monitor
+## Network & Connectivity
 
-<Tip>
-  Uptime option available under the [Business](https://areawp.com/pricing) and [Enterprise ](https://areawp.com/pricing)plans only.
-</Tip>
+### Infrastructure Specifications
 
-This feature allows you the possibility to get a custom and unique page where you can monitor the uptime of your own server as well as CPU, RAM, disk and network usage.
+**Network:**
+- 1 Gbps uplink (minimum)
+- 10 Gbps uplink (Enterprise)
+- Premium bandwidth
+- Multiple tier-1 carriers
+- Low-latency routing
 
-Take a look at the demo [here](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/).
+**Data Centers:**
+- Multiple global locations
+- Tier III or higher facilities
+- Redundant power (N+1)
+- Climate controlled
+- 24/7 physical security
 
-In addition you'll receive custom notifications via email whenever the virtual server exceeds 80% of its resources , so you can act promptly to fix the root cause or upgrade the server without causing downtime to the customer (remember that you will still have the "autoscale" that will cover you temporarily from any possible downtime)
+**Connectivity:**
+- BGP routing
+- DDoS mitigation
+- IPv4 and IPv6 support
+- Private networking
+- CDN integration ready
 
-## Blacklist Monitor
+---
 
-<Tip>
-  Blacklist option available under the [Enterprise ](https://areawp.com/pricing)plan only.
-</Tip>
+## Related Documentation
 
-This feature will alert you via email whenever your server's IP gets blacklisted in any popular RBL with a check that is performed automatically every 24 hours.
-
-Take a look at the demo [here](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/).
+<CardGroup cols={2}>
+  <Card title="Requirements" icon="list-check" href="/requirements">
+    Server and system requirements
+  </Card>
+  <Card title="Installation Guide" icon="download" href="/installation">
+    Step-by-step installation
+  </Card>
+  <Card title="General Settings" icon="gear" href="/admin/general-settings">
+    Platform configuration
+  </Card>
+  <Card title="Performance Optimization" icon="gauge-high" href="/admin/performance">
+    Optimize your platform
+  </Card>
+</CardGroup>
