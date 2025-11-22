@@ -71,7 +71,7 @@
               "extra/task-manager",
               "extra/telesales-manager",
               "extra/plugins-addons-configuration",
-              "server/server-manager"
+              "extra/service-expiration"
             ]
             }
         ]

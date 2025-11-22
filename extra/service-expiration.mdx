@@ -1,0 +1,633 @@
+---
+title: "Service Expiration Management"
+description: "Track and manage expiring websites and plugins, contact customers for renewals"
+icon: "calendar-x"
+---
+
+<Info>
+**Navigation Paths:**  
+• **Website Expiration:** `/admin/WebsiteExpire`  
+• **Plugin Expiration:** `/admin/PluginExpire`
+</Info>
+
+## Overview
+
+The Service Expiration Management system helps you track websites and plugins approaching expiration, contact customers for renewals, and manage the renewal process efficiently.
+
+<CardGroup cols={3}>
+  <Card title="Expiring Websites" icon="globe" color="#ffc107">
+    Track free/trial websites expiring
+  </Card>
+  <Card title="Expiring Plugins" icon="plug" color="#dc3545">
+    Track paid plugins expiring
+  </Card>
+  <Card title="Renewal Management" icon="arrow-rotate-right" color="#198754">
+    Process renewals
+  </Card>
+</CardGroup>
+
+---
+
+## Service Types
+
+<Tabs>
+  <Tab title="Website Expiration">
+    **Free & Trial Websites**
+    
+    Tracks websites with free or trial packages approaching expiration.
+    
+    **What Gets Tracked:**
+    - Free/trial websites (`app_price = 0`)
+    - Have an expiration date set
+    - Within configured alert window (default: 30 days)
+    - Require renewal or upgrade to paid plan
+    
+    **Excluded:**
+    - Paid websites
+    - Websites without expiration
+    - Internal/admin websites
+    - Forever/lifetime packages
+  </Tab>
+  
+  <Tab title="Plugin Expiration">
+    **Paid Plugin Licenses**
+    
+    Tracks paid plugin licenses approaching expiration.
+    
+    **What Gets Tracked:**
+    - Paid plugins (`price > 0`)
+    - Expiring within 30 days
+    - Monthly or yearly renewal types
+    - Active plugin installations
+    
+    **Excluded:**
+    - Free plugins (`price = 0`)
+    - Forever/lifetime plugins
+    - Deleted plugins
+    - Already expired plugins (handled separately)
+  </Tab>
+</Tabs>
+
+---
+
+## Website Expiration Management
+
+### Statistics Dashboard
+
+**Expiration Overview:**
+
+| Metric | Description | Badge Color |
+|--------|-------------|-------------|
+| **Total Websites** | All websites in expiration window | Primary (Blue) |
+| **Already Expired** | Websites past expiration date | Danger (Red) |
+| **Expiring Soon** | Websites expiring within 15 days | Warning (Yellow) |
+| **No Contact** | Customers not yet contacted | Info (Cyan) |
+
+### Website List Columns
+
+| Column | Information |
+|--------|-------------|
+| **ID** | Sequential number |
+| **Website & Owner** | Domain, owner avatar, name, and management links |
+| **Expiration Date** | Expiration date and days remaining/overdue |
+| **Package** | Package name and status badge |
+| **Contact Status** | Contact history and notes |
+
+### Expiration Timeline
+
+```
+Active → Expiring Soon (15 days) → Critical (7 days) → Expired
+```
+
+**Status Indicators:**
+- **Active:** More than 15 days remaining (Green)
+- **Expiring Soon:** 8-15 days remaining (Yellow)
+- **Critical:** 1-7 days remaining (Red)
+- **Expired:** Past expiration date (Red)
+
+---
+
+## Plugin Expiration Management
+
+### Plugin List
+
+Access at `/admin/PluginExpire` to see all plugins expiring within 30 days.
+
+**List Columns:**
+
+| Column | Information |
+|--------|-------------|
+| **Plugin & Website** | Plugin name, image, and target website |
+| **Version** | Current version and available updates |
+| **Price & Expiry** | Plugin price, renewal type, and expiration date |
+| **Actions** | Renew plugin button |
+
+### Plugin Information Displayed
+
+**Plugin Details:**
+- Plugin name and icon/image
+- "Expiring Soon" status badge
+- Link to App Store listing
+- Target website domain
+- Link to Website Manager
+
+**Version Information:**
+- **Current:** Installed plugin version
+- **Available:** Latest version (if update available)
+- Update warning if newer version exists
+
+**Pricing Details:**
+- Plugin price
+- Renewal type (Monthly/Yearly/Forever)
+- Expiration date
+- Color-coded urgency:
+  - **Warning (Yellow):** Expiring within 30 days
+  - **Danger (Red):** Expiring within 1 month
+
+---
+
+## Managing Website Expiration
+
+### Contact Statuses
+
+| Status | Description | When to Use |
+|--------|-------------|-------------|
+| **No Contact Yet** | Customer not contacted | Default status |
+| **Contacted** | Customer has been reached | After successful contact |
+| **Refused Renewal** | Customer declined to renew | Customer won't renew |
+
+### Viewing Contact Details
+
+**No Contact Status:**
+- Red warning icon
+- "No Contact Yet" badge
+- "Click to update status" prompt
+
+**Contacted Status:**
+- Green check icon
+- Contact notes displayed
+- Caller name and timestamp
+- Truncated notes (hover for full text)
+
+---
+
+## Managing Customer Contacts
+
+### Contacting Customers
+
+1. Click on website row to open details modal
+2. Review customer and website information
+3. Contact customer via:
+   - Phone call (click phone button)
+   - Email
+   - Other communication method
+4. Update contact status after interaction
+
+### Recording Contact Outcome
+
+**In Website Details Modal:**
+
+1. **Contact Notes Section:**
+   - Enter detailed notes about the conversation
+   - Include customer's response
+   - Note any commitments or follow-ups
+   - Record renewal decision
+
+2. **Contact Status Selection:**
+   - Select appropriate status
+   - Options depend on outcome
+   - Status updates automatically
+
+3. **Save Contact Information:**
+   - Click update button
+   - Contact history saved
+   - Status updated in list
+   - Timestamp recorded
+
+<Tip>
+**Detailed Notes:** Include specific information like renewal price quoted, customer concerns, callback dates, or reasons for refusal. This helps with follow-ups and team coordination.
+</Tip>
+
+---
+
+## Website Details Modal
+
+### Information Displayed
+
+**Website Information:**
+- Domain name with external link
+- Package type and status
+- Creation date
+- Expiration date
+- Renewal price
+
+**Owner Information:**
+- Customer name and avatar
+- Email address (clickable)
+- Phone number (clickable to call)
+- Zalo contact button
+- Total websites owned
+- Account creation date
+
+**Contact Management:**
+- Contact notes text area
+- Contact status dropdown
+- Update button
+- Contact history table (if exists)
+
+### Contact History
+
+**History Table Columns:**
+- **Caller:** Who contacted the customer
+- **Call Time:** Date and time of contact
+- **Status:** Contact outcome
+- **Note:** Detailed notes from interaction
+
+**Benefits:**
+- See all previous contact attempts
+- Understand customer journey
+- Avoid duplicate contacts
+- Track renewal discussions
+- Improve follow-up strategy
+
+---
+
+## Managing Plugin Renewals
+
+### Plugin Renewal Process
+
+**Renewing Expiring Plugins:**
+
+1. Review plugin list at `/admin/PluginExpire`
+2. Identify plugins expiring within 30 days
+3. Click **Renew Plugin** button on plugin row
+4. Plugin renewal modal opens
+
+<Warning>
+**Feature Update Notice:** The plugin renewal feature is currently being updated. Contact support for manual renewal or check back later for automated renewal functionality.
+</Warning>
+
+### Plugin Renewal Modal
+
+**Modal Information:**
+- Plugin name display
+- Plugin icon/image
+- Renewal confirmation notice
+- Feature update alert
+- Close button
+
+**Current Status:**
+- Automated renewal temporarily unavailable
+- Manual renewal required
+- Contact support for assistance
+- Feature being enhanced
+
+### Search Functionality
+
+**Plugin Search:**
+- Search by plugin name
+- Real-time filtering
+- Results update as you type
+- Case-insensitive search
+
+**Search Process:**
+1. Type plugin name in search box
+2. Results filter automatically
+3. Clear search to see all plugins
+4. Pagination available for large lists
+
+---
+
+## Search & Filter (Websites)
+
+
+### Search Options
+
+**Search By:**
+- **Domain:** Website domain name
+- **Website ID:** Specific website ID
+- **Owner Email:** Customer email address
+- **Owner Phone:** Customer phone number
+
+**Search Process:**
+1. Select search type from dropdown
+2. Enter search keywords
+3. Results filter automatically
+4. Clear to see all results
+
+### Filter Options
+
+**Contact Status Filter:**
+- **No Agreement:** Customers not yet contacted
+- **Refused Renewal:** Customers who declined
+
+**Results Per Page:**
+- 20 items (default)
+- 30 items
+- 50 items
+
+### Sorting
+
+Click **Expiration Date** column header to sort:
+- **Ascending:** Soonest expiring first
+- **Descending:** Latest expiring first
+- Active sort shown with arrow icon
+
+---
+
+## Renewal Workflow
+
+### Standard Renewal Process
+
+**1. Identification (15+ days before expiration):**
+- Website appears in expiration list
+- Review customer history
+- Check previous renewals
+- Note package and pricing
+
+**2. First Contact (10-15 days before):**
+- Contact customer
+- Explain expiration date
+- Present renewal options
+- Quote renewal price
+- Record contact notes
+
+**3. Follow-up (if needed):**
+- Customer requested callback
+- Send reminder email
+- Provide payment options
+- Answer questions
+
+**4. Renewal Decision:**
+- **Customer Agrees:**
+  - Process payment
+  - Extend expiration date
+  - Send confirmation
+  - Update contact status
+  
+- **Customer Declines:**
+  - Mark as "Refused Renewal"
+  - Document reason
+  - Schedule future follow-up
+  - Prepare for expiration
+
+**5. Post-Expiration (if not renewed):**
+- Website expires
+- Access may be suspended
+- Data retention period begins
+- Final renewal opportunity
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Proactive Contact" icon="phone">
+    - Contact customers 10-15 days before expiration
+    - Don't wait until last minute
+    - Multiple contact attempts if needed
+    - Use preferred contact method
+    - Be professional and helpful
+    - Explain value of renewal
+    - Offer flexible payment options
+  </Accordion>
+  
+  <Accordion title="Communication Strategy" icon="message">
+    - Personalize communication
+    - Reference customer's website specifically
+    - Highlight website usage/traffic
+    - Emphasize value received
+    - Present upgrade opportunities
+    - Be understanding of budget concerns
+    - Offer payment plans if possible
+  </Accordion>
+  
+  <Accordion title="Record Keeping" icon="note-sticky">
+    - Document every contact attempt
+    - Record customer's exact response
+    - Note objections and concerns
+    - Track promises made
+    - Document follow-up dates
+    - Keep notes professional
+    - Update status immediately
+  </Accordion>
+  
+  <Accordion title="Renewal Incentives" icon="gift">
+    - Offer early renewal discounts
+    - Provide upgrade incentives
+    - Bundle multiple services
+    - Loyalty rewards for long-term customers
+    - Flexible payment terms
+    - Value-added services
+    - Referral bonuses
+  </Accordion>
+  
+  <Accordion title="Plugin Renewal Management" icon="plug">
+    - Monitor plugins expiring within 30 days
+    - Contact customers proactively
+    - Explain plugin value and benefits
+    - Highlight features they're using
+    - Offer bundle deals with other plugins
+    - Provide upgrade paths to premium versions
+    - Ensure smooth renewal process
+    - Follow up on renewal confirmations
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Website Not Showing in List" icon="eye-slash">
+    **Issue:** Website should be expiring but not in list
+    
+    **Solutions:**
+    1. Check if website has expiration date set
+    2. Verify website is free/trial (app_price = 0)
+    3. Check if within expiration window
+    4. Verify website has package assigned
+    5. Check search filters
+    6. Refresh the page
+    7. Review database records
+  </Accordion>
+  
+  <Accordion title="Cannot Update Contact Status" icon="circle-xmark">
+    **Issue:** Unable to save contact information
+    
+    **Solutions:**
+    1. Fill in contact notes
+    2. Select contact status
+    3. Check internet connection
+    4. Verify permissions
+    5. Refresh page and try again
+    6. Clear browser cache
+    7. Try different browser
+  </Accordion>
+  
+  <Accordion title="Expiration Date Incorrect" icon="calendar-xmark">
+    **Issue:** Wrong expiration date displayed
+    
+    **Solutions:**
+    1. Check website database record
+    2. Verify expiration date field
+    3. Check for recent renewals
+    4. Review order history
+    5. Manually update if needed
+    6. Check timezone settings
+    7. Contact technical support
+  </Accordion>
+  
+  <Accordion title="Customer Already Contacted Alert" icon="triangle-exclamation">
+    **Issue:** System shows customer being contacted by another user
+    
+    **Solutions:**
+    1. Coordinate with other team member
+    2. Check if contact is recent
+    3. Verify contact status
+    4. Wait for other user to finish
+    5. Admin can override if needed
+    6. Move to next customer
+    7. Schedule callback
+  </Accordion>
+  
+  <Accordion title="Plugin Renewal Not Working" icon="plug">
+    **Issue:** Cannot renew plugin automatically
+    
+    **Solutions:**
+    1. Note: Feature is currently being updated
+    2. Contact support for manual renewal
+    3. Provide plugin ID and customer details
+    4. Check back later for automated feature
+    5. Verify plugin is still active
+    6. Confirm customer wants to renew
+    7. Process renewal manually through admin panel
+  </Accordion>
+  
+  <Accordion title="Plugin Not in Expiration List" icon="eye-slash">
+    **Issue:** Plugin should be expiring but not shown
+    
+    **Solutions:**
+    1. Verify plugin price is greater than 0
+    2. Check if plugin expires within 30 days
+    3. Ensure plugin is not deleted
+    4. Verify renewal type is not "forever"
+    5. Check search filters
+    6. Refresh the page
+    7. Review database records
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Expiration Notifications
+
+### Automated Notifications
+
+**System Notifications:**
+- Customers receive expiration reminders
+- Sent at configured intervals
+- Include renewal instructions
+- Provide payment options
+- Link to customer portal
+
+**Notification Schedule:**
+- 15 days before expiration
+- 7 days before expiration
+- 3 days before expiration
+- 1 day before expiration
+- On expiration day
+
+<Info>
+**Notification Configuration:** Expiration notifications are managed by the system's automated cron tasks. Check ScheduledTasks.php for notification settings.
+</Info>
+
+---
+
+## Reporting & Analytics
+
+### Key Metrics to Track
+
+**Renewal Performance:**
+- Renewal rate percentage
+- Average renewal time
+- Revenue from renewals
+- Lost revenue from non-renewals
+
+**Contact Effectiveness:**
+- Contacts per renewal
+- Conversion rate by contact method
+- Best contact times
+- Most effective messaging
+
+**Customer Behavior:**
+- Common objections
+- Price sensitivity
+- Upgrade rate
+- Churn reasons
+
+### Improving Renewal Rates
+
+**Strategies:**
+- Earlier contact (15+ days)
+- Multiple contact methods
+- Personalized messaging
+- Value demonstration
+- Flexible pricing
+- Upgrade incentives
+- Excellent support
+
+---
+
+## Quick Reference
+
+### Common Actions - Websites
+
+| Action | Steps |
+|--------|-------|
+| **View Expiring Sites** | Navigate to /admin/WebsiteExpire |
+| **Search Website** | Select search type → Enter keywords |
+| **Filter by Status** | Select contact status filter |
+| **Contact Customer** | Click row → Review details → Call/Email |
+| **Update Status** | Open details → Add notes → Select status → Update |
+| **Sort by Expiration** | Click Expiration Date header |
+
+### Common Actions - Plugins
+
+| Action | Steps |
+|--------|-------|
+| **View Expiring Plugins** | Navigate to /admin/PluginExpire |
+| **Search Plugin** | Type plugin name in search box |
+| **Renew Plugin** | Click Renew Plugin button → Contact support |
+| **View Plugin Details** | Click plugin name → App Store listing |
+| **View Website** | Click website domain → Website Manager |
+
+### Expiration Timeline
+
+| Days Remaining | Status | Priority | Action |
+|----------------|--------|----------|--------|
+| 30+ days | Active | Low | Monitor |
+| 15-30 days | Approaching | Medium | Prepare contact |
+| 8-14 days | Expiring Soon | Medium | First contact |
+| 1-7 days | Critical | High | Urgent follow-up |
+| 0 days | Expired | Critical | Final opportunity |
+| Negative | Overdue | Critical | Suspension pending |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Manage customer websites
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Configure packages
+  </Card>
+  <Card title="Order Management" icon="receipt" href="/order-management">
+    Process renewals
+  </Card>
+  <Card title="Telesales" icon="headset" href="/telesales">
+    Customer contact management
+  </Card>
+</CardGroup>
