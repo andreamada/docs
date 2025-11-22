@@ -16,46 +16,67 @@ Minimum and recommended specifications for running AreaWP on your own server.
 
 <Tabs>
   <Tab title="Minimum Requirements">
-    **Small Deployment (Up to 50 websites)**
+    **Small Deployment (Up to 25 websites)**
+    
+    | Component | Specification |
+    |-----------|---------------|
+    | **CPU** | 2 cores @ 2.0 GHz |
+    | **RAM** | 4 GB |
+    | **Storage** | 50 GB SSD |
+    | **Bandwidth** | 500 GB/month |
+    | **Network** | 100 Mbps uplink |
+    
+    **Suitable For:**
+    - Testing and development
+    - Small freelancers
+    - Up to 25 client websites
+    - Low traffic sites
+    - Basic WordPress sites
+    - Learning and experimentation
+  </Tab>
+  
+  <Tab title="Recommended">
+    **Medium Deployment (25-100 websites)**
     
     | Component | Specification |
     |-----------|---------------|
     | **CPU** | 4 cores @ 2.5 GHz |
     | **RAM** | 8 GB |
-    | **Storage** | 100 GB SSD |
-    | **Bandwidth** | 1 TB/month |
-    | **Network** | 100 Mbps uplink |
+    | **Storage** | 150 GB SSD |
+    | **Bandwidth** | 2 TB/month |
+    | **Network** | 1 Gbps uplink |
     
     **Suitable For:**
-    - Testing and development
-    - Small agencies
-    - Up to 50 client websites
-    - Low to moderate traffic
-    - Basic WordPress sites
+    - Production environments
+    - Small to medium agencies
+    - 25-100 client websites
+    - Moderate traffic
+    - Standard WordPress sites
+    - E-commerce sites
   </Tab>
   
-  <Tab title="Recommended">
-    **Medium Deployment (50-200 websites)**
+  <Tab title="High Performance">
+    **Large Deployment (100-250 websites)**
     
     | Component | Specification |
     |-----------|---------------|
     | **CPU** | 8 cores @ 3.0 GHz |
     | **RAM** | 16 GB |
-    | **Storage** | 250 GB NVMe SSD |
+    | **Storage** | 300 GB NVMe SSD |
     | **Bandwidth** | 5 TB/month |
     | **Network** | 1 Gbps uplink |
     
     **Suitable For:**
-    - Production environments
     - Growing agencies
-    - 50-200 client websites
-    - Moderate to high traffic
-    - E-commerce sites
-    - Multiple concurrent users
+    - 100-250 client websites
+    - High-traffic sites
+    - Resource-intensive applications
+    - WooCommerce stores
+    - Membership sites
   </Tab>
   
-  <Tab title="High Performance">
-    **Large Deployment (200+ websites)**
+  <Tab title="Enterprise">
+    **Enterprise Deployment (250+ websites)**
     
     | Component | Specification |
     |-----------|---------------|
@@ -66,12 +87,12 @@ Minimum and recommended specifications for running AreaWP on your own server.
     | **Network** | 10 Gbps uplink |
     
     **Suitable For:**
-    - Enterprise deployments
     - Large agencies
-    - 200+ client websites
-    - High-traffic sites
-    - Resource-intensive applications
+    - 250+ client websites
+    - Very high-traffic sites
     - Maximum performance requirements
+    - Multi-tenant platforms
+    - Mission-critical applications
   </Tab>
 </Tabs>
 
@@ -83,21 +104,128 @@ Minimum and recommended specifications for running AreaWP on your own server.
 
 ### Hosted Edition
 
-For the Hosted Edition, hardware is fully managed by AreaWP. Resources are allocated based on your plan:
+For the Hosted Edition, hardware is fully managed by AreaWP. Choose from multiple plans and VM tiers:
 
-| Plan | CPU Cores | RAM | Storage | Websites |
-|------|-----------|-----|---------|----------|
-| **Starter** | 4 cores | 8 GB | 100 GB | Up to 50 |
-| **Business** | 8 cores | 16 GB | 250 GB | Up to 200 |
-| **Enterprise** | 16+ cores | 32+ GB | 500+ GB | Unlimited |
+#### Plan Tiers
 
-**Additional Benefits:**
+<Tabs>
+  <Tab title="Pro Plan">
+    **€90/month + VAT**
+    
+    Perfect for small agencies and freelancers getting started.
+    
+    **Base Features:**
+    - Managed infrastructure
+    - Daily backups
+    - SSL certificates
+    - Basic support
+    - DirectAdmin included
+    
+    **Available VM Tiers:**
+    
+    | VM Tier | Additional Cost | CPU | RAM | Storage | Websites |
+    |---------|----------------|-----|-----|---------|----------|
+    | **VM-1** | +€40/month | 2 cores | 4 GB | 80 GB | Up to 25 |
+    | **VM-2** | +€60/month | 4 cores | 8 GB | 150 GB | Up to 50 |
+    | **VM-3** | +€80/month | 6 cores | 12 GB | 250 GB | Up to 100 |
+    
+    **Total Cost Examples:**
+    - Pro + VM-1: €130/month
+    - Pro + VM-2: €150/month
+    - Pro + VM-3: €170/month
+  </Tab>
+  
+  <Tab title="Business Plan">
+    **€150/month + VAT**
+    
+    For growing agencies with advanced needs.
+    
+    **Base Features:**
+    - Everything in Pro
+    - **Uptime monitoring** (24/7)
+    - Priority support
+    - Performance optimization
+    - Advanced analytics
+    
+    **Available VM Tiers:**
+    
+    | VM Tier | Additional Cost | CPU | RAM | Storage | Websites |
+    |---------|----------------|-----|-----|---------|----------|
+    | **VM-1** | +€40/month | 2 cores | 4 GB | 80 GB | Up to 25 |
+    | **VM-2** | +€60/month | 4 cores | 8 GB | 150 GB | Up to 50 |
+    | **VM-3** | +€80/month | 6 cores | 12 GB | 250 GB | Up to 100 |
+    
+    **Total Cost Examples:**
+    - Business + VM-1: €190/month
+    - Business + VM-2: €210/month
+    - Business + VM-3: €230/month
+    
+    [View Uptime Demo →](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/)
+  </Tab>
+  
+  <Tab title="Enterprise Plan">
+    **€300/month + VAT**
+    
+    For large agencies and mission-critical deployments.
+    
+    **Base Features:**
+    - Everything in Business
+    - **Blacklist monitoring**
+    - Dedicated account manager
+    - 24/7 premium support
+    - Custom SLA
+    - White-glove service
+    - Migration assistance
+    
+    **Available VM Tiers:**
+    
+    | VM Tier | Additional Cost | CPU | RAM | Storage | Websites |
+    |---------|----------------|-----|-----|---------|----------|
+    | **VM-2** | +€60/month | 4 cores | 8 GB | 150 GB | Up to 50 |
+    | **VM-3** | +€80/month | 6 cores | 12 GB | 250 GB | Up to 100 |
+    | **VM-4** | +€100/month | 8 cores | 16 GB | 400 GB | Up to 200 |
+    
+    **Total Cost Examples:**
+    - Enterprise + VM-2: €360/month
+    - Enterprise + VM-3: €380/month
+    - Enterprise + VM-4: €400/month
+    
+    [View Uptime Demo →](https://status.areawp.com/report/uptime/61f2fe493612fd989206729c381f02c5/)  
+    [View Blacklist Demo →](https://status.areawp.com/report/blacklist/e5f6c42327bb14de5881cc386ea30296/)
+  </Tab>
+  
+  <Tab title="Custom Solutions">
+    **Contact for Pricing**
+    
+    Need something specific? We can create a custom solution.
+    
+    **Custom Options:**
+    - Dedicated bare metal servers
+    - Custom resource allocation
+    - Multi-region deployment
+    - High-availability clusters
+    - Custom integrations
+    - Compliance requirements (HIPAA, PCI-DSS)
+    - White-label infrastructure
+    
+    [Contact Sales →](https://account.areawp.com/plugin/support_manager/client_tickets/add/2/)
+  </Tab>
+</Tabs>
+
+**Additional Benefits (All Hosted Plans):**
 - Automatic resource scaling (Business & Enterprise)
-- Dedicated IP addresses
 - DDoS protection included
-- Daily backups
-- 24/7 monitoring
+- Daily automated backups
+- 24/7 server monitoring
 - Free SSL certificates
+- Server management included
+- No setup fees
+- Cancel anytime
+
+<Info>
+**Pricing Note:** All hosted edition prices are in EUR (€) and exclude VAT. VM tier costs are in addition to the base plan cost. [View full pricing →](https://areawp.com/pricing/)
+</Info>
+
 
 ---
 
