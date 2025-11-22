@@ -1,0 +1,320 @@
+---
+title: "WordPress Update Management"
+description: "Manage WordPress core updates, version control, and builder synchronization"
+icon: "arrow-repeat"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → WordPress Update Management  
+**URL:** `/admin/UpdateWP`
+</Info>
+
+## Overview
+
+The WordPress Update Management page allows you to centrally manage WordPress core updates across all customer websites, synchronize builder folders, and perform bulk update operations.
+
+<CardGroup cols={2}>
+  <Card title="Builder Updates" icon="folder" color="#ffc107">
+    Synchronize WordPress includes across all sites
+  </Card>
+  <Card title="Core Download" icon="download" color="#198754">
+    Download latest WordPress version
+  </Card>
+  <Card title="Bulk Updates" icon="arrow-up-circle" color="#0dcaf0">
+    Update multiple sites simultaneously
+  </Card>
+  <Card title="Version Control" icon="list-check" color="#8b5cf6">
+    Track WordPress versions across sites
+  </Card>
+</CardGroup>
+
+---
+
+## Builder Folder Update
+
+### What is Builder Folder?
+
+The builder folder contains WordPress core files (`wp-admin`, `wp-includes`, and core PHP files) that are synchronized across all websites. This centralized approach ensures consistency and simplifies updates.
+
+**Update Path:**
+- **From:** `{SYSTEM_ROOT}/builder/wordpress-includes`
+- **To:** `/home/*/domains/*/public_html/builder`
+
+### Updating Builder Folders
+
+1. Click **Update Builder Folders** button
+2. System synchronizes WordPress core files to all websites
+3. Updates apply to:
+   - Template websites
+   - Client websites
+   - All WordPress installations
+
+<Warning>
+**Critical Operation:** Builder folder updates affect ALL WordPress websites on your platform. Ensure you have backups before proceeding.
+</Warning>
+
+<Tip>
+**When to Update:** Update builder folders after downloading a new WordPress version or when you need to apply security patches across all sites.
+</Tip>
+
+---
+
+## WordPress Core Download
+
+### Downloading Latest WordPress
+
+1. Click **Download Latest WP Version** button
+2. System downloads the latest WordPress version from WordPress.org
+3. Files are extracted to: `{SYSTEM_ROOT}/builder/wordpress-core/wordpress/`
+4. Current system version is displayed after download
+
+**What Gets Downloaded:**
+- Latest stable WordPress core files
+- All default themes and plugins
+- WordPress admin interface
+- Core PHP files and libraries
+
+<Info>
+**System Version:** After downloading, the system displays the current WordPress version available for deployment to websites.
+</Info>
+
+---
+
+## Bulk Website Updates
+
+### Updating Multiple Sites
+
+1. Click **Bulk Update Sites** button
+2. Modal opens with list of all WordPress websites
+3. Select websites to update:
+   - **Select All:** Check all websites
+   - **Select Templates:** Only template sites
+   - **Select Live Sites:** Only client sites
+4. Click **Update Selected** button
+5. Updates process sequentially
+
+### Update Process
+
+For each selected website, the system:
+
+1. Removes old `wp-admin` directory
+2. Removes old `wp-includes` directory
+3. Copies new WordPress core PHP files
+4. Copies new `wp-admin` directory
+5. Copies new `wp-includes` directory
+6. Preserves `wp-content` (themes, plugins, uploads)
+7. Maintains database and configuration
+
+<Warning>
+**Backup First:** Always backup websites before bulk updates. While the process preserves wp-content, unexpected issues can occur.
+</Warning>
+
+---
+
+## Website List Management
+
+### Viewing WordPress Sites
+
+The website list displays all WordPress installations:
+
+| Column | Description |
+|--------|-------------|
+| **#** | Sequential number |
+| **Domain** | Website domain name |
+| **WP Version** | Current WordPress version |
+| **Actions** | Update and backup options |
+
+### Site Types
+
+- **Template Site:** Indicated by palette icon (orange)
+- **Client Site:** Indicated by globe icon (green)
+
+### Individual Site Actions
+
+**Update Single Site:**
+1. Click update button next to website
+2. WordPress core files are updated immediately
+3. Website version refreshes automatically
+
+**Download Backup:**
+1. Click download button next to website
+2. Complete website backup is generated
+3. Backup downloads as ZIP file
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Update Strategy" icon="clipboard-list">
+    - Test updates on template sites first
+    - Schedule updates during off-peak hours
+    - Notify customers before major updates
+    - Keep WordPress versions consistent across sites
+    - Document all update activities
+    - Monitor for issues after updates
+    - Have rollback plan ready
+  </Accordion>
+  
+  <Accordion title="Version Management" icon="code-branch">
+    - Download new WordPress versions promptly
+    - Review WordPress release notes before updating
+    - Test compatibility with popular plugins
+    - Update builder folders before site updates
+    - Keep system WordPress version current
+    - Track which sites are on which versions
+    - Plan gradual rollout for major versions
+  </Accordion>
+  
+  <Accordion title="Backup Procedures" icon="database">
+    - Backup before every bulk update
+    - Store backups in secure location
+    - Test backup restoration regularly
+    - Keep multiple backup versions
+    - Document backup locations
+    - Automate backup processes
+    - Verify backup integrity
+  </Accordion>
+  
+  <Accordion title="Safety Measures" icon="shield">
+    - Never update all sites simultaneously
+    - Start with low-traffic sites
+    - Monitor error logs during updates
+    - Have support team ready
+    - Test critical functionality after updates
+    - Keep emergency contacts available
+    - Document rollback procedures
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Update Fails" icon="circle-xmark">
+    **Issue:** WordPress update fails for specific site
+    
+    **Solutions:**
+    1. Check disk space on server
+    2. Verify file permissions
+    3. Ensure wp-config.php is intact
+    4. Check for file conflicts
+    5. Review error logs
+    6. Try manual update via SSH
+    7. Restore from backup if needed
+  </Accordion>
+  
+  <Accordion title="Version Not Showing" icon="eye-slash">
+    **Issue:** WordPress version doesn't display
+    
+    **Solutions:**
+    1. Check if wp-includes/version.php exists
+    2. Verify file permissions
+    3. Refresh page
+    4. Check WordPress installation is complete
+    5. Verify path to WordPress files
+    6. Reinstall WordPress core if needed
+    7. Check server PHP version compatibility
+  </Accordion>
+  
+  <Accordion title="Builder Update Fails" icon="folder-xmark">
+    **Issue:** Builder folder update unsuccessful
+    
+    **Solutions:**
+    1. Verify source path exists
+    2. Check destination paths are writable
+    3. Ensure sufficient disk space
+    4. Check for permission issues
+    5. Review server error logs
+    6. Try updating individual sites
+    7. Verify SSH/server access
+  </Accordion>
+  
+  <Accordion title="Site Breaks After Update" icon="triangle-exclamation">
+    **Issue:** Website not working after WordPress update
+    
+    **Solutions:**
+    1. Check for plugin compatibility issues
+    2. Verify theme compatibility
+    3. Review PHP error logs
+    4. Check database connection
+    5. Restore from pre-update backup
+    6. Disable plugins one by one
+    7. Switch to default theme temporarily
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Update Workflow
+
+### Recommended Update Process
+
+**1. Preparation:**
+- [ ] Download latest WordPress version
+- [ ] Review WordPress changelog
+- [ ] Test on staging/template site
+- [ ] Backup all websites
+- [ ] Notify customers of maintenance window
+
+**2. Builder Update:**
+- [ ] Update builder folders
+- [ ] Verify builder files copied correctly
+- [ ] Check system WordPress version
+
+**3. Bulk Update:**
+- [ ] Select template sites first
+- [ ] Update and test templates
+- [ ] Select client sites in batches
+- [ ] Monitor each batch for issues
+- [ ] Verify updates completed successfully
+
+**4. Post-Update:**
+- [ ] Test critical functionality
+- [ ] Check for broken sites
+- [ ] Review error logs
+- [ ] Notify customers of completion
+- [ ] Document any issues encountered
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| **Download WP** | Click Download Latest WP Version → Wait for completion |
+| **Update Builder** | Click Update Builder Folders → Confirm → Wait |
+| **Bulk Update** | Bulk Update Sites → Select sites → Update Selected |
+| **Single Update** | Find site → Click update icon → Confirm |
+| **Backup Site** | Find site → Click download icon → Save ZIP |
+
+### Update Timing
+
+| Update Type | Recommended Frequency |
+|-------------|----------------------|
+| **Security Updates** | Immediately upon release |
+| **Minor Updates** | Within 1-2 weeks |
+| **Major Updates** | After 2-4 weeks of testing |
+| **Builder Sync** | After each WordPress download |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create and manage websites
+  </Card>
+  <Card title="Template Manager" icon="palette" href="/template-manager">
+    Manage WordPress themes
+  </Card>
+  <Card title="App Store" icon="puzzle-piece" href="/app-store">
+    Manage WordPress plugins
+  </Card>
+  <Card title="Server Manager" icon="server" href="/server-manager">
+    Server configuration
+  </Card>
+</CardGroup>

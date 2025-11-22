@@ -59,7 +59,7 @@
           {
           "group": "Server Management",
             "pages": [
-              "usage/templates-manager",
+              "server/wordpress-management",
               "usage/users-manager",
               "usage/websites-manager",
               "usage/plugins-manager",
