@@ -55,6 +55,17 @@
               "usage/orders-manager",
               "usage/invoices-manager"
             ]
+            },
+          {
+          "group": "Server Management",
+            "pages": [
+              "usage/templates-manager",
+              "usage/users-manager",
+              "usage/websites-manager",
+              "usage/plugins-manager",
+              "usage/orders-manager",
+              "usage/invoices-manager"
+            ]
             }
         ]
       }
