@@ -1,36 +1,175 @@
 ---
-title: "Pending Orders"
-description: "Manage and process pending customer orders"
-icon: "clock"
+title: "Order Management"
+description: "Manage customer orders across all statuses - pending, successful, and canceled"
+icon: "receipt"
 ---
 
 <Info>
-**Navigation Path:** Admin Dashboard → Pending Orders  
-**URL:** `/admin/OrderPending`
+**Navigation Paths:**  
+• **Pending Orders:** `/admin/OrderPending`  
+• **Successful Orders:** `/admin/OrderSuccess`  
+• **Canceled Orders:** `/admin/OrderCanceled`
 </Info>
 
 ## Overview
 
-The Pending Orders page displays all customer orders awaiting processing, payment, or approval. Manage order workflow, approve manual payments, and fulfill customer purchases.
+The Order Management system allows you to track and manage all customer orders throughout their lifecycle - from pending approval to successful completion or cancellation.
 
-<CardGroup cols={2}>
-  <Card title="Order Queue" icon="list-check" color="#10b981">
-    View all pending orders
+<CardGroup cols={3}>
+  <Card title="Pending Orders" icon="clock" color="#ffc107">
+    Orders awaiting processing
   </Card>
-  <Card title="Payment Verification" icon="credit-card" color="#0d6efd">
-    Verify manual payments
+  <Card title="Successful Orders" icon="check-circle" color="#198754">
+    Completed and fulfilled orders
   </Card>
-  <Card title="Order Approval" icon="check" color="#f59e0b">
-    Approve or reject orders
-  </Card>
-  <Card title="Fulfillment" icon="box" color="#8b5cf6">
-    Process and complete orders
+  <Card title="Canceled Orders" icon="xmark-circle" color="#dc3545">
+    Rejected or canceled orders
   </Card>
 </CardGroup>
 
 ---
 
-## Order List
+## Order Status Overview
+
+<Tabs>
+  <Tab title="Pending Orders">
+    **Orders Awaiting Action**
+    
+    Pending orders require admin review, payment verification, or approval before fulfillment.
+    
+    **Common Pending Reasons:**
+    - Awaiting manual payment confirmation
+    - Requires admin approval
+    - Payment processing in progress
+    - Fraud review needed
+    - Stock/resource verification
+    
+    **Actions Available:**
+    - Approve order
+    - Reject order
+    - Mark as paid
+    - Put on hold
+    - Request more information
+  </Tab>
+  
+  <Tab title="Successful Orders">
+    **Completed Orders**
+    
+    Successfully processed and fulfilled orders with confirmed payment.
+    
+    **Order Completion Includes:**
+    - Payment received and confirmed
+    - Services activated
+    - Customer notified
+    - Invoice generated
+    - Access credentials sent
+    
+    **Available Actions:**
+    - View order details
+    - Download invoice
+    - Resend confirmation
+    - Process refund
+    - View customer information
+  </Tab>
+  
+  <Tab title="Canceled Orders">
+    **Rejected or Canceled Orders**
+    
+    Orders that were rejected, canceled, or failed to complete.
+    
+    **Cancellation Reasons:**
+    - Payment failed or declined
+    - Customer cancellation request
+    - Fraud detection
+    - Out of stock/capacity
+    - Admin rejection
+    - Duplicate order
+    
+    **Available Actions:**
+    - View cancellation reason
+    - Process refund if paid
+    - Reactivate order
+    - Contact customer
+    - Archive order
+  </Tab>
+</Tabs>
+
+---
+
+## Order List Management
+
+### Viewing Orders by Status
+
+Access different order views:
+- **Pending Orders:** `/admin/OrderPending` - Orders awaiting action
+- **Successful Orders:** `/admin/OrderSuccess` - Completed orders
+- **Canceled Orders:** `/admin/OrderCanceled` - Rejected/canceled orders
+
+### Order List Columns
+
+| Column | Description |
+|--------|-------------|
+| **Order ID** | Unique order identifier |
+| **Customer** | Customer name and email |
+| **Items** | Products/services ordered |
+| **Amount** | Total order amount |
+| **Payment Method** | How customer paid/will pay |
+| **Status** | Current order status |
+| **Date** | Order creation date |
+| **Actions** | Available operations |
+
+### Order Statuses
+
+<Tabs>
+  <Tab title="Pending Statuses">
+    | Status | Description | Action Required |
+    |--------|-------------|-----------------|
+    | **Pending** | Order created, awaiting review | Review and approve |
+    | **Awaiting Payment** | Waiting for payment confirmation | Verify payment |
+    | **Processing** | Payment received, being fulfilled | Complete fulfillment |
+    | **On Hold** | Temporarily paused | Resolve issue |
+    | **Requires Approval** | Manual approval needed | Approve or reject |
+  </Tab>
+  
+  <Tab title="Success Statuses">
+    | Status | Description | Details |
+    |--------|-------------|---------|
+    | **Completed** | Order fully processed | Services active |
+    | **Active** | Subscription/service running | Ongoing service |
+    | **Delivered** | Products/services delivered | Customer has access |
+  </Tab>
+  
+  <Tab title="Canceled Statuses">
+    | Status | Description | Reason |
+    |--------|-------------|--------|
+    | **Canceled** | Order canceled | Various reasons |
+    | **Rejected** | Admin rejected | Failed verification |
+    | **Failed** | Payment/processing failed | Technical issue |
+    | **Refunded** | Payment returned | Customer request |
+  </Tab>
+</Tabs>
+
+### Filtering & Search
+
+**Available Filters:**
+- Search by order ID, customer name, or email
+- Filter by status
+- Filter by payment method
+- Filter by date range
+- Filter by order amount
+- Sort by any column
+- Export to CSV
+
+**Quick Filters:**
+- Today's orders
+- This week's orders
+- This month's orders
+- High-value orders (>$100)
+- Manual payment orders
+
+---
+
+## Managing Pending Orders
 
 ### Viewing Pending Orders
 
@@ -255,10 +394,197 @@ For orders requiring manual setup:
 
 ---
 
+## Managing Successful Orders
+
+### Viewing Completed Orders
+
+Access successful orders at `/admin/OrderSuccess`:
+
+**Order Information Displayed:**
+- Order ID and completion date
+- Customer details
+- Services/products delivered
+- Payment confirmation
+- Invoice number
+- Fulfillment status
+
+### Order Actions
+
+**View Order Details:**
+1. Click order ID to view full details
+2. Review all order information
+3. Check fulfillment status
+4. Verify services are active
+
+**Download Invoice:**
+1. Click **Download Invoice** button
+2. PDF invoice generates
+3. Save or print for records
+
+**Resend Confirmation:**
+1. Find completed order
+2. Click **Resend Confirmation** button
+3. Customer receives welcome email again
+4. Includes access credentials and details
+
+**Process Refund:**
+1. Click **Refund** button on completed order
+2. Select refund type (full or partial)
+3. Enter refund amount if partial
+4. Add refund reason
+5. Confirm refund
+6. Payment gateway processes refund
+7. Services may be suspended/canceled
+
+<Info>
+**Service Status:** Successful orders show active services. You can verify hosting accounts, domains, and other services are properly activated.
+</Info>
+
+### Revenue Tracking
+
+**Metrics Available:**
+- Total revenue from successful orders
+- Revenue by time period (daily, weekly, monthly)
+- Revenue by product/service type
+- Average order value
+- Top customers by revenue
+
+---
+
+## Managing Canceled Orders
+
+### Viewing Canceled Orders
+
+Access canceled orders at `/admin/OrderCanceled`:
+
+**Information Displayed:**
+- Order ID and cancellation date
+- Customer details
+- Cancellation reason
+- Refund status
+- Original order amount
+- Who canceled (customer/admin)
+
+### Cancellation Reasons
+
+**Common Reasons:**
+- **Payment Failed:** Credit card declined, insufficient funds
+- **Customer Request:** Customer changed mind or found alternative
+- **Fraud Detection:** Suspicious activity detected
+- **Out of Stock:** Service/product unavailable
+- **Admin Rejection:** Failed verification or policy violation
+- **Duplicate Order:** Customer accidentally ordered twice
+- **Technical Issue:** System error during processing
+
+### Managing Canceled Orders
+
+**View Cancellation Details:**
+1. Click order ID
+2. Review cancellation reason
+3. Check refund status
+4. View communication history
+
+**Process Refund:**
+
+If order was paid before cancellation:
+
+1. Find canceled order
+2. Check refund status
+3. If not refunded, click **Process Refund**
+4. Select refund method
+5. Confirm refund amount
+6. Process through payment gateway
+7. Update refund status
+
+**Reactivate Order:**
+
+If cancellation was in error:
+
+1. Find canceled order
+2. Click **Reactivate Order** button
+3. Verify customer wants to proceed
+4. Order moves back to pending
+5. Process as new pending order
+6. Fulfill normally
+
+**Archive Order:**
+1. Select old canceled orders
+2. Click **Archive** button
+3. Orders moved to archive
+4. Cleans up canceled order list
+5. Still accessible for records
+
+<Warning>
+**Refund Processing:** Always verify refund status before processing. Duplicate refunds can occur if not careful. Check payment gateway for existing refunds.
+</Warning>
+
+### Cancellation Analytics
+
+**Track Cancellation Metrics:**
+- Cancellation rate by time period
+- Most common cancellation reasons
+- Revenue lost to cancellations
+- Customers with multiple cancellations
+- Payment method failure rates
+
+**Use Data to Improve:**
+- Reduce payment failures
+- Improve product descriptions
+- Enhance fraud detection
+- Better customer communication
+- Streamline checkout process
+
+---
+
+## Order Lifecycle Management
+
+### Order Status Flow
+
+```
+New Order → Pending → Processing → Completed (Success)
+                ↓
+            Canceled (Failed/Rejected)
+```
+
+**Status Transitions:**
+
+| From | To | Trigger |
+|------|-----|---------|
+| Pending | Processing | Payment confirmed |
+| Pending | Canceled | Payment failed or rejected |
+| Processing | Completed | Services activated |
+| Processing | Canceled | Fulfillment failed |
+| Completed | Canceled | Refund processed |
+| Canceled | Pending | Order reactivated |
+
+### Bulk Order Operations
+
+**Bulk Actions Available:**
+
+**For Pending Orders:**
+- Approve multiple orders
+- Reject multiple orders
+- Export to CSV
+- Send reminder emails
+
+**For Successful Orders:**
+- Download invoices
+- Export revenue report
+- Resend confirmations
+- Generate analytics
+
+**For Canceled Orders:**
+- Process refunds
+- Archive orders
+- Export cancellation report
+- Analyze cancellation reasons
+
+---
+
 ## Best Practices
 
 <AccordionGroup>
-  <Accordion title="Order Processing" icon="check">
+  <Accordion title="Pending Order Processing" icon="clock">
     - Process orders within 24 hours
     - Verify payments before approval
     - Double-check customer information
@@ -266,6 +592,29 @@ For orders requiring manual setup:
     - Send confirmation emails promptly
     - Document any issues or notes
     - Follow up on delayed orders
+    - Set up automated reminders for old pending orders
+  </Accordion>
+  
+  <Accordion title="Successful Order Management" icon="check-circle">
+    - Verify all services are active
+    - Send welcome emails with credentials
+    - Follow up after 24-48 hours
+    - Monitor for support requests
+    - Track customer satisfaction
+    - Upsell additional services when appropriate
+    - Maintain detailed order records
+    - Archive old completed orders periodically
+  </Accordion>
+  
+  <Accordion title="Canceled Order Handling" icon="xmark-circle">
+    - Process refunds promptly (within 24-48 hours)
+    - Document cancellation reasons thoroughly
+    - Analyze cancellation patterns
+    - Contact customers for feedback
+    - Attempt to save cancellations when possible
+    - Learn from cancellation reasons
+    - Archive old canceled orders
+    - Track refund completion
   </Accordion>
   
   <Accordion title="Payment Verification" icon="credit-card">
@@ -276,6 +625,7 @@ For orders requiring manual setup:
     - Update payment status immediately
     - Reconcile payments daily
     - Flag suspicious transactions
+    - Use automated payment verification when possible
   </Accordion>
   
   <Accordion title="Fraud Prevention" icon="shield">
@@ -286,6 +636,7 @@ For orders requiring manual setup:
     - Verify email addresses are legitimate
     - Use fraud detection tools
     - Trust your instincts
+    - Maintain blacklist of fraudulent customers
   </Accordion>
   
   <Accordion title="Customer Communication" icon="message">
@@ -296,8 +647,64 @@ For orders requiring manual setup:
     - Send welcome emails with details
     - Respond to inquiries promptly
     - Follow up after fulfillment
+    - Request feedback and reviews
   </Accordion>
 </AccordionGroup>
+
+---
+
+## Order Analytics & Reporting
+
+### Key Metrics to Track
+
+**Pending Orders:**
+- Average time to process
+- Pending order value
+- Conversion rate (pending to completed)
+- Manual payment success rate
+- Orders on hold duration
+
+**Successful Orders:**
+- Total revenue
+- Average order value
+- Revenue by product/service
+- Revenue by time period
+- Customer lifetime value
+- Repeat customer rate
+
+**Canceled Orders:**
+- Cancellation rate
+- Revenue lost
+- Common cancellation reasons
+- Refund processing time
+- Customer retention after cancellation
+
+### Generating Reports
+
+**Revenue Reports:**
+1. Select date range
+2. Choose report type (daily, weekly, monthly)
+3. Filter by product/service if needed
+4. Export to CSV or PDF
+5. Analyze trends and patterns
+
+**Order Status Reports:**
+1. View orders by status
+2. Filter by date range
+3. Group by customer or product
+4. Export for analysis
+5. Share with team
+
+**Performance Metrics:**
+- Order processing speed
+- Fulfillment success rate
+- Customer satisfaction scores
+- Payment method performance
+- Peak order times
+
+<Tip>
+**Data-Driven Decisions:** Use order analytics to identify trends, optimize processes, and improve customer experience. Regular review of metrics helps prevent issues before they become problems.
+</Tip>
 
 ---
 
