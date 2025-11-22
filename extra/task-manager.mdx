@@ -1,0 +1,375 @@
+---
+title: "Task Manager"
+description: "Assign, track, and manage team tasks with categories and deadlines"
+icon: "list-check"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Task Manager  
+**URL:** `/admin/TaskManager`
+</Info>
+
+## Overview
+
+The Task Manager allows you to assign tasks to team members, organize work by categories, track progress, and manage deadlines efficiently across your organization.
+
+<CardGroup cols={2}>
+  <Card title="Task Assignment" icon="user-plus" color="#0d6efd">
+    Assign tasks to team members
+  </Card>
+  <Card title="Categories" icon="bookmark" color="#ffc107">
+    Organize tasks by category
+  </Card>
+  <Card title="Status Tracking" icon="chart-line" color="#198754">
+    Monitor task progress
+  </Card>
+  <Card title="Deadline Management" icon="clock" color="#dc3545">
+    Track and manage deadlines
+  </Card>
+</CardGroup>
+
+---
+
+## Task Status Overview
+
+### Task Statuses
+
+| Status | Description | Badge Color |
+|--------|-------------|-------------|
+| **No Process** | Task created but not started | Warning (Yellow) |
+| **Processing** | Task currently being worked on | Primary (Blue) |
+| **Processed** | Task completed | Success (Green) |
+
+### Status Counts
+
+The header displays real-time counts for each status:
+- No Process tasks awaiting action
+- Processing tasks in progress
+- Processed completed tasks
+
+---
+
+## Viewing Tasks
+
+### Task List Columns
+
+| Column | Information Displayed |
+|--------|----------------------|
+| **#** | Sequential number |
+| **Created By / Date** | Creator avatar, name, and creation timestamp |
+| **Category** | Task category badge |
+| **Task Description** | Brief description (truncated) |
+| **Assignee / Deadline** | Assigned user, deadline, and time remaining |
+| **Actions** | Edit and delete buttons |
+
+### Deadline Indicators
+
+**Time Remaining:**
+- **Green Badge:** Hours/days remaining until deadline
+- **Red Badge:** Hours/days overdue
+
+**Example:**
+- `24h remaining` - Task due in 24 hours
+- `5h overdue` - Task is 5 hours past deadline
+
+---
+
+## Creating Tasks
+
+### Assigning a New Task
+
+1. Click **Assign Task** button
+2. Fill in task details:
+   - **Category:** Select from available categories
+   - **Assign To:** Choose team member (shows current task count)
+   - **Deadline:** Set date and time (HH:MM DD/MM/YYYY)
+   - **Task Description:** Enter detailed task description
+3. Click **Save Task**
+
+<Tip>
+**Team Member Selection:** The dropdown shows each team member's current in-progress task count to help distribute workload evenly.
+</Tip>
+
+### Task Assignment Form
+
+**Category Selection:**
+- Choose from predefined categories
+- Categories help organize and filter tasks
+
+**Assignee Selection:**
+- Grouped by role (Admin, Manager, Staff, etc.)
+- Shows current task count: `John Doe [3 tasks]`
+- Helps balance workload distribution
+
+**Deadline Picker:**
+- Select date and time
+- Format: HH:MM DD/MM/YYYY
+- Cannot select past dates
+- Hour selection: 00-23
+- Minute selection: 0-59
+
+**Task Description:**
+- Rich text editor
+- Add detailed instructions
+- Include links and formatting
+- Attach images if needed
+
+---
+
+## Managing Tasks
+
+### Editing Tasks
+
+1. Click **Edit** button (pencil icon) on task row
+2. Modify task details:
+   - Change category
+   - Reassign to different user
+   - Update deadline
+   - Edit description
+   - Change status
+3. Click **Save Task**
+
+### Deleting Tasks
+
+1. Click **Delete** button (trash icon) on task row
+2. Confirm deletion in modal
+3. Task is permanently removed
+
+<Warning>
+**Permanent Deletion:** Deleted tasks cannot be recovered. Ensure you want to delete before confirming.
+</Warning>
+
+---
+
+## Task Categories
+
+### Managing Categories
+
+1. Click **Gear Icon** next to category filter
+2. **Manage Task Categories** modal opens
+3. View existing categories
+4. Add, edit, or delete categories
+
+### Adding Categories
+
+1. Click **Add Category** button
+2. Enter category name
+3. Click **Save Changes**
+4. New category available for task assignment
+
+### Editing Categories
+
+1. Modify category name in the list
+2. Click **Save Changes**
+3. All tasks with this category are updated
+
+### Deleting Categories
+
+1. Click **Delete** button (trash icon) next to category
+2. Category is removed
+3. Tasks with this category may need reassignment
+
+<Info>
+**Category Organization:** Use categories like "Development," "Support," "Marketing," "Sales," etc., to organize tasks by department or project type.
+</Info>
+
+---
+
+## Filtering & Sorting
+
+### Filter by Status
+
+Use the status dropdown to filter tasks:
+- **No Process:** Shows unstarted tasks
+- **Processing:** Shows tasks in progress
+- **Processed:** Shows completed tasks
+
+### Filter by Category
+
+Use the category dropdown to filter:
+- **All Categories:** Shows all tasks
+- **Specific Category:** Shows only tasks in that category
+- Displays task count per category
+
+### Sorting Tasks
+
+Default sort order:
+- Newest tasks first (by ID, descending)
+- Can be customized in code if needed
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Task Assignment" icon="user-plus">
+    - Assign tasks to appropriate team members
+    - Consider current workload (task count shown)
+    - Set realistic deadlines
+    - Provide clear, detailed descriptions
+    - Include all necessary information
+    - Attach relevant files or links
+    - Follow up on overdue tasks
+  </Accordion>
+  
+  <Accordion title="Category Management" icon="bookmark">
+    - Create meaningful category names
+    - Keep categories consistent
+    - Don't create too many categories
+    - Use categories that match your workflow
+    - Review and clean up unused categories
+    - Standardize category naming
+    - Document category purposes
+  </Accordion>
+  
+  <Accordion title="Deadline Management" icon="clock">
+    - Set realistic deadlines
+    - Consider team member availability
+    - Account for task complexity
+    - Monitor approaching deadlines
+    - Address overdue tasks promptly
+    - Communicate deadline changes
+    - Track deadline performance
+  </Accordion>
+  
+  <Accordion title="Task Tracking" icon="chart-line">
+    - Regularly review task status
+    - Update task progress
+    - Mark completed tasks promptly
+    - Monitor team workload
+    - Identify bottlenecks
+    - Reassign if needed
+    - Keep task list current
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Cannot Create Task" icon="circle-xmark">
+    **Issue:** Unable to create new task
+    
+    **Solutions:**
+    1. Verify you have "work_manager" permission
+    2. Check all required fields are filled
+    3. Ensure deadline is in valid format
+    4. Verify category exists
+    5. Check assignee is valid user
+    6. Review browser console for errors
+    7. Try refreshing the page
+  </Accordion>
+  
+  <Accordion title="Task Not Appearing" icon="eye-slash">
+    **Issue:** Created task doesn't show in list
+    
+    **Solutions:**
+    1. Check current status filter
+    2. Verify category filter setting
+    3. Refresh the page
+    4. Check if task was actually saved
+    5. Review pagination (may be on another page)
+    6. Clear browser cache
+    7. Check database for task entry
+  </Accordion>
+  
+  <Accordion title="Cannot Edit Task" icon="pencil-slash">
+    **Issue:** Unable to modify existing task
+    
+    **Solutions:**
+    1. Verify you have edit permissions
+    2. Check task still exists
+    3. Ensure modal opens properly
+    4. Verify form fields are editable
+    5. Check for JavaScript errors
+    6. Try different browser
+    7. Contact administrator
+  </Accordion>
+  
+  <Accordion title="Deadline Not Saving" icon="clock">
+    **Issue:** Deadline doesn't save correctly
+    
+    **Solutions:**
+    1. Use correct format: HH:MM DD/MM/YYYY
+    2. Ensure date is in the future
+    3. Check hour is 00-23
+    4. Check minute is 0-59
+    5. Verify date picker works
+    6. Try manual entry
+    7. Check server timezone settings
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Task Workflow
+
+### Typical Task Lifecycle
+
+**1. Creation:**
+- Manager creates task
+- Assigns to team member
+- Sets category and deadline
+- Provides detailed description
+
+**2. Assignment:**
+- Team member receives task
+- Reviews requirements
+- Starts working (status: Processing)
+
+**3. Execution:**
+- Team member works on task
+- Updates progress as needed
+- Communicates any issues
+
+**4. Completion:**
+- Team member completes task
+- Marks as Processed
+- Manager reviews completion
+
+**5. Review:**
+- Manager verifies completion
+- Provides feedback if needed
+- Archives or deletes task
+
+---
+
+## Quick Reference
+
+### Common Actions
+
+| Action | Steps |
+|--------|-------|
+| **Create Task** | Click Assign Task → Fill form → Save |
+| **Edit Task** | Click Edit icon → Modify → Save |
+| **Delete Task** | Click Delete icon → Confirm |
+| **Filter Status** | Select status from dropdown |
+| **Filter Category** | Select category from dropdown |
+| **Manage Categories** | Click gear icon → Add/Edit/Delete |
+
+### Keyboard Shortcuts
+
+While no specific shortcuts are built-in, you can:
+- Tab through form fields
+- Enter to submit forms
+- Esc to close modals
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage team members
+  </Card>
+  <Card title="Permission Settings" icon="shield" href="/permission-settings">
+    Configure user permissions
+  </Card>
+  <Card title="Telesales" icon="headset" href="/telesales">
+    Customer contact management
+  </Card>
+  <Card title="Admin Panel Settings" icon="gear" href="/admin-panel-settings">
+    System configuration
+  </Card>
+</CardGroup>

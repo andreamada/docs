@@ -1,0 +1,481 @@
+---
+title: "Telesales Manager"
+description: "Manage customer contacts, track sales calls, and monitor interaction history"
+icon: "headset"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Telesales Manager  
+**URL:** `/admin/Telesales`
+</Info>
+
+## Overview
+
+The Telesales Manager helps you track customer contacts, manage sales calls, update contact statuses, and maintain detailed interaction history for all customer communications.
+
+<CardGroup cols={3}>
+  <Card title="Contact Tracking" icon="phone" color="#0d6efd">
+    Track all customer contacts
+  </Card>
+  <Card title="Call Management" icon="headset" color="#198754">
+    Manage sales calls
+  </Card>
+  <Card title="Status Updates" icon="check-circle" color="#ffc107">
+    Update contact status
+  </Card>
+</CardGroup>
+
+---
+
+## Statistics Dashboard
+
+### Contact Status Overview
+
+The dashboard displays real-time statistics:
+
+| Metric | Description | Badge Color |
+|--------|-------------|-------------|
+| **Total Users** | All customer accounts | Dark |
+| **Pending** | Awaiting first contact | Warning (Yellow) |
+| **Calling** | Currently being contacted | Primary (Blue) |
+| **Accepted** | Customer agreed | Success (Green) |
+| **Denied** | Customer refused | Danger (Red) |
+| **With Phone** | Customers with phone numbers | Info (Cyan) |
+
+<Info>
+**Real-Time Counts:** All statistics update automatically as contact statuses change, providing an accurate overview of your telesales pipeline.
+</Info>
+
+---
+
+## Customer List
+
+### List Columns
+
+| Column | Information Displayed |
+|--------|----------------------|
+| **User Information** | Avatar, name, and online status |
+| **Contact Status** | Current contact status badge |
+| **Caller & Notes** | Who contacted, when, and notes |
+| **Phone** | Phone number and email |
+| **Date** | Account creation date |
+
+### Online Status Indicators
+
+**Status Badges:**
+- **Green Dot:** User currently online
+- **Yellow Dot:** Last seen recently (within 5 minutes)
+- **Red Dot:** Never logged in
+
+**Status Text:**
+- `Online` - Currently active
+- `Last seen X ago` - Recent activity
+- `Never logged in` - New account
+
+---
+
+## Contact Status Management
+
+### Contact Statuses
+
+| Status | Description | When to Use |
+|--------|-------------|-------------|
+| **Pending** | No contact attempted yet | Default for new customers |
+| **Calling** | Currently in contact process | When initiating call |
+| **No Connection** | Unable to reach customer | Phone not answered/invalid |
+| **Call Later** | Customer requested callback | Customer busy/requested later |
+| **Accept** | Customer agreed to offer | Successful conversion |
+| **Deny** | Customer refused offer | Closing failure |
+
+### Status Workflow
+
+```
+Pending → Calling → [Accept / Deny / Call Later / No Connection]
+```
+
+---
+
+## Managing Customer Contacts
+
+### Viewing Customer Details
+
+1. Click on any customer row in the list
+2. Customer detail modal opens
+3. View comprehensive information:
+   - Personal details
+   - Contact history
+   - Website information
+   - Communication notes
+
+### Customer Information Displayed
+
+**Personal Details:**
+- User ID
+- Full name
+- Phone number (with call button)
+- Email address
+- Gender
+- Birthday
+- Company
+- Address
+- Registration message
+
+**Account Information:**
+- Creation date
+- Last online time
+- Total websites created
+- Facebook profile link
+
+**Contact Details:**
+- Current contact status
+- Last contact date and time
+- Contact person (who called)
+- Contact notes
+
+---
+
+## Making Contact
+
+### Initiating a Call
+
+1. Click on customer row to open details
+2. Click **Call** button next to phone number
+3. System automatically:
+   - Sets status to "Calling"
+   - Records your user ID as caller
+   - Timestamps the contact
+   - Prevents other users from calling same customer
+
+<Warning>
+**Concurrent Call Protection:** If another user is already calling a customer (status: Calling), you'll see an alert: "This customer is being called by: [User Name]"
+</Warning>
+
+### Call via Zalo
+
+For customers with phone numbers:
+1. Click **Zalo** button (chat icon)
+2. Opens Zalo chat with customer
+3. Alternative communication channel
+
+---
+
+## Updating Contact Status
+
+### Recording Contact Outcome
+
+1. Open customer details modal
+2. Enter **Contact Notes** in text area
+3. Select **Contact Status** from dropdown:
+   - Unable to contact
+   - Customer will call back later
+   - Customer agrees
+   - Closing failure
+4. Click **Update Contact Information**
+
+### Contact Notes Best Practices
+
+**What to Include:**
+- Customer's response
+- Objections raised
+- Follow-up actions needed
+- Specific requirements mentioned
+- Callback time if requested
+- Any special circumstances
+
+**Example Notes:**
+- "Customer interested, wants to discuss with partner first. Call back Friday 2PM"
+- "Not interested in current offer, may consider in 3 months"
+- "Agreed to Premium plan, sending invoice"
+- "Phone number invalid, need to update contact info"
+
+---
+
+## Contact History
+
+### Viewing Interaction History
+
+The contact history section shows all previous interactions:
+
+| Column | Information |
+|--------|-------------|
+| **Caller** | Who made the contact |
+| **Call Time** | Date and time of contact |
+| **Status** | Contact outcome |
+| **Note** | Detailed notes from interaction |
+
+**History Benefits:**
+- Track all customer interactions
+- See previous objections/interests
+- Avoid duplicate calls
+- Understand customer journey
+- Improve follow-up strategy
+
+---
+
+## Search & Filter
+
+### Search Functionality
+
+**Search by:**
+- Customer name
+- Phone number
+- Email address
+- User ID (prefix with `'` - example: `'123`)
+
+**Search Tips:**
+- Type to search in real-time
+- Results filter automatically
+- Search is case-insensitive
+- Partial matches supported
+
+### Sorting Options
+
+Click column headers to sort by:
+- **Name:** Alphabetical order
+- **Contact Status:** Group by status
+- **Contact User:** Group by caller
+- **Phone:** Sort by phone number
+- **Created At:** Sort by registration date
+
+**Sort Direction:**
+- Click once: Ascending (A-Z, oldest first)
+- Click again: Descending (Z-A, newest first)
+- Active sort column highlighted in blue
+
+---
+
+## Export Functionality
+
+### Exporting Customer Data
+
+1. Click **Export Excel** button (Admin only)
+2. Select export criteria
+3. Download Excel file with customer data
+
+**Export Uses:**
+- Backup customer information
+- External analysis
+- CRM integration
+- Reporting purposes
+- Data migration
+
+<Info>
+**Admin Permission Required:** Only users with admin permission can export customer data for security and privacy reasons.
+</Info>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Contact Management" icon="phone">
+    - Contact pending customers within 24 hours
+    - Update status immediately after each call
+    - Add detailed notes for every interaction
+    - Follow up on "Call Later" requests promptly
+    - Track callback times accurately
+    - Don't contact same customer multiple times per day
+    - Respect customer's preferred contact times
+  </Accordion>
+  
+  <Accordion title="Note Taking" icon="note-sticky">
+    - Be specific and detailed
+    - Include customer's exact words when important
+    - Note objections and concerns
+    - Record follow-up actions
+    - Mention any commitments made
+    - Include callback preferences
+    - Keep notes professional
+  </Accordion>
+  
+  <Accordion title="Status Updates" icon="check-circle">
+    - Update status immediately after call
+    - Use correct status for situation
+    - Don't leave customers in "Calling" status
+    - Move "Call Later" to "Pending" after callback
+    - Document reason for "Deny" status
+    - Celebrate "Accept" conversions
+    - Review "No Connection" customers periodically
+  </Accordion>
+  
+  <Accordion title="Team Coordination" icon="people">
+    - Check if customer is being called before contacting
+    - Respect other team members' assigned customers
+    - Share successful strategies in team meetings
+    - Don't compete for same customers
+    - Coordinate on difficult cases
+    - Share contact history insights
+    - Support team members with challenging customers
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Cannot Update Contact Status" icon="circle-xmark">
+    **Issue:** Unable to save contact status update
+    
+    **Solutions:**
+    1. Ensure contact notes are filled in
+    2. Select a valid contact status
+    3. Check internet connection
+    4. Refresh page and try again
+    5. Verify you have permission
+    6. Check browser console for errors
+    7. Try different browser
+  </Accordion>
+  
+  <Accordion title="Customer Already Being Called" icon="phone-slash">
+    **Issue:** Alert shows customer is being called by another user
+    
+    **Solutions:**
+    1. Wait for other user to finish
+    2. Contact the other user directly
+    3. Check if status is stuck (old call)
+    4. Admin can manually update status
+    5. Move to next customer
+    6. Schedule callback for later
+    7. Coordinate with team
+  </Accordion>
+  
+  <Accordion title="Phone Number Not Working" icon="phone-xmark">
+    **Issue:** Cannot call customer phone number
+    
+    **Solutions:**
+    1. Verify phone number format
+    2. Check if number is complete
+    3. Try adding country code
+    4. Update customer phone number
+    5. Use alternative contact (email)
+    6. Mark as "No Connection"
+    7. Request customer to update info
+  </Accordion>
+  
+  <Accordion title="Contact History Not Showing" icon="clock-rotate-left">
+    **Issue:** Previous contacts not displayed
+    
+    **Solutions:**
+    1. Refresh customer details modal
+    2. Check if contacts were saved
+    3. Verify database connection
+    4. Review contact history data
+    5. Check for data migration issues
+    6. Contact technical support
+    7. Check server logs
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Telesales Workflow
+
+### Daily Workflow
+
+**Morning:**
+1. Review pending customers
+2. Check "Call Later" requests from previous day
+3. Prioritize high-value leads
+4. Plan call schedule
+
+**During Calls:**
+1. Open customer details
+2. Review previous contact history
+3. Make the call
+4. Update status immediately
+5. Add detailed notes
+6. Schedule follow-ups
+
+**End of Day:**
+1. Review all contacts made
+2. Schedule next day's callbacks
+3. Update any pending statuses
+4. Report on conversions
+5. Share insights with team
+
+### Weekly Review
+
+**Metrics to Track:**
+- Total contacts made
+- Conversion rate (Accept %)
+- Callback completion rate
+- Average calls per customer
+- Common objections
+- Success patterns
+
+---
+
+## Contact Performance Metrics
+
+### Key Performance Indicators
+
+**Individual Metrics:**
+- Calls made per day
+- Conversion rate
+- Average call duration
+- Callback success rate
+- Customer satisfaction
+
+**Team Metrics:**
+- Total pending customers
+- Total accepted customers
+- Denial rate
+- No connection rate
+- Overall conversion rate
+
+### Improving Performance
+
+**Strategies:**
+- Review successful call recordings
+- Learn from "Accept" interactions
+- Address common objections
+- Improve opening scripts
+- Better qualify leads
+- Optimize call timing
+- Personalize approach
+
+---
+
+## Quick Reference
+
+### Common Actions
+
+| Action | Steps |
+|--------|-------|
+| **View Customer** | Click customer row → Review details |
+| **Make Call** | Open details → Click phone button |
+| **Update Status** | Add notes → Select status → Update |
+| **Search Customer** | Type in search box → Results filter |
+| **Sort List** | Click column header → Toggle direction |
+| **Export Data** | Click Export Excel → Download |
+
+### Contact Status Quick Guide
+
+| From Status | To Status | Action |
+|-------------|-----------|--------|
+| Pending | Calling | Click to call |
+| Calling | Accept | Customer agreed |
+| Calling | Deny | Customer refused |
+| Calling | Call Later | Callback requested |
+| Calling | No Connection | Cannot reach |
+| Call Later | Pending | Ready for callback |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customer accounts
+  </Card>
+  <Card title="Task Manager" icon="list-check" href="/task-manager">
+    Assign follow-up tasks
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    View customer websites
+  </Card>
+  <Card title="Order Management" icon="receipt" href="/order-management">
+    Process customer orders
+  </Card>
+</CardGroup>

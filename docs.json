@@ -64,6 +64,15 @@
               "server/server-migration",
               "server/server-manager"
             ]
+            },
+          {
+          "group": "Extra",
+            "pages": [
+              "extra/task-manager",
+              "extra/telesales-manager",
+              "extra/server-migration",
+              "server/server-manager"
+            ]
             }
         ]
       }
