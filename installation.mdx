@@ -1,48 +1,788 @@
 ---
-title: "Installation"
-description: "Follow the instructions below to get your platform up and running. If you experience issues do not hesitate to contact us, additionally if you wish you can get it installed by us for an additional fee."
+title: "Installation Guide"
+description: "Complete step-by-step guide to install and configure AreaWP on your server"
+icon: "download"
 ---
 
-## Download AreaWP
-
-Visit [https://account.areawp.com/client/plugin/download_manager/client_main/](https://account.blesta.com/client/plugin/download_manager/client_main/) and click to download the latest version.
-
-## Unzip the Archive
-
-Unzip the AreaWP archive (.zip) file using your favorite compression utility. On Windows, right click and select "Extract All". If the zip is uploaded to or downloaded directly to a Linux server, run the following in your shell:
-
-```
-unzip areawp-vx.x.x.zip
-```
-
-## Log in DirectAdmin
-
-Follow now these steps in your DirectAdmin control panel.
-
-1. Upload the source code [areawp-vx.x.x.zip](http://areawp-vx.x.x.zip) to your default path folder (public_html)
-2. Create a reseller package where you can create it with domain, capacity and bandwidth limitations.
-3. Create user reseller. **Note** that the user name must be only **3 characters long.**
-4. Log in to the newly created reseller user and create a package for the user. (package name should be 3 **characters** as well).
-5. Create ssl wildcard for domain name using cloudflare api
-6. Create Login Keys: https://evo.site-helper.com/evo/users/keys.html#login-keys
-7. Edit the sudoers file in etc/sudoers on your server by adding the following code at the end of this file:
-
-   ```
-   USER_RESELLER ALL=(ALL) NOPASSWD: ALL
-   ```
-
-   <Note>
-     _Replace USER_RESELLER respectively with the username created in _**_Step 3_**_._
-   </Note>
-8. Create a database name, user and password
-
-## Log in AreaWP
-
-Access your domain at the following path:\
-https://domain.com/install
-
-Follow all the steps required making sure to fill database data (Step 8) and DirectAdmin data (Step 3 and 4) and then the installation will be over and you'll be prompted with the default credentials\!
+<Info>
+Follow these instructions to get your AreaWP platform up and running. If you experience any issues, don't hesitate to [contact our support team](https://support.areawp.com). Professional installation service is available for an additional fee.
+</Info>
 
 <Warning>
-  Make sure to delete the /install folder once the installation is over
+**Before You Begin:** Ensure your server meets all [system requirements](/requirements) including DirectAdmin, PHP 8.3, ionCube Loader, and MySQL/MariaDB.
 </Warning>
+
+---
+
+## Installation Overview
+
+The installation process consists of 4 main phases:
+
+<Steps>
+  <Step title="Download AreaWP">
+    Download the latest version from your account
+  </Step>
+  <Step title="Configure DirectAdmin">
+    Set up reseller account, packages, and permissions
+  </Step>
+  <Step title="Upload & Extract Files">
+    Upload source code to your server
+  </Step>
+  <Step title="Run Web Installer">
+    Complete installation via browser
+  </Step>
+</Steps>
+
+**Estimated Time:** 30-45 minutes
+
+---
+
+## Step 1: Download AreaWP
+
+### Access Your Account
+
+1. Log in to your AreaWP account at:
+   ```
+   https://account.areawp.com/client/
+   ```
+
+2. Navigate to **Downloads** section or **Download Manager**
+
+3. Download the latest version:
+   - File name: `areawp-vX.X.X.zip`
+   - Size: Approximately 50-100 MB
+   - Format: ZIP archive
+
+<Tip>
+**Version Check:** Always download the latest version to ensure you have the newest features and security updates.
+</Tip>
+
+### Verify Download
+
+After downloading, verify the file integrity:
+
+```bash
+# Check file size
+ls -lh areawp-v*.zip
+
+# Verify it's a valid ZIP file
+unzip -t areawp-v*.zip
+```
+
+---
+
+## Step 2: Configure DirectAdmin
+
+This is the most critical step. DirectAdmin must be properly configured for AreaWP to function.
+
+### 2.1 Create Reseller Package
+
+<AccordionGroup>
+  <Accordion title="Create Reseller Package" icon="box">
+    **Define Resource Limits for Reseller**
+    
+    1. Log in to DirectAdmin as **admin**
+    2. Navigate to **Account Manager** → **Manage Reseller Packages**
+    3. Click **Add Package**
+    
+    **Package Configuration:**
+    
+    | Setting | Recommended Value | Description |
+    |---------|-------------------|-------------|
+    | Package Name | `awp` (3 chars) | Must be exactly 3 characters |
+    | Bandwidth | `unlimited` | Or set specific limit |
+    | Disk Space | `unlimited` | Or set specific limit |
+    | Domains | `unlimited` | For client websites |
+    | Subdomains | `unlimited` | For staging/dev sites |
+    | Email Accounts | `unlimited` | For client emails |
+    | Databases | `unlimited` | For WordPress sites |
+    | FTP Accounts | `unlimited` | For file management |
+    | SSL Certificates | `Enabled` | Required for HTTPS |
+    | PHP Version | `8.3` | Required version |
+    
+    <Warning>
+    **Critical:** The package name MUST be exactly **3 characters long**. This is a technical requirement for AreaWP's automation system.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+### 2.2 Create Reseller User
+
+<AccordionGroup>
+  <Accordion title="Create Reseller Account" icon="user-plus">
+    **Set Up Reseller User Account**
+    
+    1. In DirectAdmin admin panel, go to **Account Manager** → **Create Reseller**
+    2. Fill in the reseller details:
+    
+    **Required Fields:**
+    
+    | Field | Value | Notes |
+    |-------|-------|-------|
+    | Username | `awp` (3 chars) | **Must be exactly 3 characters** |
+    | Email | Your admin email | For notifications |
+    | Password | Strong password | Save this securely |
+    | Domain | Your main domain | e.g., `youragency.com` |
+    | Package | Select `awp` package | Created in previous step |
+    | IP Address | Server IP | Shared or dedicated |
+    
+    **Important Settings:**
+    - ☑ **Create System Account**
+    - ☑ **Send Email with Account Info**
+    - ☑ **Use Package Settings**
+    
+    3. Click **Create** to create the reseller account
+    
+    <Warning>
+    **Username Requirement:** The reseller username MUST be exactly **3 characters long**. This is not optional - it's a technical requirement for AreaWP's file system operations.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+### 2.3 Create User Package
+
+<AccordionGroup>
+  <Accordion title="Create User Package (for Clients)" icon="users">
+    **Define Package for Client Accounts**
+    
+    1. Log out from admin panel
+    2. Log in to DirectAdmin as the **reseller user** (`awp`)
+    3. Navigate to **Account Manager** → **Manage User Packages**
+    4. Click **Add Package**
+    
+    **Package Configuration:**
+    
+    | Setting | Recommended Value |
+    |---------|-------------------|
+    | Package Name | `std` (3 chars) |
+    | Bandwidth | `10 GB` or `unlimited` |
+    | Disk Space | `5 GB` or `unlimited` |
+    | Domains | `1` (one domain per user) |
+    | Subdomains | `10` |
+    | Email Accounts | `10` |
+    | Databases | `5` |
+    | FTP Accounts | `5` |
+    | SSL | `Enabled` |
+    
+    <Info>
+    **Package Purpose:** This package will be assigned to each client's hosting account created through AreaWP. You can create multiple packages for different tiers (Basic, Pro, Enterprise).
+    </Info>
+  </Accordion>
+</AccordionGroup>
+
+### 2.4 Configure SSL Certificate
+
+<AccordionGroup>
+  <Accordion title="Set Up Wildcard SSL" icon="lock">
+    **Enable HTTPS for All Subdomains**
+    
+    AreaWP creates client sites as subdomains, so a wildcard SSL certificate is highly recommended.
+    
+    **Option 1: Cloudflare API (Recommended)**
+    
+    1. Create Cloudflare account and add your domain
+    2. Get Cloudflare API token:
+       - Go to **My Profile** → **API Tokens**
+       - Create token with **Zone:DNS:Edit** permissions
+    3. In DirectAdmin, install Let's Encrypt wildcard certificate:
+       ```bash
+       # Via DirectAdmin SSL Manager
+       # Select "Let's Encrypt" and enable wildcard
+       ```
+    
+    **Option 2: Manual DNS Verification**
+    
+    1. Request Let's Encrypt certificate via DirectAdmin
+    2. Add TXT record to DNS as prompted
+    3. Verify and install certificate
+    
+    **Option 3: Commercial SSL**
+    
+    Purchase a wildcard SSL certificate (e.g., `*.yourdomain.com`) and install via DirectAdmin SSL Manager.
+    
+    <Tip>
+    **Wildcard Format:** A wildcard SSL covers `*.yourdomain.com`, which includes `client1.yourdomain.com`, `client2.yourdomain.com`, etc.
+    </Tip>
+  </Accordion>
+</AccordionGroup>
+
+### 2.5 Create DirectAdmin Login Keys
+
+<AccordionGroup>
+  <Accordion title="Generate API Login Keys" icon="key">
+    **Enable Secure API Access**
+    
+    AreaWP uses DirectAdmin Login Keys for secure API authentication.
+    
+    **Create Login Key:**
+    
+    1. Log in to DirectAdmin as **reseller user** (`awp`)
+    2. Navigate to: **Account Manager** → **Login Keys**
+    3. Or visit directly:
+       ```
+       https://your-server-ip:2222/evo/users/keys.html#login-keys
+       ```
+    4. Click **Create Login Key**
+    
+    **Key Configuration:**
+    
+    | Setting | Value |
+    |---------|-------|
+    | Key Name | `areawp-api` |
+    | Expiration | `Never` or `10 years` |
+    | Allowed IPs | `127.0.0.1` (localhost) |
+    | Permissions | `Full Access` |
+    
+    5. Click **Create**
+    6. **Save the generated key** - you'll need it during installation
+    
+    <Warning>
+    **Security:** Keep this login key secure. It provides full access to DirectAdmin API. Never share it or commit it to version control.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+### 2.6 Configure Sudo Permissions
+
+<AccordionGroup>
+  <Accordion title="Grant Sudo Access" icon="user-shield">
+    **Allow AreaWP to Execute System Commands**
+    
+    AreaWP needs sudo permissions to manage WordPress files and execute server commands.
+    
+    **Edit Sudoers File:**
+    
+    1. Connect to your server via SSH as root:
+       ```bash
+       ssh root@your-server-ip
+       ```
+    
+    2. Edit the sudoers file:
+       ```bash
+       visudo
+       ```
+    
+    3. Add the following line at the **end of the file**:
+       ```bash
+       awp ALL=(ALL) NOPASSWD: ALL
+       ```
+       
+       Replace `awp` with your actual reseller username if different.
+    
+    4. Save and exit:
+       - Press `Ctrl + X`
+       - Press `Y` to confirm
+       - Press `Enter` to save
+    
+    5. Verify the configuration:
+       ```bash
+       sudo -l -U awp
+       ```
+    
+    **Expected Output:**
+    ```
+    User awp may run the following commands on this host:
+        (ALL) NOPASSWD: ALL
+    ```
+    
+    <Warning>
+    **Security Consideration:** This grants full sudo access to the reseller user. Ensure this user is only used for AreaWP operations and is properly secured with a strong password.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step 3: Upload & Extract Files
+
+### 3.1 Upload Source Code
+
+<Tabs>
+  <Tab title="Via DirectAdmin File Manager">
+    **Upload Through Web Interface**
+    
+    1. Log in to DirectAdmin as **reseller user** (`awp`)
+    2. Navigate to **File Manager**
+    3. Go to `public_html` directory
+    4. Click **Upload** button
+    5. Select `areawp-vX.X.X.zip` file
+    6. Wait for upload to complete
+    7. Right-click the ZIP file → **Extract**
+    8. Confirm extraction
+    9. Delete the ZIP file after extraction
+  </Tab>
+  
+  <Tab title="Via FTP/SFTP">
+    **Upload Using FTP Client**
+    
+    1. Connect to your server using FTP client (FileZilla, Cyberduck, etc.)
+       - Host: `your-server-ip`
+       - Username: `awp` (reseller username)
+       - Password: Your reseller password
+       - Port: `21` (FTP) or `22` (SFTP)
+    
+    2. Navigate to `public_html` directory
+    3. Upload `areawp-vX.X.X.zip`
+    4. Extract via DirectAdmin File Manager or SSH
+  </Tab>
+  
+  <Tab title="Via SSH (Recommended)">
+    **Upload and Extract via Command Line**
+    
+    1. Connect to server via SSH:
+       ```bash
+       ssh awp@your-server-ip
+       ```
+    
+    2. Navigate to public_html:
+       ```bash
+       cd ~/public_html
+       ```
+    
+    3. Upload file using SCP (from your local machine):
+       ```bash
+       scp areawp-vX.X.X.zip awp@your-server-ip:~/public_html/
+       ```
+    
+    4. Extract the archive:
+       ```bash
+       unzip areawp-vX.X.X.zip
+       ```
+    
+    5. Verify extraction:
+       ```bash
+       ls -la
+       ```
+    
+    6. Remove ZIP file:
+       ```bash
+       rm areawp-vX.X.X.zip
+       ```
+    
+    7. Set proper permissions:
+       ```bash
+       chmod -R 755 ~/public_html
+       find ~/public_html -type f -exec chmod 644 {} \;
+       ```
+  </Tab>
+</Tabs>
+
+### 3.2 Verify File Structure
+
+After extraction, your `public_html` directory should contain:
+
+```
+public_html/
+├── index.php
+├── install/
+├── src/
+├── vendor/
+├── public/
+├── .env.example
+├── composer.json
+└── ... (other files)
+```
+
+<Tip>
+**Permission Check:** Ensure all files are owned by the reseller user and have appropriate permissions (755 for directories, 644 for files).
+</Tip>
+
+---
+
+## Step 4: Create Database
+
+### Create MySQL Database
+
+<AccordionGroup>
+  <Accordion title="Create Database via DirectAdmin" icon="database">
+    **Set Up AreaWP Database**
+    
+    1. Log in to DirectAdmin as **reseller user** (`awp`)
+    2. Navigate to **MySQL Management**
+    3. Click **Create new Database**
+    
+    **Database Configuration:**
+    
+    | Field | Value | Example |
+    |-------|-------|---------|
+    | Database Name | `areawp_db` | `awp_areawp_db` |
+    | Database User | `areawp_user` | `awp_areawp_user` |
+    | Password | Strong password | Generate secure password |
+    
+    4. Click **Create Database**
+    5. **Save credentials** - you'll need them for installation
+    
+    **Note the full database details:**
+    - Database Name: `awp_areawp_db` (prefix added by DirectAdmin)
+    - Username: `awp_areawp_user` (prefix added by DirectAdmin)
+    - Password: Your chosen password
+    - Host: `localhost`
+    
+    <Info>
+    **Database Prefix:** DirectAdmin automatically prefixes database names and usernames with your reseller username (`awp_`). This is normal and expected.
+    </Info>
+  </Accordion>
+  
+  <Accordion title="Create Database via SSH" icon="terminal">
+    **Alternative: Command Line Method**
+    
+    1. Connect to server via SSH as root
+    2. Log in to MySQL:
+       ```bash
+       mysql -u root -p
+       ```
+    
+    3. Create database and user:
+       ```sql
+       CREATE DATABASE awp_areawp_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+       CREATE USER 'awp_areawp_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+       GRANT ALL PRIVILEGES ON awp_areawp_db.* TO 'awp_areawp_user'@'localhost';
+       FLUSH PRIVILEGES;
+       EXIT;
+       ```
+    
+    4. Verify database creation:
+       ```bash
+       mysql -u awp_areawp_user -p awp_areawp_db
+       ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step 5: Run Web Installer
+
+### Access Installation Wizard
+
+1. Open your web browser
+2. Navigate to:
+   ```
+   https://yourdomain.com/install
+   ```
+   
+   Replace `yourdomain.com` with your actual domain name.
+
+<Warning>
+**HTTPS Required:** Ensure you're accessing via HTTPS (with SSL certificate installed). HTTP may cause issues with the installation process.
+</Warning>
+
+### Installation Steps
+
+<Steps>
+  <Step title="Welcome Screen">
+    **License Agreement**
+    
+    - Read the license agreement
+    - Accept terms and conditions
+    - Click **Continue**
+  </Step>
+  
+  <Step title="System Requirements Check">
+    **Verify Server Compatibility**
+    
+    The installer will automatically check:
+    - PHP version (8.3+)
+    - Required PHP extensions
+    - ionCube Loader
+    - File permissions
+    - DirectAdmin availability
+    
+    **If any checks fail:**
+    - Review the error messages
+    - Fix the issues on your server
+    - Refresh the page to re-check
+    
+    Click **Continue** when all checks pass.
+  </Step>
+  
+  <Step title="Database Configuration">
+    **Enter Database Details**
+    
+    Fill in the database information you created earlier:
+    
+    | Field | Value |
+    |-------|-------|
+    | Database Host | `localhost` |
+    | Database Name | `awp_areawp_db` |
+    | Database User | `awp_areawp_user` |
+    | Database Password | Your database password |
+    | Table Prefix | `awp_` (default) |
+    
+    Click **Test Connection** to verify
+    
+    If successful, click **Continue**
+  </Step>
+  
+  <Step title="DirectAdmin Configuration">
+    **Configure DirectAdmin Integration**
+    
+    | Field | Value | Notes |
+    |-------|-------|-------|
+    | DirectAdmin URL | `https://your-ip:2222` | Your server IP and DA port |
+    | Reseller Username | `awp` | Your 3-char reseller username |
+    | Login Key | `your-login-key` | From Step 2.5 |
+    | User Package | `std` | Your 3-char package name |
+    
+    Click **Test Connection** to verify DirectAdmin access
+    
+    If successful, click **Continue**
+  </Step>
+  
+  <Step title="Admin Account">
+    **Create Administrator Account**
+    
+    | Field | Description |
+    |-------|-------------|
+    | Admin Email | Your email address |
+    | Admin Password | Strong password (8+ chars) |
+    | Confirm Password | Re-enter password |
+    | Platform Name | Your agency/company name |
+    | Platform URL | Your domain (auto-filled) |
+    
+    Click **Continue**
+  </Step>
+  
+  <Step title="Installation">
+    **Installing AreaWP**
+    
+    The installer will now:
+    - Create database tables
+    - Configure system settings
+    - Set up file permissions
+    - Initialize platform
+    - Create admin account
+    
+    **Wait for completion** (1-3 minutes)
+    
+    Do not close the browser or refresh the page.
+  </Step>
+  
+  <Step title="Completion">
+    **Installation Successful!**
+    
+    You'll see a success message with:
+    - Admin panel URL
+    - Login credentials
+    - Next steps
+    
+    **Important:**
+    - Save your login credentials
+    - Delete the `/install` directory for security
+    - Proceed to admin panel
+  </Step>
+</Steps>
+
+---
+
+## Step 6: Post-Installation
+
+### Security Steps
+
+<AccordionGroup>
+  <Accordion title="Delete Installation Directory" icon="trash">
+    **Remove Installer for Security**
+    
+    **Via DirectAdmin File Manager:**
+    1. Navigate to `public_html/install`
+    2. Right-click → Delete
+    3. Confirm deletion
+    
+    **Via SSH:**
+    ```bash
+    cd ~/public_html
+    rm -rf install/
+    ```
+    
+    <Warning>
+    **Critical:** Leaving the `/install` directory accessible is a security risk. Delete it immediately after installation.
+    </Warning>
+  </Accordion>
+  
+  <Accordion title="Secure Admin Panel" icon="shield">
+    **Protect Administrator Access**
+    
+    1. Change default admin password to a strong one
+    2. Enable two-factor authentication (if available)
+    3. Restrict admin IP addresses (optional)
+    4. Set up SSL certificate for admin panel
+    5. Configure firewall rules
+  </Accordion>
+  
+  <Accordion title="Configure Cron Jobs" icon="clock">
+    **Set Up Automated Tasks**
+    
+    AreaWP requires cron jobs for automated operations.
+    
+    **Add Cron Job via DirectAdmin:**
+    
+    1. Go to **Advanced Features** → **Cron Jobs**
+    2. Add new cron job:
+       ```bash
+       */5 * * * * php /home/awp/public_html/cron.php
+       ```
+    
+    This runs every 5 minutes and handles:
+    - Automated backups
+    - Update checks
+    - Email notifications
+    - Renewal reminders
+    - System maintenance
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step 7: Access AreaWP
+
+### Log In to Admin Panel
+
+1. Navigate to:
+   ```
+   https://yourdomain.com/admin
+   ```
+
+2. Enter your admin credentials:
+   - Email: Your admin email
+   - Password: Your admin password
+
+3. Click **Log In**
+
+### Initial Configuration
+
+After logging in, complete these essential setup steps:
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/admin/general-settings">
+    Configure platform basics
+  </Card>
+  <Card title="Theme Setup" icon="palette" href="/admin/theme-setup">
+    Customize branding
+  </Card>
+  <Card title="Payment Gateways" icon="credit-card" href="/admin/payments-setup">
+    Set up billing
+  </Card>
+  <Card title="Hosting Packages" icon="box" href="/admin/websites-setup">
+    Create packages
+  </Card>
+</CardGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="White Screen / 500 Error" icon="circle-xmark">
+    **Issue:** Blank page or internal server error
+    
+    **Solutions:**
+    1. Check PHP error logs in DirectAdmin
+    2. Verify ionCube Loader is installed
+    3. Check file permissions (755/644)
+    4. Ensure PHP 8.3 is active
+    5. Verify .htaccess file exists
+    6. Check Apache/Nginx error logs
+    7. Increase PHP memory_limit to 256M
+  </Accordion>
+  
+  <Accordion title="Database Connection Failed" icon="database">
+    **Issue:** Cannot connect to database
+    
+    **Solutions:**
+    1. Verify database credentials are correct
+    2. Check database exists in DirectAdmin
+    3. Ensure database user has privileges
+    4. Test MySQL connection manually
+    5. Verify database host is 'localhost'
+    6. Check MySQL service is running
+    7. Review MySQL error logs
+  </Accordion>
+  
+  <Accordion title="DirectAdmin Connection Failed" icon="server">
+    **Issue:** Cannot connect to DirectAdmin API
+    
+    **Solutions:**
+    1. Verify DirectAdmin URL is correct (https://ip:2222)
+    2. Check Login Key is valid and not expired
+    3. Ensure reseller username is correct (3 chars)
+    4. Verify package name is correct (3 chars)
+    5. Test DirectAdmin access manually
+    6. Check firewall allows port 2222
+    7. Verify SSL certificate is valid
+  </Accordion>
+  
+  <Accordion title="Permission Denied Errors" icon="ban">
+    **Issue:** File permission errors
+    
+    **Solutions:**
+    1. Set directory permissions to 755:
+       ```bash
+       find ~/public_html -type d -exec chmod 755 {} \;
+       ```
+    2. Set file permissions to 644:
+       ```bash
+       find ~/public_html -type f -exec chmod 644 {} \;
+       ```
+    3. Ensure files are owned by reseller user:
+       ```bash
+       chown -R awp:awp ~/public_html
+       ```
+    4. Check sudo permissions are configured
+    5. Verify SELinux is not blocking (if enabled)
+  </Accordion>
+  
+  <Accordion title="exec/shell_exec Not Working" icon="terminal">
+    **Issue:** System commands fail to execute
+    
+    **Solutions:**
+    1. Navigate to `/admin/GeneralOption`
+    2. Enable shell functions via interface
+    3. Or manually edit php.ini:
+       - Remove exec from disable_functions
+       - Remove shell_exec from disable_functions
+    4. Restart PHP-FPM service
+    5. Verify with phpinfo()
+    6. Check sudo permissions are granted
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="Documentation" icon="book" href="/admin/general-settings">
+    Browse complete documentation
+  </Card>
+  <Card title="Support Portal" icon="headset" href="https://support.areawp.com">
+    Submit a support ticket
+  </Card>
+  <Card title="Video Tutorials" icon="video" href="https://www.youtube.com/@areawp">
+    Watch installation videos
+  </Card>
+  <Card title="Community Forum" icon="comments" href="https://community.areawp.com">
+    Ask the community
+  </Card>
+</CardGroup>
+
+---
+
+## Professional Installation Service
+
+Don't want to handle the installation yourself? We offer professional installation services:
+
+**What's Included:**
+- Complete server setup and configuration
+- DirectAdmin optimization
+- SSL certificate installation
+- Performance tuning
+- Security hardening
+- Initial platform configuration
+- Training session
+
+**Contact sales for pricing and scheduling.**
+
+---
+
+<Info>
+**Installation Complete!** Proceed to [General Settings](/admin/general-settings) to configure your platform and start creating client websites.
+</Info>
