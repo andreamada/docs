@@ -1,52 +1,510 @@
 ---
-title: "Requirements"
+title: "System Requirements"
+description: "Hardware and software requirements for running AreaWP platform"
+icon: "list-check"
 ---
 
-Please do **NOT install** services such as **Apache, PHP, MySQL, Ftp, Sendmail**, etc. All you need is a CLEAN install of your operating system with **DirectAdmin** installed.\
-You can refer to the official documentation to proceed with the installation:\
-https://docs.directadmin.com/getting-started/installation/installguide.html
+<Info>
+Requirements vary based on your deployment model. Review the appropriate section for **Self-Hosted Edition** or **Hosted Edition**.
+</Info>
 
-<Note>
-  If you purchase the "Hosted" edition, **DirectAdmin** license is already integrated by default.\
-  No additional license purchase is required on your end.
-</Note>
+## Hardware Requirements
 
-We strongly do **not** recommend installing DirectAdmin on an existing **live production server** or on the server where any other **Control Panel is already installed**.
+### Self-Hosted Edition
 
-Please note that you must have **root access** on the server.
+Minimum and recommended specifications for running AreaWP on your own server.
 
-### Hardware
+<Tabs>
+  <Tab title="Minimum Requirements">
+    **Small Deployment (Up to 50 websites)**
+    
+    | Component | Specification |
+    |-----------|---------------|
+    | **CPU** | 4 cores @ 2.5 GHz |
+    | **RAM** | 8 GB |
+    | **Storage** | 100 GB SSD |
+    | **Bandwidth** | 1 TB/month |
+    | **Network** | 100 Mbps uplink |
+    
+    **Suitable For:**
+    - Testing and development
+    - Small agencies
+    - Up to 50 client websites
+    - Low to moderate traffic
+    - Basic WordPress sites
+  </Tab>
+  
+  <Tab title="Recommended">
+    **Medium Deployment (50-200 websites)**
+    
+    | Component | Specification |
+    |-----------|---------------|
+    | **CPU** | 8 cores @ 3.0 GHz |
+    | **RAM** | 16 GB |
+    | **Storage** | 250 GB NVMe SSD |
+    | **Bandwidth** | 5 TB/month |
+    | **Network** | 1 Gbps uplink |
+    
+    **Suitable For:**
+    - Production environments
+    - Growing agencies
+    - 50-200 client websites
+    - Moderate to high traffic
+    - E-commerce sites
+    - Multiple concurrent users
+  </Tab>
+  
+  <Tab title="High Performance">
+    **Large Deployment (200+ websites)**
+    
+    | Component | Specification |
+    |-----------|---------------|
+    | **CPU** | 16+ cores @ 3.5 GHz |
+    | **RAM** | 32 GB+ |
+    | **Storage** | 500 GB+ NVMe SSD RAID |
+    | **Bandwidth** | 10 TB+/month |
+    | **Network** | 10 Gbps uplink |
+    
+    **Suitable For:**
+    - Enterprise deployments
+    - Large agencies
+    - 200+ client websites
+    - High-traffic sites
+    - Resource-intensive applications
+    - Maximum performance requirements
+  </Tab>
+</Tabs>
+
+<Tip>
+**Storage Scaling:** Plan for approximately 2-5 GB per WordPress site, including database, uploads, and backups. Add 20-30% buffer for growth.
+</Tip>
+
+---
+
+### Hosted Edition
+
+For the Hosted Edition, hardware is fully managed by AreaWP. Resources are allocated based on your plan:
+
+| Plan | CPU Cores | RAM | Storage | Websites |
+|------|-----------|-----|---------|----------|
+| **Starter** | 4 cores | 8 GB | 100 GB | Up to 50 |
+| **Business** | 8 cores | 16 GB | 250 GB | Up to 200 |
+| **Enterprise** | 16+ cores | 32+ GB | 500+ GB | Unlimited |
+
+**Additional Benefits:**
+- Automatic resource scaling (Business & Enterprise)
+- Dedicated IP addresses
+- DDoS protection included
+- Daily backups
+- 24/7 monitoring
+- Free SSL certificates
+
+---
+
+## Software Requirements
+
+### Self-Hosted Edition
 
 <AccordionGroup>
-  <Accordion title="Self-Hosted Edition" icon="rectangle-terminal">
-    We highly recommend a processor of at least 500 Mhz even though DirectAdmin will run on slower systems. The more cores the better.
-
-    A minimum 4 GB of memory is required, with **at least 4 GB of swap memory**.
-
-    A hard drive with at least 2 gigabytes of free space (after the Linux install) is also required, not including any website data.
-
-    If you are expecting high traffic levels then you will need more memory, processor power, and hard drive space than we recommend here.
+  <Accordion title="Operating System" icon="linux">
+    **Linux Distribution**
+    
+    AreaWP requires a Linux-based operating system. Supported distributions:
+    
+    **Recommended:**
+    - CentOS 7.x / 8.x
+    - AlmaLinux 8.x / 9.x
+    - Rocky Linux 8.x / 9.x
+    - Red Hat Enterprise Linux (RHEL) 7.x / 8.x
+    
+    **Also Compatible:**
+    - CloudLinux 7.x / 8.x
+    - Ubuntu 20.04 LTS / 22.04 LTS (with DirectAdmin)
+    
+    <Warning>
+    **Not Supported:** Windows Server, FreeBSD, or other non-Linux operating systems.
+    </Warning>
   </Accordion>
-  <Accordion title="Hosted Edition" icon="rectangle-terminal">
-    We spawn and configure the virtual machine for you, no actions are required on your end.\
-    Sit back, relax and enjoy your journey\! :)
+  
+  <Accordion title="DirectAdmin Control Panel" icon="server">
+    **Required Control Panel**
+    
+    DirectAdmin is **mandatory** for AreaWP operation. It handles server management, user accounts, and domain configuration.
+    
+    **Version Requirements:**
+    - DirectAdmin 1.60.0 or higher
+    - Valid DirectAdmin license
+    - Full root access
+    - Reseller account capability
+    
+    **DirectAdmin Configuration:**
+    - Reseller account created (3-character username)
+    - User package created (3-character name)
+    - Login Keys enabled
+    - SSH access configured
+    - Sudo permissions granted
+    
+    **Purchase DirectAdmin:**
+    If you don't have DirectAdmin, you can purchase a license from:
+    - [DirectAdmin Official](https://www.directadmin.com/pricing.php)
+    - Starting at $5/month (Personal License)
+    - $15/month (Lite License - Recommended)
+    - $29/month (Standard License)
+    
+    <Info>
+    **Why DirectAdmin?** AreaWP leverages DirectAdmin's robust API for automated user management, domain setup, database creation, and file system operations.
+    </Info>
+  </Accordion>
+  
+  <Accordion title="PHP Requirements" icon="code">
+    **PHP Version 8.3**
+    
+    AreaWP requires PHP 8.3 or higher for optimal performance and security.
+    
+    **Required PHP Extensions:**
+    - `ionCube Loader` (mandatory for license encryption)
+    - `exec` (for system commands)
+    - `shell_exec` (for server operations)
+    - `curl` (for API requests)
+    - `mbstring` (for multi-byte string handling)
+    - `xml` (for XML processing)
+    - `zip` (for archive handling)
+    - `gd` or `imagick` (for image processing)
+    - `mysqli` (for database connectivity)
+    - `pdo_mysql` (for database operations)
+    - `json` (for JSON handling)
+    - `openssl` (for encryption)
+    
+    **PHP Configuration:**
+    ```ini
+    memory_limit = 256M
+    max_execution_time = 300
+    upload_max_filesize = 64M
+    post_max_size = 64M
+    max_input_vars = 5000
+    ```
+    
+    **Enabling exec and shell_exec:**
+    
+    These functions are often disabled by default for security. You can enable them through AreaWP:
+    
+    1. Navigate to: `https://yourdomain.com/admin/GeneralOption`
+    2. Find "PHP Shell Functions" section
+    3. Click "Enable Shell Functions"
+    4. System will automatically update `php.ini`
+    
+    <Warning>
+    **Security Note:** Only enable `exec` and `shell_exec` on servers dedicated to AreaWP. These functions are required for WordPress management operations.
+    </Warning>
+  </Accordion>
+  
+  <Accordion title="Database Requirements" icon="database">
+    **MySQL or MariaDB**
+    
+    AreaWP requires a MySQL-compatible database server.
+    
+    **Supported Versions:**
+    - MySQL 5.6.0 or higher
+    - MySQL 8.0.x (recommended)
+    - MariaDB 10.0.5 or higher
+    - MariaDB 10.5+ (recommended)
+    
+    **Database Configuration:**
+    - InnoDB storage engine (default)
+    - UTF8MB4 character set support
+    - Sufficient max_connections (200+)
+    - Query cache enabled (optional)
+    
+    **Required Privileges:**
+    - CREATE DATABASE
+    - CREATE USER
+    - GRANT OPTION
+    - SELECT, INSERT, UPDATE, DELETE
+    - CREATE, ALTER, DROP
+    - INDEX, REFERENCES
+    
+    **Performance Tuning:**
+    ```ini
+    innodb_buffer_pool_size = 2G
+    max_connections = 500
+    query_cache_size = 64M
+    tmp_table_size = 64M
+    max_heap_table_size = 64M
+    ```
+  </Accordion>
+  
+  <Accordion title="ionCube Loader" icon="shield-check">
+    **Required License Protection**
+    
+    ionCube Loader is **mandatory** for running AreaWP as it protects the source code.
+    
+    **Installation:**
+    
+    Most DirectAdmin servers include ionCube by default. To verify:
+    
+    ```bash
+    php -v
+    ```
+    
+    You should see ionCube Loader in the output.
+    
+    **Manual Installation:**
+    
+    If not installed, you can install via DirectAdmin:
+    
+    1. Log in to DirectAdmin as admin
+    2. Go to **Extra Features**
+    3. Find **ionCube Loader**
+    4. Click **Install**
+    
+    **Or via command line:**
+    
+    ```bash
+    cd /usr/local/directadmin/custombuild
+    ./build update
+    ./build ioncube
+    ```
+    
+    **Verify Installation:**
+    
+    Create a PHP file with:
+    ```php
+    <?php phpinfo(); ?>
+    ```
+    
+    Look for "ionCube Loader" in the output.
+    
+    <Info>
+    **Download ionCube:** If manual installation is needed, download from [ionCube Official Site](https://www.ioncube.com/loaders.php)
+    </Info>
+  </Accordion>
+  
+  <Accordion title="Web Server" icon="globe">
+    **Nginx (Recommended) or Apache**
+    
+    AreaWP works best with Nginx but also supports Apache.
+    
+    **Nginx (Recommended):**
+    - Version 1.18 or higher
+    - FastCGI support
+    - SSL/TLS support
+    - Gzip compression
+    - HTTP/2 enabled
+    
+    **Apache (Alternative):**
+    - Version 2.4 or higher
+    - mod_rewrite enabled
+    - mod_ssl enabled
+    - .htaccess support
+    
+    **DirectAdmin Default:**
+    DirectAdmin typically uses Apache with Nginx as a reverse proxy, which provides excellent performance.
+  </Accordion>
+  
+  <Accordion title="Additional Software" icon="puzzle-piece">
+    **Optional but Recommended**
+    
+    **Redis:**
+    - For object caching
+    - Significantly improves performance
+    - Reduces database load
+    
+    **Git:**
+    - For version control
+    - Theme/plugin management
+    - Deployment automation
+    
+    **WP-CLI:**
+    - WordPress command-line interface
+    - Automated WordPress operations
+    - Bulk management tasks
+    
+    **Composer:**
+    - PHP dependency management
+    - Required for some plugins
+    
+    **Node.js & NPM:**
+    - For theme development
+    - Asset compilation
+    - Modern build tools
   </Accordion>
 </AccordionGroup>
 
-### System
+---
+
+## Network Requirements
+
+### Connectivity & Ports
+
+**Required Open Ports:**
+
+| Port | Protocol | Purpose |
+|------|----------|---------|
+| 80 | HTTP | Web traffic |
+| 443 | HTTPS | Secure web traffic |
+| 22 | SSH | Server administration |
+| 2222 | DirectAdmin | Control panel access |
+| 3306 | MySQL | Database connections (localhost only) |
+| 6379 | Redis | Cache server (localhost only) |
+
+**Firewall Configuration:**
+- Allow incoming on ports 80, 443, 22, 2222
+- Block direct access to MySQL (3306) from external IPs
+- Block direct access to Redis (6379) from external IPs
+- Configure CSF/iptables for security
+
+**Domain Requirements:**
+- Valid domain name pointing to server IP
+- DNS management access
+- Ability to create A records and CNAME records
+- Wildcard DNS support (recommended)
+
+---
+
+## Security Requirements
+
+### Essential Security Measures
 
 <AccordionGroup>
-  <Accordion title="Self-Hosted Edition" icon="message-bot">
-    1. **DirectAdmin** installed
-    2. PHP version **8.3**
-    3. **MySQL** version **5.6.0**, or **MariaDB 10.0.5**
-    4. **ionCube** PHP loader extension
-    5. **exec and shell_exec** extensions \> You can enable them following the instructions available at [**https://yourdomain.com/admin/GeneralOption**](https://yourdomain.com/admin/GeneralOption)
+  <Accordion title="SSL/TLS Certificates" icon="lock">
+    **HTTPS Required**
+    
+    - Valid SSL certificate for main domain
+    - Wildcard certificate recommended
+    - Let's Encrypt integration available
+    - Auto-renewal configured
+    
+    **Certificate Types:**
+    - Let's Encrypt (Free, auto-renewing)
+    - Commercial SSL (Paid, extended validation)
+    - Wildcard SSL (Covers all subdomains)
+  </Accordion>
+  
+  <Accordion title="Firewall" icon="fire">
+    **CSF (ConfigServer Security & Firewall)**
+    
+    - Recommended for security
+    - Port management
+    - IP whitelisting/blacklisting
+    - Login failure detection
+    - DDoS mitigation
+  </Accordion>
+  
+  <Accordion title="SSH Access" icon="terminal">
+    **Secure Shell Requirements**
+    
+    - SSH key authentication (recommended)
+    - Disable password authentication
+    - Non-standard SSH port (optional)
+    - Fail2ban enabled
+    - Root login restricted
   </Accordion>
 </AccordionGroup>
 
-### **Need More Information?**
+---
 
-You can contact us via live chat or email anytime.
+## Compatibility Check
 
-We are available Monday through Friday, 9 AM - 5 PM CEST.
+### Pre-Installation Verification
+
+Before installing AreaWP, verify your server meets all requirements:
+
+**Quick Checklist:**
+
+- [ ] Linux OS (CentOS/AlmaLinux/Rocky Linux)
+- [ ] DirectAdmin installed and licensed
+- [ ] PHP 8.3 installed
+- [ ] ionCube Loader enabled
+- [ ] MySQL 5.6+ or MariaDB 10.0.5+
+- [ ] exec and shell_exec functions available
+- [ ] Minimum 8 GB RAM
+- [ ] Minimum 100 GB SSD storage
+- [ ] Valid domain name
+- [ ] SSL certificate (or Let's Encrypt access)
+- [ ] Root/sudo access
+- [ ] Reseller account created (3 chars)
+- [ ] User package created (3 chars)
+
+---
+
+## Troubleshooting Requirements
+
+<AccordionGroup>
+  <Accordion title="ionCube Not Found" icon="circle-xmark">
+    **Issue:** ionCube Loader not detected
+    
+    **Solutions:**
+    1. Install via DirectAdmin custombuild
+    2. Verify PHP version compatibility
+    3. Check php.ini for ionCube extension
+    4. Restart PHP-FPM service
+    5. Clear OPcache
+    6. Contact hosting provider
+  </Accordion>
+  
+  <Accordion title="exec/shell_exec Disabled" icon="ban">
+    **Issue:** Required PHP functions disabled
+    
+    **Solutions:**
+    1. Navigate to `/admin/GeneralOption`
+    2. Enable shell functions via interface
+    3. Or manually edit php.ini
+    4. Remove from `disable_functions`
+    5. Restart PHP-FPM
+    6. Verify with `phpinfo()`
+  </Accordion>
+  
+  <Accordion title="Insufficient Resources" icon="memory">
+    **Issue:** Server doesn't meet minimum specs
+    
+    **Solutions:**
+    1. Upgrade server plan
+    2. Add more RAM
+    3. Increase storage
+    4. Optimize existing resources
+    5. Consider Hosted Edition
+    6. Use dedicated server
+  </Accordion>
+  
+  <Accordion title="DirectAdmin Issues" icon="server">
+    **Issue:** DirectAdmin not properly configured
+    
+    **Solutions:**
+    1. Verify DirectAdmin license is active
+    2. Check reseller account exists
+    3. Ensure username is 3 characters
+    4. Verify package name is 3 characters
+    5. Enable Login Keys
+    6. Grant sudo permissions
+    7. Test API connectivity
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Need More Information?
+
+<CardGroup cols={2}>
+  <Card title="Installation Guide" icon="download" href="/installation">
+    Step-by-step installation instructions
+  </Card>
+  <Card title="Technical Details" icon="server" href="/tech-stack">
+    Complete technology stack overview
+  </Card>
+  <Card title="Support Portal" icon="headset" href="https://support.areawp.com">
+    Get help from our support team
+  </Card>
+  <Card title="Documentation" icon="book" href="/admin/general-settings">
+    Browse all documentation
+  </Card>
+</CardGroup>
+
+---
+
+<Info>
+**Ready to Install?** If your server meets all requirements, proceed to the [Installation Guide](/installation) for step-by-step instructions.
+</Info>
+
+<Warning>
+**Need Help?** If you're unsure about any requirements or need assistance with server setup, contact our support team or consider the **Hosted Edition** where we handle all infrastructure requirements.
+</Warning>
