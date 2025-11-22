@@ -1,0 +1,463 @@
+---
+title: "Plugin & Addon Setup Management"
+description: "Manage plugins and addons pending manual setup and installation"
+icon: "puzzle-piece"
+---
+
+<Info>
+**Navigation Paths:**  
+• **Plugin Orders:** `/admin/PluginOrder`  
+• **Addon Orders:** `/admin/AddonsOrder`
+</Info>
+
+## Overview
+
+The Plugin & Addon Setup Management pages help you track and manage plugins and website addons that require manual setup or installation after purchase.
+
+<CardGroup cols={2}>
+  <Card title="Plugin Setup" icon="plug" color="#198754">
+    Manage plugin installations
+  </Card>
+  <Card title="Addon Setup" icon="puzzle" color="#0d6efd">
+    Manage website addon activations
+  </Card>
+</CardGroup>
+
+---
+
+## Understanding Plugins vs Addons
+
+<Tabs>
+  <Tab title="Plugins">
+    **WordPress Plugins**
+    
+    Plugins are WordPress extensions purchased from the App Store that add functionality to customer websites.
+    
+    **Plugin Characteristics:**
+    - Purchased from App Store
+    - Installed on specific websites
+    - May require manual setup
+    - Have expiration dates (monthly/yearly/forever)
+    - Can be free or paid
+    
+    **Common Plugin Types:**
+    - SEO tools
+    - Security plugins
+    - Performance optimization
+    - Contact forms
+    - E-commerce extensions
+  </Tab>
+  
+  <Tab title="Addons">
+    **Website Addons**
+    
+    Addons are additional features or services added to websites that may require manual delivery or setup.
+    
+    **Addon Characteristics:**
+    - Added to existing websites
+    - May require manual configuration
+    - Can have expiration dates
+    - Service-based additions
+    - Custom features
+    
+    **Common Addon Types:**
+    - Premium support
+    - Custom development
+    - Additional storage
+    - Advanced features
+    - Third-party integrations
+  </Tab>
+</Tabs>
+
+---
+
+## Plugin Setup Management
+
+### Viewing Pending Plugins
+
+Access at `/admin/PluginOrder` to see all plugins awaiting installation.
+
+**List Columns:**
+
+| Column | Information |
+|--------|-------------|
+| **Plugin & Website** | Plugin name, image, and target website domain |
+| **Owner** | Customer who purchased the plugin |
+| **Price & Expiry** | Plugin price, renewal type, and expiration date |
+| **Actions** | Mark as installed button |
+
+### Plugin Information Displayed
+
+**Plugin Details:**
+- Plugin name and icon/image
+- Version number
+- "Pending Setup" status badge
+- Link to App Store listing
+
+**Website Information:**
+- Target website domain
+- Link to Website Manager
+- Website owner
+
+**Pricing Details:**
+- Plugin price (or "Free Plugin")
+- Renewal type (Monthly/Yearly/Forever)
+- Expiration date (if applicable)
+- Days until expiration (color-coded)
+
+**Expiration Colors:**
+- **Red:** Expiring within 30 days
+- **Green:** Active, not expiring soon
+
+---
+
+## Addon Setup Management
+
+### Viewing Pending Addons
+
+Access at `/admin/AddonsOrder` to see all addons awaiting activation.
+
+**List Columns:**
+
+| Column | Information |
+|--------|-------------|
+| **Addon & Website** | Addon name and target website domain |
+| **Owner** | Customer who purchased the addon |
+| **Dates** | Creation and expiration dates |
+| **Actions** | Mark as activated button |
+
+### Addon Information Displayed
+
+**Addon Details:**
+- Addon name
+- "Pending Setup" status badge
+- Associated website domain
+- Link to Website Manager
+
+**Owner Information:**
+- Customer name with avatar initials
+- Color-coded user badge
+
+**Date Information:**
+- **Created:** When addon was ordered
+- **Expires:** Expiration date (if applicable)
+- **No expiration:** Lifetime addons
+
+---
+
+## Managing Plugin Setup
+
+### Marking Plugin as Installed
+
+**When to Mark as Installed:**
+- Plugin files uploaded to website
+- Plugin activated in WordPress
+- Plugin configured properly
+- Customer has access
+- All setup steps completed
+
+**Installation Process:**
+
+1. Manually install plugin on customer's website:
+   - Upload plugin files via FTP/cPanel
+   - Or install via WordPress admin
+   - Activate the plugin
+   - Configure plugin settings
+   - Test functionality
+
+2. Mark as installed in system:
+   - Click **Mark Installed** button
+   - Confirm installation in modal
+   - System updates status
+   - Plugin removed from pending list
+
+<Warning>
+**Confirm Before Marking:** Only mark plugins as installed after you've actually completed the installation and verified it's working correctly.
+</Warning>
+
+### Plugin Installation Confirmation Modal
+
+**Modal Contents:**
+- Plugin name display
+- Installation confirmation message
+- Warning about manual installation requirement
+- Cancel and Confirm buttons
+
+**Confirmation Steps:**
+1. Review plugin name
+2. Verify installation is complete
+3. Click **Confirm Installation**
+4. Success notification appears
+5. List refreshes automatically
+
+---
+
+## Managing Addon Setup
+
+### Marking Addon as Activated
+
+**When to Mark as Activated:**
+- Addon service delivered
+- Features configured
+- Customer notified
+- Access granted
+- All requirements met
+
+**Activation Process:**
+
+1. Deliver addon service to customer:
+   - Configure addon features
+   - Set up required services
+   - Grant necessary access
+   - Test functionality
+   - Notify customer
+
+2. Mark as activated in system:
+   - Click **Mark Activated** button
+   - Confirm activation in modal
+   - System updates status
+   - Addon removed from pending list
+
+### Addon Activation Confirmation Modal
+
+**Modal Contents:**
+- Addon name display
+- Activation confirmation notice
+- Important delivery reminder
+- Cancel and Confirm buttons
+
+**Confirmation Steps:**
+1. Review addon name
+2. Verify delivery is complete
+3. Click **Confirm Activation**
+4. Success notification appears
+5. List refreshes automatically
+
+---
+
+## Search & Filter
+
+### Plugin Search
+
+**Search Functionality:**
+- Search by plugin name
+- Real-time filtering
+- Results update as you type
+- Case-insensitive search
+
+**Search Tips:**
+- Type plugin name
+- Partial matches work
+- Clear search to see all
+
+### Addon Search
+
+**Search Functionality:**
+- Search by addon name
+- Instant results
+- Auto-filtering
+- Flexible matching
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Plugin Installation" icon="plug">
+    - Install plugins promptly after purchase
+    - Test plugin functionality before marking installed
+    - Verify compatibility with website theme
+    - Check for plugin conflicts
+    - Configure plugin settings properly
+    - Document any custom configurations
+    - Notify customer after installation
+    - Provide usage instructions
+  </Accordion>
+  
+  <Accordion title="Addon Delivery" icon="puzzle">
+    - Deliver addons within promised timeframe
+    - Verify all addon features work correctly
+    - Test addon functionality thoroughly
+    - Document addon configuration
+    - Provide customer with access details
+    - Send usage instructions
+    - Offer initial support
+    - Follow up after activation
+  </Accordion>
+  
+  <Accordion title="Quality Control" icon="check-circle">
+    - Double-check installation before confirming
+    - Test all plugin/addon features
+    - Verify customer access
+    - Ensure proper configuration
+    - Check for errors or conflicts
+    - Review customer requirements
+    - Confirm expiration dates are correct
+    - Document any issues encountered
+  </Accordion>
+  
+  <Accordion title="Customer Communication" icon="message">
+    - Notify customers when setup begins
+    - Provide estimated completion time
+    - Send confirmation after completion
+    - Include usage instructions
+    - Offer support for questions
+    - Request feedback
+    - Follow up on satisfaction
+    - Document customer preferences
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Plugin Installation Fails" icon="circle-xmark">
+    **Issue:** Cannot install plugin on website
+    
+    **Solutions:**
+    1. Check WordPress version compatibility
+    2. Verify sufficient server resources
+    3. Check for plugin conflicts
+    4. Review PHP version requirements
+    5. Check file permissions
+    6. Try manual upload via FTP
+    7. Contact plugin developer
+  </Accordion>
+  
+  <Accordion title="Addon Not Working" icon="triangle-exclamation">
+    **Issue:** Addon features not functioning
+    
+    **Solutions:**
+    1. Verify addon was configured correctly
+    2. Check all required settings
+    3. Test with different browser
+    4. Clear website cache
+    5. Review error logs
+    6. Check for conflicts
+    7. Contact technical support
+  </Accordion>
+  
+  <Accordion title="Cannot Mark as Installed" icon="xmark">
+    **Issue:** Unable to confirm installation
+    
+    **Solutions:**
+    1. Refresh the page
+    2. Check internet connection
+    3. Verify you have permission
+    4. Clear browser cache
+    5. Try different browser
+    6. Check for JavaScript errors
+    7. Contact administrator
+  </Accordion>
+  
+  <Accordion title="Item Not in Pending List" icon="eye-slash">
+    **Issue:** Plugin/addon doesn't appear in list
+    
+    **Solutions:**
+    1. Check if already marked as installed
+    2. Verify purchase was completed
+    3. Check search filters
+    4. Refresh the page
+    5. Verify item requires manual setup
+    6. Check database records
+    7. Review order history
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Setup Workflow
+
+### Plugin Installation Workflow
+
+**1. Order Received:**
+- Customer purchases plugin
+- Plugin added to pending list
+- Notification sent to admin
+
+**2. Installation:**
+- Admin reviews plugin requirements
+- Installs plugin on target website
+- Activates plugin in WordPress
+- Configures plugin settings
+
+**3. Testing:**
+- Test all plugin features
+- Verify compatibility
+- Check for conflicts
+- Ensure proper functionality
+
+**4. Completion:**
+- Mark as installed in system
+- Notify customer
+- Provide usage instructions
+- Offer support
+
+### Addon Activation Workflow
+
+**1. Order Received:**
+- Customer purchases addon
+- Addon added to pending list
+- Admin notified
+
+**2. Delivery:**
+- Admin reviews addon requirements
+- Configures addon features
+- Sets up required services
+- Grants customer access
+
+**3. Verification:**
+- Test addon functionality
+- Verify all features work
+- Check customer access
+- Ensure proper setup
+
+**4. Completion:**
+- Mark as activated in system
+- Notify customer
+- Send access details
+- Provide documentation
+
+---
+
+## Quick Reference
+
+### Common Actions
+
+| Action | Steps |
+|--------|-------|
+| **View Pending Plugins** | Navigate to /admin/PluginOrder |
+| **View Pending Addons** | Navigate to /admin/AddonsOrder |
+| **Search Items** | Type in search box → Results filter |
+| **Mark Plugin Installed** | Click Mark Installed → Confirm |
+| **Mark Addon Activated** | Click Mark Activated → Confirm |
+| **View Website** | Click website domain link |
+
+### Status Indicators
+
+| Status | Meaning | Action Required |
+|--------|---------|-----------------|
+| **Pending Setup** | Awaiting installation/activation | Install/activate item |
+| **Free Plugin** | No charge | Install normally |
+| **Expiring Soon** | Renewal needed | Note expiration date |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="App Store" icon="store" href="/app-store">
+    Manage plugin catalog
+  </Card>
+  <Card title="Website Manager" icon="globe" href="/website-templates">
+    Manage customer websites
+  </Card>
+  <Card title="Order Management" icon="receipt" href="/order-management">
+    View all orders
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customers
+  </Card>
+</CardGroup>

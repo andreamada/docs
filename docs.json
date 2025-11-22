@@ -70,7 +70,7 @@
             "pages": [
               "extra/task-manager",
               "extra/telesales-manager",
-              "extra/server-migration",
+              "extra/plugins-addons-configuration",
               "server/server-manager"
             ]
             }
