@@ -62,9 +62,7 @@
               "server/wordpress-manager",
               "server/ip-manager",
               "server/server-migration",
-              "usage/plugins-manager",
-              "usage/orders-manager",
-              "usage/invoices-manager"
+              "server/server-manager"
             ]
             }
         ]

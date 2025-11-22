@@ -1,0 +1,471 @@
+---
+title: "Server Manager"
+description: "Configure server settings, PHP configuration, and system management"
+icon: "server"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Server Manager  
+**URL:** `/admin/ServerManager`
+</Info>
+
+## Overview
+
+The Server Manager provides comprehensive server configuration tools, including PHP settings management, system actions, and advanced server configurations for DirectAdmin environments.
+
+<CardGroup cols={2}>
+  <Card title="Server Actions" icon="arrow-repeat" color="#dc3545">
+    Reboot server and system operations
+  </Card>
+  <Card title="PHP Configuration" icon="code" color="#0d6efd">
+    Edit PHP.ini and settings
+  </Card>
+  <Card title="System Settings" icon="gear" color="#ffc107">
+    Configure server parameters
+  </Card>
+  <Card title="Security" icon="shield" color="#198754">
+    Firewall and security settings
+  </Card>
+</CardGroup>
+
+---
+
+## Server Actions
+
+### Quick Actions
+
+**Server Reboot:**
+- Restarts the entire server system
+- All services restart
+- Brief downtime expected
+- Use during maintenance windows
+
+**Unblock IPs:**
+- Flushes CSF firewall blocked IPs
+- Removes all IP blocks
+- Useful after false positives
+- Restores access for blocked users
+
+**System Status:**
+- Displays server online status
+- Shows current PHP version
+- Monitors system health
+- Real-time status indicators
+
+<Warning>
+**Server Reboot:** Rebooting the server will cause downtime for all websites and services. Only perform during scheduled maintenance windows and after notifying users.
+</Warning>
+
+---
+
+## Server Configuration Settings
+
+### PHP Shell Functions
+
+**Status Check:**
+- Monitors `shell_exec` and `exec` functions
+- Shows enabled/disabled status
+- Critical for platform operation
+
+**Enabling Shell Functions:**
+
+If disabled, follow these steps:
+
+```bash
+cd /usr/local/directadmin/custombuild
+mkdir -p custom
+echo "system,passthru,proc_close,proc_open,dl,popen,show_source,posix_kill,posix_mkfifo,posix_getpwuid,posix_setpgid,posix_setsid,posix_setuid,posix_setgid,posix_seteuid,posix_setegid,posix_uname" > custom/php_disable_functions
+da build secure_php
+```
+
+<Info>
+**Required Functions:** `shell_exec` and `exec` are required for the platform to function properly. These functions enable server management and automation features.
+</Info>
+
+### open_basedir Restriction
+
+**Critical Setting - Must Be DISABLED:**
+
+`open_basedir` restricts PHP file access and prevents proper platform operation.
+
+**Status Indicators:**
+- 🔴 **ENABLED - Must Disable!** (Red badge)
+- ✅ **Disabled** (Green badge - correct state)
+
+**Disabling open_basedir:**
+
+1. Click **Disable Now (Required)** button
+2. System automatically:
+   - Finds all PHP ini files
+   - Comments out `open_basedir` lines
+   - Creates backups
+   - Restarts PHP services
+3. Page reloads with updated status
+
+<Warning>
+**Action Required:** If `open_basedir` is enabled, the platform cannot access required directories. This MUST be disabled for proper operation.
+</Warning>
+
+### DirectoryIndex Priority
+
+**Purpose:** Ensures `index.php` loads before `index.html`
+
+**Fix DirectoryIndex:**
+
+1. Click **Fix DirectoryIndex** button
+2. System updates Apache configuration
+3. Sets priority: `index.php index.html index.htm`
+4. Apache reloads configuration
+
+**Configuration File:** `/etc/httpd/conf/extra/httpd-directoryindex.conf`
+
+---
+
+## PHP Configuration Management
+
+### Upload Max Filesize
+
+**Quick Update:**
+
+1. Enter desired file size (e.g., `256M`, `512M`, `1G`)
+2. Click **Update** button
+3. System updates:
+   - `upload_max_filesize`
+   - `post_max_size` (set to same value)
+4. PHP-FPM restarts automatically
+5. Refresh page to verify new value
+
+<Tip>
+**Recommended Values:** For WordPress sites with media uploads, set to at least `256M`. For sites with large file uploads, use `512M` or `1G`.
+</Tip>
+
+### PHP.ini Editor
+
+**Advanced Configuration:**
+
+1. Click **Edit PHP.ini** button
+2. Code editor opens with current php.ini content
+3. Make desired changes
+4. Click **Save** button
+5. System:
+   - Validates changes
+   - Creates backup
+   - Writes new configuration
+   - Restarts PHP-FPM
+6. Changes take effect immediately
+
+**Common PHP.ini Settings:**
+
+```ini
+; Memory and Upload Limits
+memory_limit = 512M
+upload_max_filesize = 256M
+post_max_size = 256M
+max_execution_time = 300
+max_input_time = 300
+
+; Error Reporting
+display_errors = Off
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+log_errors = On
+error_log = /var/log/php-errors.log
+
+; Session Configuration
+session.gc_maxlifetime = 1440
+session.cookie_lifetime = 0
+
+; Security
+allow_url_fopen = On
+allow_url_include = Off
+```
+
+<Warning>
+**Syntax Errors:** Invalid PHP.ini syntax can prevent PHP from starting. Always backup before making changes and test thoroughly.
+</Warning>
+
+---
+
+## Advanced Server Management
+
+### PHP Service Management
+
+**Automatic Restart:**
+- PHP-FPM restarts after configuration changes
+- Background process prevents connection loss
+- Service restart takes 3-5 seconds
+- Minimal impact on running sites
+
+**Service Commands:**
+
+```bash
+# Restart PHP-FPM (specific version)
+service php-fpm83 restart
+
+# Restart all PHP services
+systemctl restart php*-fpm
+
+# Check PHP-FPM status
+systemctl status php-fpm
+```
+
+### Apache Configuration
+
+**Reload Apache:**
+
+```bash
+# Reload configuration without downtime
+systemctl reload httpd
+
+# Full restart
+systemctl restart httpd
+
+# Check configuration syntax
+apachectl configtest
+```
+
+### CSF Firewall Management
+
+**Unblock All IPs:**
+- Removes all temporary blocks
+- Clears deny list
+- Useful after false positives
+- Doesn't affect permanent rules
+
+**CSF Commands:**
+
+```bash
+# Flush all blocks
+csf -df
+
+# Restart CSF
+csf -r
+
+# Check blocked IPs
+csf -g <ip_address>
+```
+
+---
+
+## System Information
+
+### PHP Information
+
+**Displayed Details:**
+- PHP version
+- Loaded configuration file
+- Configuration directives
+- Loaded extensions
+- Server API
+
+**Key PHP Settings:**
+- `upload_max_filesize`
+- `post_max_size`
+- `memory_limit`
+- `max_execution_time`
+- `disable_functions`
+- `open_basedir`
+
+### Server Information
+
+**System Details:**
+- Server IP address
+- Operating system
+- DirectAdmin version
+- Apache version
+- MySQL/MariaDB version
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="PHP Configuration" icon="code">
+    - Test changes on staging first
+    - Always backup php.ini before editing
+    - Document all configuration changes
+    - Monitor error logs after changes
+    - Keep php.ini organized with comments
+    - Review settings quarterly
+    - Match settings to workload requirements
+  </Accordion>
+  
+  <Accordion title="Server Maintenance" icon="wrench">
+    - Schedule reboots during off-peak hours
+    - Notify users before maintenance
+    - Keep system updated
+    - Monitor resource usage
+    - Review logs regularly
+    - Test backups frequently
+    - Document server configuration
+  </Accordion>
+  
+  <Accordion title="Security" icon="shield">
+    - Keep firewall rules updated
+    - Monitor blocked IPs
+    - Review security logs
+    - Disable unnecessary PHP functions
+    - Use secure PHP settings
+    - Keep software updated
+    - Implement fail2ban rules
+  </Accordion>
+  
+  <Accordion title="Performance" icon="gauge">
+    - Optimize PHP settings for workload
+    - Monitor PHP-FPM pool usage
+    - Adjust memory limits appropriately
+    - Enable OPcache
+    - Configure session handling
+    - Monitor slow queries
+    - Optimize Apache configuration
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="PHP Not Restarting" icon="circle-xmark">
+    **Issue:** PHP-FPM fails to restart after configuration change
+    
+    **Solutions:**
+    1. Check php.ini syntax errors
+    2. Review PHP error logs
+    3. Verify PHP-FPM service status
+    4. Check for conflicting processes
+    5. Manually restart PHP-FPM
+    6. Restore from backup if needed
+    7. Check DirectAdmin logs
+  </Accordion>
+  
+  <Accordion title="Configuration Not Applying" icon="gear">
+    **Issue:** PHP.ini changes don't take effect
+    
+    **Solutions:**
+    1. Verify correct php.ini file edited
+    2. Check if multiple php.ini files exist
+    3. Restart PHP-FPM service
+    4. Clear OPcache
+    5. Check file permissions
+    6. Verify DirectAdmin isn't overwriting
+    7. Use phpinfo() to confirm settings
+  </Accordion>
+  
+  <Accordion title="Upload Limit Not Changing" icon="upload">
+    **Issue:** upload_max_filesize update doesn't work
+    
+    **Solutions:**
+    1. Verify both upload_max_filesize and post_max_size updated
+    2. Check nginx limits if using nginx
+    3. Restart PHP-FPM completely
+    4. Clear browser cache
+    5. Check .htaccess overrides
+    6. Verify DirectAdmin limits
+    7. Test with phpinfo()
+  </Accordion>
+  
+  <Accordion title="Sites Down After Change" icon="triangle-exclamation">
+    **Issue:** Websites not loading after configuration change
+    
+    **Solutions:**
+    1. Check PHP-FPM is running
+    2. Review error logs immediately
+    3. Restore php.ini from backup
+    4. Restart all services
+    5. Check Apache error logs
+    6. Verify syntax of configuration files
+    7. Rollback recent changes
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Configuration Examples
+
+### WordPress Optimized PHP Settings
+
+```ini
+; Memory and Execution
+memory_limit = 512M
+max_execution_time = 300
+max_input_time = 300
+max_input_vars = 3000
+
+; Upload Limits
+upload_max_filesize = 256M
+post_max_size = 256M
+
+; OPcache (Performance)
+opcache.enable = 1
+opcache.memory_consumption = 256
+opcache.interned_strings_buffer = 16
+opcache.max_accelerated_files = 10000
+opcache.revalidate_freq = 60
+
+; Session
+session.gc_maxlifetime = 1440
+session.save_path = "/tmp"
+```
+
+### High-Traffic Configuration
+
+```ini
+; Increased Limits
+memory_limit = 1024M
+max_execution_time = 600
+max_input_time = 600
+
+; Upload
+upload_max_filesize = 512M
+post_max_size = 512M
+
+; OPcache Optimization
+opcache.enable = 1
+opcache.memory_consumption = 512
+opcache.interned_strings_buffer = 32
+opcache.max_accelerated_files = 20000
+opcache.validate_timestamps = 0
+```
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| **Update Upload Limit** | Enter size → Click Update → Wait for restart |
+| **Edit PHP.ini** | Click Edit → Make changes → Save |
+| **Reboot Server** | Click Reboot Server → Confirm → Wait |
+| **Unblock IPs** | Click Unblock All IPs → Confirm |
+| **Fix DirectoryIndex** | Click Fix DirectoryIndex → Wait for reload |
+| **Disable open_basedir** | Click Disable Now → Wait for completion |
+
+### Recommended PHP Values
+
+| Setting | Small Sites | Medium Sites | Large Sites |
+|---------|-------------|--------------|-------------|
+| **memory_limit** | 256M | 512M | 1024M |
+| **upload_max_filesize** | 128M | 256M | 512M |
+| **max_execution_time** | 120 | 300 | 600 |
+| **OPcache memory** | 128 | 256 | 512 |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="WordPress Updates" icon="arrow-repeat" href="/wordpress-updates">
+    Manage WordPress versions
+  </Card>
+  <Card title="IP Manager" icon="hdd-network" href="/ip-manager">
+    Manage IP assignments
+  </Card>
+  <Card title="Server Migration" icon="arrow-left-right" href="/server-migration">
+    Server migration tools
+  </Card>
+  <Card title="Website Configuration" icon="gear" href="/website-configuration">
+    Website settings
+  </Card>
+</CardGroup>
