@@ -1,26 +1,446 @@
 ---
 title: "Live Chat & Push Notifications"
-description: "You can provide support to your customers enabling a live chat system as well as web push notifications sent via OneSignal."
+description: "Configure live chat and push notifications for customer engagement"
+icon: "comments"
 ---
 
-## Enabling Live Chat
+<Info>
+**Navigation Path:** Admin Dashboard → Integrations → Chat Online
+</Info>
 
-You can enable it under [Marketing Tools] \> [Integrations Setup] \> [Chat Online]
+## Overview
 
-If enabled live chat option will appear in the bottom right of your platform and will allow your clients to interact directly with you.
+Integrate live chat and push notifications to provide real-time customer support and keep users engaged with timely updates.
 
-<Note>
-  It requires the CMS to be enabled/activated otherwise it won't work if you use an existing website
-</Note>
+<CardGroup cols={2}>
+  <Card title="Live Chat" icon="comments" color="#E54B4D">
+    Real-time customer support
+  </Card>
+  <Card title="Push Notifications" icon="bell" color="#E54B4D">
+    Browser push notifications
+  </Card>
+  <Card title="Engagement" icon="users" color="#E54B4D">
+    Increase customer interaction
+  </Card>
+  <Card title="Support" icon="headset" color="#E54B4D">
+    Instant help and assistance
+  </Card>
+</CardGroup>
 
-You can indeed manage live chats directly from your agency website (Landing CMS) and start replying to your clients.
+---
 
-## Enabling Push Notifications
+## What is OneSignal?
 
-Web push notifications are notifications that can be sent to a user via desktop and mobile web. These alert-style messages slide in at the top or bottom right-hand corner of a desktop screen, depending on the operating system, or appear on a mobile device in a manner nearly identical to push notifications delivered from apps. Website push notifications are delivered on a user’s desktop or mobile screen whenever their browser is open — whether or not the user is on the website.
+OneSignal is a customer engagement platform that provides:
 
-We did an integration with **OneSignal** to make this possible.\
-All you need to do is retrieving the **App ID** and paste it directly in  [Marketing Tools] \> [Integrations Setup] \> [Chat Online]\
-https://documentation.onesignal.com/docs/keys-and-ids#app-id
+- **Live Chat:** Real-time messaging with customers
+- **Push Notifications:** Browser and mobile push notifications
+- **In-App Messaging:** Targeted messages to users
+- **Email:** Automated email campaigns
+- **SMS:** Text message notifications
 
-After that you'll be able to manage your push notifications directly from \*\*OneSignal \*\*dashboard.
+### Integration Benefits
+
+- **Instant Support:** Chat with customers in real-time
+- **Proactive Engagement:** Send notifications about updates, offers
+- **Increased Conversions:** Engage visitors before they leave
+- **Customer Retention:** Keep users informed and engaged
+- **Multi-Channel:** Reach customers across web, mobile, email
+
+---
+
+## Configuration
+
+| Setting | Description | Format |
+|---------|-------------|--------|
+| **OneSignal App ID** | Your OneSignal application identifier | UUID format |
+| **Safari Web ID** | Safari push notification identifier | `web.onesignal.auto...` |
+
+### Getting OneSignal Credentials
+
+**1. Create OneSignal Account**
+
+1. Sign up at [OneSignal.com](https://onesignal.com/)
+2. Click **New App/Website**
+3. Enter your app name (e.g., "My Hosting Platform")
+4. Select **Web** as platform
+5. Click **Next**
+
+**2. Configure Web Push**
+
+1. Choose **Typical Site** setup
+2. Enter your **Site URL** (e.g., `https://yourdomain.com`)
+3. Upload notification icons:
+   - **Large Icon:** 256x256 px (shown in notification)
+   - **Small Icon:** 128x128 px (shown in browser)
+4. Click **Save**
+
+**3. Get Your App ID**
+
+1. Go to **Settings → Keys & IDs**
+2. Copy your **OneSignal App ID**
+3. Copy your **Safari Web ID** (if using Safari push)
+4. Paste both into your platform's integration settings
+
+**4. Configure Chat (Optional)**
+
+1. In OneSignal dashboard, go to **Messages → Live Chat**
+2. Click **Enable Live Chat**
+3. Customize chat widget appearance
+4. Set online hours and automated responses
+5. Save configuration
+
+<Info>
+**Free Plan:** OneSignal offers a generous free plan with unlimited push notifications and basic chat features. Paid plans add advanced features and higher limits.
+</Info>
+
+<Tip>
+**Icon Requirements:** Use high-quality icons (PNG format) with transparent backgrounds. Large icon (256x256) appears in the notification, small icon (128x128) appears in the browser tab.
+</Tip>
+
+---
+
+## Live Chat Features
+
+### Chat Widget
+
+The chat widget appears on your website, allowing customers to:
+
+- Start conversations instantly
+- Get real-time responses
+- Attach files and screenshots
+- View chat history
+- Rate support interactions
+
+### Admin Features
+
+From OneSignal dashboard, you can:
+
+- **Respond to Chats:** Answer customer inquiries in real-time
+- **View History:** Access past conversations
+- **Set Status:** Online, away, or offline
+- **Automated Responses:** Set up auto-replies for common questions
+- **Team Chat:** Multiple agents can handle chats
+- **Chat Routing:** Route chats to specific departments
+- **Analytics:** Track chat volume, response times, satisfaction
+
+### Customization
+
+**Widget Appearance:**
+- Position (bottom right, bottom left, etc.)
+- Colors matching your brand
+- Welcome message
+- Avatar images
+- Online/offline status
+
+**Behavior:**
+- Auto-open on page load
+- Trigger based on time on page
+- Show on specific pages only
+- Hide on mobile devices
+
+---
+
+## Push Notifications
+
+### How Push Notifications Work
+
+1. **User Visits Site:** Customer lands on your website
+2. **Permission Prompt:** Browser asks for notification permission
+3. **User Subscribes:** Customer allows notifications
+4. **Send Notifications:** You send updates via OneSignal
+5. **User Receives:** Notifications appear even when not on site
+
+### Notification Types
+
+**Automated Notifications:**
+- Welcome message after subscription
+- Order confirmations
+- Payment reminders
+- Website expiration warnings
+- Support ticket updates
+- Account notifications
+
+**Manual Notifications:**
+- Promotional offers
+- New feature announcements
+- System maintenance alerts
+- Special events
+- Blog post notifications
+
+### Sending Push Notifications
+
+**From OneSignal Dashboard:**
+
+1. Go to **Messages → New Push**
+2. Enter notification title and message
+3. Add action URL (where users go when clicking)
+4. Upload notification image (optional)
+5. Select audience:
+   - **All Subscribers:** Everyone
+   - **Segments:** Specific user groups
+   - **Filters:** Based on behavior, location, etc.
+6. Schedule or send immediately
+7. Click **Send Message**
+
+**Notification Best Practices:**
+- Keep titles under 50 characters
+- Messages under 120 characters
+- Use action-oriented language
+- Include clear call-to-action
+- Add relevant images
+- Don't over-send (max 1-2 per week)
+
+---
+
+## Segmentation & Targeting
+
+### User Segments
+
+Create targeted segments based on:
+
+- **Behavior:** Pages visited, actions taken
+- **Location:** Country, city, timezone
+- **Device:** Desktop, mobile, browser type
+- **Subscription Date:** New vs. long-time subscribers
+- **Custom Tags:** Customer type, package, status
+
+**Example Segments:**
+- Customers with expiring websites
+- Users who haven't logged in 30 days
+- Premium package subscribers
+- Users in specific timezone for timing
+- Mobile users only
+
+### Personalization
+
+Personalize notifications with:
+
+- **User Name:** "Hi John, your website expires soon"
+- **Custom Data:** Package name, expiration date
+- **Dynamic Content:** Based on user behavior
+- **Localization:** Language and timezone
+
+---
+
+## Configuration Examples
+
+<Tabs>
+  <Tab title="Chat Only">
+    **Use Case:** Live chat without push notifications
+    
+    - **OneSignal App ID**: `abc12345-6789-...`
+    - **Safari Web ID**: Not configured
+    - **Features**: Live chat enabled
+    - **Push**: Disabled
+    
+    **Best For:** Support-focused platforms
+  </Tab>
+  
+  <Tab title="Push Only">
+    **Use Case:** Push notifications without chat
+    
+    - **OneSignal App ID**: `abc12345-6789-...`
+    - **Safari Web ID**: `web.onesignal.auto...`
+    - **Features**: Push notifications enabled
+    - **Chat**: Disabled
+    
+    **Best For:** Engagement and retention
+  </Tab>
+  
+  <Tab title="Full Integration">
+    **Use Case:** Both chat and push notifications
+    
+    - **OneSignal App ID**: `abc12345-6789-...`
+    - **Safari Web ID**: `web.onesignal.auto...`
+    - **Features**: Chat + Push enabled
+    - **Automation**: Triggered notifications
+    
+    **Best For:** Complete customer engagement
+  </Tab>
+</Tabs>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Live Chat Management" icon="comments">
+    - Set realistic online hours and stick to them
+    - Use automated responses for off-hours
+    - Respond to chats within 1-2 minutes
+    - Train team on common questions
+    - Use canned responses for efficiency
+    - Monitor chat satisfaction ratings
+    - Follow up on unresolved chats
+  </Accordion>
+  
+  <Accordion title="Push Notification Strategy" icon="bell">
+    - Get explicit permission before sending
+    - Send valuable, relevant notifications only
+    - Limit frequency (1-2 per week max)
+    - Personalize with user data
+    - Test notification timing
+    - A/B test messages and images
+    - Monitor opt-out rates
+  </Accordion>
+  
+  <Accordion title="User Experience" icon="user">
+    - Don't auto-open chat on every page load
+    - Make chat widget easy to close
+    - Use subtle notification prompts
+    - Respect user's notification preferences
+    - Provide easy opt-out options
+    - Test on mobile devices
+    - Ensure fast loading times
+  </Accordion>
+  
+  <Accordion title="Privacy & Compliance" icon="shield">
+    - Add OneSignal to privacy policy
+    - Comply with GDPR and regional laws
+    - Get explicit consent for notifications
+    - Provide clear opt-out mechanisms
+    - Don't share user data
+    - Secure chat conversations
+    - Review data processing terms
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Chat Widget Not Showing" icon="comments">
+    **Issue:** Live chat widget doesn't appear
+    
+    **Solutions:**
+    1. Verify OneSignal App ID is correct
+    2. Check chat is enabled in OneSignal dashboard
+    3. Clear browser and server cache
+    4. Check browser console for JavaScript errors
+    5. Verify OneSignal script is loading
+    6. Test in incognito mode
+    7. Check widget isn't hidden by CSS
+  </Accordion>
+  
+  <Accordion title="Push Notifications Not Working" icon="bell">
+    **Issue:** Push notifications not being received
+    
+    **Solutions:**
+    1. Verify user has granted notification permission
+    2. Check OneSignal App ID and Safari Web ID
+    3. Ensure HTTPS is enabled (required for push)
+    4. Test with OneSignal's test notification
+    5. Check browser supports push notifications
+    6. Verify user is subscribed in OneSignal dashboard
+    7. Check notification isn't blocked by browser
+  </Accordion>
+  
+  <Accordion title="Permission Prompt Not Appearing" icon="shield-check">
+    **Issue:** Browser doesn't ask for notification permission
+    
+    **Solutions:**
+    1. Ensure site is using HTTPS (required)
+    2. Check user hasn't previously denied permission
+    3. Verify OneSignal SDK is loaded correctly
+    4. Test in different browser
+    5. Check browser supports push notifications
+    6. Review browser console for errors
+    7. Try resetting browser permissions
+  </Accordion>
+  
+  <Accordion title="Chat Messages Not Sending" icon="message-xmark">
+    **Issue:** Chat messages fail to send
+    
+    **Solutions:**
+    1. Check internet connection
+    2. Verify OneSignal service is online
+    3. Clear browser cache and cookies
+    4. Test in different browser
+    5. Check firewall isn't blocking OneSignal
+    6. Review OneSignal dashboard for issues
+    7. Contact OneSignal support
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Testing Your Integration
+
+**Live Chat Testing:**
+
+- [ ] OneSignal App ID configured
+- [ ] Chat widget appears on website
+- [ ] Can open and close chat widget
+- [ ] Can send test message
+- [ ] Message appears in OneSignal dashboard
+- [ ] Can reply from dashboard
+- [ ] Reply appears in chat widget
+- [ ] Test on mobile devices
+- [ ] Verify offline message handling
+
+**Push Notification Testing:**
+
+- [ ] OneSignal App ID and Safari Web ID configured
+- [ ] HTTPS enabled on website
+- [ ] Permission prompt appears
+- [ ] Can subscribe to notifications
+- [ ] Send test notification from OneSignal
+- [ ] Notification received in browser
+- [ ] Clicking notification opens correct URL
+- [ ] Test on different browsers
+- [ ] Verify unsubscribe works
+
+---
+
+## Analytics & Reporting
+
+### Chat Metrics
+
+Track in OneSignal dashboard:
+
+- **Chat Volume:** Number of chats per day/week
+- **Response Time:** Average time to first response
+- **Resolution Time:** Time to resolve issues
+- **Satisfaction:** Customer ratings
+- **Agent Performance:** Individual agent metrics
+
+### Push Notification Metrics
+
+Monitor notification performance:
+
+- **Subscribers:** Total push subscribers
+- **Delivery Rate:** Successfully delivered
+- **Click-Through Rate:** Users who clicked
+- **Conversion Rate:** Actions completed
+- **Opt-Out Rate:** Unsubscribes
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Platform configuration
+  </Card>
+  <Card title="Email Settings" icon="envelope" href="/email-settings">
+    Email notifications
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Access control
+  </Card>
+  <Card title="Website Configuration" icon="globe" href="/website-configuration">
+    Website settings
+  </Card>
+</CardGroup>
+
+---
+
+## External Resources
+
+- [OneSignal Official Website](https://onesignal.com/)
+- [OneSignal Documentation](https://documentation.onesignal.com/)
+- [OneSignal Dashboard](https://app.onesignal.com/)
+- [Web Push Guide](https://documentation.onesignal.com/docs/web-push-quickstart)
+- [Live Chat Setup](https://documentation.onesignal.com/docs/live-activities-quickstart)
