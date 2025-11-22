@@ -1,0 +1,389 @@
+---
+title: "Domain Manager"
+description: "Manage domain registrations, DNS, and domain services"
+icon: "globe"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Domain Manager  
+**URL:** `/admin/DomainManager`
+</Info>
+
+## Overview
+
+The Domain Manager allows you to view, manage, and configure all registered domains. Handle domain registrations, DNS settings, transfers, and renewals from one centralized location.
+
+<CardGroup cols={2}>
+  <Card title="Domain List" icon="list" color="#10b981">
+    View all registered domains
+  </Card>
+  <Card title="DNS Management" icon="network-wired" color="#0d6efd">
+    Configure DNS records
+  </Card>
+  <Card title="Renewals" icon="arrows-rotate" color="#f59e0b">
+    Manage domain renewals
+  </Card>
+  <Card title="Transfers" icon="right-left" color="#8b5cf6">
+    Transfer domains in/out
+  </Card>
+</CardGroup>
+
+---
+
+## Domain List
+
+### Viewing Domains
+
+The domain list displays all registered domains:
+
+| Column | Description |
+|--------|-------------|
+| **Domain Name** | Full domain name |
+| **Owner** | Customer account |
+| **Status** | Active, Pending, Expired |
+| **Registered** | Registration date |
+| **Expires** | Expiration date |
+| **Auto-Renew** | Auto-renewal status |
+| **Nameservers** | Current nameservers |
+| **Actions** | Manage, Renew, Delete |
+
+### Filtering & Search
+
+- Search by domain name or owner
+- Filter by status (Active, Pending, Expired, Expiring Soon)
+- Filter by TLD (.com, .net, .org, etc.)
+- Filter by expiration date
+- Sort by any column
+- Export to CSV
+
+---
+
+## Registering Domains
+
+### Manual Domain Registration
+
+1. Click **Register New Domain** button
+2. Enter domain name to check availability
+3. Select TLD (.com, .net, .org, etc.)
+4. Choose customer account
+5. Set registration period (1-10 years)
+6. Configure domain settings:
+   - **Nameservers:** Default or custom
+   - **Auto-Renew:** Enable/disable
+   - **Privacy Protection:** WHOIS privacy (if available)
+7. Review pricing
+8. Click **Register Domain**
+9. Domain is registered via API (Dynadot)
+
+<Info>
+**Registration Time:** Domain registration typically completes within minutes. DNS propagation may take 24-48 hours globally.
+</Info>
+
+### Domain Availability Check
+
+Before registration:
+- System checks if domain is available
+- Shows alternative suggestions if taken
+- Displays pricing for selected TLD
+- Shows registration and renewal costs
+
+---
+
+## Managing Domains
+
+### Domain Details
+
+View comprehensive domain information:
+
+**Registration Information:**
+- Domain name and TLD
+- Registration date
+- Expiration date
+- Registrar (Dynadot)
+- Owner information
+
+**DNS Settings:**
+- Current nameservers
+- DNS records (A, CNAME, MX, TXT)
+- DNS management interface
+- Propagation status
+
+**Domain Status:**
+- Active, Pending, Expired
+- Lock status (transfer lock)
+- Auto-renewal status
+- Privacy protection status
+
+### Updating Nameservers
+
+1. Find domain in list
+2. Click **Manage DNS** or **Edit**
+3. Select nameserver option:
+   - **Default Nameservers:** Your platform's NS
+   - **Custom Nameservers:** Third-party NS
+4. Enter nameserver addresses (ns1, ns2, etc.)
+5. Save changes
+6. Wait for DNS propagation (24-48 hours)
+
+**Common Nameserver Scenarios:**
+
+<Tabs>
+  <Tab title="Platform Hosting">
+    **Use Case:** Domain hosted on your platform
+    
+    - **NS1:** `ns1.yourdomain.com`
+    - **NS2:** `ns2.yourdomain.com`
+    
+    Points domain to your hosting servers
+  </Tab>
+  
+  <Tab title="Cloudflare">
+    **Use Case:** Using Cloudflare for DNS/CDN
+    
+    - **NS1:** `name1.cloudflare.com`
+    - **NS2:** `name2.cloudflare.com`
+    
+    Provided by Cloudflare after adding domain
+  </Tab>
+  
+  <Tab title="External Hosting">
+    **Use Case:** Domain hosted elsewhere
+    
+    - **NS1:** `ns1.externalhost.com`
+    - **NS2:** `ns2.externalhost.com`
+    
+    Points to external hosting provider
+  </Tab>
+</Tabs>
+
+### Managing DNS Records
+
+1. Click **Manage DNS** for the domain
+2. Add/edit DNS records:
+   - **A Record:** Points to IP address
+   - **CNAME Record:** Alias to another domain
+   - **MX Record:** Mail server configuration
+   - **TXT Record:** Text records (SPF, DKIM, verification)
+3. Set TTL (Time To Live)
+4. Save changes
+5. Wait for propagation
+
+<Tip>
+**DNS Propagation:** DNS changes can take 24-48 hours to propagate globally. Use lower TTL values (300-600 seconds) before making changes to speed up propagation.
+</Tip>
+
+---
+
+## Domain Renewals
+
+### Manual Renewal
+
+1. Find domain to renew
+2. Click **Renew** button
+3. Select renewal period (1-10 years)
+4. Review renewal cost
+5. Process payment
+6. Domain expiration date is extended
+
+### Auto-Renewal
+
+Enable automatic domain renewal:
+
+1. Edit domain settings
+2. Enable **Auto-Renew** toggle
+3. Ensure payment method on file
+4. Domain renews automatically before expiration
+5. Customer receives renewal confirmation
+
+<Warning>
+**Domain Expiration:** Expired domains may be lost permanently. Always enable auto-renewal for critical domains and send multiple expiration reminders.
+</Warning>
+
+### Expiration Reminders
+
+Automatic reminders sent:
+- 60 days before expiration
+- 30 days before expiration
+- 14 days before expiration
+- 7 days before expiration
+- Day of expiration
+
+---
+
+## Domain Transfers
+
+### Transferring Domain In
+
+1. Click **Transfer Domain** button
+2. Enter domain name to transfer
+3. Enter authorization code (EPP code)
+4. Verify domain is unlocked at current registrar
+5. Confirm transfer details
+6. Pay transfer fee (usually includes 1-year renewal)
+7. Approve transfer via email
+8. Transfer completes in 5-7 days
+
+**Transfer Requirements:**
+- Domain must be unlocked
+- Authorization code from current registrar
+- Domain must be 60+ days old
+- Not expired or in redemption period
+- Valid WHOIS contact email
+
+### Transferring Domain Out
+
+1. Unlock domain in Domain Manager
+2. Get authorization code (EPP code)
+3. Provide code to new registrar
+4. Approve transfer request
+5. Transfer completes in 5-7 days
+
+<Info>
+**Transfer Lock:** Domains are locked by default to prevent unauthorized transfers. Unlock the domain before initiating a transfer out.
+</Info>
+
+---
+
+## WHOIS Privacy Protection
+
+Protect domain owner information from public WHOIS lookup.
+
+**Enabling Privacy Protection:**
+
+1. Edit domain settings
+2. Enable **WHOIS Privacy** toggle
+3. Privacy service replaces owner info in WHOIS
+4. Owner information is hidden from public
+
+**Benefits:**
+- Reduces spam and unwanted contact
+- Protects personal information
+- Prevents domain theft attempts
+- Maintains privacy
+
+<Tip>
+**Privacy Availability:** WHOIS privacy is not available for all TLDs. Some country-code TLDs (.uk, .ca, etc.) don't support privacy protection.
+</Tip>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Domain Management" icon="globe">
+    - Enable auto-renewal for all critical domains
+    - Keep WHOIS contact information current
+    - Use strong registrar account passwords
+    - Enable two-factor authentication
+    - Lock domains to prevent unauthorized transfers
+    - Monitor expiration dates regularly
+    - Maintain domain inventory
+  </Accordion>
+  
+  <Accordion title="DNS Configuration" icon="network-wired">
+    - Use reliable nameservers
+    - Set appropriate TTL values
+    - Document DNS changes
+    - Test DNS changes before full deployment
+    - Keep DNS records organized
+    - Use DNS monitoring tools
+    - Backup DNS configurations
+  </Accordion>
+  
+  <Accordion title="Security" icon="shield">
+    - Enable domain lock/transfer lock
+    - Use WHOIS privacy protection
+    - Monitor for unauthorized changes
+    - Keep authorization codes secure
+    - Use strong passwords
+    - Enable registrar notifications
+    - Review domain security regularly
+  </Accordion>
+  
+  <Accordion title="Renewals" icon="arrows-rotate">
+    - Enable auto-renewal by default
+    - Send multiple expiration reminders
+    - Renew domains early (30+ days before)
+    - Keep payment methods current
+    - Monitor renewal failures
+    - Track renewal costs
+    - Budget for multi-year renewals
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Domain Not Resolving" icon="link-slash">
+    **Issue:** Domain doesn't load website
+    
+    **Solutions:**
+    1. Check nameservers are correct
+    2. Verify DNS records are configured
+    3. Wait for DNS propagation (24-48 hours)
+    4. Test with DNS lookup tools
+    5. Check domain status is Active
+    6. Verify hosting account exists
+    7. Clear DNS cache
+  </Accordion>
+  
+  <Accordion title="Transfer Failed" icon="xmark">
+    **Issue:** Domain transfer unsuccessful
+    
+    **Solutions:**
+    1. Verify domain is unlocked
+    2. Check authorization code is correct
+    3. Ensure domain is 60+ days old
+    4. Verify WHOIS email is accessible
+    5. Approve transfer via email
+    6. Check domain is not expired
+    7. Contact current registrar
+  </Accordion>
+  
+  <Accordion title="Auto-Renewal Failed" icon="credit-card">
+    **Issue:** Domain didn't auto-renew
+    
+    **Solutions:**
+    1. Check payment method is valid
+    2. Verify sufficient funds/credit
+    3. Update payment information
+    4. Manually renew domain immediately
+    5. Check for payment gateway errors
+    6. Review renewal notification emails
+    7. Contact billing support
+  </Accordion>
+  
+  <Accordion title="DNS Changes Not Working" icon="network-wired">
+    **Issue:** DNS updates not taking effect
+    
+    **Solutions:**
+    1. Wait for DNS propagation (24-48 hours)
+    2. Verify changes were saved
+    3. Check nameservers are correct
+    4. Clear local DNS cache
+    5. Test with different DNS servers
+    6. Verify record syntax is correct
+    7. Use DNS propagation checker tools
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Domain API Settings" icon="gear" href="/domain-api-settings">
+    Configure domain API
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create websites
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customers
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Domain pricing
+  </Card>
+</CardGroup>

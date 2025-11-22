@@ -1,0 +1,401 @@
+---
+title: "Pending Orders"
+description: "Manage and process pending customer orders"
+icon: "clock"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Pending Orders  
+**URL:** `/admin/OrderPending`
+</Info>
+
+## Overview
+
+The Pending Orders page displays all customer orders awaiting processing, payment, or approval. Manage order workflow, approve manual payments, and fulfill customer purchases.
+
+<CardGroup cols={2}>
+  <Card title="Order Queue" icon="list-check" color="#10b981">
+    View all pending orders
+  </Card>
+  <Card title="Payment Verification" icon="credit-card" color="#0d6efd">
+    Verify manual payments
+  </Card>
+  <Card title="Order Approval" icon="check" color="#f59e0b">
+    Approve or reject orders
+  </Card>
+  <Card title="Fulfillment" icon="box" color="#8b5cf6">
+    Process and complete orders
+  </Card>
+</CardGroup>
+
+---
+
+## Order List
+
+### Viewing Pending Orders
+
+The pending orders list displays all orders awaiting action:
+
+| Column | Description |
+|--------|-------------|
+| **Order ID** | Unique order identifier |
+| **Customer** | Customer name and email |
+| **Items** | Products/services ordered |
+| **Amount** | Total order amount |
+| **Payment Method** | How customer will pay |
+| **Status** | Pending, Awaiting Payment, Processing |
+| **Date** | Order creation date |
+| **Actions** | Approve, Reject, View Details |
+
+### Order Statuses
+
+| Status | Description | Action Required |
+|--------|-------------|-----------------|
+| **Pending** | Order created, awaiting review | Review and approve |
+| **Awaiting Payment** | Waiting for payment confirmation | Verify payment |
+| **Processing** | Payment received, being fulfilled | Complete fulfillment |
+| **On Hold** | Temporarily paused | Resolve issue |
+| **Requires Approval** | Manual approval needed | Approve or reject |
+
+### Filtering & Search
+
+- Search by order ID, customer name, or email
+- Filter by status
+- Filter by payment method
+- Filter by date range
+- Filter by order amount
+- Sort by any column
+- Export to CSV
+
+---
+
+## Order Types
+
+### Automatic Orders
+
+Orders that process automatically:
+- **Credit Card (Stripe):** Instant payment, auto-fulfillment
+- **PayPal:** Instant payment, auto-fulfillment
+- **Account Credit:** Uses existing balance, auto-fulfillment
+
+### Manual Orders
+
+Orders requiring manual processing:
+- **Bank Transfer:** Awaits payment confirmation
+- **Cash Payment:** Awaits payment confirmation
+- **Check/Money Order:** Awaits payment confirmation
+- **Custom Payment:** Requires manual approval
+
+---
+
+## Processing Orders
+
+### Reviewing Order Details
+
+1. Click order ID or **View Details** button
+2. Review order information:
+   - Customer details
+   - Items ordered (hosting, domains, addons)
+   - Pricing breakdown
+   - Payment method
+   - Special instructions or notes
+3. Verify customer information is correct
+4. Check for any issues or concerns
+
+### Approving Orders
+
+**For Manual Payment Orders:**
+
+1. Verify payment has been received
+2. Check payment amount matches order total
+3. Click **Approve Order** button
+4. Confirm approval
+5. Order is processed and fulfilled automatically
+6. Customer receives confirmation email
+7. Services are activated
+
+**For Orders Requiring Approval:**
+
+1. Review order details thoroughly
+2. Verify customer eligibility
+3. Check for fraud indicators
+4. Click **Approve** or **Reject**
+5. Add approval notes if needed
+6. Confirm action
+
+<Tip>
+**Payment Verification:** For bank transfers, verify the transaction reference number matches the order ID. Check your bank account or payment gateway for confirmation before approving.
+</Tip>
+
+### Rejecting Orders
+
+1. Find order to reject
+2. Click **Reject** button
+3. Select rejection reason:
+   - Payment not received
+   - Fraudulent order
+   - Customer request
+   - Out of stock
+   - Other (specify)
+4. Add notes for customer
+5. Confirm rejection
+6. Customer receives rejection notification
+7. Refund processed if payment was made
+
+<Warning>
+**Rejection Impact:** Rejecting an order cancels it permanently. If payment was received, ensure refund is processed. Consider putting orders "On Hold" instead if the issue might be resolved.
+</Warning>
+
+---
+
+## Payment Verification
+
+### Bank Transfer Verification
+
+1. Check your bank account for incoming transfer
+2. Match transfer amount with order total
+3. Verify transaction reference or order ID
+4. Confirm sender matches customer name
+5. Mark payment as received
+6. Approve order for fulfillment
+
+**Verification Checklist:**
+- [ ] Payment amount matches order total
+- [ ] Sender name matches customer
+- [ ] Reference number includes order ID
+- [ ] Payment cleared (not pending)
+- [ ] No duplicate payments
+
+### Manual Payment Confirmation
+
+1. Find order awaiting payment
+2. Click **Mark as Paid** button
+3. Enter payment details:
+   - Payment date
+   - Transaction reference
+   - Amount received
+   - Payment notes
+4. Upload payment proof (optional)
+5. Save payment confirmation
+6. Order moves to processing
+
+<Info>
+**Payment Proof:** Uploading bank transfer receipts or payment screenshots helps with record-keeping and dispute resolution.
+</Info>
+
+---
+
+## Order Fulfillment
+
+### Automatic Fulfillment
+
+For approved orders, the system automatically:
+
+1. Creates hosting account (if hosting ordered)
+2. Installs WordPress (if website ordered)
+3. Registers domain (if domain ordered)
+4. Activates addons and services
+5. Sends welcome email with access details
+6. Updates order status to Completed
+7. Generates invoice/receipt
+
+### Manual Fulfillment
+
+For orders requiring manual setup:
+
+1. Review order items
+2. Perform manual setup tasks
+3. Verify all services are active
+4. Test access credentials
+5. Mark order as **Completed**
+6. Send confirmation to customer
+
+---
+
+## Order Management
+
+### Putting Orders On Hold
+
+1. Find order to hold
+2. Click **Put On Hold** button
+3. Select hold reason:
+   - Awaiting customer response
+   - Payment verification needed
+   - Stock/resource unavailable
+   - Requires additional information
+4. Add notes
+5. Customer receives notification
+6. Order paused until resolved
+
+### Canceling Orders
+
+1. Find order to cancel
+2. Click **Cancel** button
+3. Select cancellation reason
+4. Process refund if payment received
+5. Confirm cancellation
+6. Customer receives notification
+7. Order marked as Cancelled
+
+### Editing Orders
+
+1. Click **Edit Order** button
+2. Modify order details:
+   - Add/remove items
+   - Adjust pricing
+   - Change payment method
+   - Update customer information
+3. Recalculate totals
+4. Save changes
+5. Customer receives updated invoice
+
+<Tip>
+**Order Modifications:** If editing an order after payment, ensure the customer is notified of changes and any price differences are handled appropriately (refund or additional charge).
+</Tip>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Order Processing" icon="check">
+    - Process orders within 24 hours
+    - Verify payments before approval
+    - Double-check customer information
+    - Test services before marking complete
+    - Send confirmation emails promptly
+    - Document any issues or notes
+    - Follow up on delayed orders
+  </Accordion>
+  
+  <Accordion title="Payment Verification" icon="credit-card">
+    - Verify payment amount matches exactly
+    - Check transaction is cleared, not pending
+    - Match customer name with payment sender
+    - Keep payment proof/screenshots
+    - Update payment status immediately
+    - Reconcile payments daily
+    - Flag suspicious transactions
+  </Accordion>
+  
+  <Accordion title="Fraud Prevention" icon="shield">
+    - Watch for unusual order patterns
+    - Verify high-value orders carefully
+    - Check for mismatched billing/shipping info
+    - Monitor for duplicate orders
+    - Verify email addresses are legitimate
+    - Use fraud detection tools
+    - Trust your instincts
+  </Accordion>
+  
+  <Accordion title="Customer Communication" icon="message">
+    - Acknowledge orders immediately
+    - Provide estimated processing time
+    - Update customers on order status
+    - Explain any delays clearly
+    - Send welcome emails with details
+    - Respond to inquiries promptly
+    - Follow up after fulfillment
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Order Not Appearing" icon="eye-slash">
+    **Issue:** Order doesn't show in pending list
+    
+    **Solutions:**
+    1. Check order status (may be completed)
+    2. Search by order ID or customer name
+    3. Check filters aren't hiding order
+    4. Verify order was created successfully
+    5. Check in completed orders
+    6. Review order creation logs
+    7. Check customer's order history
+  </Accordion>
+  
+  <Accordion title="Fulfillment Failed" icon="circle-xmark">
+    **Issue:** Order approved but services not activated
+    
+    **Solutions:**
+    1. Check server has available resources
+    2. Verify API connections are working
+    3. Review error logs for details
+    4. Manually create services
+    5. Retry fulfillment process
+    6. Check for system errors
+    7. Contact technical support
+  </Accordion>
+  
+  <Accordion title="Payment Mismatch" icon="dollar-sign">
+    **Issue:** Payment amount doesn't match order
+    
+    **Solutions:**
+    1. Check for currency conversion differences
+    2. Verify transaction fees weren't deducted
+    3. Contact customer for clarification
+    4. Adjust order total if appropriate
+    5. Request additional payment if short
+    6. Refund difference if overpaid
+    7. Document the discrepancy
+  </Accordion>
+  
+  <Accordion title="Customer Not Receiving Emails" icon="envelope">
+    **Issue:** Confirmation emails not delivered
+    
+    **Solutions:**
+    1. Verify email address is correct
+    2. Check spam/junk folders
+    3. Resend confirmation email
+    4. Test email delivery
+    5. Check email service is working
+    6. Verify email templates are correct
+    7. Provide details via alternative method
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### Order Processing Workflow
+
+1. **Order Created** → Customer places order
+2. **Payment Received** → Payment confirmed
+3. **Order Approved** → Admin approves order
+4. **Fulfillment** → Services activated
+5. **Completed** → Customer receives access
+6. **Invoice Sent** → Receipt delivered
+
+### Common Actions
+
+| Action | When to Use |
+|--------|-------------|
+| **Approve** | Payment verified, ready to fulfill |
+| **Reject** | Payment failed, fraudulent, or customer request |
+| **On Hold** | Awaiting information or resolution |
+| **Mark as Paid** | Manual payment received |
+| **Cancel** | Customer cancellation or unfulfillable |
+| **Edit** | Modify order details before fulfillment |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Receipts" icon="receipt" href="/receipts">
+    View completed orders
+  </Card>
+  <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
+    Payment gateway settings
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customers
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package pricing
+  </Card>
+</CardGroup>

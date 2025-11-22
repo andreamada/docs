@@ -48,12 +48,12 @@
           {
           "group": "Usage",
             "pages": [
-              "usage/adding-templates",
-              "usage/adding-clients",
-              "usage/adding-websites",
-              "usage/adding-plugins",
-              "usage/sending-notifications",
-              "usage/managing-orders"
+              "usage/templates-manager",
+              "usage/users-manager",
+              "usage/websites-manager",
+              "usage/plugins-manager",
+              "usage/orders-manager",
+              "usage/invoices-manager"
             ]
             }
         ]

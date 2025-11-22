@@ -1,0 +1,370 @@
+---
+title: "App Store (Plugin Manager)"
+description: "Manage WordPress plugins available for customer websites"
+icon: "puzzle-piece"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → App Store  
+**URL:** `/admin/AppStore`
+</Info>
+
+## Overview
+
+The App Store (Plugin Manager) allows you to manage WordPress plugins that customers can install on their websites. Control which plugins are available, set default plugins, and organize the plugin library.
+
+<CardGroup cols={2}>
+  <Card title="Plugin Library" icon="book" color="#10b981">
+    Manage available WordPress plugins
+  </Card>
+  <Card title="Default Plugins" icon="star" color="#0d6efd">
+    Auto-install plugins on new sites
+  </Card>
+  <Card title="Organization" icon="folder" color="#f59e0b">
+    Categorize plugins by function
+  </Card>
+  <Card title="Updates" icon="arrows-rotate" color="#8b5cf6">
+    Keep plugins up-to-date
+  </Card>
+</CardGroup>
+
+---
+
+## Managing Plugins
+
+### Adding New Plugins
+
+1. Click **Add New Plugin** button
+2. Choose plugin source:
+   - **WordPress.org Repository:** Free plugins
+   - **Upload Plugin:** Custom plugin ZIP file
+   - **Premium Plugin:** Purchased plugins
+3. Enter plugin details:
+   - **Plugin Name:** Display name
+   - **Plugin Slug:** WordPress directory name
+   - **Description:** Brief description of features
+   - **Category:** Plugin category
+4. Upload plugin icon/logo (128 x 128 px)
+5. Set plugin as **Active** to make available
+6. Optional: Set as **Default** to auto-install
+7. Click **Save**
+
+<Tip>
+**Plugin Icons:** Use clear, recognizable icons for plugins. This helps customers quickly identify plugins they need.
+</Tip>
+
+### Plugin Properties
+
+| Property | Description |
+|----------|-------------|
+| **Plugin Name** | Display name shown to customers |
+| **Plugin Slug** | WordPress plugin directory name |
+| **Description** | Brief description of plugin features |
+| **Category** | Plugin category for organization |
+| **Icon** | Plugin icon/logo (128 x 128 px) |
+| **Status** | Active (available) or Inactive (hidden) |
+| **Default** | Auto-install on new websites |
+| **Featured** | Highlight as recommended |
+| **Premium** | Mark as premium/paid plugin |
+
+---
+
+## Plugin Categories
+
+Organize plugins into categories:
+
+**Common Categories:**
+- **Security:** Security, backups, malware scanning
+- **SEO:** Search engine optimization tools
+- **Performance:** Caching, optimization, speed
+- **Forms:** Contact forms, surveys, lead generation
+- **E-commerce:** WooCommerce, payment gateways
+- **Page Builders:** Visual page builders
+- **Social Media:** Social sharing, feeds
+- **Analytics:** Tracking, statistics
+- **Utilities:** General tools and utilities
+
+<Info>
+**Category Benefits:** Organizing plugins by category helps customers find the right tools quickly and improves the plugin selection experience.
+</Info>
+
+---
+
+## Default Plugins
+
+Set plugins to auto-install on all new websites.
+
+**Setting Default Plugins:**
+
+1. Find the plugin in App Store
+2. Enable **Default Plugin** toggle
+3. Plugin will be automatically installed on new websites
+4. Existing websites are not affected
+
+**Recommended Default Plugins:**
+- **Security:** Wordfence or Sucuri Security
+- **SEO:** Yoast SEO or Rank Math
+- **Performance:** WP Super Cache or W3 Total Cache
+- **Backups:** UpdraftPlus or BackupBuddy
+- **Forms:** Contact Form 7 or WPForms
+- **Anti-Spam:** Akismet
+
+<Tip>
+**Default Plugin Strategy:** Install 5-8 essential plugins by default. Too many plugins can slow down websites and overwhelm customers. Focus on security, performance, and basic functionality.
+</Tip>
+
+---
+
+## Featured Plugins
+
+Highlight recommended plugins to guide customer choices.
+
+**Featuring Plugins:**
+
+1. Edit plugin in App Store
+2. Enable **Featured** toggle
+3. Featured plugins appear at top of plugin list
+4. Add "Recommended" or "Popular" badge
+
+**Why Feature Plugins:**
+- Guide customers to quality plugins
+- Promote plugins you support
+- Highlight premium offerings
+- Reduce decision paralysis
+- Improve customer satisfaction
+
+<Info>
+**Featured Limit:** Feature 5-10 plugins to avoid overwhelming customers. Highlight truly exceptional or essential plugins.
+</Info>
+
+---
+
+## Plugin Sources
+
+### WordPress.org Plugins
+
+Free plugins from the official WordPress plugin repository.
+
+**Adding WordPress.org Plugins:**
+
+1. Browse [WordPress.org Plugin Directory](https://wordpress.org/plugins/)
+2. Find plugins you want to offer
+3. Copy plugin slug (from URL)
+4. Add to App Store with plugin slug
+5. WordPress automatically downloads plugin
+
+**Popular Free Plugins:**
+- **Yoast SEO:** SEO optimization
+- **Contact Form 7:** Contact forms
+- **Akismet:** Spam protection
+- **WooCommerce:** E-commerce
+- **Elementor:** Page builder
+- **WP Super Cache:** Caching
+- **Wordfence:** Security
+
+### Premium Plugins
+
+Upload purchased or custom plugins.
+
+**Adding Premium Plugins:**
+
+1. Obtain plugin ZIP file
+2. Click **Upload Plugin**
+3. Select ZIP file
+4. Configure plugin details
+5. Mark as **Premium** if paid
+6. Set pricing (if selling to customers)
+7. Activate for customer use
+
+**Premium Plugin Sources:**
+- CodeCanyon (Envato Market)
+- WPBakery Page Builder
+- Advanced Custom Fields PRO
+- Gravity Forms
+- WP Rocket
+- WPML
+
+<Warning>
+**Plugin Licensing:** Ensure proper licensing for premium plugins. Many require separate licenses per installation. Check license terms before offering to customers.
+</Warning>
+
+---
+
+## Plugin Management
+
+### Updating Plugins
+
+1. Check for plugin updates regularly
+2. Test updates on staging site first
+3. Update plugins in App Store
+4. Notify customers of available updates
+5. Optionally auto-update on customer sites
+
+<Info>
+**Auto-Updates:** Consider enabling auto-updates for security plugins. For other plugins, allow customers to control updates to avoid breaking changes.
+</Info>
+
+### Deactivating Plugins
+
+1. Find plugin to deactivate
+2. Change status to **Inactive**
+3. Plugin is hidden from customer selection
+4. Existing installations are unaffected
+
+### Deleting Plugins
+
+1. Ensure no websites are using the plugin
+2. Find plugin in App Store
+3. Click **Delete** button
+4. Confirm deletion
+5. Plugin files are removed
+
+<Warning>
+**Before Deleting:** Check if any customer websites have the plugin installed. Deleting can prevent updates or cause issues.
+</Warning>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Plugin Selection" icon="check">
+    - Offer 30-50 quality plugins, not hundreds
+    - Include plugins for different purposes
+    - Choose well-maintained, updated plugins
+    - Prioritize plugins with good ratings
+    - Select plugins with active support
+    - Avoid plugins with security issues
+    - Test plugins before offering
+  </Accordion>
+  
+  <Accordion title="Plugin Organization" icon="folder">
+    - Categorize plugins logically
+    - Use clear category names
+    - Feature essential plugins
+    - Set appropriate default plugins
+    - Keep plugin list curated
+    - Remove abandoned plugins
+    - Update plugin descriptions
+  </Accordion>
+  
+  <Accordion title="Plugin Maintenance" icon="wrench">
+    - Keep plugins updated
+    - Test updates before deploying
+    - Monitor plugin compatibility
+    - Remove plugins with security issues
+    - Check for plugin conflicts
+    - Maintain plugin documentation
+    - Provide plugin support
+  </Accordion>
+  
+  <Accordion title="Customer Experience" icon="user">
+    - Use clear plugin descriptions
+    - Highlight key features
+    - Provide plugin documentation links
+    - Make plugin selection easy
+    - Offer plugin recommendations
+    - Allow easy installation/removal
+    - Provide plugin support
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Plugin Not Installing" icon="download">
+    **Issue:** Plugin fails to install from WordPress.org
+    
+    **Solutions:**
+    1. Verify plugin slug is correct
+    2. Check internet connection
+    3. Ensure server has write permissions
+    4. Check available disk space
+    5. Try manual upload
+    6. Review error logs
+    7. Test with different plugin
+  </Accordion>
+  
+  <Accordion title="Plugin Upload Fails" icon="upload">
+    **Issue:** Cannot upload custom plugin
+    
+    **Solutions:**
+    1. Check file size under upload limit
+    2. Verify ZIP is valid WordPress plugin
+    3. Ensure ZIP contains main plugin file
+    4. Check server write permissions
+    5. Increase PHP upload limit if needed
+    6. Try uploading via FTP
+    7. Verify plugin structure
+  </Accordion>
+  
+  <Accordion title="Plugin Not Appearing" icon="eye-slash">
+    **Issue:** Plugin doesn't show for customers
+    
+    **Solutions:**
+    1. Verify plugin status is Active
+    2. Check plugin is saved properly
+    3. Clear application cache
+    4. Refresh plugin list
+    5. Verify customer permissions
+    6. Check category is visible
+    7. Test with different account
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Plugin Recommendations
+
+### Essential Plugins
+
+**Security:**
+- Wordfence Security
+- Sucuri Security
+- iThemes Security
+
+**SEO:**
+- Yoast SEO
+- Rank Math
+- All in One SEO
+
+**Performance:**
+- WP Super Cache
+- W3 Total Cache
+- WP Rocket (Premium)
+
+**Backups:**
+- UpdraftPlus
+- BackupBuddy (Premium)
+- Duplicator
+
+**Forms:**
+- Contact Form 7
+- WPForms
+- Gravity Forms (Premium)
+
+**Page Builders:**
+- Elementor
+- Beaver Builder
+- WPBakery (Premium)
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Template Manager" icon="palette" href="/template-manager">
+    Manage WordPress themes
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create websites
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customers
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package configuration
+  </Card>
+</CardGroup>

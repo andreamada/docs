@@ -1,0 +1,427 @@
+---
+title: "Receipts & Invoices"
+description: "Manage invoices, receipts, and payment history"
+icon: "receipt"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Receipts  
+**URL:** `/admin/Receipts`
+</Info>
+
+## Overview
+
+The Receipts page displays all invoices, receipts, and payment transactions. Track revenue, manage refunds, and access complete financial records for your platform.
+
+<CardGroup cols={2}>
+  <Card title="Invoice Management" icon="file-invoice" color="#10b981">
+    View and manage all invoices
+  </Card>
+  <Card title="Payment History" icon="clock-rotate-left" color="#0d6efd">
+    Track all transactions
+  </Card>
+  <Card title="Refunds" icon="rotate-left" color="#f59e0b">
+    Process refunds and credits
+  </Card>
+  <Card title="Reports" icon="chart-bar" color="#8b5cf6">
+    Financial reporting and analytics
+  </Card>
+</CardGroup>
+
+---
+
+## Invoice List
+
+### Viewing Invoices
+
+The invoice list displays all financial transactions:
+
+| Column | Description |
+|--------|-------------|
+| **Invoice ID** | Unique invoice number |
+| **Customer** | Customer name and email |
+| **Items** | Products/services purchased |
+| **Amount** | Total invoice amount |
+| **Status** | Paid, Unpaid, Overdue, Refunded |
+| **Payment Method** | How payment was made |
+| **Date** | Invoice creation date |
+| **Due Date** | Payment due date |
+| **Actions** | View, Download, Refund |
+
+### Invoice Statuses
+
+| Status | Description | Color |
+|--------|-------------|-------|
+| **Paid** | Payment received and confirmed | Green |
+| **Unpaid** | Awaiting payment | Yellow |
+| **Overdue** | Past due date, not paid | Red |
+| **Partially Paid** | Partial payment received | Orange |
+| **Refunded** | Payment refunded to customer | Blue |
+| **Cancelled** | Invoice cancelled | Gray |
+
+### Filtering & Search
+
+- Search by invoice ID, customer name, or email
+- Filter by status (Paid, Unpaid, Overdue, Refunded)
+- Filter by payment method
+- Filter by date range
+- Filter by amount range
+- Sort by any column
+- Export to CSV or PDF
+
+---
+
+## Invoice Details
+
+### Viewing Invoice Information
+
+1. Click invoice ID or **View** button
+2. Review complete invoice details:
+   - Customer information
+   - Billing address
+   - Line items with descriptions and prices
+   - Subtotal, taxes, discounts
+   - Total amount
+   - Payment method
+   - Payment status
+   - Transaction ID
+   - Payment date
+
+### Invoice Actions
+
+**Download Invoice:**
+- Click **Download PDF** button
+- Invoice downloads as PDF file
+- Suitable for printing or emailing
+
+**Send Invoice:**
+- Click **Send to Customer** button
+- Invoice emailed to customer
+- Includes payment link if unpaid
+
+**Print Invoice:**
+- Click **Print** button
+- Opens print-friendly version
+- Includes company branding
+
+---
+
+## Payment Management
+
+### Recording Manual Payments
+
+For invoices paid outside the system:
+
+1. Find unpaid invoice
+2. Click **Mark as Paid** button
+3. Enter payment details:
+   - **Payment Date:** When payment received
+   - **Payment Method:** How customer paid
+   - **Transaction ID:** Reference number
+   - **Amount:** Payment amount
+   - **Notes:** Additional information
+4. Upload payment proof (optional)
+5. Click **Save Payment**
+6. Invoice status updates to Paid
+7. Customer receives payment confirmation
+
+<Tip>
+**Payment Proof:** Upload bank transfer receipts, check images, or payment screenshots for record-keeping and audit purposes.
+</Tip>
+
+### Partial Payments
+
+1. Find invoice to apply partial payment
+2. Click **Add Payment** button
+3. Enter partial payment amount
+4. Add payment details
+5. Save payment
+6. Invoice shows remaining balance
+7. Status updates to Partially Paid
+
+---
+
+## Refunds & Credits
+
+### Processing Refunds
+
+1. Find paid invoice to refund
+2. Click **Refund** button
+3. Select refund type:
+   - **Full Refund:** Entire amount
+   - **Partial Refund:** Specific amount
+4. Enter refund amount (if partial)
+5. Select refund method:
+   - **Original Payment Method:** Refund to card/PayPal
+   - **Account Credit:** Add to customer balance
+6. Add refund reason and notes
+7. Confirm refund
+8. Payment gateway processes refund
+9. Customer receives refund confirmation
+
+**Refund Processing Times:**
+- **Credit Card (Stripe):** 5-10 business days
+- **PayPal:** 1-3 business days
+- **Account Credit:** Immediate
+- **Bank Transfer:** Manual, varies
+
+<Warning>
+**Refund Limits:** Most payment gateways allow refunds within 180 days of the original transaction. After this period, manual refunds may be required.
+</Warning>
+
+### Account Credits
+
+Add credit to customer account:
+
+1. Click **Add Credit** button
+2. Enter credit amount
+3. Select reason:
+   - Refund
+   - Promotional credit
+   - Compensation
+   - Other
+4. Add notes
+5. Save credit
+6. Customer can use credit for future purchases
+
+---
+
+## Invoice Management
+
+### Creating Manual Invoices
+
+1. Click **Create Invoice** button
+2. Select customer account
+3. Add line items:
+   - Item description
+   - Quantity
+   - Unit price
+   - Tax rate (if applicable)
+4. Add discounts (if applicable)
+5. Set due date
+6. Add notes or terms
+7. Save invoice
+8. Send to customer
+
+### Editing Invoices
+
+**For Unpaid Invoices:**
+
+1. Find unpaid invoice
+2. Click **Edit** button
+3. Modify invoice details:
+   - Add/remove line items
+   - Adjust pricing
+   - Change due date
+   - Update customer information
+4. Recalculate totals
+5. Save changes
+6. Resend updated invoice to customer
+
+<Info>
+**Paid Invoice Edits:** Paid invoices cannot be edited. To correct a paid invoice, issue a refund and create a new invoice with correct details.
+</Info>
+
+### Voiding Invoices
+
+1. Find invoice to void
+2. Click **Void** button
+3. Add void reason
+4. Confirm action
+5. Invoice marked as Void
+6. No payment expected
+7. Customer notified (optional)
+
+---
+
+## Financial Reporting
+
+### Revenue Reports
+
+**Daily Revenue:**
+- Total revenue for each day
+- Breakdown by payment method
+- Number of transactions
+- Average transaction value
+
+**Monthly Revenue:**
+- Monthly revenue totals
+- Month-over-month growth
+- Revenue by product/service
+- Top customers by revenue
+
+**Yearly Revenue:**
+- Annual revenue summary
+- Year-over-year comparison
+- Revenue trends and patterns
+- Seasonal analysis
+
+### Payment Method Breakdown
+
+Track revenue by payment method:
+- Credit Card (Stripe)
+- PayPal
+- Bank Transfer
+- Account Credit
+- Other methods
+
+### Outstanding Invoices
+
+View all unpaid invoices:
+- Total outstanding amount
+- Overdue invoices
+- Aging report (30, 60, 90+ days)
+- Customer payment history
+
+### Export Options
+
+- **CSV Export:** Spreadsheet format
+- **PDF Export:** Printable reports
+- **Excel Export:** Advanced analysis
+- **QuickBooks Export:** Accounting software integration
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Invoice Management" icon="file-invoice">
+    - Send invoices immediately after order
+    - Set clear payment terms and due dates
+    - Include detailed line items
+    - Use professional invoice templates
+    - Number invoices sequentially
+    - Keep accurate records
+    - Follow up on overdue invoices
+  </Accordion>
+  
+  <Accordion title="Payment Tracking" icon="credit-card">
+    - Reconcile payments daily
+    - Match payments to invoices promptly
+    - Record all payment details
+    - Keep payment proof/receipts
+    - Monitor payment gateway fees
+    - Track payment success rates
+    - Review failed payments
+  </Accordion>
+  
+  <Accordion title="Refund Management" icon="rotate-left">
+    - Process refunds promptly (within 24-48 hours)
+    - Document refund reasons
+    - Follow refund policy consistently
+    - Communicate refund timeline to customers
+    - Track refund rates and patterns
+    - Review high refund customers
+    - Improve products/services based on feedback
+  </Accordion>
+  
+  <Accordion title="Financial Reporting" icon="chart-bar">
+    - Review financial reports weekly
+    - Monitor revenue trends
+    - Track key metrics (MRR, churn, LTV)
+    - Reconcile with bank statements
+    - Prepare for tax reporting
+    - Analyze payment method performance
+    - Identify revenue opportunities
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Payment Not Recorded" icon="credit-card">
+    **Issue:** Payment made but invoice still shows unpaid
+    
+    **Solutions:**
+    1. Check payment gateway for transaction
+    2. Verify webhook is configured correctly
+    3. Manually record payment
+    4. Check for payment processing errors
+    5. Review payment gateway logs
+    6. Verify customer paid correct amount
+    7. Contact payment gateway support
+  </Accordion>
+  
+  <Accordion title="Refund Failed" icon="xmark">
+    **Issue:** Refund not processing
+    
+    **Solutions:**
+    1. Check refund is within allowed timeframe
+    2. Verify original payment method is valid
+    3. Ensure sufficient funds in merchant account
+    4. Check payment gateway for errors
+    5. Try refund via payment gateway dashboard
+    6. Issue manual refund if needed
+    7. Contact payment gateway support
+  </Accordion>
+  
+  <Accordion title="Invoice Not Generating" icon="file-invoice">
+    **Issue:** Cannot create or view invoice
+    
+    **Solutions:**
+    1. Check invoice template is configured
+    2. Verify customer information is complete
+    3. Ensure line items are valid
+    4. Check for calculation errors
+    5. Review error logs
+    6. Clear cache and try again
+    7. Test with different browser
+  </Accordion>
+  
+  <Accordion title="Duplicate Invoices" icon="clone">
+    **Issue:** Multiple invoices for same order
+    
+    **Solutions:**
+    1. Identify correct invoice
+    2. Void duplicate invoices
+    3. Verify payment applied to correct invoice
+    4. Check for system errors causing duplicates
+    5. Review order processing logs
+    6. Notify customer of correction
+    7. Prevent future duplicates
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### Invoice Status Workflow
+
+1. **Created** → Invoice generated
+2. **Sent** → Emailed to customer
+3. **Viewed** → Customer opened invoice
+4. **Paid** → Payment received
+5. **Completed** → Transaction finalized
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| **View Invoice** | Click invoice ID → Review details |
+| **Download PDF** | View invoice → Download PDF |
+| **Mark as Paid** | Find invoice → Mark as Paid → Enter details |
+| **Process Refund** | View invoice → Refund → Enter amount → Confirm |
+| **Send Invoice** | View invoice → Send to Customer |
+| **Export Data** | Select filters → Export → Choose format |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Pending Orders" icon="clock" href="/pending-orders">
+    Manage pending orders
+  </Card>
+  <Card title="Payment Configuration" icon="credit-card" href="/payment-configuration">
+    Payment gateway settings
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Customer accounts
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Pricing configuration
+  </Card>
+</CardGroup>

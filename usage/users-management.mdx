@@ -1,0 +1,390 @@
+---
+title: "Users Management"
+description: "Manage customer accounts, roles, and user permissions"
+icon: "users"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Users Management  
+**URL:** `/admin/UsersList`
+</Info>
+
+## Overview
+
+The Users Management page allows you to view, create, edit, and manage all customer accounts on your platform. Control user access, assign roles, and monitor user activity.
+
+<CardGroup cols={2}>
+  <Card title="User Accounts" icon="user" color="#10b981">
+    Create and manage users
+  </Card>
+  <Card title="Role Assignment" icon="shield-lock" color="#0d6efd">
+    Assign user roles and permissions
+  </Card>
+  <Card title="Account Status" icon="toggle-on" color="#f59e0b">
+    Activate, suspend, or delete accounts
+  </Card>
+  <Card title="User Activity" icon="chart-line" color="#8b5cf6">
+    Monitor user actions and history
+  </Card>
+</CardGroup>
+
+---
+
+## User List Overview
+
+### Viewing Users
+
+The user list displays all customer accounts with key information:
+
+| Column | Description |
+|--------|-------------|
+| **Name** | User's full name |
+| **Email** | Account email address |
+| **Role** | Assigned user role |
+| **Status** | Active, Suspended, or Pending |
+| **Websites** | Number of websites owned |
+| **Registered** | Account creation date |
+| **Last Login** | Most recent login time |
+| **Actions** | Edit, Suspend, Delete options |
+
+### Filtering & Search
+
+**Search Users:**
+- Search by name, email, or username
+- Filter by role (Admin, Manager, User, etc.)
+- Filter by status (Active, Suspended, Pending)
+- Filter by registration date
+- Sort by any column
+
+**Bulk Actions:**
+- Select multiple users
+- Bulk activate/suspend accounts
+- Bulk role assignment
+- Bulk delete (with confirmation)
+- Export user list to CSV
+
+---
+
+## Creating New Users
+
+### Manual User Creation
+
+1. Click **Add New User** button
+2. Enter user details:
+   - **Full Name:** User's complete name
+   - **Email Address:** Unique email (used for login)
+   - **Username:** Unique username (optional if using email login)
+   - **Password:** Secure password or auto-generate
+   - **Role:** Select appropriate user role
+3. Set account status (Active or Pending verification)
+4. Optional: Send welcome email with login credentials
+5. Click **Create User**
+
+<Tip>
+**Auto-Generate Passwords:** Use the password generator to create strong, random passwords. Always send credentials via email when manually creating accounts.
+</Tip>
+
+### User Registration Settings
+
+Control how users can register:
+
+- **Open Registration:** Anyone can create an account
+- **Approval Required:** Admin must approve new registrations
+- **Invite Only:** Users can only join via invitation
+- **Closed:** No new registrations allowed
+
+<Info>
+**Registration Settings:** Configure registration options in [General Settings](/general-settings) under User Registration.
+</Info>
+
+---
+
+## Managing Users
+
+### Editing User Information
+
+1. Find the user in the list
+2. Click **Edit** button
+3. Update user details:
+   - Name, email, username
+   - Password (if needed)
+   - Role assignment
+   - Account status
+   - Contact information
+4. Save changes
+
+### User Roles
+
+Assign appropriate roles based on user needs:
+
+| Role | Typical Use | Permissions |
+|------|-------------|-------------|
+| **Administrator** | Platform owners | Full access to everything |
+| **Manager** | Team leads | Most features, limited settings |
+| **Support** | Customer service | User and ticket management |
+| **User** | Regular customers | Create websites, manage own content |
+| **Guest** | Trial users | Limited access, view-only |
+
+<Warning>
+**Administrator Role:** Be cautious when assigning Administrator role. Admins have full access to all platform features, settings, and data. Only assign to trusted team members.
+</Warning>
+
+### Account Status
+
+**Active:**
+- User can log in and use the platform
+- All features available based on role
+- Websites remain active
+
+**Suspended:**
+- User cannot log in
+- Websites may be suspended (configurable)
+- Data is preserved
+- Can be reactivated anytime
+
+**Pending:**
+- Account created but not verified
+- User must verify email or await approval
+- Limited or no access until activated
+
+---
+
+## User Actions
+
+### Suspending Users
+
+1. Find the user to suspend
+2. Click **Suspend** button
+3. Optional: Add suspension reason
+4. Confirm suspension
+5. User is logged out immediately
+6. User receives suspension notification email
+
+**When to Suspend:**
+- Payment issues or overdue invoices
+- Terms of service violations
+- Suspicious activity
+- User request (temporary hold)
+- Pending investigation
+
+### Deleting Users
+
+1. Find the user to delete
+2. Click **Delete** button
+3. Choose deletion options:
+   - **Delete user only:** Keep websites (reassign or orphan)
+   - **Delete user and websites:** Remove everything
+   - **Transfer websites:** Assign to another user
+4. Confirm deletion (irreversible)
+5. User and selected data are permanently removed
+
+<Warning>
+**Permanent Action:** Deleting a user is irreversible. Consider suspending instead if you might need to restore the account. Always backup important data before deletion.
+</Warning>
+
+### Resetting Passwords
+
+1. Find the user
+2. Click **Reset Password**
+3. Choose method:
+   - **Auto-generate:** System creates random password
+   - **Manual:** Set specific password
+4. Send password reset email to user
+5. User can log in with new password
+
+---
+
+## User Details
+
+### User Profile
+
+View comprehensive user information:
+
+**Account Information:**
+- Full name, email, username
+- Registration date and time
+- Last login date and time
+- Account status and role
+- Email verification status
+
+**Activity Summary:**
+- Total websites created
+- Active websites count
+- Suspended websites count
+- Total domains registered
+- Total spent (lifetime value)
+- Current balance/credits
+
+**Recent Activity:**
+- Recent logins
+- Website creations
+- Domain registrations
+- Support tickets
+- Payments made
+
+### User Websites
+
+View all websites owned by the user:
+
+- Website name and URL
+- Hosting package
+- Status (active, suspended, expired)
+- Creation and expiration dates
+- Quick actions (suspend, delete, renew)
+
+### User Invoices
+
+Access user's billing history:
+
+- All invoices (paid, unpaid, overdue)
+- Payment history
+- Outstanding balance
+- Refunds and credits
+- Download invoices
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="User Management" icon="users">
+    - Regularly review user accounts for inactive users
+    - Remove or suspend abandoned accounts
+    - Verify email addresses for new registrations
+    - Use strong password requirements
+    - Enable two-factor authentication for admins
+    - Monitor for duplicate accounts
+    - Keep user data up-to-date
+  </Accordion>
+  
+  <Accordion title="Role Assignment" icon="shield-lock">
+    - Follow principle of least privilege
+    - Assign minimum necessary permissions
+    - Review role assignments quarterly
+    - Document who has admin access
+    - Remove access when employees leave
+    - Use custom roles for specific needs
+    - Audit admin actions regularly
+  </Accordion>
+  
+  <Accordion title="Account Security" icon="lock">
+    - Enforce strong password policies
+    - Monitor for suspicious login attempts
+    - Implement login attempt limits
+    - Use email verification for new accounts
+    - Enable two-factor authentication
+    - Log all user actions
+    - Review security logs regularly
+  </Accordion>
+  
+  <Accordion title="Customer Service" icon="headset">
+    - Respond to account issues promptly
+    - Provide clear suspension reasons
+    - Offer account recovery options
+    - Maintain professional communication
+    - Document customer interactions
+    - Follow up on suspended accounts
+    - Provide self-service options
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="User Cannot Login" icon="lock">
+    **Issue:** User reports unable to log in
+    
+    **Solutions:**
+    1. Verify account status is Active
+    2. Check email address is correct
+    3. Reset password and send new credentials
+    4. Verify email is not in spam folder
+    5. Check for account suspension
+    6. Clear user's session/cookies
+    7. Test login with correct credentials
+  </Accordion>
+  
+  <Accordion title="Duplicate Accounts" icon="clone">
+    **Issue:** User has multiple accounts
+    
+    **Solutions:**
+    1. Identify all duplicate accounts
+    2. Determine primary account to keep
+    3. Transfer websites/data to primary account
+    4. Merge billing history if possible
+    5. Delete duplicate accounts
+    6. Notify user of consolidation
+    7. Update records and documentation
+  </Accordion>
+  
+  <Accordion title="Cannot Delete User" icon="trash">
+    **Issue:** Error when trying to delete user
+    
+    **Solutions:**
+    1. Check if user has active websites
+    2. Suspend or delete user's websites first
+    3. Verify no pending invoices
+    4. Check for database constraints
+    5. Review error logs for details
+    6. Try suspending instead of deleting
+    7. Contact support if issue persists
+  </Accordion>
+  
+  <Accordion title="Email Not Sending" icon="envelope">
+    **Issue:** User not receiving emails
+    
+    **Solutions:**
+    1. Verify email address is correct
+    2. Check email settings are configured
+    3. Test email delivery manually
+    4. Check spam/junk folders
+    5. Verify SMTP settings
+    6. Review email logs for errors
+    7. Try alternative email address
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Quick Reference
+
+### Common Tasks
+
+| Task | Steps |
+|------|-------|
+| Create User | Add New User → Enter details → Assign role → Save |
+| Suspend User | Find user → Suspend → Add reason → Confirm |
+| Reset Password | Find user → Reset Password → Send email |
+| Change Role | Edit user → Select new role → Save |
+| Delete User | Find user → Delete → Choose options → Confirm |
+| View Activity | Click user → View profile → Activity tab |
+
+### User Status Indicators
+
+| Status | Meaning | Icon/Color |
+|--------|---------|------------|
+| **Active** | Can use platform | Green checkmark |
+| **Suspended** | Access blocked | Red X |
+| **Pending** | Awaiting verification | Yellow clock |
+| **Deleted** | Permanently removed | Gray trash |
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Configure roles and permissions
+  </Card>
+  <Card title="General Settings" icon="gear" href="/general-settings">
+    Registration settings
+  </Card>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create websites for users
+  </Card>
+  <Card title="Email Settings" icon="envelope" href="/email-settings">
+    User notification emails
+  </Card>
+</CardGroup>

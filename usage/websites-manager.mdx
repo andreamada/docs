@@ -1,0 +1,311 @@
+---
+title: "Website Templates"
+description: "Create and manage customer WordPress websites"
+icon: "globe"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Website Templates  
+**URL:** `/admin/WebsiteTemplate`
+</Info>
+
+## Overview
+
+The Website Templates page allows you to create new WordPress websites for customers, manage existing sites, and control website provisioning settings.
+
+<CardGroup cols={2}>
+  <Card title="Create Websites" icon="plus" color="#10b981">
+    Provision new WordPress sites
+  </Card>
+  <Card title="Manage Sites" icon="list" color="#0d6efd">
+    View and manage all websites
+  </Card>
+  <Card title="Bulk Actions" icon="layer-group" color="#f59e0b">
+    Perform bulk operations
+  </Card>
+  <Card title="Site Status" icon="toggle-on" color="#8b5cf6">
+    Activate, suspend, or delete sites
+  </Card>
+</CardGroup>
+
+---
+
+## Creating New Websites
+
+### Manual Website Creation
+
+1. Click **Create New Website** button
+2. Select customer account (or create new user)
+3. Choose hosting package
+4. Enter website details:
+   - **Website Name:** Display name
+   - **Domain:** Primary domain or subdomain
+   - **WordPress Theme:** Select from available templates
+   - **Admin Username:** WordPress admin username
+   - **Admin Password:** WordPress admin password
+   - **Admin Email:** WordPress admin email
+5. Optional settings:
+   - Install default plugins
+   - Set website expiration date
+   - Enable SSL certificate
+6. Click **Create Website**
+7. System provisions the website automatically
+
+<Info>
+**Provisioning Time:** Website creation typically takes 2-5 minutes. The system installs WordPress, configures the database, sets up the theme, and installs selected plugins automatically.
+</Info>
+
+### Website Creation Process
+
+**Automated Steps:**
+1. Create hosting account on server (DirectAdmin)
+2. Set up database and database user
+3. Download and install WordPress core
+4. Configure wp-config.php with database credentials
+5. Install selected WordPress theme
+6. Install default/selected plugins
+7. Set up admin account
+8. Configure basic WordPress settings
+9. Install SSL certificate (if enabled)
+10. Add site to MainWP (if configured)
+
+---
+
+## Website List
+
+### Viewing Websites
+
+The website list displays all customer websites:
+
+| Column | Description |
+|--------|-------------|
+| **Website Name** | Site display name |
+| **Domain** | Primary domain/URL |
+| **Owner** | Customer account |
+| **Package** | Hosting plan |
+| **Status** | Active, Suspended, Expired |
+| **Created** | Creation date |
+| **Expires** | Expiration date |
+| **Disk Usage** | Storage used |
+| **Actions** | Manage, Suspend, Delete |
+
+### Filtering & Search
+
+- Search by website name, domain, or owner
+- Filter by status (Active, Suspended, Expired)
+- Filter by hosting package
+- Filter by expiration date
+- Sort by any column
+- Export to CSV
+
+---
+
+## Managing Websites
+
+### Website Actions
+
+**View/Edit Website:**
+1. Click website name or **Edit** button
+2. View website details and statistics
+3. Update website information
+4. Change hosting package
+5. Extend expiration date
+6. Save changes
+
+**Suspend Website:**
+1. Find website to suspend
+2. Click **Suspend** button
+3. Optional: Add suspension reason
+4. Website is disabled immediately
+5. Customer receives notification
+
+**Delete Website:**
+1. Find website to delete
+2. Click **Delete** button
+3. Choose deletion options:
+   - Delete files only
+   - Delete files and database
+   - Keep backup
+4. Confirm deletion (irreversible)
+
+**Renew Website:**
+1. Find expired or expiring website
+2. Click **Renew** button
+3. Select renewal period
+4. Process payment (if applicable)
+5. Expiration date is extended
+
+<Warning>
+**Website Deletion:** Deleting a website permanently removes all files, databases, and content. This action cannot be undone. Always create backups before deletion.
+</Warning>
+
+---
+
+## Website Details
+
+### Overview Tab
+
+- Website name and domain
+- Owner information
+- Hosting package details
+- Creation and expiration dates
+- Status and health
+- Resource usage (disk, bandwidth)
+
+### Access Information
+
+- **WordPress Admin URL:** `https://domain.com/wp-admin`
+- **WordPress Username:** Admin username
+- **WordPress Password:** View or reset
+- **FTP Access:** FTP credentials
+- **Database Access:** phpMyAdmin link
+- **Control Panel:** DirectAdmin access (if enabled)
+
+### Statistics
+
+- **Disk Usage:** Storage consumed
+- **Bandwidth Usage:** Monthly transfer
+- **Database Size:** Database storage
+- **File Count:** Number of files
+- **Last Backup:** Backup date/time
+- **Uptime:** Site availability
+
+---
+
+## Bulk Operations
+
+Select multiple websites and perform actions:
+
+- **Bulk Suspend:** Suspend multiple sites
+- **Bulk Activate:** Reactivate suspended sites
+- **Bulk Renew:** Extend expiration dates
+- **Bulk Delete:** Remove multiple sites
+- **Bulk Package Change:** Upgrade/downgrade plans
+- **Export Selected:** Export site list to CSV
+
+<Tip>
+**Bulk Actions:** Use bulk operations to efficiently manage multiple websites at once. Always double-check selections before confirming bulk actions.
+</Tip>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Website Creation" icon="plus">
+    - Verify customer information before creating
+    - Use strong, unique WordPress admin passwords
+    - Enable SSL certificates by default
+    - Install essential security plugins
+    - Set appropriate expiration dates
+    - Test website after creation
+    - Send welcome email with access details
+  </Accordion>
+  
+  <Accordion title="Website Management" icon="wrench">
+    - Monitor disk and bandwidth usage regularly
+    - Keep WordPress core, themes, and plugins updated
+    - Perform regular backups
+    - Review suspended websites monthly
+    - Clean up expired websites
+    - Monitor for security issues
+    - Track website performance
+  </Accordion>
+  
+  <Accordion title="Resource Management" icon="server">
+    - Set appropriate resource limits per package
+    - Monitor server capacity
+    - Upgrade packages for high-traffic sites
+    - Optimize websites exceeding limits
+    - Clean up unused files and databases
+    - Archive old websites
+    - Balance load across servers
+  </Accordion>
+  
+  <Accordion title="Customer Communication" icon="message">
+    - Send expiration reminders (30, 14, 7 days)
+    - Notify before suspension
+    - Provide clear renewal instructions
+    - Offer upgrade options for resource limits
+    - Respond to support requests promptly
+    - Document website changes
+    - Maintain service level agreements
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Website Creation Fails" icon="circle-xmark">
+    **Issue:** Website provisioning fails
+    
+    **Solutions:**
+    1. Check server has available resources
+    2. Verify DirectAdmin API is working
+    3. Ensure domain is not already in use
+    4. Check database creation permissions
+    5. Review error logs for details
+    6. Test with different domain
+    7. Contact server administrator
+  </Accordion>
+  
+  <Accordion title="Website Not Accessible" icon="link-slash">
+    **Issue:** Cannot access website after creation
+    
+    **Solutions:**
+    1. Wait 5-10 minutes for DNS propagation
+    2. Check website status is Active
+    3. Verify domain DNS settings
+    4. Test with direct IP address
+    5. Check server firewall rules
+    6. Verify WordPress installation completed
+    7. Review server error logs
+  </Accordion>
+  
+  <Accordion title="WordPress Login Fails" icon="lock">
+    **Issue:** Cannot log in to WordPress admin
+    
+    **Solutions:**
+    1. Verify username and password are correct
+    2. Reset WordPress password
+    3. Check WordPress admin URL is correct
+    4. Clear browser cache and cookies
+    5. Try different browser
+    6. Check .htaccess file for issues
+    7. Reset password via database if needed
+  </Accordion>
+  
+  <Accordion title="Resource Limit Exceeded" icon="triangle-exclamation">
+    **Issue:** Website exceeds disk or bandwidth limits
+    
+    **Solutions:**
+    1. Review resource usage in website details
+    2. Identify large files or databases
+    3. Clean up unnecessary files
+    4. Optimize images and media
+    5. Upgrade to higher package
+    6. Enable caching plugins
+    7. Contact customer about usage
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Template Manager" icon="palette" href="/template-manager">
+    Manage WordPress themes
+  </Card>
+  <Card title="Users Management" icon="users" href="/users-management">
+    Manage customer accounts
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package configuration
+  </Card>
+  <Card title="Domain Manager" icon="globe" href="/domain-manager">
+    Manage domains
+  </Card>
+</CardGroup>

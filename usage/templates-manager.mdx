@@ -1,0 +1,407 @@
+---
+title: "Template Manager"
+description: "Manage WordPress themes and templates for customer websites"
+icon: "palette"
+---
+
+<Info>
+**Navigation Path:** Admin Dashboard → Template Manager  
+**URL:** `/admin/TemplateManager`
+</Info>
+
+## Overview
+
+The Template Manager allows you to manage WordPress themes that customers can choose when creating websites. Control which themes are available, set default themes, and organize templates for easy selection.
+
+<CardGroup cols={2}>
+  <Card title="Theme Library" icon="book" color="#10b981">
+    Manage available WordPress themes
+  </Card>
+  <Card title="Default Theme" icon="star" color="#0d6efd">
+    Set default theme for new sites
+  </Card>
+  <Card title="Organization" icon="folder" color="#f59e0b">
+    Categorize and organize themes
+  </Card>
+  <Card title="Customization" icon="paintbrush" color="#8b5cf6">
+    Configure theme options
+  </Card>
+</CardGroup>
+
+---
+
+## Managing Templates
+
+### Adding New Templates
+
+1. Click **Add New Template** button
+2. Choose template source:
+   - **WordPress.org Repository:** Free themes from WordPress
+   - **Upload Theme:** Upload custom theme ZIP file
+   - **Premium Theme:** Add purchased premium themes
+3. Enter theme details:
+   - **Theme Name:** Display name for customers
+   - **Theme Slug:** WordPress theme directory name
+   - **Description:** Brief description of theme features
+   - **Category:** Theme category (Business, Blog, Portfolio, etc.)
+4. Upload theme preview image (recommended: 1200 x 900 px)
+5. Set theme as **Active** to make it available to customers
+6. Click **Save** to add the template
+
+<Tip>
+**Theme Preview Images:** Use high-quality screenshots showing the theme's homepage. This helps customers visualize how their website will look.
+</Tip>
+
+### Template Properties
+
+| Property | Description |
+|----------|-------------|
+| **Theme Name** | Display name shown to customers |
+| **Theme Slug** | WordPress theme directory name (e.g., `twentytwentyfour`) |
+| **Description** | Brief description of theme features and style |
+| **Category** | Theme category for organization |
+| **Preview Image** | Screenshot of theme (1200 x 900 px recommended) |
+| **Status** | Active (available) or Inactive (hidden) |
+| **Default** | Set as default theme for new websites |
+| **Featured** | Highlight as recommended theme |
+
+---
+
+## Theme Categories
+
+Organize themes into categories for easier browsing:
+
+**Common Categories:**
+- **Business:** Corporate and professional themes
+- **Blog:** Content-focused blogging themes
+- **Portfolio:** Creative and showcase themes
+- **E-commerce:** Online store themes (WooCommerce)
+- **Magazine:** News and magazine layouts
+- **Minimal:** Clean, minimalist designs
+- **Multi-Purpose:** Versatile, all-purpose themes
+
+<Info>
+**Category Benefits:** Organizing themes by category helps customers find appropriate themes faster and improves the website creation experience.
+</Info>
+
+---
+
+## Default Theme
+
+Set a default theme that's automatically selected when customers create new websites.
+
+**Setting Default Theme:**
+
+1. Find the theme you want to set as default
+2. Click the **Set as Default** button or toggle
+3. Confirm the selection
+4. The theme will be pre-selected for all new website creations
+
+**Best Practices for Default Theme:**
+- Choose a versatile, multi-purpose theme
+- Select a theme that works for most use cases
+- Use a well-maintained, popular theme
+- Ensure theme is mobile-responsive
+- Pick a theme with good performance
+- Consider a theme with page builder support
+
+<Tip>
+**Recommended Default Themes:** Consider using popular, well-supported themes like Astra, GeneratePress, OceanWP, or Kadence as your default. These are lightweight, flexible, and suitable for most projects.
+</Tip>
+
+---
+
+## Featured Themes
+
+Highlight recommended themes to guide customer choices.
+
+**Why Feature Themes:**
+- Guide customers to quality themes
+- Promote themes you support well
+- Highlight premium or exclusive themes
+- Reduce decision paralysis
+- Improve customer satisfaction
+
+**Featuring a Theme:**
+
+1. Edit the theme in Template Manager
+2. Enable the **Featured** toggle or checkbox
+3. Featured themes appear at the top of the theme selection
+4. Add a "Recommended" or "Popular" badge
+
+<Info>
+**Featured Limit:** Feature 3-5 themes to avoid overwhelming customers. Too many featured themes defeats the purpose of highlighting the best options.
+</Info>
+
+---
+
+## Theme Sources
+
+### WordPress.org Themes
+
+Free themes from the official WordPress theme repository.
+
+**Adding WordPress.org Themes:**
+
+1. Browse [WordPress.org Theme Directory](https://wordpress.org/themes/)
+2. Find themes you want to offer
+3. Copy the theme slug (from URL or download button)
+4. Add to Template Manager with the theme slug
+5. WordPress will automatically download and install
+
+**Popular Free Themes:**
+- **Astra:** Lightweight, customizable
+- **GeneratePress:** Fast, accessible
+- **OceanWP:** Feature-rich, versatile
+- **Kadence:** Modern, flexible
+- **Neve:** Fast, AMP-ready
+- **Blocksy:** Gutenberg-optimized
+
+### Custom/Premium Themes
+
+Upload purchased or custom-developed themes.
+
+**Adding Custom Themes:**
+
+1. Obtain theme ZIP file from developer or marketplace
+2. Click **Upload Theme** in Template Manager
+3. Select the ZIP file
+4. Theme is uploaded to your server
+5. Configure theme details and preview image
+6. Activate for customer use
+
+**Premium Theme Sources:**
+- ThemeForest (Envato Market)
+- Elegant Themes (Divi)
+- StudioPress (Genesis Framework)
+- Themify
+- MyThemeShop
+
+<Warning>
+**Theme Licensing:** Ensure you have proper licensing for premium themes. Many premium themes require separate licenses for each installation. Check theme license terms before offering to customers.
+</Warning>
+
+---
+
+## Theme Management
+
+### Editing Templates
+
+1. Find the theme in Template Manager
+2. Click **Edit** button
+3. Update theme details:
+   - Name, description, category
+   - Preview image
+   - Status (active/inactive)
+4. Save changes
+
+### Deactivating Themes
+
+1. Find the theme to deactivate
+2. Change status to **Inactive**
+3. Theme is hidden from customer selection
+4. Existing websites using the theme are unaffected
+
+<Info>
+**Deactivation vs. Deletion:** Deactivating a theme hides it from new selections but doesn't affect existing websites. Deleting a theme can break existing sites using it.
+</Info>
+
+### Deleting Themes
+
+1. Ensure no active websites are using the theme
+2. Find the theme in Template Manager
+3. Click **Delete** button
+4. Confirm deletion
+5. Theme files are removed from server
+
+<Warning>
+**Before Deleting:** Check if any customer websites are using the theme. Deleting a theme in use can break those websites. Deactivate instead of deleting if unsure.
+</Warning>
+
+---
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Theme Selection" icon="check">
+    - Offer 10-20 quality themes, not hundreds
+    - Include themes for different purposes (business, blog, portfolio)
+    - Choose well-maintained, regularly updated themes
+    - Prioritize mobile-responsive themes
+    - Select themes with good performance scores
+    - Include themes with page builder compatibility
+    - Test themes before offering to customers
+  </Accordion>
+  
+  <Accordion title="Theme Organization" icon="folder">
+    - Categorize themes logically
+    - Use clear, descriptive category names
+    - Feature your best 3-5 themes
+    - Set a versatile default theme
+    - Keep theme list curated and manageable
+    - Remove outdated or abandoned themes
+    - Update theme previews regularly
+  </Accordion>
+  
+  <Accordion title="Theme Maintenance" icon="wrench">
+    - Keep themes updated to latest versions
+    - Test theme updates before deploying
+    - Monitor theme compatibility with WordPress versions
+    - Remove themes with security issues
+    - Check for theme conflicts with plugins
+    - Maintain theme documentation
+    - Provide theme support to customers
+  </Accordion>
+  
+  <Accordion title="Customer Experience" icon="user">
+    - Use high-quality preview images
+    - Write clear, helpful theme descriptions
+    - Highlight key features of each theme
+    - Provide theme demos if possible
+    - Make theme selection easy and intuitive
+    - Offer theme recommendations
+    - Allow theme switching after creation
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Theme Not Installing" icon="download">
+    **Issue:** Theme fails to install from WordPress.org
+    
+    **Solutions:**
+    1. Verify theme slug is correct
+    2. Check internet connection to WordPress.org
+    3. Ensure server has write permissions
+    4. Check available disk space
+    5. Try downloading theme manually and uploading
+    6. Review server error logs
+    7. Test with a different theme
+  </Accordion>
+  
+  <Accordion title="Theme Upload Fails" icon="upload">
+    **Issue:** Cannot upload custom theme ZIP file
+    
+    **Solutions:**
+    1. Check file size is under server upload limit
+    2. Verify ZIP file is valid WordPress theme
+    3. Ensure ZIP contains style.css with theme headers
+    4. Check server write permissions
+    5. Increase PHP upload_max_filesize if needed
+    6. Try uploading via FTP instead
+    7. Verify theme ZIP structure is correct
+  </Accordion>
+  
+  <Accordion title="Theme Not Appearing for Customers" icon="eye-slash">
+    **Issue:** Theme doesn't show in customer selection
+    
+    **Solutions:**
+    1. Verify theme status is set to **Active**
+    2. Check theme is saved properly
+    3. Clear application cache
+    4. Refresh theme list
+    5. Verify customer has permission to select themes
+    6. Check theme category is visible
+    7. Test with different user account
+  </Accordion>
+  
+  <Accordion title="Preview Image Not Showing" icon="image">
+    **Issue:** Theme preview image doesn't display
+    
+    **Solutions:**
+    1. Verify image file format (JPG, PNG)
+    2. Check image file size (< 2 MB recommended)
+    3. Ensure image uploaded successfully
+    4. Clear browser and server cache
+    5. Re-upload preview image
+    6. Check file permissions
+    7. Verify image path is correct
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Theme Recommendations
+
+### For Different Use Cases
+
+**Small Business:**
+- Astra
+- GeneratePress
+- OceanWP
+- Kadence
+
+**Blogging:**
+- Neve
+- Blocksy
+- GeneratePress
+- Astra
+
+**Portfolio/Creative:**
+- OceanWP
+- Neve
+- Kadence
+- Blocksy
+
+**E-commerce:**
+- Astra (WooCommerce)
+- OceanWP (WooCommerce)
+- Storefront (official WooCommerce theme)
+- Kadence
+
+**Multi-Purpose:**
+- Astra
+- GeneratePress
+- Kadence
+- OceanWP
+
+<Tip>
+**Theme Performance:** Prioritize lightweight themes like Astra, GeneratePress, and Kadence for better website performance and customer satisfaction.
+</Tip>
+
+---
+
+## Quick Reference
+
+### Theme Checklist
+
+**Before Adding a Theme:**
+- [ ] Theme is actively maintained
+- [ ] Compatible with latest WordPress version
+- [ ] Mobile-responsive design
+- [ ] Good performance score
+- [ ] Positive user reviews (if from WordPress.org)
+- [ ] No known security issues
+- [ ] Compatible with popular plugins
+- [ ] Has proper documentation
+
+**After Adding a Theme:**
+- [ ] Preview image uploaded
+- [ ] Description written
+- [ ] Category assigned
+- [ ] Status set to Active
+- [ ] Tested on a demo site
+- [ ] Theme appears in customer selection
+- [ ] Preview displays correctly
+
+---
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Website Templates" icon="globe" href="/website-templates">
+    Create new websites
+  </Card>
+  <Card title="Website Configuration" icon="gear" href="/website-configuration">
+    Website settings
+  </Card>
+  <Card title="User Roles & Permissions" icon="shield-lock" href="/permission-settings">
+    Access control
+  </Card>
+  <Card title="Hosting Plans" icon="box" href="/hosting-plans">
+    Package configuration
+  </Card>
+</CardGroup>
