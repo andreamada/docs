@@ -64,6 +64,241 @@ The Template Manager allows you to manage WordPress themes that customers can ch
 | **Status** | Active (available) or Inactive (hidden) |
 | **Default** | Set as default theme for new websites |
 | **Featured** | Highlight as recommended theme |
+| **Enable Sync** | Enable template synchronization for automatic updates |
+
+---
+
+## Template Synchronization
+
+Template Synchronization is a powerful feature that allows you to automatically push updates from a master template to all websites created from it.
+
+### How Template Synchronization Works
+
+When enabled, any changes made to the master template are automatically synchronized to all websites that:
+1. Were created from this template
+2. Have synchronization enabled on their website settings
+
+**What Gets Synchronized:**
+- **Theme Files:** Template files, stylesheets, and assets
+- **Plugin Changes:** Plugin installations, updates, and removals
+- **Configuration:** Theme settings and customizations
+- **Content Updates:** Template pages and posts (optional)
+- **Widget Configurations:** Sidebar and widget settings
+
+<Info>
+**New Feature:** Template Synchronization helps you maintain consistency across multiple websites and deploy updates efficiently without manually updating each site.
+</Info>
+
+### Enabling Template Synchronization
+
+**On the Template:**
+
+1. Edit the template in Template Manager
+2. Enable **Template Synchronization** toggle
+3. Configure sync settings:
+   - **Sync Frequency:** Real-time, Hourly, Daily, Manual
+   - **Sync Scope:** Files only, Files + Plugins, Full sync
+   - **Backup Before Sync:** Create backup before applying changes
+4. Save template settings
+
+**On Individual Websites:**
+
+Customers or admins can enable/disable sync per website:
+1. Go to website settings
+2. Enable **Sync with Template** option
+3. Website will receive template updates automatically
+
+<Tip>
+**Selective Sync:** Websites can opt-out of synchronization if they need custom modifications. This gives flexibility while maintaining the option to sync when needed.
+</Tip>
+
+### Use Cases for Template Synchronization
+
+**1. Agency/Multi-Site Management:**
+- Maintain consistent branding across client websites
+- Deploy security updates to all sites instantly
+- Roll out new features to all clients simultaneously
+- Standardize plugin configurations
+
+**2. SaaS/Multi-Tenant Platforms:**
+- Update all customer sites with new features
+- Fix bugs across all instances at once
+- Maintain template consistency
+- Reduce maintenance overhead
+
+**3. Franchise/Branch Websites:**
+- Keep all franchise locations consistent
+- Update corporate branding across all sites
+- Deploy compliance changes instantly
+- Maintain brand standards
+
+**4. Educational Institutions:**
+- Standardize department websites
+- Update institutional branding
+- Deploy accessibility improvements
+- Maintain consistent navigation
+
+### Sync Modes
+
+<Tabs>
+  <Tab title="Real-Time Sync">
+    **When to Use:** Critical updates, small changes
+    
+    - Changes sync immediately after saving template
+    - Websites update within minutes
+    - Best for urgent security fixes
+    - Higher server resource usage
+  </Tab>
+  
+  <Tab title="Scheduled Sync">
+    **When to Use:** Regular updates, large changes
+    
+    - Sync runs at scheduled intervals (hourly, daily)
+    - Lower server resource usage
+    - Predictable update windows
+    - Better for batch changes
+  </Tab>
+  
+  <Tab title="Manual Sync">
+    **When to Use:** Major updates, testing required
+    
+    - Admin triggers sync manually
+    - Full control over update timing
+    - Test changes before deployment
+    - Best for major template overhauls
+  </Tab>
+</Tabs>
+
+### Sync Safety Features
+
+**Automatic Backups:**
+- System creates backup before applying sync
+- Rollback available if sync causes issues
+- Backups retained for 30 days
+
+**Conflict Detection:**
+- Detects if website has custom modifications
+- Alerts admin before overwriting changes
+- Option to skip conflicting files
+
+**Sync Logs:**
+- Detailed logs of all sync operations
+- Track what changed and when
+- Identify sync failures quickly
+
+**Rollback Capability:**
+- Revert to pre-sync state if needed
+- One-click rollback per website
+- Preserves custom modifications
+
+<Warning>
+**Custom Modifications:** Websites with custom theme modifications may have those changes overwritten by template sync. Always backup before enabling sync, or exclude customized websites from synchronization.
+</Warning>
+
+### Managing Synchronized Websites
+
+**View Synced Websites:**
+
+1. Edit template in Template Manager
+2. Click **View Synced Websites** tab
+3. See list of all websites using this template
+4. View sync status for each site:
+   - ✅ **Synced:** Up-to-date with template
+   - 🔄 **Pending:** Sync scheduled
+   - ⚠️ **Conflict:** Custom modifications detected
+   - ❌ **Failed:** Sync error occurred
+
+**Sync Actions:**
+
+- **Sync All:** Push updates to all synced websites
+- **Sync Selected:** Update specific websites only
+- **Pause Sync:** Temporarily disable sync for maintenance
+- **Disable Sync:** Turn off sync for specific websites
+
+### Best Practices for Template Sync
+
+<AccordionGroup>
+  <Accordion title="Planning Sync Strategy" icon="clipboard-list">
+    - Test template changes on staging site first
+    - Schedule major updates during off-peak hours
+    - Communicate updates to customers in advance
+    - Document all template changes
+    - Create change log for transparency
+    - Plan rollback strategy before major updates
+  </Accordion>
+  
+  <Accordion title="Sync Configuration" icon="gear">
+    - Use scheduled sync for routine updates
+    - Reserve real-time sync for critical fixes
+    - Enable automatic backups before sync
+    - Set appropriate sync scope (files vs. full)
+    - Monitor sync logs regularly
+    - Test sync on single site before deploying to all
+  </Accordion>
+  
+  <Accordion title="Handling Conflicts" icon="triangle-exclamation">
+    - Review conflict reports before forcing sync
+    - Contact customers before overwriting customizations
+    - Offer to preserve custom modifications
+    - Document which sites have custom changes
+    - Consider creating custom templates for heavily modified sites
+    - Provide migration path for custom features
+  </Accordion>
+  
+  <Accordion title="Communication" icon="message">
+    - Notify customers before major template updates
+    - Provide changelog of template modifications
+    - Offer opt-out period for testing
+    - Send sync completion confirmations
+    - Provide support for sync-related issues
+    - Maintain template update documentation
+  </Accordion>
+</AccordionGroup>
+
+### Troubleshooting Template Sync
+
+<AccordionGroup>
+  <Accordion title="Sync Not Working" icon="circle-xmark">
+    **Issue:** Changes not syncing to websites
+    
+    **Solutions:**
+    1. Verify template sync is enabled
+    2. Check website has sync enabled
+    3. Review sync logs for errors
+    4. Ensure server has write permissions
+    5. Check for file conflicts
+    6. Verify cron jobs are running
+    7. Manually trigger sync to test
+  </Accordion>
+  
+  <Accordion title="Sync Causing Errors" icon="triangle-exclamation">
+    **Issue:** Websites breaking after sync
+    
+    **Solutions:**
+    1. Rollback affected websites immediately
+    2. Review sync logs for error details
+    3. Test template changes on staging site
+    4. Check for plugin conflicts
+    5. Verify theme compatibility
+    6. Restore from automatic backup
+    7. Disable sync until issue resolved
+  </Accordion>
+  
+  <Accordion title="Partial Sync" icon="circle-half-stroke">
+    **Issue:** Only some files syncing
+    
+    **Solutions:**
+    1. Check sync scope settings
+    2. Verify file permissions
+    3. Review conflict detection logs
+    4. Check disk space on target sites
+    5. Ensure all files are included in template
+    6. Manually sync missing files
+    7. Re-save template to trigger full sync
+  </Accordion>
+</AccordionGroup>
+
+
 
 ---
 
