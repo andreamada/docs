@@ -301,37 +301,34 @@ This is the most critical step. DirectAdmin must be properly configured for Area
     
     **Troubleshooting**
     
-    <AccordionGroup>
-      <Accordion title="Certificate Request Failed" icon="circle-xmark">
-        **Common Issues:**
-        
-        1. **Invalid API Credentials:**
-           - Verify API token is correct
-           - Ensure token has DNS Edit permissions
-           - Check token hasn't expired
-        
-        2. **DNS Not Propagated:**
-           - Ensure domain is active in Cloudflare
-           - Check nameservers point to Cloudflare
-           - Wait 5-10 minutes for DNS propagation
-        
-        3. **Rate Limit Exceeded:**
-           - Let's Encrypt has rate limits (5 certificates per domain per week)
-           - Wait before retrying
-           - Use staging environment for testing
-      </Accordion>
-      
-      <Accordion title="Wildcard Not Covering Subdomains" icon="globe">
-        **Issue:** Subdomains show SSL errors
-        
-        **Solutions:**
-        1. Verify certificate includes `*.yourdomain.com`
-        2. Check subdomain DNS records exist
-        3. Ensure Apache/Nginx is configured for wildcard
-        4. Restart web server
-        5. Clear browser cache
-      </Accordion>
-    </AccordionGroup>
+    **Certificate Request Failed:**
+    
+    Common issues and solutions:
+    
+    1. **Invalid API Credentials:**
+       - Verify API token is correct
+       - Ensure token has DNS Edit permissions
+       - Check token hasn't expired
+    
+    2. **DNS Not Propagated:**
+       - Ensure domain is active in Cloudflare
+       - Check nameservers point to Cloudflare
+       - Wait 5-10 minutes for DNS propagation
+    
+    3. **Rate Limit Exceeded:**
+       - Let's Encrypt has rate limits (5 certificates per domain per week)
+       - Wait before retrying
+       - Use staging environment for testing
+    
+    **Wildcard Not Covering Subdomains:**
+    
+    If subdomains show SSL errors:
+    
+    1. Verify certificate includes `*.yourdomain.com`
+    2. Check subdomain DNS records exist
+    3. Ensure Apache/Nginx is configured for wildcard
+    4. Restart web server
+    5. Clear browser cache
   </Accordion>
 
 

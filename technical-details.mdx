@@ -382,33 +382,67 @@ Monitors your server's IP address across 100+ email blacklists to ensure optimal
 
 ---
 
-## Backup System
+## Backup & Recovery
 
-### Automated Backups
+### Server-Level Backups
 
-**Daily Backup Schedule:**
-- Full website files
-- Complete databases
-- Email accounts
-- DirectAdmin configurations
-- SSL certificates
+<Info>
+**Hosted Edition Only:** Automated backups are provided for the entire VM (server), not individual websites. This allows you to quickly restore all your data if needed.
+</Info>
 
-**Retention Policy:**
-- Daily backups: 7 days
-- Weekly backups: 4 weeks
-- Monthly backups: 3 months
+**Daily Automated Backup:**
+- **Frequency:** 1 daily backup of the entire server
+- **Scope:** Complete VM backup including:
+  - All website files
+  - All databases
+  - DirectAdmin configurations
+  - SSL certificates
+  - Email accounts
+  - System settings
 
 **Backup Storage:**
 - Off-site backup location
 - Encrypted storage
-- Redundant copies
-- Quick restoration
+- Secure redundant copies
 
-**Restoration Options:**
-- Full account restore
-- Individual file restore
-- Database restore
-- Point-in-time recovery
+**Restoration:**
+- Full server restoration available
+- Contact support to initiate restore
+- Typical restoration time: 1-4 hours
+
+---
+
+### Snapshot Feature
+
+**1 Free Snapshot Included:**
+
+Capture the exact state of your server before making critical changes.
+
+**Use Cases:**
+- Before major AreaWP updates
+- Before server configuration changes
+- Before bulk operations
+- Before installing new software
+
+**Snapshot Features:**
+- Instant server state capture
+- Quick rollback capability
+- One-click restoration
+- Separate from daily backups
+
+**How to Use:**
+1. Request snapshot via support before critical changes
+2. Perform your updates/changes
+3. If issues occur, request rollback to snapshot
+4. Snapshot replaced with next request
+
+<Warning>
+**Important:** Only 1 snapshot is available at a time. Creating a new snapshot replaces the previous one. Daily backups and snapshots serve different purposes - use snapshots for pre-change safety, rely on daily backups for data recovery.
+</Warning>
+
+<Tip>
+**Best Practice:** Request a snapshot before any major platform update or server configuration change. This provides an instant rollback point if something goes wrong.
+</Tip>
 
 ---
 
