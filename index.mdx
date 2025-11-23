@@ -28,67 +28,98 @@ WordPress-as-a-Service is a business model that allows you to offer fully manage
 
 ## Platform Architecture
 
-### Single Tenant vs Multi Tenant
+### Single Tenant Infrastructure
 
-Understanding the architecture model is crucial for choosing the right deployment:
+<Info>
+**AreaWP uses a Single Tenant architecture** - providing dedicated, isolated resources for each website. This architectural choice ensures superior performance, security, and customization capabilities compared to multi-tenant or WordPress Multisite approaches.
+</Info>
+
+**Why Single Tenant?**
+
+AreaWP has deliberately chosen the single tenant approach because it delivers the best experience for both platform owners and end users:
+
+**🚀 Superior Performance**
+- Each website has dedicated resources (CPU, RAM, storage)
+- No resource competition between sites
+- Faster load times since resources aren't shared
+- Predictable performance regardless of other sites' activity
+
+**🔒 Enhanced Security**
+- Complete isolation between websites
+- No cross-site contamination risk
+- Database issues don't cascade across sites
+- Each site can have independent security configurations
+
+**⚙️ Maximum Flexibility**
+- Independent WordPress versions per site
+- Custom plugins and themes for each website
+- Site-specific configurations and optimizations
+- Update sites individually without affecting others
+
+**🎯 Easier Management**
+- Isolated troubleshooting (issues don't affect other sites)
+- Independent backups and restores
+- Granular control over each website
+- Simpler debugging and maintenance
+
+### Architecture Comparison
 
 <Tabs>
-  <Tab title="Single Tenant (Recommended)">
-    **Dedicated Infrastructure**
+  <Tab title="Single Tenant (Our Approach)">
+    **Dedicated Resources Per Website**
     
-    Each AreaWP installation runs on its own dedicated server with isolated resources.
+    Each website operates independently with:
+    - ✅ Separate WordPress installation
+    - ✅ Dedicated database
+    - ✅ Isolated file system
+    - ✅ Independent configuration
+    - ✅ No shared resources
     
-    **Advantages:**
-    - Complete resource isolation
-    - Enhanced security and privacy
-    - Full control over server configuration
-    - Predictable performance
-    - No "noisy neighbor" issues
-    - Customizable server specifications
-    
-    **Best For:**
-    - Agencies with 50+ clients
-    - High-traffic websites
-    - Enterprise clients
-    - Security-sensitive applications
-    - Custom infrastructure requirements
-    
-    **Available In:**
-    - Self-Hosted Edition
-    - Hosted Edition (VPS per customer)
+    **Perfect For:**
+    - Agencies managing diverse client websites
+    - Sites requiring custom configurations
+    - High-security requirements
+    - Maximum performance needs
+    - Professional WaaS platforms
   </Tab>
   
   <Tab title="Multi Tenant">
     **Shared Infrastructure**
     
-    Multiple AreaWP customers share the same server infrastructure with resource allocation.
+    Multiple websites share:
+    - ⚠️ Single WordPress codebase
+    - ⚠️ Shared database (prefixed tables)
+    - ⚠️ Common plugins/themes
+    - ⚠️ Unified configuration
     
-    **Advantages:**
-    - Lower initial cost
-    - Easier to get started
-    - Managed infrastructure
-    - Automatic scaling
-    - Reduced maintenance overhead
+    **Limitations:**
+    - Limited customization per site
+    - Performance degradation under load
+    - Security risks from shared infrastructure
+    - Complex database management
+    - Updates affect all sites simultaneously
+  </Tab>
+  
+  <Tab title="WordPress Multisite">
+    **Network of Sites**
     
-    **Considerations:**
-    - Shared resources
-    - Limited customization
-    - Potential performance variability
-    - Standard configurations
+    One WordPress installation managing multiple sites:
+    - ⚠️ Single database with prefixed tables
+    - ⚠️ Shared plugins and themes
+    - ⚠️ Network-wide settings
+    - ⚠️ Subdomains or subdirectories
     
-    **Best For:**
-    - Small agencies (under 50 clients)
-    - Startups and freelancers
-    - Testing and development
-    - Budget-conscious deployments
-    
-    **Available In:**
-    - Hosted Edition only
+    **Limitations:**
+    - Weakest isolation model
+    - Database issues cascade across network
+    - Limited per-site customization
+    - Complex plugin compatibility
+    - Not suitable for client websites
   </Tab>
 </Tabs>
 
 <Tip>
-**Recommendation:** For production environments with serious business requirements, we strongly recommend the **Single Tenant** architecture for optimal performance, security, and control.
+Learn more about our single tenant infrastructure approach: [Server Management Details →](https://areawp.com/server-management/)
 </Tip>
 
 ---
@@ -238,23 +269,32 @@ Define your hosting plans with features and pricing.
     Install AreaWP on your own server infrastructure.
     
     **Includes:**
-    - Complete source code access (Encrypted with Ioncube)
+    - Complete source code (encrypted with ionCube)
     - Full server control
     - Unlimited websites
-    - Unlimited clients
+    - Unlimited users
+    - All features included
+    - Free updates
+    - Community support
     
     **Requirements:**
-    - DirectAdmin server
-    - PHP 8.3+
-    - MySQL/MariaDB
-    - ionCube loader
-    - Technical expertise
+    - Your own server (VPS/Dedicated)
+    - DirectAdmin control panel
+    - PHP 8.3 with ionCube Loader
+    - MySQL/MariaDB database
+    - Basic server management knowledge
+    
+    **Security:**
+    - Source code protected with ionCube encryption
+    - Prevents unauthorized modifications
+    - Ensures code integrity and licensing compliance
     
     **Best For:**
-    - Established agencies
-    - Custom requirements
-    - Maximum control needed
-    - Long-term cost savings
+    - Agencies with existing infrastructure
+    - Maximum customization needs
+    - Complete data control
+    - Cost-effective scaling
+    - Technical teams
   </Tab>
   
   <Tab title="Hosted Edition">
@@ -264,6 +304,7 @@ Define your hosting plans with features and pricing.
     
     **Includes:**
     - Fully managed servers
+    - Source code (encrypted with ionCube)
     - Automatic updates
     - DDoS protection
     - Daily backups
@@ -290,6 +331,11 @@ Define your hosting plans with features and pricing.
     - Business + VM-2: €210/month (50 sites)
     - Enterprise + VM-4: €400/month (200 sites)
     
+    **Security:**
+    - Source code protected with ionCube encryption
+    - Fully managed security updates
+    - Regular security audits
+    
     **Best For:**
     - Quick deployment
     - No server management
@@ -298,6 +344,10 @@ Define your hosting plans with features and pricing.
     - Focus on clients, not infrastructure
   </Tab>
 </Tabs>
+
+<Warning>
+**ionCube Protection:** Both Self-Hosted and Hosted editions use ionCube encryption to protect the source code, ensuring security, preventing unauthorized modifications, and maintaining licensing compliance.
+</Warning>
 
 ---
 
@@ -369,8 +419,8 @@ Define your hosting plans with features and pricing.
     Built on industry-standard LEMP stack with FastCGI caching, Redis, and DirectAdmin. Battle-tested infrastructure that delivers performance and reliability.
   </Accordion>
   
-  <Accordion title="Flexible Deployment Options" icon="cloud">
-    Choose between self-hosted for maximum control or fully managed hosting for convenience. Scale from a few clients to thousands with the same platform.
+  <Accordion title="Single Tenant Architecture" icon="shield">
+    Dedicated resources for each website ensure superior performance, security, and customization. No shared infrastructure means no compromises.
   </Accordion>
 </AccordionGroup>
 
