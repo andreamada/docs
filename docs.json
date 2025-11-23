@@ -88,6 +88,11 @@
           "anchor": "Blog",
           "href": "https://areawp.com/blog",
           "icon": "newspaper"
+        },
+        {
+          "anchor": "Feedback",
+          "href": "https://app.areawp.com",
+          "icon": "idea"
         }
       ]
     }
