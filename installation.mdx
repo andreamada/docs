@@ -296,39 +296,6 @@ This is the most critical step. DirectAdmin must be properly configured for Area
     <Tip>
     **Renewal Monitoring:** Check DirectAdmin → SSL Certificates regularly to ensure auto-renewal is working. You'll receive email notifications if renewal fails.
     </Tip>
-    
-    ---
-    
-    <Accordion title="Troubleshooting SSL Issues" icon="circle-question">
-      **Certificate Request Failed:**
-      
-      Common issues and solutions:
-      
-      1. **Invalid API Credentials:**
-         - Verify API token is correct
-         - Ensure token has DNS Edit permissions
-         - Check token hasn't expired
-      
-      2. **DNS Not Propagated:**
-         - Ensure domain is active in Cloudflare
-         - Check nameservers point to Cloudflare
-         - Wait 5-10 minutes for DNS propagation
-      
-      3. **Rate Limit Exceeded:**
-         - Let's Encrypt has rate limits (5 certificates per domain per week)
-         - Wait before retrying
-         - Use staging environment for testing
-      
-      **Wildcard Not Covering Subdomains:**
-      
-      If subdomains show SSL errors:
-      
-      1. Verify certificate includes `*.yourdomain.com`
-      2. Check subdomain DNS records exist
-      3. Ensure Apache/Nginx is configured for wildcard
-      4. Restart web server
-      5. Clear browser cache
-    </Accordion>
   </Accordion>
 </AccordionGroup>
 
@@ -903,6 +870,37 @@ After logging in, complete these essential setup steps:
     4. Restart PHP-FPM service
     5. Verify with phpinfo()
     6. Check sudo permissions are granted
+  </Accordion>
+  
+  <Accordion title="SSL Certificate Issues" icon="lock">
+    **Certificate Request Failed:**
+    
+    Common issues and solutions:
+    
+    1. **Invalid API Credentials:**
+       - Verify API token is correct
+       - Ensure token has DNS Edit permissions
+       - Check token hasn't expired
+    
+    2. **DNS Not Propagated:**
+       - Ensure domain is active in Cloudflare
+       - Check nameservers point to Cloudflare
+       - Wait 5-10 minutes for DNS propagation
+    
+    3. **Rate Limit Exceeded:**
+       - Let's Encrypt has rate limits (5 certificates per domain per week)
+       - Wait before retrying
+       - Use staging environment for testing
+    
+    **Wildcard Not Covering Subdomains:**
+    
+    If subdomains show SSL errors:
+    
+    1. Verify certificate includes `*.yourdomain.com`
+    2. Check subdomain DNS records exist
+    3. Ensure Apache/Nginx is configured for wildcard
+    4. Restart web server
+    5. Clear browser cache
   </Accordion>
 </AccordionGroup>
 
