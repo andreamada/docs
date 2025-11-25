@@ -5,7 +5,7 @@ icon: "credit-card"
 ---
 
 <Info>
-**Navigation Path:** Admin Dashboard → Settings → General Settings → Payment Gateway
+  **Navigation Path:** Admin Dashboard → Settings → General Settings → Payment Gateway
 </Info>
 
 ## Overview
@@ -45,13 +45,13 @@ Configure bank account details for manual payment processing via bank transfer.
 
 ### Required Information
 
-| Field | Description | Required |
-|-------|-------------|----------|
-| **Bank Logo** | Upload your bank's logo for easy identification | No |
-| **Bank Name** | Name of the financial institution (e.g., Vietinbank, Chase Bank) | ✅ Yes |
-| **Account Holder Name** | Full legal name on the bank account | ✅ Yes |
-| **Account Number (IBAN)** | Bank account number or IBAN for international transfers | ✅ Yes |
-| **Bank Location/Branch** | Branch location or bank address | No |
+| Field                     | Description                                                      | Required |
+| ------------------------- | ---------------------------------------------------------------- | -------- |
+| **Bank Logo**             | Upload your bank's logo for easy identification                  | No       |
+| **Bank Name**             | Name of the financial institution (e.g., Vietinbank, Chase Bank) | ✅ Yes    |
+| **Account Holder Name**   | Full legal name on the bank account                              | ✅ Yes    |
+| **Account Number (IBAN)** | Bank account number or IBAN for international transfers          | ✅ Yes    |
+| **Bank Location/Branch**  | Branch location or bank address                                  | No       |
 
 ### Setup Instructions
 
@@ -63,11 +63,11 @@ Configure bank account details for manual payment processing via bank transfer.
 **Capacity:** Add up to **20 bank accounts** for manual payment processing with a sortable interface.
 
 <Tip>
-**Best Practice:** Provide clear payment instructions to customers, including reference numbers and processing times for bank transfers. Consider adding multiple bank accounts for different currencies or regions.
+  **Best Practice:** Provide clear payment instructions to customers, including reference numbers and processing times for bank transfers. Consider adding multiple bank accounts for different currencies or regions.
 </Tip>
 
 <Info>
-**Manual Processing:** Bank transfers require manual verification. Set up a process to check incoming payments and manually mark invoices as paid in your system.
+  **Manual Processing:** Bank transfers require manual verification. Set up a process to check incoming payments and manually mark invoices as paid in your system.
 </Info>
 
 ---
@@ -78,13 +78,13 @@ Stripe enables secure credit card processing with industry-leading security, com
 
 ### Configuration Parameters
 
-| Setting | Description | Format |
-|---------|-------------|--------|
-| **Enable Stripe** | Master toggle to activate Stripe payment processing | Toggle (Default: Disabled) |
-| **Display Name** | Custom label shown to customers | Text (Default: "Credit Card") |
-| **Publishable Key** | Public API key from Stripe Dashboard | `pk_live_...` or `pk_test_...` |
-| **Secret Key** | Private API key from Stripe Dashboard | `sk_live_...` or `sk_test_...` |
-| **Webhook Secret** | Endpoint secret for webhook verification | `whsec_...` |
+| Setting             | Description                                         | Format                         |
+| ------------------- | --------------------------------------------------- | ------------------------------ |
+| **Enable Stripe**   | Master toggle to activate Stripe payment processing | Toggle (Default: Disabled)     |
+| **Display Name**    | Custom label shown to customers                     | Text (Default: "Credit Card")  |
+| **Publishable Key** | Public API key from Stripe Dashboard                | `pk_live_...` or `pk_test_...` |
+| **Secret Key**      | Private API key from Stripe Dashboard               | `sk_live_...` or `sk_test_...` |
+| **Webhook Secret**  | Endpoint secret for webhook verification            | `whsec_...`                    |
 
 ### Getting Your Stripe API Keys
 
@@ -104,21 +104,16 @@ Webhooks notify your platform about payment events in real-time.
 2. Click **Add Endpoint**
 3. Enter your webhook URL: `https://yourdomain.com/stripe/webhook`
 4. Select events to listen for:
-   - `payment_intent.succeeded`
-   - `payment_intent.payment_failed`
-   - `charge.refunded`
-   - `customer.subscription.created`
-   - `customer.subscription.updated`
-   - `customer.subscription.deleted`
+   - `checkout.session.completed`
 5. Copy the **Signing Secret** (starts with `whsec_`)
 6. Paste the signing secret in your platform's Stripe configuration
 
 <Warning>
-**Security:** Never share your Secret Key or Webhook Secret publicly. Use test keys during development and switch to live keys only when ready for production. Keep keys secure and rotate them if compromised.
+  **Security:** Never share your Secret Key or Webhook Secret publicly. Use test keys during development and switch to live keys only when ready for production. Keep keys secure and rotate them if compromised.
 </Warning>
 
 <Tip>
-**Testing:** Use Stripe's test mode with test card numbers to verify your integration before going live. Test card: `4242 4242 4242 4242`, any future expiry, any CVC.
+  **Testing:** Use Stripe's test mode with test card numbers to verify your integration before going live. Test card: `4242 4242 4242 4242`, any future expiry, any CVC.
 </Tip>
 
 ---
@@ -129,13 +124,13 @@ Configure PayPal for secure online payments and checkout.
 
 ### Configuration Parameters
 
-| Setting | Description | Format |
-|---------|-------------|--------|
-| **Enable PayPal** | Master toggle to activate PayPal payment processing | Toggle (Default: Disabled) |
-| **Display Name** | Custom label shown to customers | Text (Default: "PayPal") |
-| **Client ID** | PayPal REST API Client ID | From PayPal Developer Dashboard |
-| **Client Secret** | PayPal REST API Secret | From PayPal Developer Dashboard |
-| **Mode** | Environment setting | Sandbox (testing) or Live (production) |
+| Setting           | Description                                         | Format                                 |
+| ----------------- | --------------------------------------------------- | -------------------------------------- |
+| **Enable PayPal** | Master toggle to activate PayPal payment processing | Toggle (Default: Disabled)             |
+| **Display Name**  | Custom label shown to customers                     | Text (Default: "PayPal")               |
+| **Client ID**     | PayPal REST API Client ID                           | From PayPal Developer Dashboard        |
+| **Client Secret** | PayPal REST API Secret                              | From PayPal Developer Dashboard        |
+| **Mode**          | Environment setting                                 | Sandbox (testing) or Live (production) |
 
 ### Getting PayPal API Credentials
 
@@ -151,40 +146,42 @@ Configure PayPal for secure online payments and checkout.
 ### Sandbox vs Live Mode
 
 **Sandbox Mode (Testing):**
+
 - Use sandbox Client ID and Secret
 - Test with sandbox PayPal accounts
 - No real money transactions
 - Safe for development and testing
 
 **Live Mode (Production):**
+
 - Use live Client ID and Secret
 - Real PayPal accounts and transactions
 - Actual money processing
 - Only use when ready for production
 
 <Warning>
-**Mode Selection:** Always start in Sandbox mode for testing. Only switch to Live mode when you've thoroughly tested your integration and are ready to accept real payments.
+  **Mode Selection:** Always start in Sandbox mode for testing. Only switch to Live mode when you've thoroughly tested your integration and are ready to accept real payments.
 </Warning>
 
 <Tip>
-**PayPal Sandbox:** Create test buyer and seller accounts in the PayPal Sandbox to test the complete payment flow without using real money.
+  **PayPal Sandbox:** Create test buyer and seller accounts in the PayPal Sandbox to test the complete payment flow without using real money.
 </Tip>
 
 ---
 
 ## Payment Method Comparison
 
-| Feature | Bank Transfer | Stripe | PayPal |
-|---------|---------------|--------|--------|
-| **Setup Difficulty** | Easy | Moderate | Moderate |
-| **Processing** | Manual | Automatic | Automatic |
-| **Transaction Fees** | None (usually) | 2.9% + $0.30 | 2.9% + $0.30 |
-| **Recurring Payments** | Manual | ✅ Yes | ✅ Yes |
-| **Instant Confirmation** | ❌ No | ✅ Yes | ✅ Yes |
-| **Refunds** | Manual | ✅ Automatic | ✅ Automatic |
-| **International** | Limited | ✅ Yes | ✅ Yes |
-| **Customer Trust** | Moderate | High | High |
-| **Best For** | Local payments | Credit cards | PayPal users |
+| Feature                  | Bank Transfer  | Stripe        | PayPal        |
+| ------------------------ | -------------- | ------------- | ------------- |
+| **Setup Difficulty**     | Easy           | Moderate      | Moderate      |
+| **Processing**           | Manual         | Automatic     | Automatic     |
+| **Transaction Fees**     | None (usually) | 2.9% + \$0.30 | 2.9% + \$0.30 |
+| **Recurring Payments**   | Manual         | ✅ Yes         | ✅ Yes         |
+| **Instant Confirmation** | ❌ No           | ✅ Yes         | ✅ Yes         |
+| **Refunds**              | Manual         | ✅ Automatic   | ✅ Automatic   |
+| **International**        | Limited        | ✅ Yes         | ✅ Yes         |
+| **Customer Trust**       | Moderate       | High          | High          |
+| **Best For**             | Local payments | Credit cards  | PayPal users  |
 
 ---
 
@@ -201,7 +198,6 @@ Configure PayPal for secure online payments and checkout.
     - Monitor suspicious transactions
     - Comply with PCI DSS requirements
   </Accordion>
-  
   <Accordion title="Multiple Payment Options" icon="credit-card">
     - Offer at least 2-3 payment methods
     - Include both credit card and PayPal
@@ -211,7 +207,6 @@ Configure PayPal for secure online payments and checkout.
     - Test all payment methods regularly
     - Monitor which methods customers prefer
   </Accordion>
-  
   <Accordion title="Customer Experience" icon="user">
     - Clearly display accepted payment methods
     - Show security badges and SSL certificates
@@ -221,7 +216,6 @@ Configure PayPal for secure online payments and checkout.
     - Save payment methods for returning customers
     - Make refund process transparent
   </Accordion>
-  
   <Accordion title="Financial Management" icon="dollar-sign">
     - Reconcile payments daily
     - Track transaction fees
@@ -240,10 +234,11 @@ Configure PayPal for secure online payments and checkout.
 <AccordionGroup>
   <Accordion title="Stripe Payments Failing" icon="stripe">
     **Issue:** Credit card payments not processing
-    
+
     **Solutions:**
+
     1. Verify Stripe is enabled in settings
-    2. Check API keys are correct (pk_ and sk_)
+    2. Check API keys are correct (pk\_ and sk\_)
     3. Ensure using correct mode (test vs live)
     4. Verify webhook is configured properly
     5. Check Stripe Dashboard for error details
@@ -251,11 +246,11 @@ Configure PayPal for secure online payments and checkout.
     7. Review Stripe logs for specific errors
     8. Ensure SSL certificate is valid
   </Accordion>
-  
   <Accordion title="PayPal Integration Issues" icon="paypal">
     **Issue:** PayPal checkout not working
-    
+
     **Solutions:**
+
     1. Verify PayPal is enabled in settings
     2. Check Client ID and Secret are correct
     3. Ensure mode matches credentials (sandbox vs live)
@@ -265,11 +260,11 @@ Configure PayPal for secure online payments and checkout.
     7. Ensure business account is verified
     8. Review PayPal transaction logs
   </Accordion>
-  
   <Accordion title="Webhook Not Receiving Events" icon="webhook">
     **Issue:** Stripe webhooks not triggering
-    
+
     **Solutions:**
+
     1. Verify webhook URL is correct and accessible
     2. Check webhook secret is configured
     3. Ensure webhook endpoint is publicly accessible
@@ -279,11 +274,11 @@ Configure PayPal for secure online payments and checkout.
     7. Verify SSL certificate is valid
     8. Ensure correct events are selected
   </Accordion>
-  
   <Accordion title="Bank Transfer Not Showing" icon="building-columns">
     **Issue:** Bank account option not appearing
-    
+
     **Solutions:**
+
     1. Verify at least one bank account is configured
     2. Check all required fields are filled
     3. Save bank account configuration
@@ -300,20 +295,21 @@ Configure PayPal for secure online payments and checkout.
 
 **Test Checklist:**
 
-- [ ] Configure payment method in test/sandbox mode
-- [ ] Test successful payment flow
-- [ ] Test failed payment handling
-- [ ] Verify payment confirmation emails
-- [ ] Test refund process
-- [ ] Check webhook events are received
-- [ ] Verify invoice updates correctly
-- [ ] Test with different payment amounts
-- [ ] Check transaction appears in payment gateway dashboard
-- [ ] Test on mobile devices
-- [ ] Verify SSL/HTTPS is working
-- [ ] Switch to live mode only after all tests pass
+- Configure payment method in test/sandbox mode
+- Test successful payment flow
+- Test failed payment handling
+- Verify payment confirmation emails
+- Test refund process
+- Check webhook events are received
+- Verify invoice updates correctly
+- Test with different payment amounts
+- Check transaction appears in payment gateway dashboard
+- Test on mobile devices
+- Verify SSL/HTTPS is working
+- Switch to live mode only after all tests pass
 
 **Stripe Test Cards:**
+
 - Success: `4242 4242 4242 4242`
 - Decline: `4000 0000 0000 0002`
 - Insufficient Funds: `4000 0000 0000 9995`
@@ -325,20 +321,20 @@ Configure PayPal for secure online payments and checkout.
 
 ### API Key Formats
 
-| Service | Key Type | Format | Example |
-|---------|----------|--------|---------|
-| **Stripe** | Publishable | `pk_test_` or `pk_live_` | `pk_live_51H...` |
-| **Stripe** | Secret | `sk_test_` or `sk_live_` | `sk_live_51H...` |
-| **Stripe** | Webhook | `whsec_` | `whsec_abc123...` |
-| **PayPal** | Client ID | Alphanumeric | `AYSq3RDG...` |
-| **PayPal** | Secret | Alphanumeric | `EHnHq7...` |
+| Service    | Key Type    | Format                   | Example           |
+| ---------- | ----------- | ------------------------ | ----------------- |
+| **Stripe** | Publishable | `pk_test_` or `pk_live_` | `pk_live_51H...`  |
+| **Stripe** | Secret      | `sk_test_` or `sk_live_` | `sk_live_51H...`  |
+| **Stripe** | Webhook     | `whsec_`                 | `whsec_abc123...` |
+| **PayPal** | Client ID   | Alphanumeric             | `AYSq3RDG...`     |
+| **PayPal** | Secret      | Alphanumeric             | `EHnHq7...`       |
 
 ### Common Transaction Fees
 
-| Payment Method | Fee Structure |
-|----------------|---------------|
-| **Stripe** | 2.9% + $0.30 per transaction |
-| **PayPal** | 2.9% + $0.30 per transaction |
+| Payment Method    | Fee Structure                   |
+| ----------------- | ------------------------------- |
+| **Stripe**        | 2.9% + \$0.30 per transaction   |
+| **PayPal**        | 2.9% + \$0.30 per transaction   |
 | **Bank Transfer** | Usually free (may vary by bank) |
 
 ---
