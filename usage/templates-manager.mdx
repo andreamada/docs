@@ -45,8 +45,8 @@ The Template Manager allows you to manage WordPress themes that customers can ch
    - **Description:** Brief description of theme features
    - **Category:** Theme category (Business, Blog, Portfolio, etc.)
 4. Upload theme preview image (recommended: 1200 x 900 px)
-5. Set theme as **Active** to make it available to customers
-6. Click **Save** to add the template
+5. Click **Save** to add the template.
+6. **Next Step:** Go to [Browse Templates](#template-ordering-and-visibility) to enable the theme and make it visible to customers.
 
 <Tip>
 **Theme Preview Images:** Use high-quality screenshots showing the theme's homepage. This helps customers visualize how their website will look.
@@ -61,10 +61,35 @@ The Template Manager allows you to manage WordPress themes that customers can ch
 | **Description** | Brief description of theme features and style |
 | **Category** | Theme category for organization |
 | **Preview Image** | Screenshot of theme (1200 x 900 px recommended) |
-| **Status** | Active (available) or Inactive (hidden) |
+| **Status** | Managed via the [Browse Templates](#template-ordering-and-visibility) screen. |
 | **Default** | Set as default theme for new websites |
 | **Featured** | Highlight as recommended theme |
 | **Enable Sync** | Enable template synchronization for automatic updates |
+
+---
+
+## Template Ordering and Visibility
+
+While basic theme details are managed in the Template Manager, the **visibility** and **display order** are managed separately.
+
+<Info>
+**Navigation Path:** Admin Dashboard → Browse Templates  
+**URL:** `/admin/WebsiteTemplateSort`
+</Info>
+
+### Managing Visibility
+
+1. Navigate to the **Browse Templates** page.
+2. Find the template you want to show or hide.
+3. Toggle the **Visibility** switch to **Active** (available to customers) or **Inactive** (hidden).
+
+### Reordering Templates
+
+The order in which themes appear to customers during website creation can be customized:
+
+1. On the **Browse Templates** page, locate the template cards.
+2. Use **Drag and Drop** to rearrange the templates.
+3. The new order is saved automatically and reflected in the customer dashboard instantly.
 
 ---
 
@@ -112,32 +137,6 @@ Customers or admins can enable/disable sync per website:
 **Selective Sync:** Websites can opt-out of synchronization if they need custom modifications. This gives flexibility while maintaining the option to sync when needed.
 </Tip>
 
-### Use Cases for Template Synchronization
-
-**1. Agency/Multi-Site Management:**
-- Maintain consistent branding across client websites
-- Deploy security updates to all sites instantly
-- Roll out new features to all clients simultaneously
-- Standardize plugin configurations
-
-**2. SaaS/Multi-Tenant Platforms:**
-- Update all customer sites with new features
-- Fix bugs across all instances at once
-- Maintain template consistency
-- Reduce maintenance overhead
-
-**3. Franchise/Branch Websites:**
-- Keep all franchise locations consistent
-- Update corporate branding across all sites
-- Deploy compliance changes instantly
-- Maintain brand standards
-
-**4. Educational Institutions:**
-- Standardize department websites
-- Update institutional branding
-- Deploy accessibility improvements
-- Maintain consistent navigation
-
 ### Sync Modes
 
 <Tabs>
@@ -169,253 +168,6 @@ Customers or admins can enable/disable sync per website:
   </Tab>
 </Tabs>
 
-### Sync Safety Features
-
-**Automatic Backups:**
-- System creates backup before applying sync
-- Rollback available if sync causes issues
-- Backups retained for 30 days
-
-**Conflict Detection:**
-- Detects if website has custom modifications
-- Alerts admin before overwriting changes
-- Option to skip conflicting files
-
-**Sync Logs:**
-- Detailed logs of all sync operations
-- Track what changed and when
-- Identify sync failures quickly
-
-**Rollback Capability:**
-- Revert to pre-sync state if needed
-- One-click rollback per website
-- Preserves custom modifications
-
-<Warning>
-**Custom Modifications:** Websites with custom theme modifications may have those changes overwritten by template sync. Always backup before enabling sync, or exclude customized websites from synchronization.
-</Warning>
-
-### Managing Synchronized Websites
-
-**View Synced Websites:**
-
-1. Edit template in Template Manager
-2. Click **View Synced Websites** tab
-3. See list of all websites using this template
-4. View sync status for each site:
-   - ✅ **Synced:** Up-to-date with template
-   - 🔄 **Pending:** Sync scheduled
-   - ⚠️ **Conflict:** Custom modifications detected
-   - ❌ **Failed:** Sync error occurred
-
-**Sync Actions:**
-
-- **Sync All:** Push updates to all synced websites
-- **Sync Selected:** Update specific websites only
-- **Pause Sync:** Temporarily disable sync for maintenance
-- **Disable Sync:** Turn off sync for specific websites
-
-### Best Practices for Template Sync
-
-<AccordionGroup>
-  <Accordion title="Planning Sync Strategy" icon="clipboard-list">
-    - Test template changes on staging site first
-    - Schedule major updates during off-peak hours
-    - Communicate updates to customers in advance
-    - Document all template changes
-    - Create change log for transparency
-    - Plan rollback strategy before major updates
-  </Accordion>
-  
-  <Accordion title="Sync Configuration" icon="gear">
-    - Use scheduled sync for routine updates
-    - Reserve real-time sync for critical fixes
-    - Enable automatic backups before sync
-    - Set appropriate sync scope (files vs. full)
-    - Monitor sync logs regularly
-    - Test sync on single site before deploying to all
-  </Accordion>
-  
-  <Accordion title="Handling Conflicts" icon="triangle-exclamation">
-    - Review conflict reports before forcing sync
-    - Contact customers before overwriting customizations
-    - Offer to preserve custom modifications
-    - Document which sites have custom changes
-    - Consider creating custom templates for heavily modified sites
-    - Provide migration path for custom features
-  </Accordion>
-  
-  <Accordion title="Communication" icon="message">
-    - Notify customers before major template updates
-    - Provide changelog of template modifications
-    - Offer opt-out period for testing
-    - Send sync completion confirmations
-    - Provide support for sync-related issues
-    - Maintain template update documentation
-  </Accordion>
-</AccordionGroup>
-
-### Troubleshooting Template Sync
-
-<AccordionGroup>
-  <Accordion title="Sync Not Working" icon="circle-xmark">
-    **Issue:** Changes not syncing to websites
-    
-    **Solutions:**
-    1. Verify template sync is enabled
-    2. Check website has sync enabled
-    3. Review sync logs for errors
-    4. Ensure server has write permissions
-    5. Check for file conflicts
-    6. Verify cron jobs are running
-    7. Manually trigger sync to test
-  </Accordion>
-  
-  <Accordion title="Sync Causing Errors" icon="triangle-exclamation">
-    **Issue:** Websites breaking after sync
-    
-    **Solutions:**
-    1. Rollback affected websites immediately
-    2. Review sync logs for error details
-    3. Test template changes on staging site
-    4. Check for plugin conflicts
-    5. Verify theme compatibility
-    6. Restore from automatic backup
-    7. Disable sync until issue resolved
-  </Accordion>
-  
-  <Accordion title="Partial Sync" icon="circle-half-stroke">
-    **Issue:** Only some files syncing
-    
-    **Solutions:**
-    1. Check sync scope settings
-    2. Verify file permissions
-    3. Review conflict detection logs
-    4. Check disk space on target sites
-    5. Ensure all files are included in template
-    6. Manually sync missing files
-    7. Re-save template to trigger full sync
-  </Accordion>
-</AccordionGroup>
-
-
-
----
-
-## Theme Categories
-
-Organize themes into categories for easier browsing:
-
-**Common Categories:**
-- **Business:** Corporate and professional themes
-- **Blog:** Content-focused blogging themes
-- **Portfolio:** Creative and showcase themes
-- **E-commerce:** Online store themes (WooCommerce)
-- **Magazine:** News and magazine layouts
-- **Minimal:** Clean, minimalist designs
-- **Multi-Purpose:** Versatile, all-purpose themes
-
-<Info>
-**Category Benefits:** Organizing themes by category helps customers find appropriate themes faster and improves the website creation experience.
-</Info>
-
----
-
-## Default Theme
-
-Set a default theme that's automatically selected when customers create new websites.
-
-**Setting Default Theme:**
-
-1. Find the theme you want to set as default
-2. Click the **Set as Default** button or toggle
-3. Confirm the selection
-4. The theme will be pre-selected for all new website creations
-
-**Best Practices for Default Theme:**
-- Choose a versatile, multi-purpose theme
-- Select a theme that works for most use cases
-- Use a well-maintained, popular theme
-- Ensure theme is mobile-responsive
-- Pick a theme with good performance
-- Consider a theme with page builder support
-
-<Tip>
-**Recommended Default Themes:** Consider using popular, well-supported themes like Astra, GeneratePress, OceanWP, or Kadence as your default. These are lightweight, flexible, and suitable for most projects.
-</Tip>
-
----
-
-## Featured Themes
-
-Highlight recommended themes to guide customer choices.
-
-**Why Feature Themes:**
-- Guide customers to quality themes
-- Promote themes you support well
-- Highlight premium or exclusive themes
-- Reduce decision paralysis
-- Improve customer satisfaction
-
-**Featuring a Theme:**
-
-1. Edit the theme in Template Manager
-2. Enable the **Featured** toggle or checkbox
-3. Featured themes appear at the top of the theme selection
-4. Add a "Recommended" or "Popular" badge
-
-<Info>
-**Featured Limit:** Feature 3-5 themes to avoid overwhelming customers. Too many featured themes defeats the purpose of highlighting the best options.
-</Info>
-
----
-
-## Theme Sources
-
-### WordPress.org Themes
-
-Free themes from the official WordPress theme repository.
-
-**Adding WordPress.org Themes:**
-
-1. Browse [WordPress.org Theme Directory](https://wordpress.org/themes/)
-2. Find themes you want to offer
-3. Copy the theme slug (from URL or download button)
-4. Add to Template Manager with the theme slug
-5. WordPress will automatically download and install
-
-**Popular Free Themes:**
-- **Astra:** Lightweight, customizable
-- **GeneratePress:** Fast, accessible
-- **OceanWP:** Feature-rich, versatile
-- **Kadence:** Modern, flexible
-- **Neve:** Fast, AMP-ready
-- **Blocksy:** Gutenberg-optimized
-
-### Custom/Premium Themes
-
-Upload purchased or custom-developed themes.
-
-**Adding Custom Themes:**
-
-1. Obtain theme ZIP file from developer or marketplace
-2. Click **Upload Theme** in Template Manager
-3. Select the ZIP file
-4. Theme is uploaded to your server
-5. Configure theme details and preview image
-6. Activate for customer use
-
-**Premium Theme Sources:**
-- ThemeForest (Envato Market)
-- Elegant Themes (Divi)
-- StudioPress (Genesis Framework)
-- Themify
-- MyThemeShop
-
-<Warning>
-**Theme Licensing:** Ensure you have proper licensing for premium themes. Many premium themes require separate licenses for each installation. Check theme license terms before offering to customers.
-</Warning>
-
 ---
 
 ## Theme Management
@@ -427,15 +179,16 @@ Upload purchased or custom-developed themes.
 3. Update theme details:
    - Name, description, category
    - Preview image
-   - Status (active/inactive)
 4. Save changes
 
 ### Deactivating Themes
 
-1. Find the theme to deactivate
-2. Change status to **Inactive**
-3. Theme is hidden from customer selection
-4. Existing websites using the theme are unaffected
+To hide a theme from customers without deleting it:
+
+1. Navigate to [Browse Templates](#template-ordering-and-visibility).
+2. Find the theme to deactivate.
+3. Toggle status to **Inactive**.
+4. Theme is hidden from customer selection; existing websites using it are unaffected.
 
 <Info>
 **Deactivation vs. Deletion:** Deactivating a theme hides it from new selections but doesn't affect existing websites. Deleting a theme can break existing sites using it.
@@ -443,14 +196,13 @@ Upload purchased or custom-developed themes.
 
 ### Deleting Themes
 
-1. Ensure no active websites are using the theme
-2. Find the theme in Template Manager
-3. Click **Delete** button
-4. Confirm deletion
-5. Theme files are removed from server
+1. Ensure no active websites are using the theme.
+2. Find the theme in Template Manager.
+3. Click **Delete** button.
+4. Confirm deletion; theme files are removed from server.
 
 <Warning>
-**Before Deleting:** Check if any customer websites are using the theme. Deleting a theme in use can break those websites. Deactivate instead of deleting if unsure.
+**Before Deleting:** Check if any customer websites are using the theme. Deleting a theme in use can break those websites. Deactivate via the Browse Templates page instead if unsure.
 </Warning>
 
 ---
@@ -459,43 +211,25 @@ Upload purchased or custom-developed themes.
 
 <AccordionGroup>
   <Accordion title="Theme Selection" icon="check">
-    - Offer 10-20 quality themes, not hundreds
-    - Include themes for different purposes (business, blog, portfolio)
-    - Choose well-maintained, regularly updated themes
-    - Prioritize mobile-responsive themes
-    - Select themes with good performance scores
-    - Include themes with page builder compatibility
-    - Test themes before offering to customers
+    - Offer 10-20 quality themes, not hundreds.
+    - Include themes for different purposes (business, blog, portfolio).
+    - Choose well-maintained, regularly updated themes.
+    - Prioritize mobile-responsive themes.
+    - Select themes with good performance scores.
   </Accordion>
   
   <Accordion title="Theme Organization" icon="folder">
-    - Categorize themes logically
-    - Use clear, descriptive category names
-    - Feature your best 3-5 themes
-    - Set a versatile default theme
-    - Keep theme list curated and manageable
-    - Remove outdated or abandoned themes
-    - Update theme previews regularly
+    - Categorize themes logically in Template Manager.
+    - Feature your best 3-5 themes.
+    - Change display order via **Browse Templates** to highlight top choices.
+    - Update theme previews regularly.
   </Accordion>
   
-  <Accordion title="Theme Maintenance" icon="wrench">
-    - Keep themes updated to latest versions
-    - Test theme updates before deploying
-    - Monitor theme compatibility with WordPress versions
-    - Remove themes with security issues
-    - Check for theme conflicts with plugins
-    - Maintain theme documentation
-    - Provide theme support to customers
-  </Accordion>
-  
-  <Accordion title="Customer Experience" icon="user">
-    - Use high-quality preview images
-    - Write clear, helpful theme descriptions
-    - Highlight key features of each theme
-    - Provide theme demos if possible
-    - Make theme selection easy and intuitive
-    - Offer theme recommendations
-    - Allow theme switching after creation
+  <Accordion title="Maintenance & Synchronization" icon="wrench">
+    - Test template changes on a staging site before syncing.
+    - Enable automatic backups before major sync operations.
+    - Monitor sync logs for potential conflicts or failures.
+    - Keep themes and plugins within templates updated.
   </Accordion>
 </AccordionGroup>
 
@@ -504,123 +238,34 @@ Upload purchased or custom-developed themes.
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Theme Not Installing" icon="download">
-    **Issue:** Theme fails to install from WordPress.org
+  <Accordion title="Theme Not Appearing for Customers" icon="eye-slash">
+    **Issue:** Theme is saved in Template Manager but not visible to customers.
     
     **Solutions:**
-    1. Verify theme slug is correct
-    2. Check internet connection to WordPress.org
-    3. Ensure server has write permissions
-    4. Check available disk space
-    5. Try downloading theme manually and uploading
-    6. Review server error logs
-    7. Test with a different theme
+    1. Verify visibility is set to **Active** in [Browse Templates](#template-ordering-and-visibility).
+    2. Check if the theme is in the correct category.
+    3. Clear application/server cache.
+  </Accordion>
+  
+  <Accordion title="Sync Not Working" icon="circle-xmark">
+    **Issue:** Changes not syncing to websites.
+    
+    **Solutions:**
+    1. Verify template sync is enabled in Template Manager correctly.
+    2. Check website has sync enabled in its own settings.
+    3. Review sync logs for errors.
+    4. Verify cron jobs are running on the server.
   </Accordion>
   
   <Accordion title="Theme Upload Fails" icon="upload">
-    **Issue:** Cannot upload custom theme ZIP file
+    **Issue:** Cannot upload custom theme ZIP file.
     
     **Solutions:**
-    1. Check file size is under server upload limit
-    2. Verify ZIP file is valid WordPress theme
-    3. Ensure ZIP contains style.css with theme headers
-    4. Check server write permissions
-    5. Increase PHP upload_max_filesize if needed
-    6. Try uploading via FTP instead
-    7. Verify theme ZIP structure is correct
-  </Accordion>
-  
-  <Accordion title="Theme Not Appearing for Customers" icon="eye-slash">
-    **Issue:** Theme doesn't show in customer selection
-    
-    **Solutions:**
-    1. Verify theme status is set to **Active**
-    2. Check theme is saved properly
-    3. Clear application cache
-    4. Refresh theme list
-    5. Verify customer has permission to select themes
-    6. Check theme category is visible
-    7. Test with different user account
-  </Accordion>
-  
-  <Accordion title="Preview Image Not Showing" icon="image">
-    **Issue:** Theme preview image doesn't display
-    
-    **Solutions:**
-    1. Verify image file format (JPG, PNG)
-    2. Check image file size (< 2 MB recommended)
-    3. Ensure image uploaded successfully
-    4. Clear browser and server cache
-    5. Re-upload preview image
-    6. Check file permissions
-    7. Verify image path is correct
+    1. Check file size against server upload limits.
+    2. Verify ZIP file is a valid WordPress theme structure.
+    3. Ensure server directory has write permissions.
   </Accordion>
 </AccordionGroup>
-
----
-
-## Theme Recommendations
-
-### For Different Use Cases
-
-**Small Business:**
-- Astra
-- GeneratePress
-- OceanWP
-- Kadence
-
-**Blogging:**
-- Neve
-- Blocksy
-- GeneratePress
-- Astra
-
-**Portfolio/Creative:**
-- OceanWP
-- Neve
-- Kadence
-- Blocksy
-
-**E-commerce:**
-- Astra (WooCommerce)
-- OceanWP (WooCommerce)
-- Storefront (official WooCommerce theme)
-- Kadence
-
-**Multi-Purpose:**
-- Astra
-- GeneratePress
-- Kadence
-- OceanWP
-
-<Tip>
-**Theme Performance:** Prioritize lightweight themes like Astra, GeneratePress, and Kadence for better website performance and customer satisfaction.
-</Tip>
-
----
-
-## Quick Reference
-
-### Theme Checklist
-
-**Before Adding a Theme:**
-- [ ] Theme is actively maintained
-- [ ] Compatible with latest WordPress version
-- [ ] Mobile-responsive design
-- [ ] Good performance score
-- [ ] Positive user reviews (if from WordPress.org)
-- [ ] No known security issues
-- [ ] Compatible with popular plugins
-- [ ] Has proper documentation
-
-**After Adding a Theme:**
-- [ ] Preview image uploaded
-- [ ] Description written
-- [ ] Category assigned
-- [ ] Status set to Active
-- [ ] Tested on a demo site
-- [ ] Theme appears in customer selection
-- [ ] Preview displays correctly
 
 ---
 
