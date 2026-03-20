@@ -46,7 +46,7 @@ The Template Manager allows you to manage WordPress themes that customers can ch
    - **Category:** Theme category (Business, Blog, Portfolio, etc.)
 4. Upload theme preview image (recommended: 1200 x 900 px)
 5. Click **Save** to add the template.
-6. **Next Step:** Go to [Browse Templates](#template-ordering-and-visibility) to enable the theme and make it visible to customers.
+6. **Note:** New templates are **enabled by default**. To hide a theme or change its display order, go to [Browse Templates](#template-ordering-and-visibility).
 
 <Tip>
 **Theme Preview Images:** Use high-quality screenshots showing the theme's homepage. This helps customers visualize how their website will look.
@@ -61,7 +61,7 @@ The Template Manager allows you to manage WordPress themes that customers can ch
 | **Description** | Brief description of theme features and style |
 | **Category** | Theme category for organization |
 | **Preview Image** | Screenshot of theme (1200 x 900 px recommended) |
-| **Status** | Managed via the [Browse Templates](#template-ordering-and-visibility) screen. |
+| **Status** | New templates are enabled by default. Managed via the [Browse Templates](#template-ordering-and-visibility) screen. |
 | **Default** | Set as default theme for new websites |
 | **Featured** | Highlight as recommended theme |
 | **Enable Sync** | Enable template synchronization for automatic updates |
@@ -95,78 +95,15 @@ The order in which themes appear to customers during website creation can be cus
 
 ## Template Synchronization
 
-Template Synchronization is a powerful feature that allows you to automatically push updates from a master template to all websites created from it.
+The **Template Synchronization** option is a toggle that allows you to automatically push updates from a master template to all websites created from it.
 
-### How Template Synchronization Works
+When enabled, any changes made to this template are automatically synchronized to all websites that have synchronization enabled in their website settings. This includes:
 
-When enabled, any changes made to the master template are automatically synchronized to all websites that:
-1. Were created from this template
-2. Have synchronization enabled on their website settings
+- **Theme Files:** Updates to stylesheets, templates, and assets.
+- **Plugin Changes:** Installations, updates, and removals.
+- **Configuration:** Changes to theme settings and customizations.
 
-**What Gets Synchronized:**
-- **Theme Files:** Template files, stylesheets, and assets
-- **Plugin Changes:** Plugin installations, updates, and removals
-- **Configuration:** Theme settings and customizations
-- **Content Updates:** Template pages and posts (optional)
-- **Widget Configurations:** Sidebar and widget settings
-
-<Info>
-**New Feature:** Template Synchronization helps you maintain consistency across multiple websites and deploy updates efficiently without manually updating each site.
-</Info>
-
-### Enabling Template Synchronization
-
-**On the Template:**
-
-1. Edit the template in Template Manager
-2. Enable **Template Synchronization** toggle
-3. Configure sync settings:
-   - **Sync Frequency:** Real-time, Hourly, Daily, Manual
-   - **Sync Scope:** Files only, Files + Plugins, Full sync
-   - **Backup Before Sync:** Create backup before applying changes
-4. Save template settings
-
-**On Individual Websites:**
-
-Customers or admins can enable/disable sync per website:
-1. Go to website settings
-2. Enable **Sync with Template** option
-3. Website will receive template updates automatically
-
-<Tip>
-**Selective Sync:** Websites can opt-out of synchronization if they need custom modifications. This gives flexibility while maintaining the option to sync when needed.
-</Tip>
-
-### Sync Modes
-
-<Tabs>
-  <Tab title="Real-Time Sync">
-    **When to Use:** Critical updates, small changes
-    
-    - Changes sync immediately after saving template
-    - Websites update within minutes
-    - Best for urgent security fixes
-    - Higher server resource usage
-  </Tab>
-  
-  <Tab title="Scheduled Sync">
-    **When to Use:** Regular updates, large changes
-    
-    - Sync runs at scheduled intervals (hourly, daily)
-    - Lower server resource usage
-    - Predictable update windows
-    - Better for batch changes
-  </Tab>
-  
-  <Tab title="Manual Sync">
-    **When to Use:** Major updates, testing required
-    
-    - Admin triggers sync manually
-    - Full control over update timing
-    - Test changes before deployment
-    - Best for major template overhauls
-  </Tab>
-</Tabs>
+No additional configuration or sync modes are required beyond enabling the toggle.
 
 ---
 
@@ -251,10 +188,8 @@ To hide a theme from customers without deleting it:
     **Issue:** Changes not syncing to websites.
     
     **Solutions:**
-    1. Verify template sync is enabled in Template Manager correctly.
-    2. Check website has sync enabled in its own settings.
-    3. Review sync logs for errors.
-    4. Verify cron jobs are running on the server.
+    1. Verify the **Template Synchronization** toggle is enabled for the template.
+    2. Ensure the individual website has **Sync with Template** enabled in its settings.
   </Accordion>
   
   <Accordion title="Theme Upload Fails" icon="upload">
