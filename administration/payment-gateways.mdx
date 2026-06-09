@@ -69,10 +69,7 @@ When a client chooses Bank Transfer at checkout, they see these instructions and
 1. Copy the **Webhook URL** shown in the Stripe card
 2. In the Stripe dashboard → **Developers → Webhooks → Add Endpoint**
 3. Paste the URL and select events:
-   - `invoice.payment_succeeded`
-   - `invoice.payment_failed`
-   - `customer.subscription.deleted`
-   - `payment_intent.succeeded`
+   - `checkout.session.completed`
 4. Copy the **Signing Secret** back into AreaWP
 
 ### Stripe Test Cards
