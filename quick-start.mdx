@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-description: "Connect your first server, deploy a WordPress template, and configure your platform in a few steps."
+description: "Deploy a WordPress template, configure your platform settings, and set up email in a few steps."
 icon: "rocket"
 ---
 
@@ -8,100 +8,108 @@ icon: "rocket"
 This guide assumes you've installed AreaWP and completed the setup wizard. If not, start with the [Installation Guide](/installation).
 </Info>
 
-## Step 1 — Connect Your First Server
+## Step 1 — Deploy a WordPress Template
 
-AreaWP manages servers via a lightweight agent. Install the agent on any Linux server you want to manage.
-
-<Steps>
-  <Step title="Go to Servers → Agent Fleet">
-    In the sidebar, navigate to **Servers** → **Agent Fleet** (`/fleet`).
-  </Step>
-  <Step title="Click Add Server">
-    The panel generates a one-line install command with your panel URL and registration token.
-
-    ```bash
-    curl -fsSL https://your-panel.com/install.sh | sudo bash -s -- \
-      --token "sk_reg_YOUR_TOKEN" \
-      --server "https://your-panel.com"
-    ```
-  </Step>
-  <Step title="Run the command on your server">
-    SSH into the target server and run the command as root. The agent installs as a systemd service.
-  </Step>
-  <Step title="Approve the registration">
-    Go to the **Approvals** tab in Agent Fleet and approve the new server. It appears as **Online** immediately.
-  </Step>
-</Steps>
-
----
-
-## Step 2 — Deploy a WordPress Template
-
-Templates let you pre-package a full WordPress setup and deploy it to any client site instantly.
+Templates (Blueprints) let you package a full WordPress setup and make it available for deployment. Go to **Services → Templates** (`/templates`) → **Manage** → **Add Blueprint**.
 
 <Steps>
-  <Step title="Go to Services → Templates">
-    In the sidebar, navigate to **Services** → **Templates** (`/templates`).
-  </Step>
-  <Step title="Click Submit Plugin/Theme">
-    Click the **Submit Plugin/Theme** button to open the template upload form.
+  <Step title="Go to Services → Templates → Manage">
+    In the sidebar, navigate to **Services** → **Templates**, then click the **Manage** button and select **Add Blueprint**.
   </Step>
   <Step title="Upload your WordPress files">
-    Provide the template contents — two upload options:
+    Provide the template contents. Two options:
 
     | Option | What to upload |
     |--------|---------------|
     | **wp-content only** | A `wp-content.zip` containing your themes, plugins, and uploads |
-    | **Full site** | A full site archive plus a `.sql` database dump |
+    | **Full site** | A complete site archive plus a `.sql` database dump |
 
     Fill in the template name, description, category, and version.
   </Step>
-  <Step title="Publish the template">
-    Set visibility (**Public** to make it available to clients, **Private** for admin use only) and click **Submit**. The template immediately appears in the catalog.
-  </Step>
-  <Step title="Deploy to a site">
-    From the Browse tab, click **Install** on your template, select the target WordPress site, and confirm. The template files and database are applied to the selected site.
+  <Step title="Save the Blueprint">
+    Click **Save**. The template is now available in the catalog for clients to deploy from their portal.
   </Step>
 </Steps>
 
 ---
 
-## Step 3 — Configure Site Settings (Optional)
+## Step 2 — Configure Site Settings (Optional)
 
-After deploying a site, fine-tune its individual settings from the site detail page.
+Go to **Settings → Site Settings** to configure platform-wide options for your installation.
 
-<Steps>
-  <Step title="Open the site">
-    Go to **WordPress**, find your site in the list, and click on it to open the site detail view.
-  </Step>
-  <Step title="Go to Settings">
-    Click the **Settings** tab within the site. Configure as needed:
+### Platform Mode
 
-    | Setting | Description |
-    |---------|-------------|
-    | **Site Title** | WordPress site title and tagline |
-    | **PHP Version** | Switch between available PHP versions |
-    | **Cache** | Enable/disable FastCGI page cache and Redis object cache |
-    | **SSL** | Force HTTPS, manage the certificate |
-    | **Domain** | Add or change the primary domain |
-    | **WP Debug** | Enable WordPress debug logging |
-    | **Maintenance Mode** | Put the site in maintenance mode |
-    | **Auto-Updates** | Configure WordPress core and plugin update policy |
-  </Step>
-  <Step title="Save">
-    Changes apply immediately. PHP version changes briefly restart the container.
-  </Step>
-</Steps>
+Choose how the platform operates:
+
+| Mode | Description |
+|------|-------------|
+| **SaaS** | General hosting — clients subscribe and manage their own sites |
+| **WaaS** | WordPress-as-a-Service — optimized for WordPress site deployments with marketplace |
+
+### General Toggles
+
+| Setting | Description |
+|---------|-------------|
+| **Registration** | Allow new users to register publicly at `/register` |
+| **Dev Mode** | Enable development-only features in the sidebar |
+| **Support Center** | Show the built-in support ticket system in the sidebar |
+
+### Site Configuration
+
+| Field | Description |
+|-------|-------------|
+| **Default Domain** | The primary domain for the panel (e.g. `panel.yourcompany.com`). Changing this redirects you to the new address after saving. |
+| **Default Language** | UI language for new users |
+| **Session Timeout** | Auto-logout after inactivity (minutes) |
+
+### SSL Certificate
+
+Provision a **wildcard Let's Encrypt certificate** (`*.yourdomain.com`) for the panel domain via DNS challenge:
+
+1. Ensure the required DNS A records are set for both `yourdomain.com` and `*.yourdomain.com` pointing to your server IP
+2. Enter your **Let's Encrypt notification email**
+3. Select a **DNS provider** (Cloudflare, DigitalOcean, Namecheap, GoDaddy, or AWS Route 53) and enter its API credentials
+4. Click **Provision Certificate** — provisioning runs in the background with a live step log
+5. Once complete, the **Active** badge appears and HTTPS is enforced
+
+<Info>
+If using Cloudflare, set SSL/TLS mode to **Full** (not Flexible) in your Cloudflare dashboard to avoid redirect loops.
+</Info>
+
+The **Force WWW Redirect** toggle redirects `www.yourdomain.com` to the apex domain (or vice versa) automatically.
+
+### Company Info
+
+Used on invoices and billing documents:
+
+| Field | Description |
+|-------|-------------|
+| **Currency** | Billing currency (USD, EUR, GBP, and more) |
+| **Company Name** | Your business name |
+| **Email** | Company contact email |
+| **Phone** | Company phone number |
+| **Address, City, Postal Code, Country** | Full billing address |
+| **VAT ID** | Tax registration number |
+
+### Tax Management
+
+Enable the **Tax** toggle to add tax to all invoices:
+- **Tax Name** — label shown on invoices (e.g. VAT, GST)
+- **Tax Amount** — percentage rate (e.g. `20` for 20%)
+
+### Support Center Links
+
+When the Support Center is enabled, add quick-access links shown on the client dashboard — each link has a label, description, and URL. Useful for pointing clients to your knowledge base, community forum, or external support portal.
 
 ---
 
-## Step 4 — Set Up Email (Important)
+## Step 3 — Set Up Email (Important)
 
-Outgoing email is required for user registration confirmations, password resets, billing invoices, and renewal reminders. Without it, clients will not receive any platform communications.
+Outgoing email is required for registration confirmations, password resets, billing invoices, and renewal reminders. Without it, clients receive nothing from the platform.
 
 <Steps>
   <Step title="Go to Settings → Email">
-    Navigate to **Settings** and select the **Email** category from the sidebar.
+    Navigate to **Settings** and select **Email** from the sidebar.
   </Step>
   <Step title="Enter your SMTP credentials">
     | Field | Example |
@@ -113,41 +121,39 @@ Outgoing email is required for user registration confirmations, password resets,
     | **From Email** | `noreply@yourplatform.com` |
     | **From Name** | Your platform or brand name |
 
-    Popular SMTP providers: **SendGrid**, **Mailgun**, **Amazon SES**, **Postmark**, or your own mail server.
+    Popular providers: **SendGrid**, **Mailgun**, **Amazon SES**, **Postmark**, or your own Postfix server.
   </Step>
   <Step title="Send a test email">
-    Click **Send Test Email**. AreaWP sends a verification message to the admin address. Check your inbox to confirm delivery.
+    Click **Send Test Email**. AreaWP sends a verification message to the admin address. Check your inbox to confirm delivery before going live.
   </Step>
   <Step title="Customize email templates (optional)">
-    Still in the Email settings, scroll to **Email Templates** to customize the content and branding of transactional emails — welcome message, invoices, renewal reminders, and more.
+    Scroll to **Email Templates** to customize the content and branding of transactional emails — welcome, invoices, renewal reminders, and more.
   </Step>
 </Steps>
 
 <Warning>
-Without a working SMTP configuration, clients will not receive registration emails, password resets, or billing notifications. Set this up before inviting your first user.
+Without a working SMTP configuration, clients will not receive registration emails, password resets, or billing notifications. Configure this before inviting your first user.
 </Warning>
 
 ---
 
-## Step 5 — Set Up Billing (Optional)
-
-If you're selling hosting to clients:
+## Step 4 — Set Up Billing (Optional)
 
 <Steps>
   <Step title="Create a Pricing Plan">
     Go to **Administration → Pricing Plans** → **New Plan**. Set name, price, billing period, and resource limits.
   </Step>
   <Step title="Enable a Payment Gateway">
-    Go to **Administration → Payment Gateways**. Enable **Stripe** (for cards) or **Bank Transfer** and enter credentials.
+    Go to **Administration → Payment Gateways**. Enable **Stripe**, **PayPal**, **Tap**, or **Bank Transfer** and enter credentials.
   </Step>
   <Step title="Invite a Client">
-    Go to **Administration → Users** → **Invite User**. The client receives an email registration link.
+    Go to **Administration → Users** → **Invite User**. The client receives an email registration link and can subscribe to a plan from their portal.
   </Step>
 </Steps>
 
 ---
 
-## Step 6 — White-Label the Platform (Optional)
+## Step 5 — White-Label the Platform (Optional)
 
 <Steps>
   <Step title="Open Settings → White Label">
@@ -166,8 +172,8 @@ If you're selling hosting to clients:
 ## What's Next?
 
 <CardGroup cols={2}>
-  <Card title="Add More Servers" icon="server" href="/infrastructure/servers">
-    Fleet monitor, canary rollouts, cloud provisioning
+  <Card title="Connect a Server" icon="server" href="/infrastructure/servers">
+    Agent Fleet, fleet monitor, cloud provisioning
   </Card>
   <Card title="Set Up Monitoring" icon="chart-line" href="/operations/monitoring">
     Thresholds, alerts, and public status pages
