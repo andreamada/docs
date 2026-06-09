@@ -95,13 +95,15 @@ After installation, open the panel at `http://your-server-ip`. The setup wizard 
 
 ## Updating
 
-Run the following command to check if a new version is available:
+Run the following command **as root on the server** via SSH to check if a new version is available:
 
 ```bash
 areawp update
 ```
 
-If an update is available, the command will display the new version and prompt you to confirm before proceeding. No data is lost during updates.
+If an update is available, the command displays the new version and prompts for confirmation before proceeding. No data is lost during updates.
+
+You can also see whether an update is available from **Settings → Licensing** inside the panel — however, the actual update must always be run via SSH as root using the command above.
 
 ---
 
