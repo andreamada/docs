@@ -1,0 +1,126 @@
+---
+title: "Files & FTP"
+description: "Browse, edit, and manage files on your servers, and configure FTP/SFTP access."
+icon: "folder"
+---
+
+<Info>
+**Path:** Files (`/files`) → FTP Server (`/ftp`) — Admin only
+
+The Files section provides a web-based file manager for all connected servers, plus FTP/SFTP server management.
+</Info>
+
+## File Manager
+
+The web-based file manager lets you browse and manage files on any connected server without needing SSH or an external FTP client.
+
+### Features
+
+<CardGroup cols={2}>
+  <Card title="Browse" icon="folder" color="#6366f1">
+    Navigate the full server filesystem with a familiar folder tree
+  </Card>
+  <Card title="Edit" icon="pen" color="#10b981">
+    Edit text files directly in the browser with syntax highlighting
+  </Card>
+  <Card title="Upload & Download" icon="arrows-up-down" color="#f59e0b">
+    Upload files from your computer or download files to it
+  </Card>
+  <Card title="Permissions" icon="lock" color="#8b5cf6">
+    View and change file/directory permissions (chmod)
+  </Card>
+</CardGroup>
+
+### File Operations
+
+| Operation | Description |
+|-----------|-------------|
+| **Create file/folder** | New blank file or directory |
+| **Upload** | Single file or ZIP archive (auto-extracted) |
+| **Download** | Download file or compress directory as ZIP |
+| **Rename** | Rename file or directory |
+| **Move / Copy** | Move or copy within the server filesystem |
+| **Delete** | Permanently remove (no recycle bin) |
+| **Chmod** | Change permissions (numeric or symbolic) |
+| **Chown** | Change owner and group |
+| **Edit** | Open text files in the built-in code editor |
+| **Archive** | Create or extract `.zip`, `.tar.gz` archives |
+
+### Quick Access Paths
+
+The file manager includes bookmarks for common paths:
+
+| Bookmark | Path |
+|----------|------|
+| Web Root | `/var/www/html` |
+| Nginx Configs | `/etc/nginx/sites-available` |
+| App Containers | `/opt/areawp/` |
+| System Logs | `/var/log/` |
+| Home Directory | `/home/` |
+
+---
+
+## Code Editor
+
+Click any text file to open the built-in code editor with:
+- Syntax highlighting (PHP, HTML, CSS, JS, YAML, JSON, shell)
+- Line numbers
+- Search & replace
+- Auto-save option
+
+<Warning>
+Editing configuration files (Nginx, PHP-FPM, etc.) directly may affect running services. Always test changes before saving to production.
+</Warning>
+
+---
+
+## FTP Server
+
+**Path:** `/ftp`
+
+AreaWP includes a managed FTP/SFTP server so clients and developers can access their sites using standard FTP clients.
+
+### FTP Accounts
+
+| Field | Description |
+|-------|-------------|
+| **Username** | FTP login name |
+| **Password** | Encrypted password |
+| **Home Directory** | Root path the user can access (chrooted) |
+| **Server** | Which server this account is on |
+| **Protocol** | FTP, FTPS, SFTP |
+| **Permissions** | Read-only or read/write |
+
+### Creating an FTP Account
+
+1. Go to **Files → FTP Server**
+2. Click **New FTP Account**
+3. Enter username, password, and home directory
+4. Choose protocol (SFTP recommended for security)
+5. Click **Create**
+
+The account is created immediately and credentials can be shared with the client.
+
+### Connection Details
+
+Once an FTP account is created, AreaWP shows the connection information:
+
+```
+Protocol: SFTP
+Host:     your-server-ip
+Port:     22  (SFTP) / 21 (FTP) / 990 (FTPS)
+Username: ftpuser_client1
+Password: ••••••••
+Path:     /var/www/client1.com
+```
+
+### Security Recommendations
+
+<Tip>
+Use **SFTP** (SSH File Transfer Protocol) instead of plain FTP. SFTP encrypts the connection and is natively supported by all modern FTP clients (FileZilla, Cyberduck, etc.).
+</Tip>
+
+- Always use SFTP or FTPS — never plain FTP over the internet
+- Set the home directory to the specific site root, not `/`
+- Use strong, unique passwords for each FTP account
+- Remove FTP accounts when clients no longer need access

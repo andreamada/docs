@@ -1,0 +1,135 @@
+---
+title: "Dashboard"
+description: "The AreaWP dashboard gives you a real-time overview of your servers, sites, and platform health."
+icon: "layout-dashboard"
+---
+
+<Info>
+**Path:** Dashboard (home `/`)
+
+The dashboard is the first page you see after logging in. It provides at-a-glance metrics for your entire infrastructure.
+</Info>
+
+## Dashboard Layout
+
+The dashboard is divided into several sections that update in real time via WebSocket.
+
+<CardGroup cols={3}>
+  <Card title="Server Metrics" icon="server" color="#6366f1">
+    CPU, RAM, disk, and network across all connected servers
+  </Card>
+  <Card title="Site Overview" icon="globe" color="#10b981">
+    Total sites, active deployments, and recent activity
+  </Card>
+  <Card title="Platform Health" icon="shield-check" color="#f59e0b">
+    License status, pending tasks, and alerts
+  </Card>
+</CardGroup>
+
+---
+
+## Metric Cards
+
+The top row of the dashboard shows key counters:
+
+| Metric | Description |
+|--------|-------------|
+| **Servers** | Total connected agents (online / offline) |
+| **Sites** | Total deployed applications |
+| **Users** | Registered client accounts |
+| **Backups** | Recent backup operations |
+| **Subscriptions** | Active client subscriptions |
+| **Alerts** | Open security or health alerts |
+
+---
+
+## Server Health
+
+The server health section lists all connected agents with their real-time resource usage:
+
+- **CPU usage** — percentage across all cores
+- **RAM usage** — used / total memory
+- **Disk usage** — used / total storage
+- **Load average** — 1m, 5m, 15m averages
+- **Uptime** — time since last reboot
+- **Status** — Online / Offline / Warning
+
+Click any server row to navigate to that server's detail page.
+
+---
+
+## Recent Activity
+
+The activity feed shows the last 20 actions performed on the platform:
+
+- Site deployments and deletions
+- Backup completions
+- User registrations and login events
+- Security alerts (failed logins, blocked IPs)
+- Subscription changes and payments
+- System tasks and cron job executions
+
+<Tip>
+For full activity history, navigate to **Administration → Activity Overview** (`/activity`).
+</Tip>
+
+---
+
+## Quick Actions
+
+The dashboard toolbar provides shortcuts for the most common tasks:
+
+| Action | Description |
+|--------|-------------|
+| **New Site** | Deploy a new WordPress site or app |
+| **Add Server** | Register a new managed server |
+| **Invite User** | Send a client invitation email |
+| **Create Backup** | Trigger a manual backup |
+
+---
+
+## Platform Mode
+
+The dashboard header shows whether you are in **SaaS** or **WaaS** mode. This affects which features are visible and how billing is configured. Change the platform mode in **Administration → Settings → Platform**.
+
+---
+
+## Sidebar Navigation
+
+The sidebar on the left organizes all platform features into categories. Admins see all sections; regular users see only what is relevant to their account.
+
+<AccordionGroup>
+  <Accordion title="Overview" icon="layout-dashboard">
+    Dashboard — the home screen with all platform metrics.
+  </Accordion>
+
+  <Accordion title="Infrastructure" icon="server">
+    Servers, WordPress, Services, Workflow, Databases, Docker, Git, Domains — everything related to hosting and deployment.
+  </Accordion>
+
+  <Accordion title="Operations" icon="gear">
+    Files, Monitoring, Backups, Cron Jobs, Security, Email, Terminal — day-to-day server management tasks.
+  </Accordion>
+
+  <Accordion title="Administration" icon="shield">
+    Activity, Users, Subscriptions, Transactions, Pricing Plans, Payment Gateways, Settings — admin-only business management.
+  </Accordion>
+
+  <Accordion title="System" icon="box">
+    Marketplace, Billing, Support — platform-level features for users and administrators.
+  </Accordion>
+</AccordionGroup>
+
+### Sidebar Presets
+
+Admins can switch between sidebar presets to show only the features relevant to their workflow:
+
+| Preset | Shows |
+|--------|-------|
+| **Full** | Everything |
+| **Web Hosting** | Domains, SSL, databases, core web tools |
+| **Email Admin** | Email server, DNS, monitoring, security |
+| **Docker / DevOps** | Docker, Git, monitoring, workflow |
+| **Minimal** | Dashboard, servers, terminal only |
+
+Customize presets via **Settings → Sidebar** or from the user menu at the bottom of the sidebar.

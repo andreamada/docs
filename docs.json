@@ -3,77 +3,76 @@
   "theme": "mint",
   "name": "AreaWP Documentation",
   "colors": {
-    "primary": "#163e49",
-    "light": "#07C983",
-    "dark": "#163e49"
+    "primary": "#6366f1",
+    "light": "#818cf8",
+    "dark": "#4f46e5"
   },
   "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
-        "tab": "Knowledge Base",
+        "tab": "Documentation",
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
               "index",
-              "technical-details",
               "requirements",
-              "installation"
+              "installation",
+              "quick-start"
             ]
           },
           {
-          "group": "Configuration",
+            "group": "Overview",
             "pages": [
-              "admin/general-settings",
-              "admin/payments-configuration",
-              "admin/websites-configuration",
-              "admin/domains-configuration",
-              "admin/packages-configuration",
-              "admin/autorenewal-configuration",
-              "admin/roles-configuration",
-              "admin/emails-configuration",
-              "admin/theme-configuration"
+              "overview/dashboard"
             ]
-            },
+          },
           {
-          "group": "Integrations",
+            "group": "Infrastructure",
             "pages": [
-              "integrations/mainwp",
-              "integrations/google",
-              "integrations/facebook",
-              "integrations/onesignal-chat"
+              "infrastructure/servers",
+              "infrastructure/wordpress",
+              "infrastructure/services",
+              "infrastructure/workflow",
+              "infrastructure/databases",
+              "infrastructure/docker",
+              "infrastructure/git",
+              "infrastructure/domains"
             ]
-            },
+          },
           {
-          "group": "Usage",
+            "group": "Operations",
             "pages": [
-              "usage/templates-manager",
-              "usage/users-manager",
-              "usage/websites-manager",
-              "usage/plugins-manager",
-              "usage/orders-manager",
-              "usage/invoices-manager"
+              "operations/files",
+              "operations/monitoring",
+              "operations/backups",
+              "operations/cron",
+              "operations/security",
+              "operations/email",
+              "operations/terminal"
             ]
-            },
+          },
           {
-          "group": "Server Management",
+            "group": "Administration",
             "pages": [
-              "server/wordpress-manager",
-              "server/ip-manager",
-              "server/server-migration",
-              "server/server-manager"
+              "administration/overview",
+              "administration/users",
+              "administration/subscriptions",
+              "administration/transactions",
+              "administration/pricing",
+              "administration/payment-gateways",
+              "administration/settings"
             ]
-            },
+          },
           {
-          "group": "Extra",
+            "group": "Platform",
             "pages": [
-              "extra/task-manager",
-              "extra/telesales-manager",
-              "extra/plugins-addons-configuration",
-              "extra/service-expiration"
+              "platform/marketplace",
+              "platform/billing",
+              "platform/support"
             ]
-            }
+          }
         ]
       }
     ],
@@ -85,13 +84,13 @@
           "icon": "book-open-cover"
         },
         {
-          "anchor": "Blog",
-          "href": "https://areawp.com/blog",
-          "icon": "newspaper"
+          "anchor": "Changelog",
+          "href": "https://areawp.com/changelog",
+          "icon": "list"
         },
         {
           "anchor": "Roadmap",
-          "href": "https://app.areawp.com",
+          "href": "https://areawp.com/roadmap",
           "icon": "lightbulb"
         }
       ]

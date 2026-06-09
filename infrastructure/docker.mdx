@@ -1,0 +1,161 @@
+---
+title: "Docker"
+description: "Manage Docker containers, images, networks, and volumes across your connected servers."
+icon: "box"
+---
+
+<Info>
+**Path:** Docker (`/docker`) — Admin only
+
+The Docker section provides full lifecycle management for containers on all your connected servers.
+</Info>
+
+## Container Management
+
+The main Docker page lists all containers across all connected servers. Each row shows:
+
+| Column | Description |
+|--------|-------------|
+| **Name** | Container name |
+| **Image** | Docker image and tag |
+| **Server** | Which server the container runs on |
+| **Status** | Running / Stopped / Restarting / Exited |
+| **Ports** | Exposed port mappings |
+| **CPU / RAM** | Live resource usage |
+| **Uptime** | Time since container started |
+
+### Container Actions
+
+| Action | Description |
+|--------|-------------|
+| ▶ **Start** | Start a stopped container |
+| ⏹ **Stop** | Gracefully stop a running container |
+| 🔄 **Restart** | Stop and start the container |
+| 🗑 **Remove** | Delete the container (and optionally its volumes) |
+| 📋 **Logs** | View real-time and historical container logs |
+| 💻 **Terminal** | Open a bash/sh shell inside the container |
+| 🔧 **Rebuild** | Pull the latest image and recreate the container |
+
+---
+
+## Running a New Container
+
+<Steps>
+  <Step title="Click New Container">
+    From the Docker page, click **New Container**.
+  </Step>
+
+  <Step title="Select server and image">
+    Choose the target server and enter the Docker image (e.g. `nginx:latest`, `mysql:8.0`).
+  </Step>
+
+  <Step title="Configure the container">
+    | Setting | Description |
+    |---------|-------------|
+    | **Name** | Container name |
+    | **Ports** | Host:container port mappings (`8080:80`) |
+    | **Volumes** | Host:container volume mounts |
+    | **Environment Variables** | Key=value pairs |
+    | **Restart Policy** | always, unless-stopped, on-failure |
+    | **Network** | Docker network to attach |
+    | **Memory Limit** | Maximum RAM (e.g. `512m`, `2g`) |
+    | **CPU Limit** | CPU cores fraction (e.g. `0.5`) |
+  </Step>
+
+  <Step title="Deploy">
+    Click **Deploy**. AreaWP pulls the image (if not cached) and starts the container.
+  </Step>
+</Steps>
+
+---
+
+## Docker Compose Stacks
+
+Manage multi-container applications as Docker Compose stacks.
+
+### Deploying a Stack
+
+1. Go to **Docker → Stacks**
+2. Click **New Stack**
+3. Paste or upload your `docker-compose.yml`
+4. Set environment variables if required
+5. Click **Deploy**
+
+AreaWP stores the compose file and manages the stack lifecycle (`up`, `down`, `pull`, `restart`).
+
+### Example Stack
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: myapp:latest
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+```
+
+---
+
+## Images
+
+**Docker → Images** lists all pulled images on each server:
+
+- Pull a new image from Docker Hub or a private registry
+- View image size and layers
+- Delete unused images to reclaim disk space
+- Configure private registry credentials
+
+---
+
+## Networks
+
+**Docker → Networks** shows all Docker networks:
+
+| Network | Type | Purpose |
+|---------|------|---------|
+| `bridge` | Bridge | Default network for standalone containers |
+| `areawp-network` | Bridge | Shared network for AreaWP components |
+| `host` | Host | Container shares host networking |
+| Custom | Bridge / Overlay | User-created networks for app isolation |
+
+---
+
+## Volumes
+
+**Docker → Volumes** manages persistent storage:
+
+- View all named volumes and their sizes
+- Create new named volumes
+- Inspect which containers use each volume
+- Delete unused volumes
+
+<Warning>
+Deleting a Docker volume permanently destroys its data. Always back up volumes before removing them.
+</Warning>
+
+---
+
+## Resource Monitoring
+
+The Docker dashboard shows real-time resource usage per container. For detailed per-container metrics over time, use **Operations → Monitoring**.
+
+<Tip>
+AreaWP itself runs the frontend as a Docker container (`areawp-frontend`). This container is protected and cannot be stopped or removed from the Docker management UI.
+</Tip>

@@ -1,0 +1,154 @@
+---
+title: "Domains"
+description: "Manage domains, DNS zones, SSL certificates, and domain pricing across your platform."
+icon: "globe"
+---
+
+<Info>
+**Path:** Domains (`/domains`)
+
+The Domains section provides DNS management, SSL certificate provisioning, and domain pricing configuration for all sites on your platform.
+</Info>
+
+## Overview
+
+<CardGroup cols={3}>
+  <Card title="Domains" icon="globe" color="#6366f1">
+    View and manage all domains pointing to your servers
+  </Card>
+  <Card title="DNS Zones" icon="layer-group" color="#10b981">
+    Manage DNS records for domains you control
+  </Card>
+  <Card title="SSL Certificates" icon="lock" color="#f59e0b">
+    Provision and renew Let's Encrypt certificates
+  </Card>
+</CardGroup>
+
+---
+
+## Domain Management
+
+The main Domains page lists every domain associated with your platform:
+
+| Column | Description |
+|--------|-------------|
+| **Domain** | The domain name |
+| **Site** | Which application this domain serves |
+| **Server** | Which server handles requests |
+| **SSL** | Certificate status (valid / expiring / missing) |
+| **Registrar** | Where the domain is registered |
+| **Expiry** | Domain registration expiry date |
+
+### Adding a Domain to a Site
+
+1. Go to **Domains** → **Add Domain**
+2. Enter the domain name
+3. Select the site to point to
+4. AreaWP updates the Nginx configuration and attempts to provision an SSL certificate
+
+---
+
+## DNS Zones
+
+**Path:** `/dns`
+
+Manage DNS records for domains whose nameservers point to your AreaWP server or integrated DNS provider.
+
+### Supported Record Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **A** | IPv4 address | `192.0.2.1` |
+| **AAAA** | IPv6 address | `2001:db8::1` |
+| **CNAME** | Canonical name alias | `www → @` |
+| **MX** | Mail exchange | `mail.example.com` (priority 10) |
+| **TXT** | Text record | SPF, DKIM, DMARC, domain verification |
+| **NS** | Nameserver | `ns1.example.com` |
+| **CAA** | Certificate Authority Authorization | `letsencrypt.org` |
+| **SRV** | Service locator | `_sip._tcp` records |
+| **PTR** | Reverse DNS | `1.2.0.192.in-addr.arpa` |
+
+### Creating a Zone
+
+1. Go to **Domains → DNS Zones** → **New Zone**
+2. Enter the domain name
+3. AreaWP creates the zone with default records (SOA, NS)
+4. Point your domain's nameservers to AreaWP's nameservers
+
+### DNS Provider Integration
+
+Connect external DNS providers (Cloudflare, Route53, etc.) to manage DNS records directly:
+
+| Provider | Records Managed |
+|---------|----------------|
+| Cloudflare | All record types + proxy toggle |
+| AWS Route 53 | All record types |
+| DigitalOcean DNS | All record types |
+| Manual (built-in) | All record types via PowerDNS |
+
+---
+
+## SSL Certificates
+
+**Path:** `/ssl`
+
+AreaWP integrates with **Let's Encrypt** to provision free SSL certificates automatically.
+
+### Certificate Lifecycle
+
+| Status | Meaning |
+|--------|---------|
+| ✅ Valid | Certificate active, expiry > 30 days |
+| ⚠️ Expiring Soon | Expiry within 30 days |
+| 🔄 Auto-renewing | Renewal in progress |
+| ❌ Expired | Certificate expired |
+| ⏳ Pending | Certificate request submitted |
+| ❗ Failed | Provisioning failed — check domain DNS |
+
+### Provisioning a Certificate
+
+Certificates are provisioned automatically when:
+- A new site is deployed with a domain
+- A domain is added to an existing site
+
+To provision manually:
+
+1. Go to **Domains → SSL Certificates**
+2. Click **Issue Certificate** next to the domain
+3. AreaWP runs the ACME challenge (HTTP-01 or DNS-01)
+4. Nginx is updated with the new certificate
+
+### Auto-Renewal
+
+AreaWP checks certificates daily and renews those expiring within 30 days. Renewal is fully automatic.
+
+<Tip>
+If certificate provisioning fails, check that:
+1. The domain resolves to your server's IP
+2. Port 80 is accessible for the HTTP-01 challenge
+3. No firewall rules block Let's Encrypt verification
+</Tip>
+
+### Wildcard Certificates
+
+Wildcard certificates (`*.example.com`) require DNS-01 validation. Connect a DNS provider (Cloudflare, Route53) with write access to enable wildcard SSL.
+
+---
+
+## Domain Pricing
+
+**Path:** `/domains/pricing` — Admin only
+
+Configure pricing for domain registration and renewal services offered to your clients.
+
+| Setting | Description |
+|---------|-------------|
+| **TLD** | Top-level domain (e.g. `.com`, `.net`, `.io`) |
+| **Registration Price** | Price charged to client for new registrations |
+| **Renewal Price** | Annual renewal price |
+| **Transfer Price** | Domain transfer price |
+| **Registrar Cost** | Your cost (for margin calculation) |
+
+<Info>
+Domain pricing is only relevant if you resell domain registrations via a registrar API (Namecheap, Resellerclub, etc.). Configure the registrar integration in **Administration → Settings → Registrars**.
+</Info>

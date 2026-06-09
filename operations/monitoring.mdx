@@ -1,0 +1,152 @@
+---
+title: "Monitoring"
+description: "Real-time server and application monitoring with alerts and public status pages."
+icon: "chart-line"
+---
+
+<Info>
+**Path:** Monitoring (`/monitoring`) → Status Pages (`/status-pages`) — Admin only
+
+Monitoring gives you real-time visibility into server health, resource usage, and application availability.
+</Info>
+
+## Server Monitoring
+
+The Monitoring dashboard shows live metrics for all connected servers via WebSocket streams.
+
+### Metrics Available
+
+<CardGroup cols={2}>
+  <Card title="CPU" icon="microchip" color="#6366f1">
+    Per-core and aggregate CPU usage, load averages (1m/5m/15m)
+  </Card>
+  <Card title="Memory" icon="memory" color="#10b981">
+    RAM usage, swap usage, available memory
+  </Card>
+  <Card title="Disk" icon="hard-drive" color="#f59e0b">
+    Usage per partition, read/write I/O rates, inode usage
+  </Card>
+  <Card title="Network" icon="network-wired" color="#8b5cf6">
+    Inbound/outbound bandwidth per interface, packet rates
+  </Card>
+</CardGroup>
+
+### Historical Charts
+
+Metrics are stored for up to **90 days**. Select time ranges to view historical trends:
+
+- Last 1 hour (5-second resolution)
+- Last 24 hours (1-minute resolution)
+- Last 7 days (5-minute resolution)
+- Last 30 days (1-hour resolution)
+- Last 90 days (6-hour resolution)
+
+---
+
+## Uptime Monitoring
+
+AreaWP monitors your sites and APIs at configurable intervals and alerts you when they go down.
+
+### Creating an Uptime Monitor
+
+1. Go to **Monitoring → Uptime Checks**
+2. Click **New Monitor**
+3. Configure:
+
+| Field | Options |
+|-------|---------|
+| **URL** | Full URL to monitor (e.g. `https://mysite.com`) |
+| **Type** | HTTP/HTTPS ping, TCP port check, DNS check |
+| **Interval** | 30s, 1m, 5m, 10m, 15m, 30m |
+| **Timeout** | Request timeout (default: 10s) |
+| **Expected Status** | HTTP status code(s) to treat as "up" (default: 200-299) |
+| **Keyword Check** | Optional: check that response body contains a string |
+| **Alert Contacts** | Who to notify when the monitor triggers |
+
+### Alert Channels
+
+Configure alert destinations in **Settings → Alerts**:
+
+| Channel | Configuration |
+|---------|--------------|
+| **Email** | SMTP address or addresses |
+| **Slack** | Incoming webhook URL |
+| **Telegram** | Bot token + chat ID |
+| **Webhook** | HTTP POST to any URL |
+| **Discord** | Webhook URL |
+
+---
+
+## Alert Rules
+
+Set threshold-based alerts for server resources:
+
+| Metric | Operators | Example |
+|--------|----------|---------|
+| CPU usage | >, >=, <, <= | CPU > 85% for 5 minutes |
+| Memory usage | >, >= | RAM > 90% |
+| Disk usage | >, >= | Disk > 80% |
+| Load average | >, >= | Load > 4 for 10 minutes |
+| Disk read/write | > | Write > 100 MB/s |
+| Network traffic | > | Inbound > 100 Mbps |
+
+### Alert States
+
+| State | Meaning |
+|-------|---------|
+| 🟢 **OK** | Metric within normal range |
+| 🟡 **Warning** | Approaching threshold |
+| 🔴 **Critical** | Threshold exceeded |
+| ⚪ **No Data** | Agent not reporting |
+
+Alerts have a configurable **cooldown period** to prevent notification spam.
+
+---
+
+## Status Pages
+
+**Path:** `/status-pages`
+
+Create public status pages to communicate uptime and incidents to your clients.
+
+### Creating a Status Page
+
+1. Go to **Monitoring → Status Pages**
+2. Click **New Status Page**
+3. Configure:
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Status page title (e.g. "AreaWP Platform Status") |
+| **Slug** | URL slug (e.g. `status.yourplatform.com`) |
+| **Custom Domain** | Use your own domain for the status page |
+| **Components** | Which services/monitors to display |
+| **Visibility** | Public (no login) or private (link required) |
+| **Branding** | Custom logo and colors |
+
+### Status Components
+
+Each component on the status page represents a service:
+
+| Status | Badge |
+|--------|-------|
+| ✅ Operational | Green |
+| ⚠️ Degraded Performance | Yellow |
+| 🔴 Partial Outage | Orange |
+| ❌ Major Outage | Red |
+| 🔧 Maintenance | Blue |
+
+### Incident Management
+
+Create incidents to communicate issues to subscribers:
+
+1. Go to the status page → **New Incident**
+2. Choose affected components and severity
+3. Write an update message
+4. Post the incident — subscribers are notified immediately
+
+Post follow-up updates as the incident progresses, and mark it **Resolved** when complete.
+
+<Tip>
+Subscribers can receive incident notifications via email or RSS. The subscription link is shown at the bottom of every status page.
+</Tip>

@@ -1,0 +1,129 @@
+---
+title: "Terminal & Logs"
+description: "Access a real-time browser-based terminal and view system logs for all connected servers."
+icon: "terminal"
+---
+
+<Info>
+**Path:** Terminal & Logs (`/terminal`) — Admin only
+
+The Terminal section provides a fully functional browser-based SSH terminal and real-time log streaming for all connected servers.
+</Info>
+
+## Browser Terminal
+
+Open a terminal session to any connected server directly from your browser — no SSH client required.
+
+### Starting a Terminal Session
+
+1. Go to **Terminal**
+2. Select the target server from the dropdown
+3. The terminal opens immediately — you're connected as `root` (or the agent user)
+
+### Terminal Features
+
+| Feature | Description |
+|---------|-------------|
+| **Full TTY** | Complete terminal emulation (xterm-256color) |
+| **Resize** | Terminal resizes with your browser window |
+| **Copy/Paste** | Standard clipboard integration |
+| **Multiple tabs** | Open terminal sessions to multiple servers simultaneously |
+| **History** | Scrollback buffer (10,000 lines) |
+| **Search** | Ctrl+F to search terminal output |
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|---------|--------|
+| `Ctrl+C` | Interrupt current process |
+| `Ctrl+D` | Close terminal / EOF |
+| `Ctrl+L` | Clear screen |
+| `Ctrl+A` | Move to start of line |
+| `Ctrl+E` | Move to end of line |
+| `Ctrl+U` | Clear from cursor to start |
+| `Ctrl+K` | Clear from cursor to end |
+
+<Warning>
+The terminal opens a root shell on the selected server. All commands are executed with full system privileges. Use with care.
+</Warning>
+
+---
+
+## Log Viewer
+
+Stream real-time logs from any server or container without leaving the browser.
+
+### Available Log Sources
+
+<Tabs>
+  <Tab title="System Logs">
+    | Log | Path | Description |
+    |-----|------|-------------|
+    | Syslog | `/var/log/syslog` | General system messages |
+    | Auth log | `/var/log/auth.log` | SSH logins and sudo usage |
+    | Kernel | `/var/log/kern.log` | Kernel messages |
+    | Fail2ban | `/var/log/fail2ban.log` | Banned IPs |
+    | UFW | `/var/log/ufw.log` | Firewall activity |
+  </Tab>
+
+  <Tab title="Web Logs">
+    | Log | Path | Description |
+    |-----|------|-------------|
+    | Nginx access | `/var/log/nginx/access.log` | HTTP request log |
+    | Nginx error | `/var/log/nginx/error.log` | Nginx errors |
+    | Per-site access | `/var/log/nginx/<site>.access.log` | Site-specific access |
+    | Per-site error | `/var/log/nginx/<site>.error.log` | Site-specific errors |
+    | PHP-FPM | `/var/log/php<version>-fpm.log` | PHP process manager |
+  </Tab>
+
+  <Tab title="App Logs">
+    | Log | Source | Description |
+    |-----|--------|-------------|
+    | AreaWP backend | `journalctl -u areawp` | Panel API logs |
+    | WordPress debug | `wp-content/debug.log` | WP_DEBUG output |
+    | MySQL | `/var/log/mysql/error.log` | Database errors |
+    | PostgreSQL | `journalctl -u postgresql` | DB server logs |
+  </Tab>
+
+  <Tab title="Docker Logs">
+    Stream logs from any Docker container. Select the container from the dropdown and AreaWP runs `docker logs -f <container>` on the server.
+  </Tab>
+</Tabs>
+
+### Log Features
+
+| Feature | Description |
+|---------|-------------|
+| **Live stream** | New lines appear in real time |
+| **Filter** | Search/filter by keyword or regex |
+| **Highlight** | Color-code ERROR, WARN, INFO lines |
+| **Download** | Export the last N lines as a text file |
+| **Pause** | Pause streaming to read without new lines arriving |
+| **Lines** | Show last 100, 500, 1000, or 5000 lines |
+
+---
+
+## Systemd Services
+
+View and manage systemd services on connected servers from the Terminal section:
+
+| Operation | Description |
+|-----------|-------------|
+| **Status** | Check if a service is running |
+| **Start / Stop / Restart** | Service lifecycle management |
+| **Enable / Disable** | Control autostart on boot |
+| **View logs** | `journalctl -u <service> -f` |
+
+Common services managed via the panel:
+
+- `areawp` — AreaWP backend
+- `nginx` — Web server
+- `postgresql` — Database
+- `docker` — Docker daemon
+- `fail2ban` — Intrusion prevention
+- `postfix` — Mail server
+- `dovecot` — IMAP server
+
+<Tip>
+Quick restart shortcuts are also available from the **Dashboard** for the most common services (AreaWP, Nginx, Docker).
+</Tip>

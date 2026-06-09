@@ -1,0 +1,134 @@
+---
+title: "Transactions"
+description: "View and manage all payment transactions, invoices, and refunds on your platform."
+icon: "dollar-sign"
+---
+
+<Info>
+**Path:** Administration → Transactions (`/transactions`) — Admin only
+
+Transactions gives you a complete view of all payment activity across your platform — every invoice, payment, refund, and pending charge.
+</Info>
+
+## Transaction List
+
+The Transactions page shows every financial event:
+
+| Column | Description |
+|--------|-------------|
+| **ID** | Unique transaction identifier |
+| **Date** | When the transaction occurred |
+| **User** | Client who was charged |
+| **Description** | What was billed (plan name, period) |
+| **Amount** | Charge amount and currency |
+| **Status** | Paid / Pending / Failed / Refunded |
+| **Method** | Stripe / Bank Transfer |
+| **Invoice** | Download or view invoice |
+
+### Transaction Statuses
+
+| Status | Meaning |
+|--------|---------|
+| ✅ **Paid** | Payment confirmed and received |
+| ⏳ **Pending** | Awaiting payment (bank transfer) or processing |
+| ❌ **Failed** | Payment attempt rejected |
+| 🔄 **Refunded** | Full or partial refund issued |
+| ⚡ **Disputed** | Chargeback filed by client |
+
+---
+
+## Filtering and Search
+
+Filter transactions by:
+- Date range (today, this month, custom)
+- Status (paid, pending, failed, refunded)
+- Payment method (Stripe, Bank Transfer)
+- User (search by name or email)
+- Amount range
+
+Export filtered results as **CSV** or **PDF** for accounting.
+
+---
+
+## Invoice Management
+
+Each transaction generates an invoice automatically.
+
+### Invoice Details
+
+| Field | Value |
+|-------|-------|
+| Invoice number | Auto-generated sequential ID |
+| Issue date | Date of charge |
+| Due date | Payment due date |
+| Bill to | Client name, email, address |
+| Line items | Plan name, billing period, amount |
+| Tax | If VAT/tax is configured |
+| Total | Amount due |
+
+### Invoice Actions
+
+| Action | Description |
+|--------|-------------|
+| **View** | Open invoice in the browser |
+| **Download PDF** | Download printable invoice |
+| **Send to client** | Email the invoice to the client |
+| **Mark as paid** | Manually mark pending invoices as paid |
+| **Void** | Cancel an invoice (creates a credit note) |
+
+---
+
+## Manual Transactions
+
+Create manual transactions for offline payments (bank transfers, cash, etc.):
+
+1. Go to **Transactions** → **New Transaction**
+2. Select the user
+3. Enter amount, description, and date
+4. Set status to **Paid**
+5. Optionally link to a subscription
+
+This creates an invoice and records the payment in the transaction history.
+
+---
+
+## Refunds
+
+Issue refunds from the transaction detail page:
+
+### Stripe Refunds
+
+1. Click the transaction
+2. Click **Issue Refund**
+3. Enter the amount (full or partial)
+4. Add an optional reason
+5. Confirm — AreaWP processes the refund via Stripe API
+
+Refunds typically appear on the client's statement within 5–10 business days.
+
+### Bank Transfer Refunds
+
+For bank transfer payments, mark the refund manually:
+
+1. Process the bank transfer externally
+2. Click **Mark as Refunded** on the transaction
+3. Enter the refund amount and reference
+
+---
+
+## Revenue Reports
+
+The transactions overview includes revenue metrics:
+
+| Metric | Description |
+|--------|-------------|
+| **Total revenue** | Sum of all paid transactions |
+| **MRR** | Monthly Recurring Revenue |
+| **ARR** | Annual Recurring Revenue |
+| **Revenue by plan** | Breakdown per pricing tier |
+| **New vs renewal** | New subscriptions vs renewals |
+| **Churn rate** | Percentage of subscriptions canceled |
+
+<Tip>
+Export the full transaction history monthly for reconciliation with your bank statement or accounting software.
+</Tip>

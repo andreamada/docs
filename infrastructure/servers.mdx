@@ -1,0 +1,158 @@
+---
+title: "Servers"
+description: "Manage multiple Linux servers from a single dashboard using the AreaWP agent system."
+icon: "server"
+---
+
+<Info>
+**Path:** Servers (`/servers`)
+
+The Servers section is the hub for multi-server management. Connect unlimited Linux servers via the lightweight AreaWP agent and manage them all from one place.
+</Info>
+
+## Overview
+
+AreaWP uses an agent-based architecture. A small Go binary (the **agent**) is installed on each server you want to manage. The agent connects back to your panel over a secure WebSocket and handles all system operations.
+
+<CardGroup cols={2}>
+  <Card title="Agent Fleet" icon="users" href="#agent-fleet">
+    View and manage all connected servers
+  </Card>
+  <Card title="Fleet Monitor" icon="chart-line" href="#fleet-monitor">
+    Real-time metrics across all servers
+  </Card>
+  <Card title="Cloud Servers" icon="cloud" href="#cloud-servers">
+    Provision new VPS on cloud providers
+  </Card>
+  <Card title="Server Templates" icon="file-code" href="#server-templates">
+    Save and reuse server configurations
+  </Card>
+</CardGroup>
+
+---
+
+## Agent Fleet
+
+**Path:** `/fleet`
+
+The Agent Fleet page lists every server with an installed agent.
+
+### Server Status
+
+| Status | Meaning |
+|--------|---------|
+| 🟢 Online | Agent connected and responding |
+| 🔴 Offline | Agent not reachable |
+| 🟡 Warning | Connected but resource threshold exceeded |
+
+### Connecting a New Server
+
+<Steps>
+  <Step title="Click Add Server">
+    On the Agent Fleet page, click **Add Server**.
+  </Step>
+
+  <Step title="Enter server details">
+    Give the server a name and optional description. Select the OS type.
+  </Step>
+
+  <Step title="Run the install command">
+    Copy the generated install command and run it on the target server as root:
+
+    ```bash
+    curl -fsSL https://your-panel.com/install.sh | sudo bash -s -- \
+      --token "sk_reg_YOUR_TOKEN" \
+      --server "https://your-panel.com"
+    ```
+  </Step>
+
+  <Step title="Agent connects automatically">
+    The agent registers with your panel within seconds. The server appears as **Online** in the fleet.
+  </Step>
+</Steps>
+
+### Server Actions
+
+From the fleet list, you can:
+- **View details** — OS, kernel version, package updates available
+- **SSH Terminal** — open a browser-based terminal session
+- **Restart agent** — reconnect a disconnected agent
+- **Remove server** — unregister and optionally uninstall the agent
+
+---
+
+## Fleet Monitor
+
+**Path:** `/fleet-monitor`
+
+The Fleet Monitor provides a real-time dashboard of all server metrics simultaneously.
+
+### Metrics Displayed
+
+| Metric | Update Frequency |
+|--------|----------------|
+| CPU usage (%) | Every 5 seconds |
+| Memory usage (GB / %) | Every 5 seconds |
+| Disk usage (GB / %) | Every 30 seconds |
+| Network in/out (Mbps) | Every 5 seconds |
+| Load average (1m/5m/15m) | Every 5 seconds |
+| Active connections | Every 10 seconds |
+
+### Threshold Alerts
+
+Set resource thresholds in **Settings → Monitoring** to receive alerts when a server exceeds a limit:
+
+- CPU > 80% for more than 5 minutes
+- RAM > 90%
+- Disk > 85%
+- Load average > (number of CPUs × 2)
+
+---
+
+## Cloud Servers
+
+**Path:** `/cloud`
+
+Provision new cloud VPS instances directly from AreaWP without leaving the panel.
+
+### Supported Providers
+
+| Provider | Regions | Instance Types |
+|---------|---------|---------------|
+| DigitalOcean | All regions | Droplets (shared/dedicated) |
+| Hetzner | EU + US | CX, CPX, CCX |
+| Vultr | All regions | Cloud Compute, High Frequency |
+| Linode (Akamai) | All regions | Nanode, Linode plans |
+
+### Provisioning a Server
+
+1. Go to **Servers → Cloud Servers**
+2. Click **New Server**
+3. Select your cloud provider (API key required)
+4. Choose region, instance type, and OS
+5. Click **Provision** — AreaWP creates the VPS and automatically installs the agent
+
+<Tip>
+Connect your cloud provider API keys in **Administration → Settings → Cloud Providers**.
+</Tip>
+
+---
+
+## Server Templates
+
+**Path:** `/server-templates`
+
+Save your server configurations as templates to quickly provision new servers with identical setups.
+
+### What Templates Store
+
+- Installed packages and versions
+- Nginx/Apache configuration
+- PHP versions and extensions
+- Firewall rules (UFW)
+- Cron jobs
+- Environment variables
+
+### Using a Template
+
+When provisioning a cloud server, select a saved template. AreaWP runs the template's provisioning script after the base OS is ready.

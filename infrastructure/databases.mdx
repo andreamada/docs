@@ -1,0 +1,125 @@
+---
+title: "Databases"
+description: "Create and manage MySQL and PostgreSQL databases across your connected servers."
+icon: "database"
+---
+
+<Info>
+**Path:** Databases (`/databases`) — Admin only
+
+The Databases section provides a centralized interface for managing all databases on your connected servers.
+</Info>
+
+## Supported Engines
+
+| Engine | Versions | Use Case |
+|--------|---------|---------|
+| **MySQL** | 5.7, 8.0, 8.4 | WordPress, PHP apps, general purpose |
+| **MariaDB** | 10.6, 10.11, 11.x | Drop-in MySQL replacement |
+| **PostgreSQL** | 14, 15, 16 | AreaWP panel, Python/Node apps |
+
+---
+
+## Creating a Database
+
+<Steps>
+  <Step title="Navigate to Databases">
+    Click **New Database** from the Databases page.
+  </Step>
+
+  <Step title="Choose server and engine">
+    Select which connected server to create the database on and which engine (MySQL/MariaDB/PostgreSQL).
+  </Step>
+
+  <Step title="Configure the database">
+    | Field | Description |
+    |-------|-------------|
+    | **Database Name** | The database identifier (lowercase, no spaces) |
+    | **Username** | Dedicated database user |
+    | **Password** | Auto-generated strong password (or set manually) |
+    | **Character Set** | Default: `utf8mb4` for MySQL, `UTF8` for PostgreSQL |
+    | **Collation** | Default: `utf8mb4_unicode_ci` |
+  </Step>
+
+  <Step title="Set permissions">
+    Choose what the user can do: ALL PRIVILEGES, SELECT only, or custom (INSERT, UPDATE, DELETE, etc.).
+  </Step>
+</Steps>
+
+---
+
+## Database Operations
+
+From each database's detail page:
+
+<AccordionGroup>
+  <Accordion title="phpMyAdmin / pgAdmin" icon="table">
+    Open the database admin interface directly from AreaWP. Authentication is handled automatically — no separate login required.
+  </Accordion>
+
+  <Accordion title="Import / Export" icon="arrows-up-down">
+    Import a `.sql` file or export the database as a SQL dump directly from the panel. Supports gzip compression for large databases.
+  </Accordion>
+
+  <Accordion title="Query Runner" icon="code">
+    Run SQL queries directly from the panel without opening phpMyAdmin. Results are displayed in a table view.
+  </Accordion>
+
+  <Accordion title="User Management" icon="users">
+    Add, remove, or modify database users and their permissions. Grant access to specific tables if needed.
+  </Accordion>
+
+  <Accordion title="Performance" icon="chart-bar">
+    View slow query logs, table sizes, index usage, and connection counts. Identify performance bottlenecks without SSH.
+  </Accordion>
+
+  <Accordion title="Clone Database" icon="copy">
+    Clone a database to the same server or a different connected server. Useful for creating staging copies.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Backups
+
+Databases can be backed up independently from site backups:
+
+1. Go to **Databases** → select a database → **Backup**
+2. Choose the backup destination (local, S3, Backblaze B2)
+3. Download or restore from any saved backup
+
+<Tip>
+For automated database backups, create a backup schedule in **Operations → Backups**.
+</Tip>
+
+---
+
+## Connection Strings
+
+AreaWP displays the connection string for each database in a format ready to paste into your app's configuration:
+
+```env
+# MySQL / MariaDB
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=myapp_db
+DB_USER=myapp_user
+DB_PASSWORD=generated_password
+
+# PostgreSQL
+DATABASE_URL=postgresql://myapp_user:generated_password@localhost:5432/myapp_db
+```
+
+---
+
+## Remote Access
+
+By default, databases only accept connections from `localhost`. To allow remote connections:
+
+1. Go to the database settings → **Remote Access**
+2. Enter the allowed IP address or CIDR range
+3. AreaWP updates the database grants and firewall rules automatically
+
+<Warning>
+Never expose database ports (3306, 5432) publicly. Always use IP whitelisting or SSH tunneling for remote access.
+</Warning>

@@ -1,0 +1,133 @@
+---
+title: "Git"
+description: "Manage Git repositories and trigger deployments from connected servers."
+icon: "code-branch"
+---
+
+<Info>
+**Path:** Git (`/git`) — Admin only
+
+The Git section integrates with GitHub, GitLab, Bitbucket, and self-hosted Git servers to enable automated deployments.
+</Info>
+
+## Git Integration
+
+Connect your Git provider once and AreaWP can automatically deploy code when you push to a branch.
+
+### Supported Providers
+
+| Provider | Authentication | Webhooks |
+|---------|---------------|---------|
+| GitHub | OAuth / Personal Access Token | ✅ |
+| GitLab | OAuth / Personal Access Token | ✅ |
+| Bitbucket | OAuth / App Password | ✅ |
+| Gitea / Forgejo | Personal Access Token | ✅ |
+| Any Git server | SSH key / HTTPS token | ✅ |
+
+---
+
+## Connecting a Repository
+
+<Steps>
+  <Step title="Add credentials">
+    Go to **Git → Credentials** and add your provider credentials (OAuth or token). These are stored encrypted.
+  </Step>
+
+  <Step title="Add a repository">
+    Go to **Git → Repositories** → **Add Repository**. Select your provider and choose the repository from the list.
+  </Step>
+
+  <Step title="Configure deploy settings">
+    | Setting | Description |
+    |---------|-------------|
+    | **Branch** | Branch to watch for changes |
+    | **Target Server** | Which server to deploy to |
+    | **Deploy Path** | Absolute path on server (e.g. `/var/www/myapp`) |
+    | **Post-deploy Hook** | Commands to run after deployment |
+    | **Trigger** | On push / manual only |
+  </Step>
+
+  <Step title="Enable webhook">
+    Copy the webhook URL and add it to your Git provider repository settings. AreaWP will receive push events and deploy automatically.
+  </Step>
+</Steps>
+
+---
+
+## Deployments
+
+**Git → Deployments** shows the deployment history for all repositories.
+
+### Deployment Process
+
+When a push is received (or triggered manually):
+
+1. **Pull** — Fetch the latest commits from the remote
+2. **Build** — Run build commands if configured (npm install, composer install, etc.)
+3. **Deploy** — Copy files to the deploy path
+4. **Post-deploy** — Run post-deploy hooks
+5. **Log** — Record outcome (success/fail) with full output
+
+### Deployment Log
+
+Each deployment entry shows:
+- Commit hash and message
+- Author and timestamp
+- Duration
+- Full command output (expandable)
+- Status: ✅ Success / ❌ Failed / 🔄 In Progress
+
+---
+
+## SSH Keys
+
+AreaWP generates a unique SSH key for each server's agent. This key is used for Git operations on that server.
+
+### Adding the Deploy Key
+
+1. Go to **Git → SSH Keys** for your server
+2. Copy the public key
+3. Add it as a **Deploy Key** in your repository settings (GitHub: Settings → Deploy Keys)
+
+<Tip>
+Deploy keys are read-only by default. Enable write access only if you need to push tags or releases back to the repository from a deploy script.
+</Tip>
+
+---
+
+## Post-Deploy Hooks
+
+Configure commands that run after each successful deployment:
+
+```bash
+# PHP / Laravel
+composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan queue:restart
+
+# Node.js
+npm ci --production
+pm2 restart myapp
+
+# WordPress
+wp cache flush
+wp cron event run --due-now
+
+# Custom
+./deploy-script.sh
+```
+
+---
+
+## Rollbacks
+
+If a deployment fails or introduces a regression, roll back to any previous commit:
+
+1. Go to **Git → Deployments**
+2. Find the last good deployment
+3. Click **Rollback to this version**
+
+AreaWP checks out that specific commit and re-runs the deploy process.

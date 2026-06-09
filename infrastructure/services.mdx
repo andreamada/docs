@@ -1,0 +1,136 @@
+---
+title: "Services & Templates"
+description: "Deploy pre-built application templates for one-click site creation in SaaS and WaaS modes."
+icon: "box"
+---
+
+<Info>
+**Path:** Services (`/services`) → Templates (`/templates`)
+
+Services is the catalog of deployable application templates. It powers self-service deployments for both admins and clients in SaaS/WaaS mode.
+</Info>
+
+## What are Services?
+
+Services are pre-configured application stacks that can be deployed with a single click. They define:
+- Which Docker images to use
+- Environment variables and configuration
+- Database requirements
+- Nginx routing rules
+- Post-install scripts
+
+### Use Cases
+
+<CardGroup cols={2}>
+  <Card title="WordPress Hosting" icon="globe" color="#6366f1">
+    Pre-configured WordPress with plugins, themes, and settings for clients
+  </Card>
+  <Card title="E-commerce Stores" icon="shopping-cart" color="#10b981">
+    WooCommerce or other e-commerce stacks ready to go
+  </Card>
+  <Card title="PHP Applications" icon="code" color="#f59e0b">
+    Custom PHP apps, Laravel, Symfony, or CodeIgniter
+  </Card>
+  <Card title="Static Sites" icon="file-code" color="#8b5cf6">
+    Static HTML/CSS/JS sites served via Nginx
+  </Card>
+</CardGroup>
+
+---
+
+## Templates
+
+**Path:** `/templates`
+
+The Templates page lists all available application templates.
+
+### Template Properties
+
+| Property | Description |
+|----------|-------------|
+| **Name** | Display name shown to clients |
+| **Description** | Short description of what the template provides |
+| **Category** | WordPress, PHP, Node.js, Static, etc. |
+| **PHP Version** | Default PHP version for the container |
+| **Docker Image** | Base image used for the container |
+| **Post-install Script** | Commands run after deployment |
+| **Variables** | User-configurable values (domain, admin email, etc.) |
+| **Visible to Users** | Whether clients can self-deploy this template |
+
+---
+
+## Creating a Template
+
+<Steps>
+  <Step title="Go to Services → Templates">
+    Click **New Template**.
+  </Step>
+
+  <Step title="Configure the base">
+    Choose the Docker image and base stack (WordPress, PHP, Node.js, etc.).
+  </Step>
+
+  <Step title="Define variables">
+    Specify which values clients must provide at deployment time:
+
+    ```json
+    {
+      "variables": [
+        { "name": "domain", "label": "Domain Name", "type": "text", "required": true },
+        { "name": "admin_email", "label": "Admin Email", "type": "email", "required": true },
+        { "name": "site_title", "label": "Site Title", "type": "text", "default": "My Site" }
+      ]
+    }
+    ```
+  </Step>
+
+  <Step title="Add post-install hooks">
+    Define commands that run after the container is created:
+
+    ```bash
+    wp core install --url="${domain}" --title="${site_title}" --admin_user=admin --admin_email="${admin_email}"
+    wp plugin install woocommerce --activate
+    wp cache flush
+    ```
+  </Step>
+
+  <Step title="Set visibility">
+    Mark the template as **visible to users** to allow client self-service deployments, or keep it **admin-only**.
+  </Step>
+</Steps>
+
+---
+
+## Client Self-Service
+
+When a template is marked as user-visible, clients can deploy their own sites from their dashboard without admin intervention.
+
+### Client Deployment Flow
+
+1. Client logs in and goes to **My Sites**
+2. Clicks **Deploy New Site**
+3. Selects a template from the catalog
+4. Fills in the required variables (domain, preferences)
+5. Clicks **Deploy** — site is provisioned automatically
+
+### Limiting Deployments
+
+You can restrict template usage per pricing plan. For example:
+- Free plan: only "Basic WordPress" template
+- Pro plan: all templates + WooCommerce
+- Enterprise plan: custom templates + priority provisioning
+
+Configure this in **Administration → Pricing Plans**.
+
+---
+
+## Platform Mode Notes
+
+<Tabs>
+  <Tab title="SaaS Mode">
+    In SaaS mode, Services is primarily used for **admin-managed templates**. Clients can deploy sites if self-service is enabled in their plan. The service catalog is scoped to what the admin has made available.
+  </Tab>
+  <Tab title="WaaS Mode">
+    In WaaS mode, Services powers the **client marketplace**. Clients browse WordPress-focused templates and deploy sites independently as part of their subscription. The full template library is accessible.
+  </Tab>
+</Tabs>

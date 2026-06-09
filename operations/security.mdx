@@ -1,0 +1,155 @@
+---
+title: "Security"
+description: "Manage firewalls, intrusion prevention, SSH hardening, and security audits across your servers."
+icon: "shield"
+---
+
+<Info>
+**Path:** Security (`/security`) — Admin only
+
+The Security section centralizes firewall management, intrusion detection, login monitoring, and server hardening across all connected servers.
+</Info>
+
+## Security Dashboard
+
+The security dashboard provides a real-time overview of your threat posture:
+
+<CardGroup cols={2}>
+  <Card title="Blocked IPs" icon="ban" color="#ef4444">
+    IPs currently blocked by fail2ban or manual rules
+  </Card>
+  <Card title="Recent Alerts" icon="triangle-exclamation" color="#f59e0b">
+    Security events in the last 24 hours
+  </Card>
+  <Card title="Failed Logins" icon="lock" color="#8b5cf6">
+    SSH and panel login failures by IP
+  </Card>
+  <Card title="Open Ports" icon="door-open" color="#6366f1">
+    Firewall status and open ports per server
+  </Card>
+</CardGroup>
+
+---
+
+## Firewall (UFW)
+
+AreaWP manages UFW (Uncomplicated Firewall) on connected servers.
+
+### Default Firewall Rules
+
+When AreaWP is installed, the following rules are set:
+
+| Port | Protocol | Action | Purpose |
+|------|---------|--------|---------|
+| 22 | TCP | ALLOW | SSH |
+| 80 | TCP | ALLOW | HTTP |
+| 443 | TCP | ALLOW | HTTPS |
+| 5432 | TCP | DENY | PostgreSQL (local only) |
+| All others | Any | DENY | Default deny |
+
+### Managing Rules
+
+1. Go to **Security → Firewall**
+2. Select the server
+3. Add, edit, or remove rules:
+
+| Field | Description |
+|-------|-------------|
+| **Port** | Single port, range (`8000:9000`), or any |
+| **Protocol** | TCP, UDP, or both |
+| **Action** | ALLOW or DENY |
+| **Source** | Any IP, specific IP, or CIDR range |
+| **Direction** | Inbound, outbound, or both |
+| **Comment** | Label for the rule |
+
+<Warning>
+Be careful when modifying SSH (port 22) rules. Locking yourself out via firewall requires console access to recover.
+</Warning>
+
+---
+
+## Fail2ban (Intrusion Prevention)
+
+AreaWP configures fail2ban to automatically block IPs that show signs of brute-force attacks.
+
+### Default Jails
+
+| Jail | Threshold | Ban Duration |
+|------|----------|-------------|
+| `sshd` | 5 failed logins in 10 min | 1 hour |
+| `nginx-http-auth` | 5 failures in 10 min | 1 hour |
+| `areawp-auth` | 10 failures in 10 min | 30 minutes |
+| `wordpress` | 10 failures in 5 min | 1 hour |
+
+### Managing Banned IPs
+
+1. Go to **Security → Blocked IPs**
+2. View currently banned IPs with reason and ban time
+3. Click **Unban** to remove a block immediately
+4. Click **Permanent Ban** to add to the permanent blocklist
+
+### Customizing Fail2ban
+
+Adjust thresholds in **Security → Fail2ban Settings**:
+
+| Setting | Default |
+|---------|---------|
+| Max retry | 5 attempts |
+| Find time | 600 seconds |
+| Ban time | 3600 seconds |
+| Ignore IPs | Your home/office IP (whitelist) |
+
+---
+
+## SSH Hardening
+
+AreaWP can apply SSH security hardening to connected servers:
+
+| Hardening Option | Default | Description |
+|-----------------|---------|-------------|
+| **Disable root login** | Enabled | Prevent direct root SSH login |
+| **Disable password auth** | Optional | Require SSH key authentication |
+| **Change SSH port** | Optional | Move SSH away from port 22 |
+| **Rate limiting** | Enabled | Allow max 3 connections per 10s |
+| **Idle timeout** | 300s | Disconnect idle sessions |
+
+Apply hardening from **Security → SSH Hardening** for each server.
+
+---
+
+## SSL/TLS Configuration
+
+Manage SSL/TLS settings across all Nginx vhosts:
+
+| Option | Description |
+|--------|-------------|
+| **TLS version** | Minimum TLS version (TLS 1.2 or 1.3) |
+| **Cipher suites** | Allowed cipher list (Mozilla Modern/Intermediate) |
+| **HSTS** | HTTP Strict Transport Security header |
+| **OCSP Stapling** | Faster certificate verification |
+| **Security Headers** | X-Frame-Options, CSP, X-Content-Type-Options |
+
+---
+
+## Security Audit
+
+Run a security audit on any connected server to check for common vulnerabilities:
+
+1. Go to **Security → Audit**
+2. Select the server
+3. Click **Run Audit**
+
+The audit checks:
+- Open ports and services
+- Outdated packages with security patches
+- World-writable files and directories
+- SUID/SGID binaries
+- Active cron jobs (potential persistence)
+- SSH configuration weaknesses
+- Weak passwords (admin accounts)
+
+Results are scored and actionable recommendations are shown.
+
+<Tip>
+Run security audits monthly or after any significant server changes to maintain a strong security posture.
+</Tip>

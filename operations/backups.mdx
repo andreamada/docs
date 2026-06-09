@@ -1,0 +1,141 @@
+---
+title: "Backups"
+description: "Automate and manage backups for your sites, databases, and server files."
+icon: "database"
+---
+
+<Info>
+**Path:** Backups (`/backups`) — Admin only
+
+AreaWP provides comprehensive backup management for sites, databases, and server files with local and cloud storage options.
+</Info>
+
+## Backup Types
+
+<CardGroup cols={3}>
+  <Card title="Site Backup" icon="globe" color="#6366f1">
+    Full snapshot of a WordPress site or app (files + database)
+  </Card>
+  <Card title="Database Backup" icon="database" color="#10b981">
+    Database-only backup (SQL dump)
+  </Card>
+  <Card title="Server Backup" icon="server" color="#f59e0b">
+    Full server directory backup (selective paths)
+  </Card>
+</CardGroup>
+
+---
+
+## Backup Destinations
+
+| Destination | Protocol | Description |
+|------------|---------|-------------|
+| **Local** | Filesystem | Stored on the same server (fast, no egress) |
+| **Amazon S3** | S3 API | AWS S3 or any S3-compatible storage |
+| **Backblaze B2** | S3-compatible | Cost-effective cloud storage |
+| **DigitalOcean Spaces** | S3-compatible | DigitalOcean object storage |
+| **Google Cloud Storage** | S3-compatible | Via interoperability API |
+| **MinIO** | S3 API | Self-hosted object storage |
+| **FTP/SFTP** | FTP | Remote server via FTP |
+| **Wasabi** | S3-compatible | High-speed cloud storage |
+
+Configure destinations in **Settings → Backup Destinations** with your credentials.
+
+---
+
+## Backup Schedules
+
+### Creating a Schedule
+
+1. Go to **Backups → Schedules**
+2. Click **New Schedule**
+3. Configure:
+
+| Field | Options |
+|-------|---------|
+| **Name** | Schedule label |
+| **Type** | Site / Database / Directory |
+| **Target** | Site, database, or path to back up |
+| **Frequency** | Hourly / Daily / Weekly / Monthly |
+| **Time** | Time of day (UTC) |
+| **Retention** | How many backups to keep (e.g. 7 daily, 4 weekly) |
+| **Destination** | Where to store the backup |
+| **Compression** | gzip, zstd, or none |
+
+### Retention Policy
+
+AreaWP automatically deletes old backups based on your retention rules:
+
+```
+Daily backups:   keep last 7
+Weekly backups:  keep last 4
+Monthly backups: keep last 3
+```
+
+<Tip>
+Use **grandfather-father-son** rotation: keep 7 daily + 4 weekly + 3 monthly backups for comprehensive coverage with manageable storage use.
+</Tip>
+
+---
+
+## Manual Backups
+
+Run an on-demand backup at any time:
+
+1. Go to **Backups** or to the site/database detail page
+2. Click **Backup Now**
+3. Choose the destination
+4. The backup runs in the background — progress is shown in real time
+
+---
+
+## Restoring a Backup
+
+<Steps>
+  <Step title="Find the backup">
+    Go to **Backups → Restore** or to the site's backup list.
+  </Step>
+
+  <Step title="Select the backup point">
+    Choose the backup by date and time. AreaWP shows backup size and what it contains.
+  </Step>
+
+  <Step title="Choose restore mode">
+    | Mode | Description |
+    |------|-------------|
+    | **Restore in place** | Overwrite the current site/database with the backup |
+    | **Restore to new site** | Create a new site from the backup (original is preserved) |
+    | **Download** | Download the backup archive to your computer |
+  </Step>
+
+  <Step title="Confirm and restore">
+    Click **Restore**. AreaWP downloads the backup (if remote), extracts it, and restores the files and database. The site is briefly in maintenance mode during the restore.
+  </Step>
+</Steps>
+
+---
+
+## Pricing Plan Integration
+
+Backup features can be gated by pricing plan:
+
+| Plan Feature | Description |
+|-------------|-------------|
+| **Manual backups** | Allow clients to trigger backups on demand |
+| **Automatic backups** | Enable scheduled backups (daily, weekly) |
+| **Retention days** | How many days of backup history clients keep |
+| **Remote storage** | Allow clients to use their own S3 bucket |
+
+Configure per-plan backup limits in **Administration → Pricing Plans**.
+
+---
+
+## Backup Notifications
+
+Get notified when backups complete or fail:
+
+1. Go to **Settings → Notifications**
+2. Enable backup alerts
+3. Choose channels: email, Slack, webhook
+
+Failure alerts fire immediately; success alerts can be batched (daily digest) to reduce noise.

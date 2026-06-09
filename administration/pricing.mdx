@@ -1,0 +1,127 @@
+---
+title: "Pricing Plans"
+description: "Create and manage hosting plans that define features, resources, and pricing for your clients."
+icon: "tag"
+---
+
+<Info>
+**Path:** Administration → Pricing Plans (`/pricing`) — Admin only
+
+Pricing Plans define what your clients get when they subscribe. Each plan controls resource limits, features, and billing.
+</Info>
+
+## What Pricing Plans Control
+
+<CardGroup cols={3}>
+  <Card title="Resources" icon="server" color="#6366f1">
+    Number of sites, storage, databases
+  </Card>
+  <Card title="Features" icon="stars" color="#10b981">
+    Backups, staging, custom domains, SSL
+  </Card>
+  <Card title="Pricing" icon="dollar-sign" color="#f59e0b">
+    Monthly / yearly prices and trial period
+  </Card>
+</CardGroup>
+
+---
+
+## Plan List
+
+The Pricing Plans page shows all defined plans with their key attributes. Plans can be:
+- **Active** — Visible and available for new subscriptions
+- **Featured** — Highlighted on the pricing page
+- **Hidden** — Not visible to new users but existing subscribers keep their plan
+- **Archived** — Retired plan, no new subscriptions
+
+---
+
+## Creating a Plan
+
+1. Go to **Pricing Plans** → **New Plan**
+2. Configure:
+
+### Basic Information
+
+| Field | Description |
+|-------|-------------|
+| **Name** | Plan display name (e.g. "Starter", "Pro", "Business") |
+| **Description** | Short description shown on the pricing page |
+| **Price (monthly)** | Monthly billing price |
+| **Price (yearly)** | Yearly billing price (typically ~16% discount) |
+| **Trial days** | Free trial period (0 = no trial) |
+| **Featured** | Highlight this plan on the pricing page |
+| **Active** | Whether new users can subscribe to this plan |
+
+### Resource Limits
+
+| Limit | Description |
+|-------|-------------|
+| **Max sites** | Maximum number of deployable sites (0 = unlimited) |
+| **Max databases** | Maximum databases across all sites |
+| **Storage (GB)** | Total disk space for sites and files |
+| **Bandwidth (GB/mo)** | Monthly transfer limit (0 = unlimited) |
+
+### Features
+
+| Feature | Description |
+|---------|-------------|
+| **Manual local backup** | Allow clients to trigger manual backups |
+| **Automatic backup** | Schedule: daily, weekly, or none |
+| **Backup retention (days)** | How many days of backups to keep |
+| **Staging sites** | Allow creating staging copies |
+| **Custom domains** | Number of custom domains allowed |
+| **SSL certificates** | Auto-provision Let's Encrypt SSL |
+| **CDN** | Content delivery network integration |
+| **Priority support** | Flag for elevated support response time |
+
+---
+
+## Plan Comparison Page
+
+AreaWP can generate a public pricing comparison page at `/pricing` that clients see when browsing plans or upgrading.
+
+Customize the page in **Settings → Billing → Pricing Page**:
+- Highlight the recommended plan
+- Add feature comparison table
+- Show/hide specific features
+- Add FAQ section
+- Custom CTA button text
+
+---
+
+## Free Plan
+
+Create a free plan (price = $0) to allow users to start without a payment method. Useful for demos and trials.
+
+<Tip>
+Pair a free plan with a feature-limited configuration (1 site, 1 GB storage, no backups) to encourage upgrades to paid plans.
+</Tip>
+
+---
+
+## Plan Migrations
+
+When you change a plan's limits, existing subscribers are affected:
+
+| Change Type | Effect on Existing Subscribers |
+|------------|-------------------------------|
+| Increase limits | Immediate — existing users gain access |
+| Decrease limits | At next renewal — existing users notified |
+| Price change | At next renewal — existing users notified |
+| Feature removal | At next renewal — feature disabled |
+
+<Warning>
+Removing a feature from a plan affects all current subscribers at their next renewal. Send a notification email before making breaking changes to plans.
+</Warning>
+
+---
+
+## Default Plan
+
+Set a default plan that new users are automatically assigned to after registration (if free trial is not configured):
+
+1. Go to **Settings → Billing**
+2. Set **Default Plan**
+
+New users get this plan automatically without needing to go through checkout.

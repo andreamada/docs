@@ -1,0 +1,152 @@
+---
+title: "Billing"
+description: "Manage your subscription, payment method, and invoices from the client billing portal."
+icon: "credit-card"
+---
+
+<Info>
+**Path:** Billing (`/billing`) — Client users only
+
+The Billing section is the self-service portal for clients to manage their subscription and payment details. Admins see the full transaction history under Administration instead.
+</Info>
+
+## Billing Overview
+
+The Billing page gives clients a clear view of their current subscription and payment history:
+
+<CardGroup cols={3}>
+  <Card title="Current Plan" icon="tag" color="#6366f1">
+    Active plan name, price, and features
+  </Card>
+  <Card title="Next Renewal" icon="calendar" color="#10b981">
+    Date and amount of next charge
+  </Card>
+  <Card title="Payment Method" icon="credit-card" color="#f59e0b">
+    Saved card or bank transfer status
+  </Card>
+</CardGroup>
+
+---
+
+## Current Subscription
+
+The subscription summary shows:
+
+| Field | Description |
+|-------|-------------|
+| **Plan** | Current pricing plan name |
+| **Status** | Active / Trial / Suspended / Canceled |
+| **Billing period** | Monthly or yearly |
+| **Period start** | When the current period began |
+| **Period end** | When the current period ends |
+| **Next charge** | Amount and date of next renewal |
+| **Payment method** | How renewals are charged |
+
+---
+
+## Managing Your Subscription
+
+### Upgrade / Downgrade
+
+1. Click **Change Plan** on the Billing page
+2. Browse available plans and their features
+3. Select a new plan
+4. Confirm the change
+
+**Upgrades** take effect immediately. The difference in price is prorated for the remainder of the current period.
+
+**Downgrades** take effect at the start of the next billing period. You keep full access to the current plan until then.
+
+### Cancel Subscription
+
+1. Click **Cancel Subscription**
+2. Review what happens after cancellation (access until period end)
+3. Optionally provide a cancellation reason
+4. Confirm
+
+Your subscription remains **Active** until the end of the current period. After that, access is downgraded or removed based on platform settings.
+
+<Info>
+Canceling a subscription does not delete your sites or data immediately. Contact support to recover data after cancellation if needed.
+</Info>
+
+---
+
+## Payment Methods
+
+### Adding a Card (Stripe)
+
+1. Click **Add Payment Method**
+2. Enter your card details in the Stripe-hosted form
+3. Card is saved securely by Stripe (AreaWP never stores raw card numbers)
+4. New card becomes the default for future renewals
+
+### Updating a Card
+
+Replace an expired or invalid card:
+
+1. Click **Update Payment Method**
+2. Enter new card details
+3. Save — future renewals use the new card
+
+### Bank Transfer
+
+If your platform uses Bank Transfer as a payment method, you'll see your invoices with payment instructions. After sending the transfer, contact support to have your payment confirmed.
+
+---
+
+## Invoices
+
+All invoices are listed with download links:
+
+| Column | Description |
+|--------|-------------|
+| **Invoice #** | Unique invoice number |
+| **Date** | Issue date |
+| **Description** | What was billed |
+| **Amount** | Total charged |
+| **Status** | Paid / Pending / Failed |
+| **PDF** | Download PDF invoice |
+
+Click any invoice to view full details including line items and tax breakdown.
+
+---
+
+## Resource Usage
+
+The Billing page also shows your current resource usage vs plan limits:
+
+| Resource | Used | Limit |
+|---------|------|-------|
+| Sites | 2 | 5 |
+| Databases | 4 | 10 |
+| Storage | 12 GB | 20 GB |
+| Backups | 14 | — |
+
+<Tip>
+If you're approaching your plan limits, click **Upgrade Plan** to get more resources before you hit the cap and new deployments are blocked.
+</Tip>
+
+---
+
+## Billing Help
+
+Having billing issues?
+
+<AccordionGroup>
+  <Accordion title="Payment failed">
+    If your payment failed, check that your card is valid and has sufficient funds. Update your payment method and click **Retry Payment** to attempt the charge again immediately.
+  </Accordion>
+
+  <Accordion title="Subscription suspended">
+    If your subscription is suspended, add a valid payment method and click **Reactivate Subscription**. Your sites and data are preserved during suspension.
+  </Accordion>
+
+  <Accordion title="Request a refund">
+    Contact support with your invoice number to request a refund. Refunds are processed within 5–10 business days for card payments.
+  </Accordion>
+
+  <Accordion title="Need a VAT invoice">
+    Ensure your billing details include your company name and VAT number under **Account → Profile**. Future invoices will include this information automatically.
+  </Accordion>
+</AccordionGroup>

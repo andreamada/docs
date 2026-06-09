@@ -1,431 +1,167 @@
 ---
 title: "Introduction"
-description: "The all-in-one WordPress-as-a-Service platform for agencies and professionals"
+description: "AreaWP — the all-in-one server control panel for managing web applications, WordPress sites, databases, and Docker on VPS and dedicated servers."
 icon: "house"
 ---
 
 <Info>
-**AreaWP** is a comprehensive WordPress-as-a-Service (WaaS) platform designed specifically for agencies, freelancers, and WordPress professionals who want to offer managed WordPress hosting to their clients.
+**AreaWP** is a modern server control panel that gives agencies, developers, and hosting providers a single interface to manage websites, databases, Docker containers, security, billing, and clients — all from one dashboard.
 </Info>
 
-## What is WordPress-as-a-Service (WaaS)?
+## What is AreaWP?
 
-WordPress-as-a-Service is a business model that allows you to offer fully managed WordPress hosting to your clients under your own brand. AreaWP provides the complete infrastructure, automation tools, and management systems you need to run a professional WordPress hosting business.
+AreaWP is built for professionals who run VPS or dedicated servers and need a powerful, self-hosted control panel. It replaces a scattered toolset (cPanel, manual CLI, billing software, monitoring dashboards) with a single, cohesive platform.
 
 <CardGroup cols={3}>
-  <Card title="White-Label Platform" icon="palette" color="#0d6efd">
-    Fully customizable branding
+  <Card title="Server Management" icon="server" color="#6366f1">
+    Full control over your Linux servers via the agent system
   </Card>
-  <Card title="Automated Management" icon="robot" color="#198754">
-    Automated site creation & updates
+  <Card title="WordPress & Apps" icon="globe" color="#10b981">
+    Deploy and manage WordPress sites and web applications
   </Card>
-  <Card title="Client Portal" icon="users" color="#ffc107">
-    Self-service customer dashboard
+  <Card title="Client Billing" icon="credit-card" color="#f59e0b">
+    Built-in subscriptions, pricing plans, and payment gateways
   </Card>
 </CardGroup>
 
 ---
 
-## Platform Architecture
+## Platform Modes
 
-### Single Tenant Infrastructure
-
-<Info>
-**AreaWP uses a Single Tenant architecture** - providing dedicated, isolated resources for each website. This architectural choice ensures superior performance, security, and customization capabilities compared to multi-tenant or WordPress Multisite approaches.
-</Info>
-
-**Why Single Tenant?**
-
-AreaWP has deliberately chosen the single tenant approach because it delivers the best experience for both platform owners and end users:
-
-**🚀 Superior Performance**
-- Each website has dedicated resources (CPU, RAM, storage)
-- No resource competition between sites
-- Faster load times since resources aren't shared
-- Predictable performance regardless of other sites' activity
-
-**🔒 Enhanced Security**
-- Complete isolation between websites
-- No cross-site contamination risk
-- Database issues don't cascade across sites
-- Each site can have independent security configurations
-
-**⚙️ Maximum Flexibility**
-- Independent WordPress versions per site
-- Custom plugins and themes for each website
-- Site-specific configurations and optimizations
-- Update sites individually without affecting others
-
-**🎯 Easier Management**
-- Isolated troubleshooting (issues don't affect other sites)
-- Independent backups and restores
-- Granular control over each website
-- Simpler debugging and maintenance
-
-### Architecture Comparison
+AreaWP supports two deployment modes depending on your business model:
 
 <Tabs>
-  <Tab title="Single Tenant (Our Approach)">
-    **Dedicated Resources Per Website**
-    
-    Each website operates independently with:
-    - ✅ Separate WordPress installation
-    - ✅ Dedicated database
-    - ✅ Isolated file system
-    - ✅ Independent configuration
-    - ✅ No shared resources
-    
-    **Perfect For:**
-    - Agencies managing diverse client websites
-    - Sites requiring custom configurations
-    - High-security requirements
-    - Maximum performance needs
-    - Professional WaaS platforms
+  <Tab title="SaaS Mode">
+    **Sell hosting as a service**
+
+    In SaaS mode, you run a hosted platform where clients sign up, choose a pricing plan, and manage their own sites via the user portal.
+
+    - ✅ Client self-service portal
+    - ✅ Subscription billing with Stripe / Bank Transfer
+    - ✅ Pricing plans with resource limits
+    - ✅ White-label branding
+    - ✅ Support center
+    - ✅ Service marketplace
   </Tab>
-  
-  <Tab title="Multi Tenant">
-    **Shared Infrastructure**
-    
-    Multiple websites share:
-    - ⚠️ Single WordPress codebase
-    - ⚠️ Shared database (prefixed tables)
-    - ⚠️ Common plugins/themes
-    - ⚠️ Unified configuration
-    
-    **Limitations:**
-    - Limited customization per site
-    - Performance degradation under load
-    - Security risks from shared infrastructure
-    - Complex database management
-    - Updates affect all sites simultaneously
-  </Tab>
-  
-  <Tab title="WordPress Multisite">
-    **Network of Sites**
-    
-    One WordPress installation managing multiple sites:
-    - ⚠️ Single database with prefixed tables
-    - ⚠️ Shared plugins and themes
-    - ⚠️ Network-wide settings
-    - ⚠️ Subdomains or subdirectories
-    
-    **Limitations:**
-    - Weakest isolation model
-    - Database issues cascade across network
-    - Limited per-site customization
-    - Complex plugin compatibility
-    - Not suitable for client websites
+  <Tab title="WaaS Mode">
+    **WordPress-as-a-Service**
+
+    In WaaS mode, the platform is optimized for WordPress deployment at scale. Clients subscribe to hosting plans and get managed WordPress sites.
+
+    - ✅ Everything in SaaS mode
+    - ✅ WordPress site templates
+    - ✅ One-click WordPress deployments
+    - ✅ WP pipeline (CI/CD)
+    - ✅ Plugin and theme marketplace
+    - ✅ Bulk WordPress management
   </Tab>
 </Tabs>
 
-<Tip>
-Learn more about our single tenant infrastructure approach: [Server Management Details →](https://areawp.com/server-management/)
-</Tip>
+---
+
+## Core Features
+
+<AccordionGroup>
+  <Accordion title="Multi-Server Management" icon="server">
+    Deploy lightweight agents on any Linux server and manage them all from a single AreaWP dashboard. Monitor CPU, RAM, disk, and network in real time. Provision new cloud servers on DigitalOcean, Hetzner, and other providers directly from the panel.
+  </Accordion>
+
+  <Accordion title="Application Hosting" icon="globe">
+    Deploy WordPress sites, PHP apps, Node.js applications, and static sites as isolated Docker containers. Each site gets its own container, database, and Nginx config — no shared resources, no cross-site contamination.
+  </Accordion>
+
+  <Accordion title="Database Management" icon="database">
+    Create and manage MySQL and PostgreSQL databases. Access phpMyAdmin directly from the panel, run queries, manage users, and monitor performance.
+  </Accordion>
+
+  <Accordion title="Docker & Containers" icon="box">
+    Full Docker container lifecycle management — start, stop, rebuild, view logs, exec into containers. Manage Docker Compose stacks, networks, and volumes from the UI.
+  </Accordion>
+
+  <Accordion title="Security & Firewall" icon="shield">
+    Built-in UFW firewall management, fail2ban configuration, SSL certificate provisioning (Let's Encrypt), and server hardening tools. Monitor login attempts and blocked IPs in real time.
+  </Accordion>
+
+  <Accordion title="Billing & Subscriptions" icon="receipt">
+    Full billing system with pricing plans, subscriptions, transactions, and payment gateways (Stripe, Bank Transfer). Automated invoice generation and renewal reminders.
+  </Accordion>
+
+  <Accordion title="White-Label Branding" icon="palette">
+    Customize the platform with your own brand name, logo, and colors. Present a fully branded experience to your clients without any AreaWP mentions.
+  </Accordion>
+
+  <Accordion title="Real-Time Monitoring" icon="chart-line">
+    Live metrics via Socket.IO — CPU, memory, disk I/O, network throughput. Set up public status pages to communicate uptime to clients. Configure alerts for resource thresholds.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
-## Key Features
+## Architecture
 
-### Platform Capabilities
+AreaWP runs as two components:
 
-<AccordionGroup>
-  <Accordion title="Automated Website Management" icon="wand-magic-sparkles">
-    - One-click WordPress installation
-    - Automatic WordPress core updates
-    - Plugin and theme management
-    - Automated backups and restoration
-    - Bulk operations across multiple sites
-    - Template-based site creation
-    - Clone and migration tools
-  </Accordion>
-  
-  <Accordion title="Client Management" icon="users">
-    - Customer portal with self-service features
-    - User role management and permissions
-    - Client billing and invoicing
-    - Package and subscription management
-    - Domain management integration
-    - Support ticket system
-    - Client communication tools
-  </Accordion>
-  
-  <Accordion title="White-Label Branding" icon="palette">
-    - Custom logo and colors
-    - Branded email templates
-    - Custom domain for client portal
-    - Personalized dashboard theme
-    - Custom CSS and styling
-    - Branded documentation
-    - Remove AreaWP branding
-  </Accordion>
-  
-  <Accordion title="Business Automation" icon="robot">
-    - Automated billing and renewals
-    - Payment gateway integration (PayPal, Stripe)
-    - Subscription management
-    - Automated expiration notifications
-    - Order processing automation
-    - Task scheduling and cron jobs
-    - API integrations
-  </Accordion>
-  
-  <Accordion title="Performance & Security" icon="shield-check">
-    - LEMP stack optimization
-    - FastCGI caching
-    - Redis object caching
-    - SSL certificate automation
-    - DDoS protection
-    - Malware scanning
-    - Firewall management
-  </Accordion>
-</AccordionGroup>
+| Component | Technology | Role |
+|-----------|-----------|------|
+| **Panel** | Flask (Python) + React | Web dashboard, API, billing, user management |
+| **Agent** | Go binary | Installed on each managed server, handles system commands |
+
+The panel communicates with agents over a secure WebSocket connection. Agents execute commands on the server (start/stop services, deploy apps, manage files) and stream real-time metrics back to the panel.
+
+```
+┌─────────────┐     HTTPS/WSS     ┌─────────────┐
+│  AreaWP     │ ◄────────────────► │   Agent     │
+│  Panel      │                   │  (Server 1) │
+│  (Flask +   │                   └─────────────┘
+│   React)    │     HTTPS/WSS     ┌─────────────┐
+│             │ ◄────────────────► │   Agent     │
+└─────────────┘                   │  (Server 2) │
+                                  └─────────────┘
+```
 
 ---
 
 ## Getting Started
 
-Follow these essential steps to set up your AreaWP platform:
-
-### 1. Customize Your Theme
-
-Make the platform your own by customizing the visual appearance.
-
-<Card title="Theme Setup" icon="brush" href="/admin/theme-setup">
-  Customize your dashboard theme, colors, logo, and branding to match your agency identity.
-</Card>
-
-**What You'll Configure:**
-- Platform logo and favicon
-- Color scheme and theme
-- Custom CSS styling
-- Email template branding
-- Client portal appearance
-
----
-
-### 2. Configure Important Settings
-
-Define the core settings that control how your platform operates.
-
-<Card title="Important Settings" icon="gear" href="/admin/important-settings">
-  Set up basic platform settings including domain configuration, email settings, and system preferences.
-</Card>
-
-**Key Settings:**
-- Primary domain configuration
-- System email addresses
-- DirectAdmin integration
-- Server connection details
-- Default language and timezone
-- Security settings
-
----
-
-### 3. Set Up Payment Gateways
-
-Enable payment processing to accept customer payments automatically.
-
-<Card title="Payments Gateway" icon="credit-card" href="/admin/payments-setup">
-  Integrate PayPal and Stripe for seamless payment processing and automated billing.
-</Card>
-
-**Payment Features:**
-- PayPal integration
-- Stripe payment processing
-- Automated recurring billing
-- Invoice generation
-- Payment notifications
-- Refund management
-
----
-
-### 4. Create Hosting Packages
-
-Define your hosting plans with features and pricing.
-
-<Card title="Packages Setup" icon="box" href="/admin/websites-setup">
-  Create and configure hosting packages with specific features, resources, and pricing tiers.
-</Card>
-
-**Package Configuration:**
-- Package name and description
-- Storage and bandwidth limits
-- Number of websites allowed
-- Plugin and theme access
-- Pricing and billing cycle
-- Trial period options
-- Feature restrictions
-
----
-
-## Platform Editions
-
-### Choose Your Deployment Model
-
-<Tabs>
-  <Tab title="Self-Hosted Edition">
-    **Full Control & Ownership**
-    
-    Install AreaWP on your own server infrastructure.
-    
-    **Includes:**
-    - Complete source code (encrypted with ionCube)
-    - Full server control
-    - Unlimited websites
-    - Unlimited users
-    - All features included
-    - Free updates
-    - Community support
-    
-    **Requirements:**
-    - Your own server (VPS/Dedicated)
-    - DirectAdmin control panel
-    - PHP 8.3 with ionCube Loader
-    - MySQL/MariaDB database
-    - Basic server management knowledge
-    
-    **Security:**
-    - Source code protected with ionCube encryption
-    - Prevents unauthorized modifications
-    - Ensures code integrity and licensing compliance
-    
-    **Best For:**
-    - Agencies with existing infrastructure
-    - Maximum customization needs
-    - Complete data control
-    - Cost-effective scaling
-    - Technical teams
-  </Tab>
-  
-  <Tab title="Hosted Edition">
-    **Managed & Hassle-Free**
-    
-    We manage the infrastructure while you focus on your clients.
-    
-    **Includes:**
-    - Fully managed servers
-    - Source code (encrypted with ionCube)
-    - Automatic updates
-    - DDoS protection
-    - Daily backups
-    - 24/7 monitoring
-    - Technical support
-    - DirectAdmin included
-    
-    **Plans Available:**
-    
-    | Plan | Base Price | VM Tiers Available | Key Features |
-    |------|------------|-------------------|--------------|
-    | **Pro** | €90/month + VAT | VM-1, VM-2, VM-3 | Managed infrastructure, SSL, backups |
-    | **Business** | €150/month + VAT | VM-1, VM-2, VM-3 | + Uptime monitoring, priority support |
-    | **Enterprise** | €300/month + VAT | VM-2, VM-3, VM-4 | + Blacklist monitoring, premium support |
-    
-    **VM Tiers (Additional Cost):**
-    - **VM-1:** +€40/month (2 cores, 4GB RAM, 80GB) - Up to 25 sites
-    - **VM-2:** +€60/month (4 cores, 8GB RAM, 150GB) - Up to 50 sites
-    - **VM-3:** +€80/month (6 cores, 12GB RAM, 250GB) - Up to 100 sites
-    - **VM-4:** +€100/month (8 cores, 16GB RAM, 400GB) - Up to 200 sites
-    
-    **Example Pricing:**
-    - Pro + VM-1: €130/month (25 sites)
-    - Business + VM-2: €210/month (50 sites)
-    - Enterprise + VM-4: €400/month (200 sites)
-    
-    **Security:**
-    - Source code protected with ionCube encryption
-    - Fully managed security updates
-    - Regular security audits
-    
-    **Best For:**
-    - Quick deployment
-    - No server management
-    - Guaranteed uptime
-    - Scalable growth
-    - Focus on clients, not infrastructure
-  </Tab>
-</Tabs>
-
-<Warning>
-**ionCube Protection:** Both Self-Hosted and Hosted editions use ionCube encryption to protect the source code, ensuring security, preventing unauthorized modifications, and maintaining licensing compliance.
-</Warning>
-
----
-
-## Next Steps
-
 <Steps>
-  <Step title="Review Technical Details">
-    Understand the technology stack and infrastructure behind AreaWP.
-    
-    [View Tech Stack →](/tech-stack)
-  </Step>
-  
   <Step title="Check Requirements">
-    Ensure your server meets all necessary requirements for installation.
-    
+    Review the server and software requirements before installing.
+
     [View Requirements →](/requirements)
   </Step>
-  
+
   <Step title="Install AreaWP">
-    Follow the step-by-step installation guide to get your platform running.
-    
+    Run the one-line installer on your Linux server.
+
     [Installation Guide →](/installation)
   </Step>
-  
-  <Step title="Configure Settings">
-    Set up your platform with essential configurations and customizations.
-    
-    [General Settings →](/admin/general-settings)
+
+  <Step title="Quick Start">
+    Follow the quick start guide to set up your first server and site.
+
+    [Quick Start →](/quick-start)
+  </Step>
+
+  <Step title="Configure the Platform">
+    Set up payment gateways, pricing plans, and branding.
+
+    [Settings →](/administration/settings)
   </Step>
 </Steps>
 
 ---
 
-## Support & Resources
-
 <CardGroup cols={2}>
-  <Card title="Documentation" icon="book" href="/admin/general-settings">
-    Comprehensive guides and tutorials
+  <Card title="Requirements" icon="list-check" href="/requirements">
+    Server and software prerequisites
   </Card>
-  <Card title="Support Portal" icon="headset" href="https://support.areawp.com">
-    Get help from our support team
+  <Card title="Installation" icon="download" href="/installation">
+    Step-by-step install guide
   </Card>
-  <Card title="Community Forum" icon="comments" href="https://community.areawp.com">
-    Connect with other users
+  <Card title="Dashboard" icon="layout-dashboard" href="/overview/dashboard">
+    Learn the dashboard layout
   </Card>
-  <Card title="Video Tutorials" icon="video" href="https://www.youtube.com/@areawp">
-    Watch step-by-step guides
+  <Card title="Support" icon="headset" href="https://account.areawp.com/client/login/">
+    Contact the support team
   </Card>
 </CardGroup>
-
----
-
-## Why Choose AreaWP?
-
-<AccordionGroup>
-  <Accordion title="Built for WordPress Professionals" icon="wordpress">
-    AreaWP is designed specifically for agencies and professionals who understand WordPress and want to offer managed hosting services. Every feature is tailored to the needs of WordPress experts serving clients.
-  </Accordion>
-  
-  <Accordion title="Complete White-Label Solution" icon="tag">
-    Your brand, your platform. AreaWP provides complete white-labeling capabilities, allowing you to present a fully branded experience to your clients without any mention of AreaWP.
-  </Accordion>
-  
-  <Accordion title="Automation at Scale" icon="gears">
-    Manage hundreds of WordPress sites efficiently with powerful automation tools. From site creation to updates, backups to billing - everything can be automated.
-  </Accordion>
-  
-  <Accordion title="Proven Technology Stack" icon="server">
-    Built on industry-standard LEMP stack with FastCGI caching, Redis, and DirectAdmin. Battle-tested infrastructure that delivers performance and reliability.
-  </Accordion>
-  
-  <Accordion title="Single Tenant Architecture" icon="shield">
-    Dedicated resources for each website ensure superior performance, security, and customization. No shared infrastructure means no compromises.
-  </Accordion>
-</AccordionGroup>
-
----
-
-<Info>
-**Ready to get started?** Check out our [Technical Details](/tech-stack) to understand the infrastructure, review the [Requirements](/requirements), and follow our [Installation Guide](/installation) to launch your platform.
-</Info>
