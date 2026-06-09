@@ -9,7 +9,7 @@ icon: "download"
 Run this on your Linux server (Ubuntu 20.04+, Debian 11+, or Fedora 35+) as root:
 
 ```bash
-curl -fsSL https://releases.areawp.com/install.sh | sudo bash
+curl -fsSL https://areawp.com/install.sh | sudo bash
 ```
 
 The installer:
@@ -95,11 +95,13 @@ After installation, open the panel at `http://your-server-ip`. The setup wizard 
 
 ## Updating
 
-Re-run the installer to update to the latest version — it is idempotent and will not wipe your data:
+Run the following command to check if a new version is available:
 
 ```bash
-curl -fsSL https://releases.areawp.com/install.sh | sudo bash
+areawp update
 ```
+
+If an update is available, the command will display the new version and prompt you to confirm before proceeding. No data is lost during updates.
 
 ---
 
