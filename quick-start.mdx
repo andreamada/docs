@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-description: "Connect your first server and deploy your first WordPress site in under 10 minutes."
+description: "Connect your first server, deploy a WordPress template, and configure your platform in a few steps."
 icon: "rocket"
 ---
 
@@ -35,34 +35,101 @@ AreaWP manages servers via a lightweight agent. Install the agent on any Linux s
 
 ---
 
-## Step 2 — Deploy a WordPress Site
+## Step 2 — Deploy a WordPress Template
+
+Templates let you pre-package a full WordPress setup and deploy it to any client site instantly.
 
 <Steps>
-  <Step title="Go to WordPress">
-    Click **WordPress** in the sidebar.
+  <Step title="Go to Services → Templates">
+    In the sidebar, navigate to **Services** → **Templates** (`/templates`).
   </Step>
-  <Step title="Click Create Site">
-    Fill in the creation modal:
+  <Step title="Click Submit Plugin/Theme">
+    Click the **Submit Plugin/Theme** button to open the template upload form.
+  </Step>
+  <Step title="Upload your WordPress files">
+    Provide the template contents — two upload options:
 
-    | Field | Example |
-    |-------|---------|
-    | Site Name | My First Site |
-    | Domain | mysite.com (or mysite.yourpanel.com) |
-    | Admin Email | admin@mysite.com |
+    | Option | What to upload |
+    |--------|---------------|
+    | **wp-content only** | A `wp-content.zip` containing your themes, plugins, and uploads |
+    | **Full site** | A full site archive plus a `.sql` database dump |
 
-    As you type the domain, AreaWP checks availability in real time.
+    Fill in the template name, description, category, and version.
   </Step>
-  <Step title="Deploy">
-    Click **Create**. AreaWP provisions the Docker container, installs WordPress, configures the database, and sets up Nginx. The site is live within 60–90 seconds.
+  <Step title="Publish the template">
+    Set visibility (**Public** to make it available to clients, **Private** for admin use only) and click **Submit**. The template immediately appears in the catalog.
   </Step>
-  <Step title="Access WP Admin">
-    Click the **WordPress Admin** button next to the site. You're logged in automatically — no password needed.
+  <Step title="Deploy to a site">
+    From the Browse tab, click **Install** on your template, select the target WordPress site, and confirm. The template files and database are applied to the selected site.
   </Step>
 </Steps>
 
 ---
 
-## Step 3 — Set Up Billing (Optional)
+## Step 3 — Configure Site Settings (Optional)
+
+After deploying a site, fine-tune its individual settings from the site detail page.
+
+<Steps>
+  <Step title="Open the site">
+    Go to **WordPress**, find your site in the list, and click on it to open the site detail view.
+  </Step>
+  <Step title="Go to Settings">
+    Click the **Settings** tab within the site. Configure as needed:
+
+    | Setting | Description |
+    |---------|-------------|
+    | **Site Title** | WordPress site title and tagline |
+    | **PHP Version** | Switch between available PHP versions |
+    | **Cache** | Enable/disable FastCGI page cache and Redis object cache |
+    | **SSL** | Force HTTPS, manage the certificate |
+    | **Domain** | Add or change the primary domain |
+    | **WP Debug** | Enable WordPress debug logging |
+    | **Maintenance Mode** | Put the site in maintenance mode |
+    | **Auto-Updates** | Configure WordPress core and plugin update policy |
+  </Step>
+  <Step title="Save">
+    Changes apply immediately. PHP version changes briefly restart the container.
+  </Step>
+</Steps>
+
+---
+
+## Step 4 — Set Up Email (Important)
+
+Outgoing email is required for user registration confirmations, password resets, billing invoices, and renewal reminders. Without it, clients will not receive any platform communications.
+
+<Steps>
+  <Step title="Go to Settings → Email">
+    Navigate to **Settings** and select the **Email** category from the sidebar.
+  </Step>
+  <Step title="Enter your SMTP credentials">
+    | Field | Example |
+    |-------|---------|
+    | **SMTP Host** | `smtp.sendgrid.net` |
+    | **SMTP Port** | `587` (STARTTLS) or `465` (SMTPS) |
+    | **Username** | Your SMTP account username |
+    | **Password** | Your SMTP account password |
+    | **From Email** | `noreply@yourplatform.com` |
+    | **From Name** | Your platform or brand name |
+
+    Popular SMTP providers: **SendGrid**, **Mailgun**, **Amazon SES**, **Postmark**, or your own mail server.
+  </Step>
+  <Step title="Send a test email">
+    Click **Send Test Email**. AreaWP sends a verification message to the admin address. Check your inbox to confirm delivery.
+  </Step>
+  <Step title="Customize email templates (optional)">
+    Still in the Email settings, scroll to **Email Templates** to customize the content and branding of transactional emails — welcome message, invoices, renewal reminders, and more.
+  </Step>
+</Steps>
+
+<Warning>
+Without a working SMTP configuration, clients will not receive registration emails, password resets, or billing notifications. Set this up before inviting your first user.
+</Warning>
+
+---
+
+## Step 5 — Set Up Billing (Optional)
 
 If you're selling hosting to clients:
 
@@ -80,7 +147,7 @@ If you're selling hosting to clients:
 
 ---
 
-## Step 4 — White-Label the Platform (Optional)
+## Step 6 — White-Label the Platform (Optional)
 
 <Steps>
   <Step title="Open Settings → White Label">
