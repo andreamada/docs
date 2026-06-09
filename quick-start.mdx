@@ -64,19 +64,7 @@ Choose how the platform operates:
 
 ### SSL Certificate
 
-Provision a **wildcard Let's Encrypt certificate** (`*.yourdomain.com`) for the panel domain via DNS challenge:
-
-1. Ensure the required DNS A records are set for both `yourdomain.com` and `*.yourdomain.com` pointing to your server IP
-2. Enter your **Let's Encrypt notification email**
-3. Select a **DNS provider** (Cloudflare, DigitalOcean, Namecheap, GoDaddy, or AWS Route 53) and enter its API credentials
-4. Click **Provision Certificate** — provisioning runs in the background with a live step log
-5. Once complete, the **Active** badge appears and HTTPS is enforced
-
-<Info>
-If using Cloudflare, set SSL/TLS mode to **Full** (not Flexible) in your Cloudflare dashboard to avoid redirect loops.
-</Info>
-
-The **Force WWW Redirect** toggle redirects `www.yourdomain.com` to the apex domain (or vice versa) automatically.
+SSL is provisioned during the initial setup wizard. This section only needs revisiting if you change the panel domain or need to redeploy the certificate for a new domain. The **Force WWW Redirect** toggle redirects `www.yourdomain.com` to the apex domain (or vice versa) automatically.
 
 ### Company Info
 
