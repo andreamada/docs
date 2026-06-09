@@ -1,123 +1,78 @@
 ---
-title: "Activity Overview"
-description: "Monitor all platform activity, user actions, and system events in one place."
+title: "Activity"
+description: "Platform-wide audit trail — every user action and system event logged with full attribution."
 icon: "chart-line"
 ---
 
 <Info>
 **Path:** Administration → Activity (`/activity`) — Admin only
 
-The Activity Overview gives administrators a comprehensive audit trail of everything happening on the platform.
+The Activity page is the platform audit trail, showing every significant action taken by users and the system.
 </Info>
 
 ## What is Logged
 
-AreaWP logs every significant action taken by users and the system:
-
 ### User Actions
 
-| Category | Events Logged |
-|----------|--------------|
-| **Authentication** | Login, logout, failed login attempts, 2FA events, password resets |
+| Category | Events |
+|----------|--------|
+| **Authentication** | Login, logout, failed logins, 2FA events, password resets |
 | **Sites** | Site created, deleted, deployed, cloned, backed up, restored |
-| **Users** | User created, deleted, role changed, password reset, impersonation |
-| **Billing** | Subscription created, updated, canceled; payment received; invoice generated |
-| **Settings** | Any admin settings changed (what was changed, old → new value) |
-| **License** | License validation, suspension detected, key changed |
+| **Users** | User created, deleted, role changed, impersonation sessions |
+| **Billing** | Subscriptions created/updated/canceled, payments received, invoices generated |
+| **Settings** | Any admin setting changed — records old and new value |
+| **License** | Validation, suspension detected, key changed |
 
 ### System Events
 
-| Category | Events Logged |
-|----------|--------------|
-| **Backups** | Backup started, completed, failed |
+| Category | Events |
+|----------|--------|
+| **Backups** | Started, completed, failed |
 | **Certificates** | SSL issued, renewed, failed |
-| **Cron** | Job executed, succeeded, failed |
-| **Agent** | Agent connected, disconnected, command executed |
-| **Security** | IP banned, failed login threshold reached |
+| **Cron** | Jobs executed, succeeded, failed |
+| **Agents** | Connected, disconnected, commands executed |
+| **Security** | IP banned, login thresholds breached, firewall rule changes |
 
 ---
 
 ## Activity Feed
 
-The main activity page shows a real-time feed of events:
+The page is rendered by the **ActivityTab** component, showing a real-time feed of events:
 
 | Column | Description |
 |--------|-------------|
-| **Time** | When the event occurred |
-| **User** | Who performed the action (or "System") |
+| **Time** | When the event occurred (relative and absolute) |
+| **User** | Account that performed the action, or "System" |
 | **Action** | What happened |
 | **Resource** | What was affected (site name, user email, etc.) |
-| **IP Address** | Originating IP address |
-| **Details** | Expandable detail view |
+| **IP Address** | Origin IP address |
+| **Details** | Expandable full event payload |
 
-Click any row to see the full event details including request parameters (with sensitive values masked).
-
----
-
-## Filtering
-
-Filter the activity log by:
-
-| Filter | Options |
-|--------|---------|
-| **Date range** | Last hour, today, last 7 days, custom range |
-| **User** | Specific user or all users |
-| **Action type** | Category filter (auth, sites, billing, etc.) |
-| **Status** | Success or failure |
-| **IP address** | Filter by specific IP |
-| **Resource** | Search by site name, user email, etc. |
+Click any row to expand the full details, including request parameters with sensitive values masked.
 
 ---
 
-## Exporting Logs
+## Audit Trail Properties
 
-Export filtered activity logs for compliance reporting:
-
-1. Apply your filters
-2. Click **Export**
-3. Choose format: **CSV** or **JSON**
-4. Download the file
-
-Exported logs include all fields shown in the UI.
+- **Immutable** — entries cannot be edited or deleted from the UI
+- **Complete** — every state-changing action is recorded
+- **Timestamped** — all events use UTC timestamps
+- **Attributed** — every action linked to a user account or the system process
+- **Retained** — logs kept for 365 days by default (configurable in Settings)
 
 ---
 
-## Audit Trail & Compliance
+## Common Investigation Queries
 
-The activity log is designed to support compliance requirements:
-
-- **Immutable** — Log entries cannot be edited or deleted by regular users
-- **Complete** — Every state-changing action is recorded
-- **Timestamped** — All events use UTC timestamps
-- **Attribution** — Every action linked to a user account or system process
-- **Retention** — Logs are kept for **365 days** by default (configurable in Settings)
-
-<Info>
-For GDPR compliance, note that the activity log records user IP addresses. Review your privacy policy if you host for EU clients.
-</Info>
-
----
-
-## Security Audit
-
-The activity log is your first line of defense when investigating suspicious activity:
-
-### Common Investigation Queries
+Use the built-in filters to narrow down activity:
 
 ```
-# Failed login attempts in the last 24 hours
-Action: authentication.login.failed | Date: Last 24 hours
-
-# All actions by a specific user
-User: user@example.com | Date: Last 30 days
-
-# Settings changes
-Action category: settings | Date: Last 7 days
-
-# Site deletions
-Action: site.deleted | Date: Last 30 days
+Failed logins in last 24h   → Action: auth.login.failed, Date: Last 24 hours
+All actions by a user       → User: user@example.com
+Admin settings changes      → Category: settings
+Site deletions this month   → Action: site.deleted, Date: This month
 ```
 
 <Tip>
-Set up a Slack/email alert in **Settings → Notifications** to be notified immediately when suspicious events occur (multiple failed logins, admin account changes, etc.).
+Set up Slack or email alerts in **Settings → Notifications** to be notified immediately when suspicious events occur — multiple failed logins, admin role changes, or site deletions.
 </Tip>

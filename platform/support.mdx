@@ -1,144 +1,112 @@
 ---
 title: "Support"
-description: "Get help from the support team directly through the platform's built-in support center."
+description: "Built-in support ticket system — clients submit tickets, admins manage them with status, priority, assignment, and internal notes."
 icon: "comment"
 ---
 
 <Info>
 **Path:** Support (`/support`)
 
-The Support section provides a built-in help center where clients can submit tickets and admins can manage support requests. It must be enabled in **Settings → Support Center**.
+The support center must be enabled in **Settings → General → Support Center**. Both clients and admins use the same page, with different views based on role.
 </Info>
 
-## Support Center Overview
+## Status Counts Bar
 
-The Support Center is available to all users when enabled. It provides:
+Below the page header, clickable badge counters filter the ticket list:
 
-<CardGroup cols={2}>
-  <Card title="Submit Tickets" icon="ticket" color="#6366f1">
-    Create support requests with priority, category, and attachments
-  </Card>
-  <Card title="Ticket History" icon="list" color="#10b981">
-    View all past and current tickets with full conversation history
-  </Card>
-  <Card title="Knowledge Base" icon="book" color="#f59e0b">
-    Browse help articles before submitting a ticket
-  </Card>
-  <Card title="Status Page" icon="circle-check" color="#8b5cf6">
-    Check platform status for ongoing incidents
-  </Card>
-</CardGroup>
+| Badge | Count |
+|-------|-------|
+| **Open** | New tickets awaiting first response |
+| **In Progress** | Tickets being actively worked on |
+| **Waiting User** | Awaiting client reply |
+| **Resolved** | Marked as resolved |
+| **Closed** | Fully closed tickets |
+
+Click any badge to filter the list to that status.
 
 ---
 
-## For Clients — Submitting a Ticket
+## Ticket List
 
-### Creating a New Ticket
+Search and filter controls:
+- **Search** — by subject or ticket number
+- **Priority** — Low / Normal / High / Urgent
+- **Category** — Billing / Technical / Account / General
 
-1. Navigate to **Support** in the sidebar
-2. Click **New Ticket**
-3. Fill in the ticket form:
+**Ticket cards show:**
 
 | Field | Description |
 |-------|-------------|
-| **Subject** | Brief description of the issue |
-| **Category** | Billing / Technical / Account / General |
-| **Priority** | Low / Normal / High / Urgent |
-| **Description** | Detailed explanation of the problem |
-| **Attachments** | Screenshots, error logs, or other files |
-
-4. Click **Submit** — you'll receive an email confirmation
-
-### Tracking Your Ticket
-
-The Support page shows all your tickets:
-
-| Column | Description |
-|--------|-------------|
-| **Ticket #** | Unique identifier |
-| **Subject** | Ticket title |
-| **Status** | Open / In Progress / Waiting / Closed |
-| **Priority** | Low / Normal / High / Urgent |
-| **Last update** | When the ticket was last updated |
-
-Click any ticket to read the conversation and add replies.
-
-### Ticket Statuses
-
-| Status | Meaning |
-|--------|---------|
-| 🔵 **Open** | Submitted, waiting for support response |
-| 🟡 **In Progress** | Support team is working on it |
-| 🟠 **Waiting for Client** | Support replied, waiting for your response |
-| 🟢 **Closed** | Issue resolved |
-
-Closed tickets can be reopened within 7 days by adding a reply.
-
----
-
-## For Admins — Managing Support
-
-### Ticket Queue
-
-Admins see all tickets from all clients in the support queue:
-
-| Column | Description |
-|--------|-------------|
-| **Client** | User who submitted the ticket |
+| **Ticket Number** | Unique identifier |
+| **Priority Badge** | Color-coded urgency level |
 | **Subject** | Ticket title |
 | **Category** | Issue category |
-| **Priority** | Urgency level |
-| **Status** | Current state |
-| **Agent** | Assigned support agent |
-| **Created** | Submission date |
-| **SLA** | Time remaining before SLA breach |
-
-### Managing a Ticket
-
-1. Click any ticket to open it
-2. Read the full conversation
-3. Assign to a support agent
-4. Change priority or category
-5. Add an internal note (not visible to client)
-6. Reply to the client
-7. Close when resolved
-
-### Ticket Macros
-
-Create saved responses for common issues:
-
-1. Go to **Support → Macros** → **New Macro**
-2. Name the macro (e.g. "DNS Propagation Explanation")
-3. Write the template response (supports `{{client_name}}`, `{{site_domain}}` variables)
-4. Save — use the macro in any ticket reply
-
-### SLA Configuration
-
-Set response time targets in **Settings → Support → SLA**:
-
-| Priority | First Response | Resolution |
-|----------|---------------|------------|
-| **Urgent** | 1 hour | 4 hours |
-| **High** | 4 hours | 24 hours |
-| **Normal** | 8 hours | 48 hours |
-| **Low** | 24 hours | 7 days |
-
-Tickets approaching SLA breach are highlighted in the queue.
+| **Related App** | Site or app this ticket is about (if set) |
+| **User** | Submitting client (admin view) |
+| **Date** | Submission timestamp |
+| **Status** | Current state badge |
 
 ---
 
-## Enabling the Support Center
+## Creating a Ticket
 
-The Support Center is disabled by default. To enable:
+Click **Create Ticket** to open the creation form:
 
-1. Go to **Administration → Settings**
-2. Find **Support Center**
-3. Toggle **Enable Support Center** to on
-4. Configure notification email for new tickets
-5. Save
+| Field | Description |
+|-------|-------------|
+| **Subject** | Brief description |
+| **Category** | Billing / Technical / Account / General |
+| **Priority** | Low / Normal / High / Urgent |
+| **Description** | Full details of the issue |
+| **Attachments** | Screenshots, logs, or other files |
 
-The **Support** link will appear in the sidebar for all users.
+Click **Submit** — you receive an email confirmation with the ticket number.
+
+---
+
+## Ticket Detail View
+
+Click any ticket to open the full conversation thread.
+
+### For Clients
+
+- Read the full conversation
+- Add a reply
+- Reopen a closed ticket (within 7 days)
+
+### For Admins (additional controls)
+
+- **Assign** — assign the ticket to a support agent
+- **Change Status** — Open / In Progress / Waiting User / Resolved / Closed
+- **Change Priority** — Low / Normal / High / Urgent
+- **Change Category** — update the topic category
+- **Internal Note** — add a note visible only to admins (not the client)
+- **Close / Reopen** — finalize or re-open the ticket
+- **Delete** — permanently remove (confirmation required)
+
+---
+
+## Admin Settings
+
+Click the **Settings** button (admin only) to configure:
+- Notification email for new tickets
+- Auto-close rules (e.g. close resolved tickets after 7 days)
+- Agent assignment defaults
+
+---
+
+## Ticket Statuses
+
+| Status | Color | Meaning |
+|--------|-------|---------|
+| **Open** | Blue | Submitted, waiting for support |
+| **In Progress** | Yellow | Support team is working on it |
+| **Waiting User** | Orange | Support replied, waiting for client |
+| **Resolved** | Green | Issue resolved |
+| **Closed** | Gray | Fully closed |
+
+Closed tickets can be reopened within **7 days** by adding a reply.
 
 <Tip>
-Even if you use external support software (Zendesk, Freshdesk, Intercom), you can link clients to it by setting a **Support URL** in **Settings → General → Support URL**. The sidebar Support link will open your external tool instead.
+If you use an external helpdesk (Zendesk, Freshdesk, Intercom), set a **Support URL** in **Settings → General**. The Support sidebar link will open your external tool instead of the built-in system.
 </Tip>

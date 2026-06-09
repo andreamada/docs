@@ -1,141 +1,115 @@
 ---
 title: "Backups"
-description: "Automate and manage backups for your sites, databases, and server files."
+description: "Create, schedule, and restore backups for applications, databases, and files — stored locally or on S3-compatible cloud storage."
 icon: "database"
 ---
 
 <Info>
 **Path:** Backups (`/backups`) — Admin only
-
-AreaWP provides comprehensive backup management for sites, databases, and server files with local and cloud storage options.
 </Info>
 
-## Backup Types
+## Stats Overview
 
-<CardGroup cols={3}>
-  <Card title="Site Backup" icon="globe" color="#6366f1">
-    Full snapshot of a WordPress site or app (files + database)
-  </Card>
-  <Card title="Database Backup" icon="database" color="#10b981">
-    Database-only backup (SQL dump)
-  </Card>
-  <Card title="Server Backup" icon="server" color="#f59e0b">
-    Full server directory backup (selective paths)
-  </Card>
-</CardGroup>
+| Card | Shows |
+|------|-------|
+| **Total Backups** | All backups across all types |
+| **Local Size** | Total disk space used by local backups |
+| **Active Schedules** | Running backup schedules |
+| **Remote Synced** | Backups uploaded to remote storage |
 
 ---
 
-## Backup Destinations
+## Tabs
 
-| Destination | Protocol | Description |
-|------------|---------|-------------|
-| **Local** | Filesystem | Stored on the same server (fast, no egress) |
-| **Amazon S3** | S3 API | AWS S3 or any S3-compatible storage |
-| **Backblaze B2** | S3-compatible | Cost-effective cloud storage |
-| **DigitalOcean Spaces** | S3-compatible | DigitalOcean object storage |
-| **Google Cloud Storage** | S3-compatible | Via interoperability API |
-| **MinIO** | S3 API | Self-hosted object storage |
-| **FTP/SFTP** | FTP | Remote server via FTP |
-| **Wasabi** | S3-compatible | High-speed cloud storage |
+### Backups (Manual)
 
-Configure destinations in **Settings → Backup Destinations** with your credentials.
+Lists all existing backups. Filter by:
+- **Type pills:** All / Application / Database / Files / WordPress
+- **Website dropdown:** Show backups for a specific site
+- **Name search:** Filter by backup name
 
----
+**Backup list columns:**
 
-## Backup Schedules
+| Column | Description |
+|--------|-------------|
+| **Name** | Backup display name |
+| **Site** | Application or site this backup belongs to |
+| **Type** | Application / Database / Files / WordPress badge |
+| **Synced** | Whether it has been uploaded to remote storage |
+| **Size** | Backup file size |
+| **Date** | Creation timestamp |
 
-### Creating a Schedule
+**Per-backup actions:** Restore, Upload to Remote, Delete.
 
-1. Go to **Backups → Schedules**
-2. Click **New Schedule**
-3. Configure:
+#### Creating a Backup
+
+Click **Create Backup** to open the modal:
+- Choose type: Application, Database, WordPress, or Files
+- Select the target app, WordPress site, or directory path
+- Optionally provide database credentials if needed
+
+### Schedules
+
+Automated backup schedules with individual website and name filters.
+
+**Schedule list** — expandable rows showing:
+- Type, frequency, scheduled time
+- Storage location (Local / Remote)
+- Last run status (success/error badge)
+- Next run time
+
+**Per-schedule actions:** Run Now, Enable/Disable, Delete.
+
+For WordPress backup schedules, expand the row to see **individual backup records** for each scheduled run.
+
+#### Adding a Schedule
+
+Click **Add Schedule** to configure:
 
 | Field | Options |
 |-------|---------|
-| **Name** | Schedule label |
-| **Type** | Site / Database / Directory |
-| **Target** | Site, database, or path to back up |
+| **Name** | Display name |
+| **Type** | Application / WordPress / Files / Database |
+| **Target** | Which site, app, or path |
 | **Frequency** | Hourly / Daily / Weekly / Monthly |
-| **Time** | Time of day (UTC) |
-| **Retention** | How many backups to keep (e.g. 7 daily, 4 weekly) |
-| **Destination** | Where to store the backup |
-| **Compression** | gzip, zstd, or none |
+| **Time** | Hour of day to run |
+| **Remote Upload** | Automatically sync to remote storage |
 
-### Retention Policy
+### Storage
 
-AreaWP automatically deletes old backups based on your retention rules:
+Configure where backups are stored.
 
-```
-Daily backups:   keep last 7
-Weekly backups:  keep last 4
-Monthly backups: keep last 3
-```
+**Provider cards** — select one:
 
-<Tip>
-Use **grandfather-father-son** rotation: keep 7 daily + 4 weekly + 3 monthly backups for comprehensive coverage with manageable storage use.
-</Tip>
+| Provider | Protocol |
+|---------|---------|
+| **Local** | Filesystem on the server |
+| **Amazon S3** | S3 API |
+| **Backblaze B2** | S3-compatible |
 
----
+**Per-provider fields:**
+- Bucket/container name
+- Endpoint URL (for S3-compatible)
+- Access key and secret key
+- Region
 
-## Manual Backups
+**Remote options** (if not Local):
+- **Auto Upload** — push backups to remote storage automatically
+- **Keep Local Copy** — retain a local copy after upload
 
-Run an on-demand backup at any time:
+**Retention** — slider from 1 to 365 days. Backups older than the retention period are automatically deleted.
 
-1. Go to **Backups** or to the site/database detail page
-2. Click **Backup Now**
-3. Choose the destination
-4. The backup runs in the background — progress is shown in real time
+**Test Connection** — verifies credentials before saving.
 
 ---
 
 ## Restoring a Backup
 
-<Steps>
-  <Step title="Find the backup">
-    Go to **Backups → Restore** or to the site's backup list.
-  </Step>
+1. Find the backup in the **Backups** tab
+2. Click **Restore**
+3. Confirm in the dialog — review the backup name and creation date
+4. The restore runs in the background; the site is briefly in maintenance mode
 
-  <Step title="Select the backup point">
-    Choose the backup by date and time. AreaWP shows backup size and what it contains.
-  </Step>
-
-  <Step title="Choose restore mode">
-    | Mode | Description |
-    |------|-------------|
-    | **Restore in place** | Overwrite the current site/database with the backup |
-    | **Restore to new site** | Create a new site from the backup (original is preserved) |
-    | **Download** | Download the backup archive to your computer |
-  </Step>
-
-  <Step title="Confirm and restore">
-    Click **Restore**. AreaWP downloads the backup (if remote), extracts it, and restores the files and database. The site is briefly in maintenance mode during the restore.
-  </Step>
-</Steps>
-
----
-
-## Pricing Plan Integration
-
-Backup features can be gated by pricing plan:
-
-| Plan Feature | Description |
-|-------------|-------------|
-| **Manual backups** | Allow clients to trigger backups on demand |
-| **Automatic backups** | Enable scheduled backups (daily, weekly) |
-| **Retention days** | How many days of backup history clients keep |
-| **Remote storage** | Allow clients to use their own S3 bucket |
-
-Configure per-plan backup limits in **Administration → Pricing Plans**.
-
----
-
-## Backup Notifications
-
-Get notified when backups complete or fail:
-
-1. Go to **Settings → Notifications**
-2. Enable backup alerts
-3. Choose channels: email, Slack, webhook
-
-Failure alerts fire immediately; success alerts can be batched (daily digest) to reduce noise.
+<Warning>
+Restoring overwrites the current site files and database. There is no undo — create a fresh backup of the current state before restoring an older one.
+</Warning>

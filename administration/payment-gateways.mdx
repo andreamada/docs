@@ -1,118 +1,79 @@
 ---
 title: "Payment Gateways"
-description: "Configure payment processors to accept client payments on your platform."
+description: "Configure Stripe, PayPal, Tap, and Bank Transfer to accept client payments and automate subscription renewals."
 icon: "credit-card"
 ---
 
 <Info>
 **Path:** Administration → Payment Gateways (`/payment-gateways`) — Admin only
 
-AreaWP supports multiple payment methods. Configure at least one gateway to enable client billing.
+The page shows four collapsible gateway cards. Enable any gateway by toggling it on and entering the required credentials, then click **Save**.
 </Info>
 
 ## Supported Gateways
 
-| Gateway | Type | Card Support | Recurring Billing |
-|---------|------|-------------|-------------------|
-| **Stripe** | Online | ✅ Credit/Debit | ✅ Automatic |
-| **Bank Transfer** | Manual | ❌ | ⚠️ Manual confirmation |
-
----
-
-## Stripe
-
-Stripe enables fully automated credit and debit card payments with automatic subscription renewals.
-
-### Setting Up Stripe
-
-<Steps>
-  <Step title="Create a Stripe account">
-    Sign up at [stripe.com](https://stripe.com) and complete account verification.
-  </Step>
-
-  <Step title="Get your API keys">
-    In the Stripe dashboard, go to **Developers → API Keys** and copy your:
-    - **Publishable key** (`pk_live_...`)
-    - **Secret key** (`sk_live_...`)
-
-    Use **test keys** (`pk_test_...` / `sk_test_...`) during development.
-  </Step>
-
-  <Step title="Enter keys in AreaWP">
-    Go to **Payment Gateways → Stripe** and paste both keys. Click **Save**.
-  </Step>
-
-  <Step title="Configure webhook (recommended)">
-    For reliable event processing (payment failures, disputes, refunds), configure a Stripe webhook:
-
-    1. In AreaWP, go to **Payment Gateways → Stripe → Webhook**
-    2. Copy the webhook endpoint URL
-    3. In Stripe dashboard → **Developers → Webhooks** → **Add Endpoint**
-    4. Paste the URL and select events:
-       - `payment_intent.succeeded`
-       - `payment_intent.payment_failed`
-       - `customer.subscription.deleted`
-       - `invoice.payment_succeeded`
-       - `invoice.payment_failed`
-    5. Copy the **Signing secret** and paste it back in AreaWP
-  </Step>
-
-  <Step title="Test the integration">
-    Go to **Payment Gateways → Stripe → Test**. AreaWP attempts a $0.01 authorization to verify the connection.
-  </Step>
-</Steps>
-
-### Stripe Configuration Options
-
-| Setting | Description |
-|---------|-------------|
-| **Currency** | Default billing currency (e.g. USD, EUR, GBP) |
-| **Statement descriptor** | What appears on client's bank statement |
-| **Trial cancellation** | Cancel trial if no card added by end date |
-| **Failed payment retry** | Retry schedule for failed payments |
-| **3D Secure** | Require 3DS verification for applicable cards |
+| Gateway | Type | Auto-Renew |
+|---------|------|------------|
+| **Stripe** | Online — card | ✅ Automatic |
+| **PayPal** | Online — PayPal account | ✅ Automatic |
+| **Tap** | Online — Middle East card processor | ✅ Automatic |
+| **Bank Transfer** | Manual — wire transfer | ⚠️ Manual approval |
 
 ---
 
 ## Bank Transfer
 
-Bank Transfer enables manual payments where clients send money via bank wire and admins confirm receipt.
+Simple setup — no API key required.
 
-### Setting Up Bank Transfer
-
-1. Go to **Payment Gateways → Bank Transfer**
-2. Enable the gateway
-3. Enter your bank account instructions:
+1. Toggle **Enable Bank Transfer**
+2. Paste your bank account instructions in the **Payment Instructions** textarea:
 
 ```
-Please transfer the amount to:
 Bank: First National Bank
-Account name: Your Company Ltd
+Account: Your Company Ltd
 IBAN: GB00 XXXX 0000 0000 0000 00
-BIC/SWIFT: XXXXXXXX
-Reference: [Your invoice number]
-
-Payments are processed within 1-3 business days.
+BIC: XXXXXXXX
+Reference: [Invoice Number]
 ```
 
-### Bank Transfer Workflow
+3. Click **Save**
 
-1. Client selects **Bank Transfer** at checkout
-2. AreaWP creates a **Pending** invoice and shows the bank details
-3. Client sends the bank transfer
-4. Admin receives the payment (external to AreaWP)
-5. Admin goes to **Transactions** and marks the invoice as **Paid**
-6. Subscription activates automatically
-
-<Tip>
-Ask clients to include their invoice number as the payment reference to make reconciliation easier.
-</Tip>
+When a client chooses Bank Transfer at checkout, they see these instructions and their subscription stays **Pending** until you manually approve the transaction in **Administration → Transactions**.
 
 ---
 
-## Testing Payments
+## PayPal
 
-Before going live, test your payment setup:
+| Field | Description |
+|-------|-------------|
+| **Webhook URL** | Auto-generated — copy to PayPal developer portal |
+| **Sandbox Mode** | Toggle for testing |
+| **Client ID** | From PayPal developer app |
+| **Client Secret** | From PayPal developer app |
+| **Webhook ID** | From PayPal webhook configuration |
+
+---
+
+## Stripe
+
+| Field | Description |
+|-------|-------------|
+| **Webhook URL** | Auto-generated — copy to Stripe dashboard |
+| **Sandbox Mode** | Toggle test mode (uses `pk_test_` / `sk_test_` keys) |
+| **Publishable Key** | `pk_live_...` from Stripe API keys |
+| **Secret Key** | `sk_live_...` from Stripe API keys |
+| **Webhook Secret** | Signing secret from Stripe webhook endpoint |
+
+### Setting Up Stripe Webhooks
+
+1. Copy the **Webhook URL** shown in the Stripe card
+2. In the Stripe dashboard → **Developers → Webhooks → Add Endpoint**
+3. Paste the URL and select events:
+   - `invoice.payment_succeeded`
+   - `invoice.payment_failed`
+   - `customer.subscription.deleted`
+   - `payment_intent.succeeded`
+4. Copy the **Signing Secret** back into AreaWP
 
 ### Stripe Test Cards
 
@@ -121,30 +82,26 @@ Before going live, test your payment setup:
 | `4242 4242 4242 4242` | Always succeeds |
 | `4000 0000 0000 0002` | Always declined |
 | `4000 0025 0000 3155` | Requires 3D Secure |
-| `4000 0000 0000 9995` | Insufficient funds |
-
-Use any future expiry date, any CVC, and any ZIP code.
 
 ---
 
-## Currency Configuration
+## Tap
 
-Set your platform's currency in **Settings → Billing → Currency**. The currency applies to all pricing plans and invoices.
-
-<Warning>
-Changing the currency after clients have active subscriptions is not recommended — existing invoices will show the old currency. Make this decision before going live.
-</Warning>
+| Field | Description |
+|-------|-------------|
+| **Merchant ID** | Your Tap merchant identifier |
+| **Environment** | Test or Live toggle |
+| **Public Key (Test)** | Test mode publishable key |
+| **Secret Key (Test)** | Test mode secret key |
+| **Public Key (Live)** | Live mode publishable key |
+| **Secret Key (Live)** | Live mode secret key |
 
 ---
 
-## Tax / VAT
+## Save
 
-Configure tax collection in **Settings → Billing → Tax**:
+After configuring any gateway, click the **Save** button at the bottom of the page. All gateway settings are saved together in a single request.
 
-| Setting | Description |
-|---------|-------------|
-| **Tax rate** | Percentage to add (e.g. 20% VAT) |
-| **Tax label** | Label on invoice (VAT, GST, Sales Tax) |
-| **Tax number** | Your business tax registration number |
-| **Show tax** | Display tax separately on invoices |
-| **Stripe Tax** | Use Stripe's automatic tax calculation (Stripe only) |
+<Tip>
+You can enable multiple payment gateways simultaneously. Clients choose their preferred method at checkout.
+</Tip>

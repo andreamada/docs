@@ -1,133 +1,105 @@
 ---
 title: "Git"
-description: "Manage Git repositories and trigger deployments from connected servers."
+description: "Built-in Gitea server — browse repositories, manage webhooks, trigger deployments, and view full deployment logs."
 icon: "code-branch"
 ---
 
 <Info>
 **Path:** Git (`/git`) — Admin only
 
-The Git section integrates with GitHub, GitLab, Bitbucket, and self-hosted Git servers to enable automated deployments.
+AreaWP includes a built-in Gitea Git server. Install it once on your server, then manage repositories, webhooks, and deployments from the panel.
 </Info>
 
-## Git Integration
+## Installation
 
-Connect your Git provider once and AreaWP can automatically deploy code when you push to a branch.
+If Gitea is not installed, the page shows an empty state with resource requirements. Click **Install** to open the setup modal:
 
-### Supported Providers
+- Set the Gitea admin username and password
+- AreaWP installs and configures Gitea as a system service
 
-| Provider | Authentication | Webhooks |
-|---------|---------------|---------|
-| GitHub | OAuth / Personal Access Token | ✅ |
-| GitLab | OAuth / Personal Access Token | ✅ |
-| Bitbucket | OAuth / App Password | ✅ |
-| Gitea / Forgejo | Personal Access Token | ✅ |
-| Any Git server | SSH key / HTTPS token | ✅ |
+**Header actions after install:** Open Gitea (external link), Start, Stop.
 
 ---
 
-## Connecting a Repository
+## Status Cards
 
-<Steps>
-  <Step title="Add credentials">
-    Go to **Git → Credentials** and add your provider credentials (OAuth or token). These are stored encrypted.
-  </Step>
+Once installed, four cards show the current state:
 
-  <Step title="Add a repository">
-    Go to **Git → Repositories** → **Add Repository**. Select your provider and choose the repository from the list.
-  </Step>
-
-  <Step title="Configure deploy settings">
-    | Setting | Description |
-    |---------|-------------|
-    | **Branch** | Branch to watch for changes |
-    | **Target Server** | Which server to deploy to |
-    | **Deploy Path** | Absolute path on server (e.g. `/var/www/myapp`) |
-    | **Post-deploy Hook** | Commands to run after deployment |
-    | **Trigger** | On push / manual only |
-  </Step>
-
-  <Step title="Enable webhook">
-    Copy the webhook URL and add it to your Git provider repository settings. AreaWP will receive push events and deploy automatically.
-  </Step>
-</Steps>
+| Card | Shows |
+|------|-------|
+| **Server Status** | Running / stopped with version |
+| **URL Path** | HTTP access URL |
+| **SSH Port** | Git-over-SSH port |
+| **Version** | Installed Gitea version |
 
 ---
 
-## Deployments
+## Tabs
 
-**Git → Deployments** shows the deployment history for all repositories.
+### Overview
 
-### Deployment Process
+Server info panel with HTTP and SSH access URLs (with copy buttons) and quick-action shortcuts.
 
-When a push is received (or triggered manually):
+### Repositories
 
-1. **Pull** — Fetch the latest commits from the remote
-2. **Build** — Run build commands if configured (npm install, composer install, etc.)
-3. **Deploy** — Copy files to the deploy path
-4. **Post-deploy** — Run post-deploy hooks
-5. **Log** — Record outcome (success/fail) with full output
+Two modes:
 
-### Deployment Log
+**Repository List** — all repositories with owner, name, forks, stars, and description.
 
-Each deployment entry shows:
-- Commit hash and message
-- Author and timestamp
-- Duration
-- Full command output (expandable)
-- Status: ✅ Success / ❌ Failed / 🔄 In Progress
+**Repository Detail** (click any repo) — full file browser:
+- Folder and file navigation with sizes
+- **Commits** tab — commit log with author, date, and message
+- **Branches** tab — all branches with switch button
 
----
+### Access
 
-## SSH Keys
+HTTP and SSH access configuration for this Gitea instance, with copy buttons for each URL format.
 
-AreaWP generates a unique SSH key for each server's agent. This key is used for Git operations on that server.
+### Webhooks
 
-### Adding the Deploy Key
+All configured deployment webhooks:
 
-1. Go to **Git → SSH Keys** for your server
-2. Copy the public key
-3. Add it as a **Deploy Key** in your repository settings (GitHub: Settings → Deploy Keys)
+| Column | Description |
+|--------|-------------|
+| **Name** | Webhook display name |
+| **Source** | Repository URL and branch |
+| **URL** | Deployment target URL |
+| **Last Sync** | Most recent webhook trigger |
 
-<Tip>
-Deploy keys are read-only by default. Enable write access only if you need to push tags or releases back to the repository from a deploy script.
-</Tip>
+**Add Webhook** button opens a full configuration modal:
+- Name, source repo URL, branch to watch
+- Deployment settings (target server, path)
+- Pre-deploy and post-deploy shell scripts
+- Secret token for webhook verification
 
----
+**Actions per webhook:** Test, Toggle (enable/disable), Delete.
 
-## Post-Deploy Hooks
+### Deployments
 
-Configure commands that run after each successful deployment:
+Full deployment history across all webhooks:
 
-```bash
-# PHP / Laravel
-composer install --no-dev --optimize-autoloader
-php artisan migrate --force
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan queue:restart
+| Column | Description |
+|--------|-------------|
+| **Status** | Success / Failed / In Progress badge |
+| **Commit** | Short hash and message |
+| **Branch** | Source branch |
+| **Duration** | How long the deployment took |
+| **Triggered** | Timestamp |
 
-# Node.js
-npm ci --production
-pm2 restart myapp
+Click **View Logs** to open the deployment log modal showing pre-deploy, deploy, and post-deploy output separately. Click **Rollback** to redeploy a previous successful run.
 
-# WordPress
-wp cache flush
-wp cron event run --due-now
+### Settings
 
-# Custom
-./deploy-script.sh
-```
+Start, stop, and uninstall Gitea from the panel. Uninstalling removes the service but preserves repository data.
 
 ---
 
-## Rollbacks
+## Webhook Configuration
 
-If a deployment fails or introduces a regression, roll back to any previous commit:
+A webhook fires on every push to the configured branch. The deployment process:
 
-1. Go to **Git → Deployments**
-2. Find the last good deployment
-3. Click **Rollback to this version**
+1. **Pre-deploy script** — runs before files are updated (e.g. put site in maintenance mode)
+2. **Deploy** — pulls the latest commit to the target path
+3. **Post-deploy script** — runs after update (e.g. `php artisan migrate`, `wp cache flush`)
 
-AreaWP checks out that specific commit and re-runs the deploy process.
+If any step fails, the deployment is marked as Failed and subsequent steps are skipped.

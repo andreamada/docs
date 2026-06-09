@@ -1,50 +1,67 @@
 ---
 title: "Domains"
-description: "Manage domains, DNS zones, SSL certificates, and domain pricing across your platform."
+description: "Manage local app domains, SSL certificates, DNS zones, and domain registrations — including Dynadot integration."
 icon: "globe"
 ---
 
 <Info>
 **Path:** Domains (`/domains`)
 
-The Domains section provides DNS management, SSL certificate provisioning, and domain pricing configuration for all sites on your platform.
+The Domains section manages two types of domains: local domains attached to your apps, and registered domains synced from your domain registrar (Dynadot integration). Sub-pages: DNS Zones (`/dns`) and SSL Certificates (`/ssl`).
 </Info>
 
-## Overview
+## Domains List
 
-<CardGroup cols={3}>
-  <Card title="Domains" icon="globe" color="#6366f1">
-    View and manage all domains pointing to your servers
-  </Card>
-  <Card title="DNS Zones" icon="layer-group" color="#10b981">
-    Manage DNS records for domains you control
-  </Card>
-  <Card title="SSL Certificates" icon="lock" color="#f59e0b">
-    Provision and renew Let's Encrypt certificates
-  </Card>
-</CardGroup>
+The main page shows all domains in two groups:
 
----
+### Local Domains
 
-## Domain Management
-
-The main Domains page lists every domain associated with your platform:
+Domains added to deployed applications on your servers.
 
 | Column | Description |
 |--------|-------------|
-| **Domain** | The domain name |
-| **Site** | Which application this domain serves |
-| **Server** | Which server handles requests |
-| **SSL** | Certificate status (valid / expiring / missing) |
-| **Registrar** | Where the domain is registered |
-| **Expiry** | Domain registration expiry date |
+| **Domain** | Domain name with Primary badge if it's the app's main domain |
+| **Connected App** | Which application this domain serves |
+| **SSL Status** | Active or inactive indicator |
 
-### Adding a Domain to a Site
+**Actions per domain:**
+- **Visit** — open in a new tab
+- **Verify DNS** — check DNS propagation
+- **Enable SSL** — provision a certificate (opens SSL modal with email input)
+- **Renew SSL** — force certificate renewal
+- **Delete** — remove domain from the app
 
-1. Go to **Domains** → **Add Domain**
-2. Enter the domain name
-3. Select the site to point to
-4. AreaWP updates the Nginx configuration and attempts to provision an SSL certificate
+### Registered Domains (Dynadot)
+
+Domains registered through the Dynadot integration, synced from your registrar account.
+
+| Column | Description |
+|--------|-------------|
+| **Domain** | Domain name with "Dynadot" provider badge |
+| **Lifecycle Status** | Active, pending, expired, etc. |
+| **Expiration Date** | Registration expiry |
+| **Auto-Renew** | Status indicator |
+
+**Actions:** Manage (opens detail modal), Renew, Delete.
+
+### Domain Detail Modal
+
+Full registration details: registration date, expiration, auto-renew toggle, lifecycle status. Edit nameservers and DNS records directly from this modal.
+
+---
+
+## Registering a New Domain
+
+Click **Register Domain** (admin, requires Dynadot configured in Settings) to search for available domains:
+
+1. Enter the domain name to search
+2. See availability results with pricing for `.com`, `.net`, `.io`, etc.
+3. View alternative suggestions
+4. Click **Register** to purchase
+
+### SSL Alerts
+
+If **Certbot** is not installed on the server, a warning banner appears at the top. The page also shows a count of active certificates.
 
 ---
 
@@ -52,39 +69,38 @@ The main Domains page lists every domain associated with your platform:
 
 **Path:** `/dns`
 
-Manage DNS records for domains whose nameservers point to your AreaWP server or integrated DNS provider.
+Two-panel layout for managing DNS zones.
 
-### Supported Record Types
+### Left Panel — Zones List
 
-| Type | Description | Example |
-|------|-------------|---------|
-| **A** | IPv4 address | `192.0.2.1` |
-| **AAAA** | IPv6 address | `2001:db8::1` |
-| **CNAME** | Canonical name alias | `www → @` |
-| **MX** | Mail exchange | `mail.example.com` (priority 10) |
-| **TXT** | Text record | SPF, DKIM, DMARC, domain verification |
-| **NS** | Nameserver | `ns1.example.com` |
-| **CAA** | Certificate Authority Authorization | `letsencrypt.org` |
-| **SRV** | Service locator | `_sip._tcp` records |
-| **PTR** | Reverse DNS | `1.2.0.192.in-addr.arpa` |
+All configured DNS zones, each showing the domain, DNS provider, and record count. A **Check** button triggers a propagation status check.
 
-### Creating a Zone
+**Creating a Zone:** Click the **+** button and choose a provider:
 
-1. Go to **Domains → DNS Zones** → **New Zone**
-2. Enter the domain name
-3. AreaWP creates the zone with default records (SOA, NS)
-4. Point your domain's nameservers to AreaWP's nameservers
-
-### DNS Provider Integration
-
-Connect external DNS providers (Cloudflare, Route53, etc.) to manage DNS records directly:
-
-| Provider | Records Managed |
+| Provider | Required Fields |
 |---------|----------------|
-| Cloudflare | All record types + proxy toggle |
-| AWS Route 53 | All record types |
-| DigitalOcean DNS | All record types |
-| Manual (built-in) | All record types via PowerDNS |
+| **Manual** | Domain name only |
+| **Cloudflare** | Zone ID, API Token |
+| **Route53** | Zone ID, Access Key, Secret Key, Region |
+| **DigitalOcean** | Zone ID, API Token |
+
+### Right Panel — Records
+
+Select a zone to see its DNS records.
+
+| Column | Description |
+|--------|-------------|
+| **Type** | A, AAAA, CNAME, MX, TXT, SRV, CAA, NS (badge) |
+| **Name** | Record name |
+| **Value** | Record content (monospace) |
+| **TTL** | Time to live in seconds |
+| **Priority** | For MX and SRV records |
+
+**Add a record** from the panel. **Export** exports the full zone file.
+
+### DNS Propagation Check
+
+Click **Check** on any zone to see which nameservers have propagated the records — shows each nameserver with a status dot and the IP it returns.
 
 ---
 
@@ -92,63 +108,20 @@ Connect external DNS providers (Cloudflare, Route53, etc.) to manage DNS records
 
 **Path:** `/ssl`
 
-AreaWP integrates with **Let's Encrypt** to provision free SSL certificates automatically.
+All SSL certificates on the server with live expiry status.
 
-### Certificate Lifecycle
+| Column | Description |
+|--------|-------------|
+| **Domain** | Domain name |
+| **Type** | Panel (self-signed), acme.sh, or Custom |
+| **Auto-Renew** | Badge indicating auto-renewal is active |
+| **Expiry** | Expiry date with color coding |
+| **Days Remaining** | Red (under 7), orange (under 30), green (over 30) |
 
-| Status | Meaning |
-|--------|---------|
-| ✅ Valid | Certificate active, expiry > 30 days |
-| ⚠️ Expiring Soon | Expiry within 30 days |
-| 🔄 Auto-renewing | Renewal in progress |
-| ❌ Expired | Certificate expired |
-| ⏳ Pending | Certificate request submitted |
-| ❗ Failed | Provisioning failed — check domain DNS |
+**Actions per certificate:**
+- **Force Renew** — trigger immediate renewal
+- **Re-provision** — recreate the certificate from scratch (not available for Panel type)
 
-### Provisioning a Certificate
+### Expiry Alert
 
-Certificates are provisioned automatically when:
-- A new site is deployed with a domain
-- A domain is added to an existing site
-
-To provision manually:
-
-1. Go to **Domains → SSL Certificates**
-2. Click **Issue Certificate** next to the domain
-3. AreaWP runs the ACME challenge (HTTP-01 or DNS-01)
-4. Nginx is updated with the new certificate
-
-### Auto-Renewal
-
-AreaWP checks certificates daily and renews those expiring within 30 days. Renewal is fully automatic.
-
-<Tip>
-If certificate provisioning fails, check that:
-1. The domain resolves to your server's IP
-2. Port 80 is accessible for the HTTP-01 challenge
-3. No firewall rules block Let's Encrypt verification
-</Tip>
-
-### Wildcard Certificates
-
-Wildcard certificates (`*.example.com`) require DNS-01 validation. Connect a DNS provider (Cloudflare, Route53) with write access to enable wildcard SSL.
-
----
-
-## Domain Pricing
-
-**Path:** `/domains/pricing` — Admin only
-
-Configure pricing for domain registration and renewal services offered to your clients.
-
-| Setting | Description |
-|---------|-------------|
-| **TLD** | Top-level domain (e.g. `.com`, `.net`, `.io`) |
-| **Registration Price** | Price charged to client for new registrations |
-| **Renewal Price** | Annual renewal price |
-| **Transfer Price** | Domain transfer price |
-| **Registrar Cost** | Your cost (for margin calculation) |
-
-<Info>
-Domain pricing is only relevant if you resell domain registrations via a registrar API (Namecheap, Resellerclub, etc.). Configure the registrar integration in **Administration → Settings → Registrars**.
-</Info>
+A banner at the top of the page lists any domain expiring within 30 days.

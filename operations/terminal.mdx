@@ -1,129 +1,99 @@
 ---
 title: "Terminal & Logs"
-description: "Access a real-time browser-based terminal and view system logs for all connected servers."
+description: "Log file viewer, systemd journal, process manager, and service control — all in the browser without SSH."
 icon: "terminal"
 ---
 
 <Info>
-**Path:** Terminal & Logs (`/terminal`) — Admin only
+**Path:** Terminal (`/terminal`) — Admin only
 
-The Terminal section provides a fully functional browser-based SSH terminal and real-time log streaming for all connected servers.
+The Terminal page provides four tools for inspecting and managing running systems: log files, systemd journal, process list, and service control.
 </Info>
 
-## Browser Terminal
+## Log Files Tab
 
-Open a terminal session to any connected server directly from your browser — no SSH client required.
+Browse and view any log file on the server.
 
-### Starting a Terminal Session
+**Left sidebar** — clickable list of log files showing path and size. Click any file to load it in the main viewer.
 
-1. Go to **Terminal**
-2. Select the target server from the dropdown
-3. The terminal opens immediately — you're connected as `root` (or the agent user)
+**Viewer controls:**
 
-### Terminal Features
-
-| Feature | Description |
+| Control | Description |
 |---------|-------------|
-| **Full TTY** | Complete terminal emulation (xterm-256color) |
-| **Resize** | Terminal resizes with your browser window |
-| **Copy/Paste** | Standard clipboard integration |
-| **Multiple tabs** | Open terminal sessions to multiple servers simultaneously |
-| **History** | Scrollback buffer (10,000 lines) |
-| **Search** | Ctrl+F to search terminal output |
+| **Search pattern** | Filter log lines by text or regex |
+| **Line count** | Load 50 / 100 / 200 / 500 / 1000 lines |
+| **Auto-refresh** | Toggle live updates |
 
-### Keyboard Shortcuts
+**Actions:**
+- **Refresh** — reload the log content
+- **Download** — save the log file to your computer
+- **Clear log** — truncate the log file (admin only)
 
-| Shortcut | Action |
-|---------|--------|
-| `Ctrl+C` | Interrupt current process |
-| `Ctrl+D` | Close terminal / EOF |
-| `Ctrl+L` | Clear screen |
-| `Ctrl+A` | Move to start of line |
-| `Ctrl+E` | Move to end of line |
-| `Ctrl+U` | Clear from cursor to start |
-| `Ctrl+K` | Clear from cursor to end |
-
-<Warning>
-The terminal opens a root shell on the selected server. All commands are executed with full system privileges. Use with care.
-</Warning>
+Log output is displayed in a monospace, scrollable view.
 
 ---
 
-## Log Viewer
+## Journal Tab
 
-Stream real-time logs from any server or container without leaving the browser.
+Read systemd journal output for any service.
 
-### Available Log Sources
-
-<Tabs>
-  <Tab title="System Logs">
-    | Log | Path | Description |
-    |-----|------|-------------|
-    | Syslog | `/var/log/syslog` | General system messages |
-    | Auth log | `/var/log/auth.log` | SSH logins and sudo usage |
-    | Kernel | `/var/log/kern.log` | Kernel messages |
-    | Fail2ban | `/var/log/fail2ban.log` | Banned IPs |
-    | UFW | `/var/log/ufw.log` | Firewall activity |
-  </Tab>
-
-  <Tab title="Web Logs">
-    | Log | Path | Description |
-    |-----|------|-------------|
-    | Nginx access | `/var/log/nginx/access.log` | HTTP request log |
-    | Nginx error | `/var/log/nginx/error.log` | Nginx errors |
-    | Per-site access | `/var/log/nginx/<site>.access.log` | Site-specific access |
-    | Per-site error | `/var/log/nginx/<site>.error.log` | Site-specific errors |
-    | PHP-FPM | `/var/log/php<version>-fpm.log` | PHP process manager |
-  </Tab>
-
-  <Tab title="App Logs">
-    | Log | Source | Description |
-    |-----|--------|-------------|
-    | AreaWP backend | `journalctl -u areawp` | Panel API logs |
-    | WordPress debug | `wp-content/debug.log` | WP_DEBUG output |
-    | MySQL | `/var/log/mysql/error.log` | Database errors |
-    | PostgreSQL | `journalctl -u postgresql` | DB server logs |
-  </Tab>
-
-  <Tab title="Docker Logs">
-    Stream logs from any Docker container. Select the container from the dropdown and AreaWP runs `docker logs -f <container>` on the server.
-  </Tab>
-</Tabs>
-
-### Log Features
-
-| Feature | Description |
+| Control | Description |
 |---------|-------------|
-| **Live stream** | New lines appear in real time |
-| **Filter** | Search/filter by keyword or regex |
-| **Highlight** | Color-code ERROR, WARN, INFO lines |
-| **Download** | Export the last N lines as a text file |
-| **Pause** | Pause streaming to read without new lines arriving |
-| **Lines** | Show last 100, 500, 1000, or 5000 lines |
+| **Unit / Service** | Type a service name, or pick from quick-select chips (nginx, apache2, mysql, etc.) |
+| **Line count** | 50 / 100 / 200 / 500 lines |
+| **Priority filter** | Emergency / Alert / Critical / Error / Warning / Notice / Info / Debug |
+
+Click **Load Logs** to fetch the journal output. If journalctl is not available, the fallback source is shown in an info notice.
 
 ---
 
-## Systemd Services
+## Processes Tab
 
-View and manage systemd services on connected servers from the Terminal section:
+Live process list for the selected server.
 
-| Operation | Description |
-|-----------|-------------|
-| **Status** | Check if a service is running |
-| **Start / Stop / Restart** | Service lifecycle management |
-| **Enable / Disable** | Control autostart on boot |
-| **View logs** | `journalctl -u <service> -f` |
+**Controls:**
+- **Search** — filter by process name, command, or PID
+- **Sort** — CPU / Memory / PID / Name
+- **Limit** — show 25 / 50 / 100 processes
 
-Common services managed via the panel:
+**Refresh** button reloads the list.
 
-- `areawp` — AreaWP backend
-- `nginx` — Web server
-- `postgresql` — Database
-- `docker` — Docker daemon
-- `fail2ban` — Intrusion prevention
-- `postfix` — Mail server
-- `dovecot` — IMAP server
+**Table columns:**
+
+| Column | Description |
+|--------|-------------|
+| **PID** | Process ID |
+| **Name** | Process name |
+| **User** | System user running the process |
+| **CPU %** | Current CPU usage |
+| **Memory %** | Memory usage as a percentage |
+| **Memory** | Human-readable memory size |
+| **Status** | Running / Sleeping / Zombie badge |
+
+Click any row to expand a **details panel** showing: full command line, thread count, created time, and open file count.
+
+**Kill options per process:**
+- **Kill** — send SIGTERM (graceful)
+- **Force Kill** — send SIGKILL (immediate)
+
+---
+
+## Services Tab
+
+All systemd services on the server displayed as a grid of cards.
+
+**Each service card shows:**
+- Status dot (green = running, red = stopped)
+- Service name and description
+- Status badge
+- PID and memory usage (if running)
+
+**Per-service actions:**
+- **Start / Restart / Stop** — lifecycle control
+- **Logs** — opens a modal with the last 100 lines from the service journal
+
+**Refresh** button reloads all service statuses.
 
 <Tip>
-Quick restart shortcuts are also available from the **Dashboard** for the most common services (AreaWP, Nginx, Docker).
+Common services you'll manage here: `areawp` (panel backend), `nginx`, `postgresql`, `docker`, `fail2ban`, `postfix`, `dovecot`.
 </Tip>

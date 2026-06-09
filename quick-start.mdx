@@ -1,11 +1,11 @@
 ---
 title: "Quick Start"
-description: "Get your first server connected and your first site running in under 10 minutes."
+description: "Connect your first server and deploy your first WordPress site in under 10 minutes."
 icon: "rocket"
 ---
 
 <Info>
-This guide assumes you have already installed AreaWP and completed the setup wizard. If not, start with the [Installation Guide](/installation).
+This guide assumes you've installed AreaWP and completed the setup wizard. If not, start with the [Installation Guide](/installation).
 </Info>
 
 ## Step 1 — Connect Your First Server
@@ -14,15 +14,10 @@ AreaWP manages servers via a lightweight agent. Install the agent on any Linux s
 
 <Steps>
   <Step title="Go to Servers → Agent Fleet">
-    In the left sidebar, navigate to **Servers** → **Agent Fleet**.
+    In the sidebar, navigate to **Servers** → **Agent Fleet** (`/fleet`).
   </Step>
-
   <Step title="Click Add Server">
-    Click **Add Server** and enter a name for your server.
-  </Step>
-
-  <Step title="Copy the install command">
-    AreaWP generates a one-line install command with your panel URL and a registration token.
+    The panel generates a one-line install command with your panel URL and registration token.
 
     ```bash
     curl -fsSL https://your-panel.com/install.sh | sudo bash -s -- \
@@ -30,78 +25,74 @@ AreaWP manages servers via a lightweight agent. Install the agent on any Linux s
       --server "https://your-panel.com"
     ```
   </Step>
-
-  <Step title="Run it on your server">
-    SSH into the target server and run the command. The agent installs as a systemd service and connects to your panel automatically.
+  <Step title="Run the command on your server">
+    SSH into the target server and run the command as root. The agent installs as a systemd service.
   </Step>
-
-  <Step title="Verify connection">
-    The server appears as **Online** in the Agent Fleet list within seconds.
+  <Step title="Approve the registration">
+    Go to the **Approvals** tab in Agent Fleet and approve the new server. It appears as **Online** immediately.
   </Step>
 </Steps>
 
 ---
 
-## Step 2 — Deploy Your First Site
+## Step 2 — Deploy a WordPress Site
 
-Once a server is connected, you can deploy WordPress sites and web applications.
+<Steps>
+  <Step title="Go to WordPress">
+    Click **WordPress** in the sidebar.
+  </Step>
+  <Step title="Click Create Site">
+    Fill in the creation modal:
 
-<Tabs>
-  <Tab title="WordPress Site">
-    1. Navigate to **WordPress** in the sidebar
-    2. Click **New Site**
-    3. Select the target server
-    4. Enter the domain name (e.g. `mysite.com`)
-    5. Choose a WordPress template or start fresh
-    6. Click **Deploy**
+    | Field | Example |
+    |-------|---------|
+    | Site Name | My First Site |
+    | Domain | mysite.com (or mysite.yourpanel.com) |
+    | Admin Email | admin@mysite.com |
 
-    AreaWP will:
-    - Create a Docker container for the site
-    - Install WordPress and configure the database
-    - Set up Nginx with SSL (if domain resolves)
-    - Have the site live within 60–90 seconds
-  </Tab>
-
-  <Tab title="From a Template">
-    1. Navigate to **Services** → **Templates**
-    2. Browse available app templates
-    3. Click **Deploy** on your chosen template
-    4. Select target server and enter domain
-    5. Fill in any template variables
-    6. Click **Deploy**
-  </Tab>
-</Tabs>
+    As you type the domain, AreaWP checks availability in real time.
+  </Step>
+  <Step title="Deploy">
+    Click **Create**. AreaWP provisions the Docker container, installs WordPress, configures the database, and sets up Nginx. The site is live within 60–90 seconds.
+  </Step>
+  <Step title="Access WP Admin">
+    Click the **WordPress Admin** button next to the site. You're logged in automatically — no password needed.
+  </Step>
+</Steps>
 
 ---
 
 ## Step 3 — Set Up Billing (Optional)
 
-If you're selling hosting to clients, configure billing next.
+If you're selling hosting to clients:
 
 <Steps>
   <Step title="Create a Pricing Plan">
-    Go to **Administration → Pricing Plans** and click **New Plan**. Set the name, price, billing period, and resource limits (sites, backups, etc.).
+    Go to **Administration → Pricing Plans** → **New Plan**. Set name, price, billing period, and resource limits.
   </Step>
-
   <Step title="Enable a Payment Gateway">
-    Go to **Administration → Payment Gateways**. Enable **Stripe** (for credit cards) or **Bank Transfer** and enter your credentials.
+    Go to **Administration → Payment Gateways**. Enable **Stripe** (for cards) or **Bank Transfer** and enter credentials.
   </Step>
-
-  <Step title="Invite your first client">
-    Go to **Administration → Users** and click **Invite User**. The client receives an email with a registration link.
+  <Step title="Invite a Client">
+    Go to **Administration → Users** → **Invite User**. The client receives an email registration link.
   </Step>
 </Steps>
 
 ---
 
-## Step 4 — Configure Branding
+## Step 4 — White-Label the Platform (Optional)
 
-Make the platform your own with white-label settings.
-
-1. Go to **Administration → Settings** → **White Label**
-2. Set your brand name, upload your logo
-3. Choose **Text only** mode (replaces "AreaWP" with your brand name) or **Full logo** mode
-4. Save — changes take effect immediately for all users
+<Steps>
+  <Step title="Open Settings → White Label">
+    Go to **Settings** and find the **White Label** category.
+  </Step>
+  <Step title="Set brand name and logo">
+    Enter your brand name, upload your logo (light and dark variants), and choose your primary color.
+  </Step>
+  <Step title="Save">
+    Changes take effect immediately across the entire UI for all users.
+  </Step>
+</Steps>
 
 ---
 
@@ -109,15 +100,15 @@ Make the platform your own with white-label settings.
 
 <CardGroup cols={2}>
   <Card title="Add More Servers" icon="server" href="/infrastructure/servers">
-    Learn about the Agent Fleet, Fleet Monitor, and Cloud provisioning
-  </Card>
-  <Card title="Manage WordPress" icon="globe" href="/infrastructure/wordpress">
-    Bulk updates, staging, cloning, and the WP Pipeline
+    Fleet monitor, canary rollouts, cloud provisioning
   </Card>
   <Card title="Set Up Monitoring" icon="chart-line" href="/operations/monitoring">
-    Real-time metrics and public status pages
+    Thresholds, alerts, and public status pages
   </Card>
   <Card title="Configure Backups" icon="database" href="/operations/backups">
-    Automated backup schedules and restoration
+    Automated schedules and S3 storage
+  </Card>
+  <Card title="Explore Docker" icon="box" href="/infrastructure/docker">
+    Containers, Compose stacks, and live metrics
   </Card>
 </CardGroup>

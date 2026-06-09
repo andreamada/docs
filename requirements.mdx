@@ -1,12 +1,12 @@
 ---
 title: "Requirements"
-description: "Server and software requirements for installing AreaWP."
+description: "Server and software requirements for the AreaWP panel and managed servers."
 icon: "list-check"
 ---
 
 ## Panel Server Requirements
 
-The AreaWP panel runs on a dedicated Linux server or VPS.
+The AreaWP panel (the control dashboard) runs on a dedicated Linux server or VPS.
 
 <CardGroup cols={2}>
   <Card title="Minimum" icon="server" color="#f59e0b">
@@ -17,7 +17,7 @@ The AreaWP panel runs on a dedicated Linux server or VPS.
   </Card>
 </CardGroup>
 
-### Operating System
+### Supported Operating Systems
 
 | OS | Version | Status |
 |----|---------|--------|
@@ -27,31 +27,29 @@ The AreaWP panel runs on a dedicated Linux server or VPS.
 | Fedora | 35+ | ✅ Supported |
 
 <Warning>
-AreaWP is designed for **Linux servers only**. Windows and macOS are supported for local development only (via WSL2).
+AreaWP is **Linux only** for production. Windows and macOS are supported for local development via WSL2.
 </Warning>
 
-### Software Dependencies
-
-The installer handles all of the following automatically:
+### Software (installed automatically by the installer)
 
 | Dependency | Version | Purpose |
 |-----------|---------|---------|
-| Python | 3.11 – 3.12 | Backend API (Flask) |
+| Python | 3.11 – 3.12 | Flask backend |
 | Node.js | 20.x | Frontend build |
 | PostgreSQL | 14+ | Panel database |
 | Nginx | Latest | Reverse proxy |
 | Docker | 24+ | App container runtime |
-| Docker Compose | v2 plugin | Multi-container stacks |
-| Gunicorn | 23+ | Production WSGI server |
+| Docker Compose | v2 | Multi-container stacks |
+| Gunicorn | 23+ | WSGI server |
 
 ---
 
 ## Managed Server Requirements
 
-Servers you manage via AreaWP need only the lightweight agent binary installed.
+Servers you connect to AreaWP need only the lightweight agent binary.
 
-| Requirement | Minimum |
-|------------|---------|
+| Requirement | Value |
+|------------|-------|
 | OS | Ubuntu 20.04+, Debian 11+, Fedora 35+ |
 | RAM | 256 MB free |
 | Disk | 1 GB free |
@@ -66,38 +64,38 @@ The agent is a single static Go binary (~15 MB) with no runtime dependencies. It
 
 ## Network Requirements
 
-### Panel Server
+### Panel Server Ports
 
 | Port | Purpose |
 |------|---------|
-| 80 | HTTP → HTTPS redirect |
-| 443 | HTTPS panel access |
-| 5000 | Internal backend API (local only) |
+| 80 | HTTP (redirects to HTTPS) |
+| 443 | HTTPS — panel access |
+| 5000 | Backend API (localhost only) |
 
-### Managed Servers
+### Managed Server Ports
 
 | Port | Purpose |
 |------|---------|
-| 22 | SSH for initial agent installation |
-| 443 | Agent WebSocket connection to panel (outbound) |
+| 22 | SSH — for initial agent install |
+| 443 | Agent WebSocket (outbound to panel) |
 | 80, 443 | Hosted websites |
 | 8001–8999 | Docker app containers (internal) |
 
 <Info>
-The agent connects **outbound** to the panel. No inbound firewall rules are needed on managed servers for the agent itself.
+The agent connects **outbound** to the panel. No inbound rules need to be opened on managed servers for the agent.
 </Info>
 
 ---
 
 ## License
 
-AreaWP requires a valid license key. The license is validated against the domain registered at [account.areawp.com](https://account.areawp.com).
+AreaWP requires a valid license key validated against your registered domain.
 
 <CardGroup cols={2}>
   <Card title="Get a License" icon="key" href="https://areawp.com/pricing">
-    View plans and purchase a license
+    View plans and purchase
   </Card>
   <Card title="Configure License" icon="shield-check" href="/administration/settings">
-    Set up your license key in settings
+    Set up your key in Settings
   </Card>
 </CardGroup>

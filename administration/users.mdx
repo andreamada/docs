@@ -1,51 +1,60 @@
 ---
-title: "User Management"
-description: "Create, manage, and control access for all users on your platform."
+title: "Users"
+description: "Create and manage all user accounts, roles, subscriptions, activity, and security settings."
 icon: "users"
 ---
 
 <Info>
 **Path:** Administration → Users (`/users`) — Admin only
-
-Manage all user accounts on the platform, including client accounts, sub-admins, and developers.
 </Info>
 
 ## User Roles
 
-AreaWP has two primary roles:
-
-| Role | Access Level |
-|------|-------------|
-| **Admin** | Full platform access — all settings, all servers, all client data |
-| **User** | Client access — only their own sites, billing, and support |
-
-### Role Permissions
-
-| Feature | Admin | User |
-|---------|-------|------|
-| Server management | ✅ Full | ❌ None |
-| Docker, databases, files | ✅ Full | ❌ None |
-| Site management (all sites) | ✅ Full | Own sites only |
-| Billing and subscriptions | ✅ Full | Own billing only |
-| User management | ✅ Full | ❌ None |
-| Platform settings | ✅ Full | ❌ None |
-| Activity log | ✅ Full | ❌ None |
+| Role | Access |
+|------|--------|
+| **Admin** | Full platform access — servers, settings, all clients |
+| **User** | Client access — own sites, billing, and support only |
 
 ---
 
 ## User List
 
-The Users page shows all accounts with:
+The Users page is rendered by **UsersTab** which shows all accounts with the ability to search, filter, and manage them.
 
-| Column | Description |
-|--------|-------------|
-| **Name** | Full name |
-| **Email** | Login email address |
-| **Role** | Admin or User |
-| **Status** | Active / Suspended / Pending |
-| **Subscription** | Current plan (if applicable) |
-| **Last Login** | Most recent login timestamp |
-| **Joined** | Account creation date |
+**Per-user quick actions:**
+- View full profile
+- Reset password
+- Impersonate (log in as that user)
+- Change role
+- Suspend / Activate
+- Delete
+
+---
+
+## User Detail Page
+
+Click any user to open their full profile with these sections:
+
+<AccordionGroup>
+  <Accordion title="Profile" icon="user">
+    Name, email, phone, address, timezone. Admins can update any field.
+  </Accordion>
+  <Accordion title="Sites" icon="globe">
+    All sites owned by this user. Admins can link/unlink sites and transfer ownership.
+  </Accordion>
+  <Accordion title="Subscription" icon="credit-card">
+    Current plan, status, billing period, and expiry. Admins can manually change the plan, extend the period, or cancel.
+  </Accordion>
+  <Accordion title="Transactions" icon="receipt">
+    Full payment history — invoice numbers, amounts, and payment methods.
+  </Accordion>
+  <Accordion title="Activity" icon="list">
+    Recent actions taken by this user on the platform.
+  </Accordion>
+  <Accordion title="Security" icon="shield">
+    Reset password, revoke all sessions, enable/disable 2FA, view login history and IP addresses.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -53,59 +62,19 @@ The Users page shows all accounts with:
 
 ### Admin-Created Account
 
-1. Go to **Users** → **New User**
-2. Fill in name, email, and role
-3. Set a password (or send a password reset email)
-4. Optionally assign a subscription/plan
-5. Click **Create**
+From the Users page, click **New User**:
+1. Enter name, email, and role (Admin or User)
+2. Set a password or trigger a password reset email
+3. Optionally assign a subscription plan immediately
+4. Click **Create**
 
-### Invitation Flow
+### Invitation
 
-Send an email invitation for self-registration:
+Click **Invite User**, enter the email address, set the intended role, and optionally pre-assign a pricing plan. The user receives an email with a time-limited registration link.
 
-1. Click **Invite User**
-2. Enter the email address
-3. Set the role they'll have after registration
-4. Optionally pre-assign a pricing plan
-5. Click **Send Invitation**
+### Self-Service Registration
 
-The user receives an email with a registration link valid for 48 hours.
-
-### Registration (Self-Service)
-
-If registration is enabled in **Settings → Registration**, users can sign up themselves at `/register`.
-
----
-
-## User Detail Page
-
-Click any user to view their full profile:
-
-<AccordionGroup>
-  <Accordion title="Profile" icon="user">
-    View and edit the user's name, email, phone, address, and timezone. Admins can update any field.
-  </Accordion>
-
-  <Accordion title="Sites" icon="globe">
-    All sites owned by this user. Link or unlink sites from this account. Admins can transfer site ownership.
-  </Accordion>
-
-  <Accordion title="Subscription" icon="credit-card">
-    Current subscription plan and status. Admins can manually change the plan, extend the billing period, or cancel.
-  </Accordion>
-
-  <Accordion title="Transactions" icon="receipt">
-    Full payment history for this user — invoices, amounts, and payment method.
-  </Accordion>
-
-  <Accordion title="Activity" icon="list">
-    Recent actions taken by this user on the platform.
-  </Accordion>
-
-  <Accordion title="Security" icon="shield">
-    Reset password, revoke sessions, enable/disable 2FA, view login history and IP addresses.
-  </Accordion>
-</AccordionGroup>
+If public registration is enabled in **Settings → General**, users sign up at `/register`.
 
 ---
 
@@ -113,38 +82,23 @@ Click any user to view their full profile:
 
 | Action | Description |
 |--------|-------------|
-| **Suspend** | Block login while preserving account and data |
+| **Suspend** | Block login — data and sites preserved |
 | **Activate** | Re-enable a suspended account |
-| **Impersonate** | Log in as the user to troubleshoot (admin logs show the impersonation) |
+| **Impersonate** | Log in as the user to troubleshoot (logged in the Activity feed) |
 | **Reset Password** | Send a password reset email |
-| **Delete** | Permanently delete account (requires confirmation) |
 | **Change Role** | Promote to admin or demote to user |
-| **Assign Plan** | Set the user's pricing plan manually |
+| **Assign Plan** | Manually set or change the pricing plan |
+| **Delete** | Permanently remove the account |
 
 ---
 
-## Account Suspension
+## Two-Factor Authentication
 
-Suspending a user:
-- Prevents login to the platform
-- Does not delete any data or sites
-- Sends an optional notification email
-- Can be reversed at any time
+Admins can see each user's 2FA status and reset it if they lose access to their authenticator app:
 
-Reasons for suspension:
-- Non-payment (automated by billing system)
-- Terms of service violation (manual)
-- Fraudulent activity
-
----
-
-## Two-Factor Authentication (2FA)
-
-Admins can view each user's 2FA status and reset it if they lose access to their authenticator app.
-
-1. Go to the user detail page → **Security**
-2. Click **Reset 2FA** to disable and require re-enrollment on next login
+1. Open the user detail → **Security** tab
+2. Click **Reset 2FA** — disables 2FA and forces re-enrollment on next login
 
 <Tip>
-Require 2FA for all admin accounts. Enable this in **Settings → Security → Enforce 2FA for Admins**.
+Enable "Enforce 2FA for Admins" in **Settings → Security** to require all admin accounts to use 2FA.
 </Tip>

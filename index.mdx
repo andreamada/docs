@@ -1,26 +1,26 @@
 ---
 title: "Introduction"
-description: "AreaWP — the all-in-one server control panel for managing web applications, WordPress sites, databases, and Docker on VPS and dedicated servers."
+description: "AreaWP — a modern server control panel for managing websites, Docker containers, databases, and security on VPS and dedicated servers."
 icon: "house"
 ---
 
 <Info>
-**AreaWP** is a modern server control panel that gives agencies, developers, and hosting providers a single interface to manage websites, databases, Docker containers, security, billing, and clients — all from one dashboard.
+**AreaWP** is a self-hosted server control panel built for developers, agencies, and hosting providers. Manage WordPress sites, Docker apps, databases, billing, and clients — all from one dashboard, on your own infrastructure.
 </Info>
 
-## What is AreaWP?
+## What AreaWP Does
 
-AreaWP is built for professionals who run VPS or dedicated servers and need a powerful, self-hosted control panel. It replaces a scattered toolset (cPanel, manual CLI, billing software, monitoring dashboards) with a single, cohesive platform.
+AreaWP runs on your Linux server and connects to remote servers via a lightweight agent. From the dashboard you can deploy apps, manage databases, configure firewalls, handle client subscriptions, and monitor everything in real time.
 
 <CardGroup cols={3}>
-  <Card title="Server Management" icon="server" color="#6366f1">
-    Full control over your Linux servers via the agent system
+  <Card title="Multi-Server Fleet" icon="server" color="#6366f1">
+    Connect unlimited servers and manage them all from one panel
   </Card>
-  <Card title="WordPress & Apps" icon="globe" color="#10b981">
-    Deploy and manage WordPress sites and web applications
+  <Card title="WordPress & Docker" icon="globe" color="#10b981">
+    Deploy WordPress sites and containerized apps in seconds
   </Card>
-  <Card title="Client Billing" icon="credit-card" color="#f59e0b">
-    Built-in subscriptions, pricing plans, and payment gateways
+  <Card title="Built-in Billing" icon="credit-card" color="#f59e0b">
+    Stripe, PayPal, Tap, and Bank Transfer with full subscription management
   </Card>
 </CardGroup>
 
@@ -28,32 +28,27 @@ AreaWP is built for professionals who run VPS or dedicated servers and need a po
 
 ## Platform Modes
 
-AreaWP supports two deployment modes depending on your business model:
-
 <Tabs>
   <Tab title="SaaS Mode">
     **Sell hosting as a service**
 
-    In SaaS mode, you run a hosted platform where clients sign up, choose a pricing plan, and manage their own sites via the user portal.
+    Clients sign up, choose a plan, and manage their own sites through a self-service portal.
 
-    - ✅ Client self-service portal
-    - ✅ Subscription billing with Stripe / Bank Transfer
-    - ✅ Pricing plans with resource limits
-    - ✅ White-label branding
-    - ✅ Support center
-    - ✅ Service marketplace
+    - ✅ Client self-service portal and billing dashboard
+    - ✅ Pricing plans with resource limits (sites, storage, backups)
+    - ✅ Stripe, PayPal, Tap, and Bank Transfer
+    - ✅ White-label branding (logo, colors, brand name)
+    - ✅ Built-in support ticket system
   </Tab>
   <Tab title="WaaS Mode">
-    **WordPress-as-a-Service**
+    **WordPress as a Service**
 
-    In WaaS mode, the platform is optimized for WordPress deployment at scale. Clients subscribe to hosting plans and get managed WordPress sites.
+    Everything in SaaS, optimized for WordPress hosting at scale with a client-facing marketplace.
 
-    - ✅ Everything in SaaS mode
-    - ✅ WordPress site templates
-    - ✅ One-click WordPress deployments
-    - ✅ WP pipeline (CI/CD)
-    - ✅ Plugin and theme marketplace
-    - ✅ Bulk WordPress management
+    - ✅ Plugin and theme marketplace with licensing
+    - ✅ Bulk WordPress management across all client sites
+    - ✅ Site templates for one-click WordPress deployments
+    - ✅ Gitea-powered CI/CD pipeline
   </Tab>
 </Tabs>
 
@@ -62,36 +57,29 @@ AreaWP supports two deployment modes depending on your business model:
 ## Core Features
 
 <AccordionGroup>
-  <Accordion title="Multi-Server Management" icon="server">
-    Deploy lightweight agents on any Linux server and manage them all from a single AreaWP dashboard. Monitor CPU, RAM, disk, and network in real time. Provision new cloud servers on DigitalOcean, Hetzner, and other providers directly from the panel.
+  <Accordion title="Agent Fleet & Multi-Server Management" icon="server">
+    Deploy the AreaWP agent on any Linux server. Monitor health across the fleet with heatmaps, compare metrics, detect anomalies, forecast capacity, and run staged or canary upgrades — all without leaving the panel.
   </Accordion>
-
-  <Accordion title="Application Hosting" icon="globe">
-    Deploy WordPress sites, PHP apps, Node.js applications, and static sites as isolated Docker containers. Each site gets its own container, database, and Nginx config — no shared resources, no cross-site contamination.
+  <Accordion title="WordPress Hosting" icon="globe">
+    Deploy WordPress sites from templates with domain validation, auto-SSL, and isolated Docker containers. Manage sites in a grid or table view, with direct WP Admin auto-login links.
   </Accordion>
-
+  <Accordion title="Docker Management" icon="box">
+    Full Docker lifecycle: start/stop containers, tail logs, open an in-browser terminal, manage Compose stacks, images, volumes, and networks. Live CPU and RAM per container.
+  </Accordion>
   <Accordion title="Database Management" icon="database">
-    Create and manage MySQL and PostgreSQL databases. Access phpMyAdmin directly from the panel, run queries, manage users, and monitor performance.
+    Create MySQL, PostgreSQL, and SQLite databases. Browse tables, run SQL queries, manage users and privileges, and create or restore backups — all from the browser.
   </Accordion>
-
-  <Accordion title="Docker & Containers" icon="box">
-    Full Docker container lifecycle management — start, stop, rebuild, view logs, exec into containers. Manage Docker Compose stacks, networks, and volumes from the UI.
+  <Accordion title="Security Suite" icon="shield">
+    UFW firewall, fail2ban, SSH keys, IP lists, malware scanner, file integrity monitor, vulnerability scanner, and security audit — across 13 dedicated tabs.
   </Accordion>
-
-  <Accordion title="Security & Firewall" icon="shield">
-    Built-in UFW firewall management, fail2ban configuration, SSL certificate provisioning (Let's Encrypt), and server hardening tools. Monitor login attempts and blocked IPs in real time.
+  <Accordion title="Billing & Subscriptions" icon="credit-card">
+    Full billing: pricing plans, client subscriptions, invoices, and 4 payment gateways. Admins approve or reject payments; clients renew or cancel from their Billing page.
   </Accordion>
-
-  <Accordion title="Billing & Subscriptions" icon="receipt">
-    Full billing system with pricing plans, subscriptions, transactions, and payment gateways (Stripe, Bank Transfer). Automated invoice generation and renewal reminders.
+  <Accordion title="Git & Gitea Integration" icon="code-branch">
+    Built-in Gitea server. Browse repositories, configure webhooks, trigger deployments with pre/post-deploy scripts, and roll back from full deployment logs.
   </Accordion>
-
-  <Accordion title="White-Label Branding" icon="palette">
-    Customize the platform with your own brand name, logo, and colors. Present a fully branded experience to your clients without any AreaWP mentions.
-  </Accordion>
-
-  <Accordion title="Real-Time Monitoring" icon="chart-line">
-    Live metrics via Socket.IO — CPU, memory, disk I/O, network throughput. Set up public status pages to communicate uptime to clients. Configure alerts for resource thresholds.
+  <Accordion title="Email Server" icon="envelope">
+    Manage Postfix, Dovecot, OpenDKIM, SpamAssassin, and Roundcube webmail. Add domains, create accounts, configure aliases, forwarding rules, and DNS records (DKIM/SPF/DMARC).
   </Accordion>
 </AccordionGroup>
 
@@ -99,24 +87,16 @@ AreaWP supports two deployment modes depending on your business model:
 
 ## Architecture
 
-AreaWP runs as two components:
-
-| Component | Technology | Role |
-|-----------|-----------|------|
-| **Panel** | Flask (Python) + React | Web dashboard, API, billing, user management |
-| **Agent** | Go binary | Installed on each managed server, handles system commands |
-
-The panel communicates with agents over a secure WebSocket connection. Agents execute commands on the server (start/stop services, deploy apps, manage files) and stream real-time metrics back to the panel.
+| Component | Stack | Role |
+|-----------|-------|------|
+| **Panel** | Flask + React (Vite) | Dashboard, API, billing, user management |
+| **Agent** | Go binary | Installed per server, executes commands, streams metrics |
 
 ```
-┌─────────────┐     HTTPS/WSS     ┌─────────────┐
-│  AreaWP     │ ◄────────────────► │   Agent     │
-│  Panel      │                   │  (Server 1) │
-│  (Flask +   │                   └─────────────┘
-│   React)    │     HTTPS/WSS     ┌─────────────┐
-│             │ ◄────────────────► │   Agent     │
-└─────────────┘                   │  (Server 2) │
-                                  └─────────────┘
+Browser → Nginx (80/443) → Flask API (5000)
+                               ↕ WebSocket
+                     Agent on managed Server 1
+                     Agent on managed Server 2
 ```
 
 ---
@@ -125,27 +105,20 @@ The panel communicates with agents over a secure WebSocket connection. Agents ex
 
 <Steps>
   <Step title="Check Requirements">
-    Review the server and software requirements before installing.
-
-    [View Requirements →](/requirements)
+    Review server prerequisites before installing.
+    [Requirements →](/requirements)
   </Step>
-
   <Step title="Install AreaWP">
-    Run the one-line installer on your Linux server.
-
-    [Installation Guide →](/installation)
+    Run the one-line installer on your Linux VPS.
+    [Installation →](/installation)
   </Step>
-
   <Step title="Quick Start">
-    Follow the quick start guide to set up your first server and site.
-
+    Connect your first server and deploy your first site in under 10 minutes.
     [Quick Start →](/quick-start)
   </Step>
-
-  <Step title="Configure the Platform">
-    Set up payment gateways, pricing plans, and branding.
-
-    [Settings →](/administration/settings)
+  <Step title="Set Up Billing">
+    Configure pricing plans and payment gateways to onboard clients.
+    [Payment Gateways →](/administration/payment-gateways)
   </Step>
 </Steps>
 
@@ -158,7 +131,7 @@ The panel communicates with agents over a secure WebSocket connection. Agents ex
   <Card title="Installation" icon="download" href="/installation">
     Step-by-step install guide
   </Card>
-  <Card title="Dashboard" icon="layout-dashboard" href="/overview/dashboard">
+  <Card title="Dashboard Overview" icon="gauge" href="/overview/dashboard">
     Learn the dashboard layout
   </Card>
   <Card title="Support" icon="headset" href="https://account.areawp.com/client/login/">

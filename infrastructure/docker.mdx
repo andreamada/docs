@@ -1,161 +1,115 @@
 ---
 title: "Docker"
-description: "Manage Docker containers, images, networks, and volumes across your connected servers."
+description: "Manage containers, images, volumes, networks, and Compose stacks across all connected servers."
 icon: "box"
 ---
 
 <Info>
 **Path:** Docker (`/docker`) — Admin only
 
-The Docker section provides full lifecycle management for containers on all your connected servers.
+Full Docker lifecycle management across your server fleet. Select a server from the dropdown to switch context.
 </Info>
 
-## Container Management
+## Stats Overview
 
-The main Docker page lists all containers across all connected servers. Each row shows:
+Four cards at the top update in real time for the selected server:
+
+| Card | Shows |
+|------|-------|
+| **Containers** | Total / running / stopped counts |
+| **Images** | Total count and disk usage |
+| **Volumes** | Total count |
+| **Networks** | Total count |
+
+---
+
+## Containers Tab
+
+The containers list shows every Docker container on the selected server.
 
 | Column | Description |
 |--------|-------------|
-| **Name** | Container name |
-| **Image** | Docker image and tag |
-| **Server** | Which server the container runs on |
-| **Status** | Running / Stopped / Restarting / Exited |
-| **Ports** | Exposed port mappings |
-| **CPU / RAM** | Live resource usage |
-| **Uptime** | Time since container started |
+| **Name / ID** | Container name and short image ID |
+| **Image** | Image repository and tag |
+| **Status** | Running or Exited pill |
+| **Ports** | Host-to-container port bindings |
+| **CPU %** | Live CPU usage bar |
+| **RAM %** | Live memory usage bar |
 
 ### Container Actions
 
-| Action | Description |
+| Action | Available When |
+|--------|---------------|
+| **Logs** | Always — opens log viewer |
+| **Terminal** | Running containers only — opens in-browser shell |
+| **Restart** | Running containers |
+| **Stop** | Running containers |
+| **Start** | Stopped containers |
+| **Delete** | Stopped containers |
+
+Use the **Show Stopped** toggle to include exited containers in the list.
+
+### Run a New Container
+
+Click **Run Container** to launch the creation modal:
+
+| Field | Description |
+|-------|-------------|
+| **Image** | Docker image and tag (e.g. `nginx:latest`) |
+| **Name** | Container name |
+| **Ports** | Host:container port mappings |
+| **Volumes** | Host:container volume mounts |
+| **Environment** | Key=value environment variables |
+| **Restart Policy** | always / unless-stopped / on-failure |
+
+### Container Logs
+
+Tail options: 50 / 100 / 200 / 500 / 1000 lines. Log output updates in real time.
+
+### Container Terminal
+
+Full interactive shell inside the container with command history (arrow keys supported).
+
+---
+
+## Images Tab
+
+| Column | Description |
 |--------|-------------|
-| ▶ **Start** | Start a stopped container |
-| ⏹ **Stop** | Gracefully stop a running container |
-| 🔄 **Restart** | Stop and start the container |
-| 🗑 **Remove** | Delete the container (and optionally its volumes) |
-| 📋 **Logs** | View real-time and historical container logs |
-| 💻 **Terminal** | Open a bash/sh shell inside the container |
-| 🔧 **Rebuild** | Pull the latest image and recreate the container |
+| **Repository** | Image name |
+| **Tag** | Version tag |
+| **Image ID** | Short hash |
+| **Size** | Disk space used |
+| **Created** | Pull/build date |
+
+Actions: **Delete** (removes image from the server). Pull a new image with the **Pull Image** button.
 
 ---
 
-## Running a New Container
+## Networks Tab
 
-<Steps>
-  <Step title="Click New Container">
-    From the Docker page, click **New Container**.
-  </Step>
+All Docker networks with Name, ID, Driver, and Scope. Delete button is disabled for built-in system networks (`bridge`, `host`, `none`).
 
-  <Step title="Select server and image">
-    Choose the target server and enter the Docker image (e.g. `nginx:latest`, `mysql:8.0`).
-  </Step>
-
-  <Step title="Configure the container">
-    | Setting | Description |
-    |---------|-------------|
-    | **Name** | Container name |
-    | **Ports** | Host:container port mappings (`8080:80`) |
-    | **Volumes** | Host:container volume mounts |
-    | **Environment Variables** | Key=value pairs |
-    | **Restart Policy** | always, unless-stopped, on-failure |
-    | **Network** | Docker network to attach |
-    | **Memory Limit** | Maximum RAM (e.g. `512m`, `2g`) |
-    | **CPU Limit** | CPU cores fraction (e.g. `0.5`) |
-  </Step>
-
-  <Step title="Deploy">
-    Click **Deploy**. AreaWP pulls the image (if not cached) and starts the container.
-  </Step>
-</Steps>
+Create a custom network with the **Create Network** button — choose bridge, overlay, or macvlan driver.
 
 ---
 
-## Docker Compose Stacks
+## Volumes Tab
 
-Manage multi-container applications as Docker Compose stacks.
-
-### Deploying a Stack
-
-1. Go to **Docker → Stacks**
-2. Click **New Stack**
-3. Paste or upload your `docker-compose.yml`
-4. Set environment variables if required
-5. Click **Deploy**
-
-AreaWP stores the compose file and manages the stack lifecycle (`up`, `down`, `pull`, `restart`).
-
-### Example Stack
-
-```yaml
-version: '3.8'
-services:
-  app:
-    image: myapp:latest
-    ports:
-      - "8080:3000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=${DATABASE_URL}
-    depends_on:
-      - db
-    restart: unless-stopped
-
-  db:
-    image: postgres:16
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    restart: unless-stopped
-
-volumes:
-  pgdata:
-```
+Named volumes with Name, Driver, and Mount Point. Delete any unused volume (data is permanently lost — no recovery).
 
 ---
 
-## Images
+## Compose Tab
 
-**Docker → Images** lists all pulled images on each server:
+Manage Docker Compose projects as a unit.
 
-- Pull a new image from Docker Hub or a private registry
-- View image size and layers
-- Delete unused images to reclaim disk space
-- Configure private registry credentials
+| Column | Description |
+|--------|-------------|
+| **Project Name** | Compose project name |
+| **Status** | Running with container count |
+| **Config File** | Path to docker-compose.yml |
 
----
+**Actions:** View logs, restart/start, stop, pull latest images.
 
-## Networks
-
-**Docker → Networks** shows all Docker networks:
-
-| Network | Type | Purpose |
-|---------|------|---------|
-| `bridge` | Bridge | Default network for standalone containers |
-| `areawp-network` | Bridge | Shared network for AreaWP components |
-| `host` | Host | Container shares host networking |
-| Custom | Bridge / Overlay | User-created networks for app isolation |
-
----
-
-## Volumes
-
-**Docker → Volumes** manages persistent storage:
-
-- View all named volumes and their sizes
-- Create new named volumes
-- Inspect which containers use each volume
-- Delete unused volumes
-
-<Warning>
-Deleting a Docker volume permanently destroys its data. Always back up volumes before removing them.
-</Warning>
-
----
-
-## Resource Monitoring
-
-The Docker dashboard shows real-time resource usage per container. For detailed per-container metrics over time, use **Operations → Monitoring**.
-
-<Tip>
-AreaWP itself runs the frontend as a Docker container (`areawp-frontend`). This container is protected and cannot be stopped or removed from the Docker management UI.
-</Tip>
+**Compose logs** support service filtering and tail line options.

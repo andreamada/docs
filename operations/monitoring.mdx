@@ -1,105 +1,71 @@
 ---
 title: "Monitoring"
-description: "Real-time server and application monitoring with alerts and public status pages."
+description: "System-wide resource monitoring with configurable thresholds, alert history, email/webhook notifications, and public status pages."
 icon: "chart-line"
 ---
 
 <Info>
 **Path:** Monitoring (`/monitoring`) → Status Pages (`/status-pages`) — Admin only
-
-Monitoring gives you real-time visibility into server health, resource usage, and application availability.
 </Info>
 
-## Server Monitoring
+## Stats Overview
 
-The Monitoring dashboard shows live metrics for all connected servers via WebSocket streams.
+Four cards at the top of the Monitoring page:
 
-### Metrics Available
+| Card | Shows |
+|------|-------|
+| **Monitoring Status** | Active or Inactive |
+| **Recent Alerts** | Count of alerts in the last 24 hours |
+| **Check Interval** | How often the system polls metrics (seconds) |
+| **Notification Methods** | Email and/or webhook configured |
 
-<CardGroup cols={2}>
-  <Card title="CPU" icon="microchip" color="#6366f1">
-    Per-core and aggregate CPU usage, load averages (1m/5m/15m)
-  </Card>
-  <Card title="Memory" icon="memory" color="#10b981">
-    RAM usage, swap usage, available memory
-  </Card>
-  <Card title="Disk" icon="hard-drive" color="#f59e0b">
-    Usage per partition, read/write I/O rates, inode usage
-  </Card>
-  <Card title="Network" icon="network-wired" color="#8b5cf6">
-    Inbound/outbound bandwidth per interface, packet rates
-  </Card>
-</CardGroup>
-
-### Historical Charts
-
-Metrics are stored for up to **90 days**. Select time ranges to view historical trends:
-
-- Last 1 hour (5-second resolution)
-- Last 24 hours (1-minute resolution)
-- Last 7 days (5-minute resolution)
-- Last 30 days (1-hour resolution)
-- Last 90 days (6-hour resolution)
+Below the cards: current threshold values for CPU, memory, disk, and load average.
 
 ---
 
-## Uptime Monitoring
+## Tabs
 
-AreaWP monitors your sites and APIs at configurable intervals and alerts you when they go down.
+### Overview
 
-### Creating an Uptime Monitor
+High-level health summary: stat cards, current threshold display, and a preview of the 5 most recent alerts (with severity icons).
 
-1. Go to **Monitoring → Uptime Checks**
-2. Click **New Monitor**
-3. Configure:
+### Alert History
 
-| Field | Options |
-|-------|---------|
-| **URL** | Full URL to monitor (e.g. `https://mysite.com`) |
-| **Type** | HTTP/HTTPS ping, TCP port check, DNS check |
-| **Interval** | 30s, 1m, 5m, 10m, 15m, 30m |
-| **Timeout** | Request timeout (default: 10s) |
-| **Expected Status** | HTTP status code(s) to treat as "up" (default: 200-299) |
-| **Keyword Check** | Optional: check that response body contains a string |
-| **Alert Contacts** | Who to notify when the monitor triggers |
+Full alert log with severity filter buttons:
 
-### Alert Channels
+| Filter | Shows |
+|--------|-------|
+| **All** | Every alert |
+| **Critical** | Thresholds exceeded at critical level |
+| **Warning** | Thresholds exceeded at warning level |
+| **Info** | Informational events |
 
-Configure alert destinations in **Settings → Alerts**:
+**Alert table columns:** Severity icon/badge, Alert type, Message, Current value, Threshold, Timestamp.
 
-| Channel | Configuration |
-|---------|--------------|
-| **Email** | SMTP address or addresses |
-| **Slack** | Incoming webhook URL |
-| **Telegram** | Bot token + chat ID |
-| **Webhook** | HTTP POST to any URL |
-| **Discord** | Webhook URL |
+### Configuration
 
----
+| Setting | Description |
+|---------|-------------|
+| **Enable monitoring** | Toggle to start/stop the monitoring agent |
+| **Check interval** | Polling frequency (10–3600 seconds) |
+| **Email** | Auto-synced to your account email — read-only |
+| **Webhook URL** | HTTP endpoint to receive alert POSTs |
 
-## Alert Rules
+**Test buttons** for both email and webhook let you verify delivery before going live.
 
-Set threshold-based alerts for server resources:
+<Warning>
+If SMTP is not configured in Settings, the email notification field shows a warning. Set up SMTP under **Settings → Email** first.
+</Warning>
 
-| Metric | Operators | Example |
-|--------|----------|---------|
-| CPU usage | >, >=, <, <= | CPU > 85% for 5 minutes |
-| Memory usage | >, >= | RAM > 90% |
-| Disk usage | >, >= | Disk > 80% |
-| Load average | >, >= | Load > 4 for 10 minutes |
-| Disk read/write | > | Write > 100 MB/s |
-| Network traffic | > | Inbound > 100 Mbps |
+### Thresholds
 
-### Alert States
+Set warning and critical thresholds using dual-range sliders for:
+- **CPU usage** (%)
+- **Memory usage** (%)
+- **Disk usage** (%)
+- **Load average**
 
-| State | Meaning |
-|-------|---------|
-| 🟢 **OK** | Metric within normal range |
-| 🟡 **Warning** | Approaching threshold |
-| 🔴 **Critical** | Threshold exceeded |
-| ⚪ **No Data** | Agent not reporting |
-
-Alerts have a configurable **cooldown period** to prevent notification spam.
+Changes save on form submit. Current values are shown as a reference display in the Overview tab.
 
 ---
 
@@ -107,46 +73,31 @@ Alerts have a configurable **cooldown period** to prevent notification spam.
 
 **Path:** `/status-pages`
 
-Create public status pages to communicate uptime and incidents to your clients.
+Create public-facing status pages to communicate uptime and incidents to clients.
 
 ### Creating a Status Page
 
-1. Go to **Monitoring → Status Pages**
-2. Click **New Status Page**
-3. Configure:
+1. Go to **Monitoring → Status Pages → New Status Page**
+2. Set a name, slug (URL), and optional custom domain
+3. Add components — each component maps to a service or uptime check
+4. Configure visibility (public or link-only)
+5. Customize branding (logo, colors)
 
-| Field | Description |
-|-------|-------------|
-| **Name** | Status page title (e.g. "AreaWP Platform Status") |
-| **Slug** | URL slug (e.g. `status.yourplatform.com`) |
-| **Custom Domain** | Use your own domain for the status page |
-| **Components** | Which services/monitors to display |
-| **Visibility** | Public (no login) or private (link required) |
-| **Branding** | Custom logo and colors |
+### Component Statuses
 
-### Status Components
-
-Each component on the status page represents a service:
-
-| Status | Badge |
+| Status | Color |
 |--------|-------|
 | ✅ Operational | Green |
-| ⚠️ Degraded Performance | Yellow |
+| ⚠️ Degraded | Yellow |
 | 🔴 Partial Outage | Orange |
 | ❌ Major Outage | Red |
-| 🔧 Maintenance | Blue |
+| 🔧 Under Maintenance | Blue |
 
-### Incident Management
+### Incidents
 
-Create incidents to communicate issues to subscribers:
+Create an incident to communicate an ongoing issue:
+- Choose affected components and severity
+- Write an update message
+- Subscribers are notified immediately by email
 
-1. Go to the status page → **New Incident**
-2. Choose affected components and severity
-3. Write an update message
-4. Post the incident — subscribers are notified immediately
-
-Post follow-up updates as the incident progresses, and mark it **Resolved** when complete.
-
-<Tip>
-Subscribers can receive incident notifications via email or RSS. The subscription link is shown at the bottom of every status page.
-</Tip>
+Post follow-up updates as the incident progresses. Mark **Resolved** when fixed.

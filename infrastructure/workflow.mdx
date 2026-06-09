@@ -1,127 +1,113 @@
 ---
 title: "Workflow Builder"
-description: "Create automated workflows to chain server actions, notifications, and conditional logic."
+description: "Visual node-based automation builder — automate deployments, scripts, notifications, and conditional logic without code."
 icon: "share-nodes"
 ---
 
 <Info>
 **Path:** Workflow (`/workflow`) — Admin only
 
-The Workflow Builder lets you create visual automation workflows that chain together server operations, API calls, and notifications without writing code.
+The Workflow Builder is a visual drag-and-drop automation tool built on React Flow. Create, save, and execute workflows that chain triggers, scripts, notifications, and conditional logic.
 </Info>
 
-## What is the Workflow Builder?
+## Toolbar
 
-The Workflow Builder is a visual no-code automation tool. You connect **trigger nodes** to **action nodes** to create automated sequences that run on a schedule or in response to events.
+At the top of the builder:
 
-### Example Workflows
-
-- **Nightly cleanup** — Stop dev containers at midnight, free disk space, restart services
-- **Deployment pipeline** — Pull latest code → run tests → deploy to staging → notify Slack
-- **Alert response** — When CPU > 90% → scale down non-critical services → send email alert
-- **New client onboarding** — User registers → deploy WordPress → send welcome email → create DNS record
-
----
-
-## Building a Workflow
-
-<Steps>
-  <Step title="Create a new workflow">
-    Go to **Workflow** and click **New Workflow**. Give it a name and description.
-  </Step>
-
-  <Step title="Add a trigger">
-    Every workflow starts with a trigger:
-
-    | Trigger | Description |
-    |---------|-------------|
-    | **Schedule** | Cron expression (e.g. `0 2 * * *` = 2am daily) |
-    | **Event** | Platform event (new user, site deployed, backup complete, etc.) |
-    | **Webhook** | Incoming HTTP request to a unique URL |
-    | **Manual** | Run on-demand from the UI |
-  </Step>
-
-  <Step title="Add action nodes">
-    Connect actions that execute when the trigger fires:
-
-    | Category | Actions |
-    |----------|---------|
-    | **Server** | Run shell command, restart service, exec Docker command |
-    | **Sites** | Deploy site, run WP-CLI, clear cache, take backup |
-    | **Notifications** | Send email, webhook POST, Slack message |
-    | **Logic** | If/Else condition, loop, delay, set variable |
-    | **API** | HTTP GET/POST to external URLs |
-    | **Files** | Upload to S3, delete old files, compress directory |
-  </Step>
-
-  <Step title="Configure conditions">
-    Add conditional branches using the **If/Else** node to handle different outcomes based on command output, status codes, or variable values.
-  </Step>
-
-  <Step title="Test and activate">
-    Use the **Test Run** button to execute the workflow in debug mode and inspect each node's output. When satisfied, toggle the workflow to **Active**.
-  </Step>
-</Steps>
+| Control | Description |
+|---------|-------------|
+| **Workflow name** | Editable input for the current workflow |
+| **Saved View** badge | Appears when the workflow has been saved |
+| **New** | Start a blank workflow |
+| **Load** | Open a previously saved workflow |
+| **Execute** | Run the workflow (disabled if unsaved) |
+| **History** | View execution history |
+| **Save** | Save the current workflow with status feedback |
 
 ---
 
-## Workflow Nodes
+## Node Palette
 
-### Trigger Nodes
+The left sidebar contains draggable nodes organized into three sections:
 
-| Node | Configuration |
-|------|--------------|
-| **Cron Schedule** | Cron expression, timezone |
-| **Platform Event** | Event type filter (site.deployed, user.created, etc.) |
-| **Incoming Webhook** | Auto-generated URL, optional auth token |
-| **Manual Trigger** | No configuration required |
-
-### Action Nodes
-
-| Node | Inputs | Outputs |
-|------|--------|---------|
-| **Shell Command** | Server, command string | stdout, exit code |
-| **WP-CLI** | Site, WP-CLI command | output, success/fail |
-| **HTTP Request** | URL, method, headers, body | status code, response body |
-| **Send Email** | To, subject, body (template variables) | success/fail |
-| **Docker Exec** | Container name, command | output |
-| **Create Backup** | Site or server, destination | backup ID |
-
-### Logic Nodes
+### Triggers
+Start a workflow in response to an event:
 
 | Node | Description |
 |------|-------------|
-| **If/Else** | Branch based on a condition (variable comparison, exit code) |
-| **Loop** | Iterate over a list of servers or sites |
-| **Delay** | Wait N seconds/minutes before continuing |
-| **Set Variable** | Store a value for use in later nodes |
-| **Stop** | Terminate the workflow (optionally with a status) |
+| **Manual Trigger** | Run on demand from the UI |
+| **Scheduled Task** | Cron expression — run on a schedule |
+| **Webhook Trigger** | Fires when an HTTP request is received |
+| **Event Listener** | Responds to platform events (site deployed, user created, etc.) |
+
+### Actions
+Execute work:
+
+| Node | Description |
+|------|-------------|
+| **Run Script** | Execute a shell command on a server |
+| **Send Notification** | Send email, webhook, or Slack message |
+
+### Flow Control
+Control the execution path:
+
+| Node | Description |
+|------|-------------|
+| **If/Else** | Branch based on a condition (exit code, variable value) |
 
 ---
 
-## Variables
+## Canvas
 
-Workflows support variable interpolation using `{{ variable_name }}` syntax:
+The main canvas is a React Flow editor with:
+- **Background grid** for alignment
+- **Zoom / pan** controls
+- **Mini-map** for overview navigation
 
-```
-{{ trigger.server_id }}      # Server that triggered the event
-{{ trigger.site_domain }}    # Domain of the affected site
-{{ node.shell.stdout }}      # Output from a previous shell command node
-{{ env.PANEL_URL }}          # Panel URL from environment
-{{ date.iso }}               # Current date/time in ISO format
-```
+### Node Color Coding
+
+| Color | Node Type |
+|-------|-----------|
+| Blue | Docker App, Trigger |
+| Amber | Database |
+| Green | Domain |
+| Indigo | Service |
+| Gray | Run Script |
+| Purple | Send Notification |
+| Orange | If/Else Logic |
 
 ---
 
-## Workflow History
+## Server Overview (Auto-Load)
 
-Every workflow execution is logged. Go to **Workflow → History** to see:
+When you open the Workflow Builder, it automatically loads your infrastructure as read-only nodes on the canvas — apps, domains, and databases positioned in a grid with connection lines showing relationships. Use this as a reference while building your automation, or as a live infrastructure map.
 
-- Execution time and duration
-- Status (success, failed, partial)
-- Each node's output and exit code
-- Error messages for failed nodes
+---
+
+## Saving and Executing
+
+1. Connect nodes by dragging from one node's output handle to another's input
+2. Configure each node (double-click to open settings)
+3. Click **Save** — the "Saved View" badge appears
+4. Click **Execute** to run the workflow immediately
+
+### Execution Progress Modal
+
+Shows the result of each node step as the workflow runs — success/failure status and output for every action.
+
+---
+
+## Execution History
+
+Click **History** to see all past runs:
+
+| Column | Description |
+|--------|-------------|
+| **Started** | Timestamp |
+| **Duration** | How long the workflow took |
+| **Status** | Success / Failed / Partial |
+| **Details** | Expand to see per-node output |
 
 <Tip>
-Workflows that fail 3 times in a row are automatically **paused** and an alert is shown on the dashboard. Review the history to diagnose the issue before re-enabling.
+Workflows that fail 3 times in a row are automatically paused. Check the history to diagnose before re-enabling.
 </Tip>

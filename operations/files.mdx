@@ -1,76 +1,64 @@
 ---
 title: "Files & FTP"
-description: "Browse, edit, and manage files on your servers, and configure FTP/SFTP access."
+description: "Browser-based file manager with disk analysis and FTP/SFTP server management for client access."
 icon: "folder"
 ---
 
 <Info>
 **Path:** Files (`/files`) → FTP Server (`/ftp`) — Admin only
-
-The Files section provides a web-based file manager for all connected servers, plus FTP/SFTP server management.
 </Info>
 
 ## File Manager
 
-The web-based file manager lets you browse and manage files on any connected server without needing SSH or an external FTP client.
+A full filesystem explorer running in your browser — no SSH client needed.
 
-### Features
+### File List
 
-<CardGroup cols={2}>
-  <Card title="Browse" icon="folder" color="#6366f1">
-    Navigate the full server filesystem with a familiar folder tree
-  </Card>
-  <Card title="Edit" icon="pen" color="#10b981">
-    Edit text files directly in the browser with syntax highlighting
-  </Card>
-  <Card title="Upload & Download" icon="arrows-up-down" color="#f59e0b">
-    Upload files from your computer or download files to it
-  </Card>
-  <Card title="Permissions" icon="lock" color="#8b5cf6">
-    View and change file/directory permissions (chmod)
-  </Card>
-</CardGroup>
+| Column | Description |
+|--------|-------------|
+| **Name** | File or folder with type icon |
+| **Size** | Human-readable file size |
+| **Modified** | Last modification date |
+| **Permissions** | Unix permission string |
+| **Actions** | Rename, chmod, delete |
 
-### File Operations
+Navigate with the breadcrumb path at the top.
 
-| Operation | Description |
-|-----------|-------------|
-| **Create file/folder** | New blank file or directory |
-| **Upload** | Single file or ZIP archive (auto-extracted) |
-| **Download** | Download file or compress directory as ZIP |
-| **Rename** | Rename file or directory |
-| **Move / Copy** | Move or copy within the server filesystem |
-| **Delete** | Permanently remove (no recycle bin) |
-| **Chmod** | Change permissions (numeric or symbolic) |
-| **Chown** | Change owner and group |
-| **Edit** | Open text files in the built-in code editor |
-| **Archive** | Create or extract `.zip`, `.tar.gz` archives |
+### Actions
 
-### Quick Access Paths
+| Action | Description |
+|--------|-------------|
+| **Create file / folder** | Toolbar buttons |
+| **Upload** | Drag-and-drop or picker with live progress bar |
+| **Rename** | Opens rename modal |
+| **Change permissions** | Octal chmod input |
+| **Delete** | Permanent — no trash |
+| **Download** | Single-file download |
+| **Show hidden files** | Toggle to include dotfiles |
+| **Search** | Search box with file-type icons in results |
 
-The file manager includes bookmarks for common paths:
+### File Editor
 
-| Bookmark | Path |
-|----------|------|
-| Web Root | `/var/www/html` |
-| Nginx Configs | `/etc/nginx/sites-available` |
-| App Containers | `/opt/areawp/` |
-| System Logs | `/var/log/` |
-| Home Directory | `/home/` |
+Click any text file to open the right-side preview panel:
+- File info: size, owner, group, MIME type
+- Toggle between **Read** and **Edit** mode
+- Inline save/cancel
+
+Supported formats: PHP, HTML, CSS, JS, YAML, JSON, Nginx config, shell scripts.
 
 ---
 
-## Code Editor
+## Disk Usage Sidebar
 
-Click any text file to open the built-in code editor with:
-- Syntax highlighting (PHP, HTML, CSS, JS, YAML, JSON, shell)
-- Line numbers
-- Search & replace
-- Auto-save option
+Collapsible panel with three sections:
 
-<Warning>
-Editing configuration files (Nginx, PHP-FPM, etc.) directly may affect running services. Always test changes before saving to production.
-</Warning>
+**Partitions** — all mounted filesystems with a percentage bar, device name, and used/total size.
+
+**Directory Analysis** — toggle between:
+- **Top Directories** — largest subdirectories with percentage bars
+- **Largest Files** — top 10 files by size
+
+**File Type Breakdown** — donut chart showing disk usage by category (images, video, code, archives, etc.).
 
 ---
 
@@ -78,49 +66,36 @@ Editing configuration files (Nginx, PHP-FPM, etc.) directly may affect running s
 
 **Path:** `/ftp`
 
-AreaWP includes a managed FTP/SFTP server so clients and developers can access their sites using standard FTP clients.
+### Status Cards
 
-### FTP Accounts
+| Card | Shows |
+|------|-------|
+| **Status** | Running / Stopped |
+| **Active Server** | vsftpd or ProFTPD |
+| **Users** | Total FTP accounts |
+| **Connections** | Live active connections |
 
-| Field | Description |
-|-------|-------------|
-| **Username** | FTP login name |
-| **Password** | Encrypted password |
-| **Home Directory** | Root path the user can access (chrooted) |
-| **Server** | Which server this account is on |
-| **Protocol** | FTP, FTPS, SFTP |
-| **Permissions** | Read-only or read/write |
+Install by clicking **Install** and choosing vsftpd or ProFTPD.
 
-### Creating an FTP Account
+### Tabs
 
-1. Go to **Files → FTP Server**
-2. Click **New FTP Account**
-3. Enter username, password, and home directory
-4. Choose protocol (SFTP recommended for security)
-5. Click **Create**
+<AccordionGroup>
+  <Accordion title="Overview" icon="gauge">
+    Configuration display — port, anonymous access, local users, write permission, chroot, SSL/TLS — and a connection info grid.
+  </Accordion>
+  <Accordion title="Users" icon="users">
+    All FTP accounts with username, home directory, and status. **Create User** opens a modal: username, password (with auto-generate), home directory.
 
-The account is created immediately and credentials can be shared with the client.
-
-### Connection Details
-
-Once an FTP account is created, AreaWP shows the connection information:
-
-```
-Protocol: SFTP
-Host:     your-server-ip
-Port:     22  (SFTP) / 21 (FTP) / 990 (FTPS)
-Username: ftpuser_client1
-Password: ••••••••
-Path:     /var/www/client1.com
-```
-
-### Security Recommendations
+    Per-user actions: **Change Password**, **Enable/Disable**, **Delete**.
+  </Accordion>
+  <Accordion title="Connections" icon="wifi">
+    Live connections — local/remote addresses, state, and a **Disconnect** button. Auto-refreshes.
+  </Accordion>
+  <Accordion title="Logs" icon="file">
+    Raw FTP server log output. Refresh button to reload.
+  </Accordion>
+</AccordionGroup>
 
 <Tip>
-Use **SFTP** (SSH File Transfer Protocol) instead of plain FTP. SFTP encrypts the connection and is natively supported by all modern FTP clients (FileZilla, Cyberduck, etc.).
+FTP users are chrooted to their home directory and cannot access other server paths. Share credentials with clients so they can upload files to their site root without needing SSH.
 </Tip>
-
-- Always use SFTP or FTPS — never plain FTP over the internet
-- Set the home directory to the specific site root, not `/`
-- Use strong, unique passwords for each FTP account
-- Remove FTP accounts when clients no longer need access

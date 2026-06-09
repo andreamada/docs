@@ -1,155 +1,111 @@
 ---
 title: "Security"
-description: "Manage firewalls, intrusion prevention, SSH hardening, and security audits across your servers."
+description: "Comprehensive security suite — firewall, fail2ban, SSH keys, IP lists, malware scanner, file integrity, vulnerability scanner, and audit across 13 tabs."
 icon: "shield"
 ---
 
 <Info>
 **Path:** Security (`/security`) — Admin only
 
-The Security section centralizes firewall management, intrusion detection, login monitoring, and server hardening across all connected servers.
+The Security page is the central hub for all server security management. It uses a horizontal tab navigation with 13 dedicated sections.
 </Info>
 
-## Security Dashboard
+## Security Tabs
 
-The security dashboard provides a real-time overview of your threat posture:
+<AccordionGroup>
+  <Accordion title="Overview" icon="gauge">
+    Status display showing the overall security posture of the selected server. Includes a refresh button to pull the latest state.
+  </Accordion>
 
-<CardGroup cols={2}>
-  <Card title="Blocked IPs" icon="ban" color="#ef4444">
-    IPs currently blocked by fail2ban or manual rules
-  </Card>
-  <Card title="Recent Alerts" icon="triangle-exclamation" color="#f59e0b">
-    Security events in the last 24 hours
-  </Card>
-  <Card title="Failed Logins" icon="lock" color="#8b5cf6">
-    SSH and panel login failures by IP
-  </Card>
-  <Card title="Open Ports" icon="door-open" color="#6366f1">
-    Firewall status and open ports per server
-  </Card>
-</CardGroup>
+  <Accordion title="Firewall (UFW)" icon="fire">
+    Manage UFW firewall rules:
+    - View all current rules (port, protocol, action, source)
+    - Add inbound/outbound ALLOW or DENY rules
+    - Delete rules
+    - Enable/disable the firewall
 
----
+    Default rules: ports 22, 80, 443 allowed; all others denied.
+  </Accordion>
 
-## Firewall (UFW)
+  <Accordion title="Fail2ban" icon="ban">
+    Intrusion prevention configuration:
+    - View active jails (SSH, Nginx, AreaWP auth, WordPress)
+    - See currently banned IPs with ban time and reason
+    - **Unban** an IP immediately
+    - **Permanent Ban** — add to the permanent blocklist
+    - Adjust thresholds: max retries, find time, ban duration
+    - Add IPs to the ignore list (whitelist)
+  </Accordion>
 
-AreaWP manages UFW (Uncomplicated Firewall) on connected servers.
+  <Accordion title="SSH Keys" icon="key">
+    Manage authorized SSH keys for the server:
+    - View all public keys with name and fingerprint
+    - Add a new SSH key (paste public key)
+    - Delete any key
+    - Generate a new keypair from the panel
+  </Accordion>
 
-### Default Firewall Rules
+  <Accordion title="IP Lists" icon="list">
+    Manage allowlists and blocklists:
+    - **Allowlist** — IPs always permitted regardless of other rules
+    - **Blocklist** — IPs permanently denied at the firewall level
+    - Add single IPs or CIDR ranges to either list
+  </Accordion>
 
-When AreaWP is installed, the following rules are set:
+  <Accordion title="Scanner" icon="magnifying-glass">
+    Malware and file scanner — scans the server filesystem for:
+    - Known malware signatures
+    - Suspicious file patterns
+    - PHP shell indicators
+    - Results show affected files with severity and recommended action
+  </Accordion>
 
-| Port | Protocol | Action | Purpose |
-|------|---------|--------|---------|
-| 22 | TCP | ALLOW | SSH |
-| 80 | TCP | ALLOW | HTTP |
-| 443 | TCP | ALLOW | HTTPS |
-| 5432 | TCP | DENY | PostgreSQL (local only) |
-| All others | Any | DENY | Default deny |
+  <Accordion title="Quarantine" icon="lock">
+    Files flagged by the scanner appear here. Quarantine moves suspicious files to an isolated location without deleting them. Review and restore or permanently delete quarantined files.
+  </Accordion>
 
-### Managing Rules
+  <Accordion title="Integrity" icon="shield-check">
+    File integrity monitoring — detects unauthorized changes to critical system files and web app files:
+    - Set a baseline snapshot
+    - Compare current state against baseline
+    - Shows modified, added, and deleted files with timestamps
+  </Accordion>
 
-1. Go to **Security → Firewall**
-2. Select the server
-3. Add, edit, or remove rules:
+  <Accordion title="Audit" icon="clipboard-list">
+    Security audit runner — checks for common vulnerabilities and misconfigurations:
+    - Open ports and unexpected services
+    - Packages with outstanding security patches
+    - World-writable files
+    - Weak SSH configuration
+    - Results are scored with actionable recommendations
+  </Accordion>
 
-| Field | Description |
-|-------|-------------|
-| **Port** | Single port, range (`8000:9000`), or any |
-| **Protocol** | TCP, UDP, or both |
-| **Action** | ALLOW or DENY |
-| **Source** | Any IP, specific IP, or CIDR range |
-| **Direction** | Inbound, outbound, or both |
-| **Comment** | Label for the rule |
+  <Accordion title="Vulnerability" icon="triangle-exclamation">
+    CVE and package vulnerability scanner — checks installed packages against known vulnerability databases. Shows CVE IDs, severity, and available patch versions.
+  </Accordion>
 
-<Warning>
-Be careful when modifying SSH (port 22) rules. Locking yourself out via firewall requires console access to recover.
-</Warning>
+  <Accordion title="Updates" icon="arrows-rotate">
+    Auto-updates configuration — enable automatic security patch installation for:
+    - OS packages (apt/dnf security updates)
+    - AreaWP panel
+    - Agent binary
+    - Set maintenance window (day and time)
+  </Accordion>
 
----
+  <Accordion title="Events" icon="bell">
+    Security event log — real-time feed of security-relevant system events:
+    - Login successes and failures
+    - sudo commands executed
+    - Firewall rule hits
+    - Fail2ban bans and unbans
+    - File system changes (if integrity monitoring active)
+  </Accordion>
 
-## Fail2ban (Intrusion Prevention)
-
-AreaWP configures fail2ban to automatically block IPs that show signs of brute-force attacks.
-
-### Default Jails
-
-| Jail | Threshold | Ban Duration |
-|------|----------|-------------|
-| `sshd` | 5 failed logins in 10 min | 1 hour |
-| `nginx-http-auth` | 5 failures in 10 min | 1 hour |
-| `areawp-auth` | 10 failures in 10 min | 30 minutes |
-| `wordpress` | 10 failures in 5 min | 1 hour |
-
-### Managing Banned IPs
-
-1. Go to **Security → Blocked IPs**
-2. View currently banned IPs with reason and ban time
-3. Click **Unban** to remove a block immediately
-4. Click **Permanent Ban** to add to the permanent blocklist
-
-### Customizing Fail2ban
-
-Adjust thresholds in **Security → Fail2ban Settings**:
-
-| Setting | Default |
-|---------|---------|
-| Max retry | 5 attempts |
-| Find time | 600 seconds |
-| Ban time | 3600 seconds |
-| Ignore IPs | Your home/office IP (whitelist) |
-
----
-
-## SSH Hardening
-
-AreaWP can apply SSH security hardening to connected servers:
-
-| Hardening Option | Default | Description |
-|-----------------|---------|-------------|
-| **Disable root login** | Enabled | Prevent direct root SSH login |
-| **Disable password auth** | Optional | Require SSH key authentication |
-| **Change SSH port** | Optional | Move SSH away from port 22 |
-| **Rate limiting** | Enabled | Allow max 3 connections per 10s |
-| **Idle timeout** | 300s | Disconnect idle sessions |
-
-Apply hardening from **Security → SSH Hardening** for each server.
-
----
-
-## SSL/TLS Configuration
-
-Manage SSL/TLS settings across all Nginx vhosts:
-
-| Option | Description |
-|--------|-------------|
-| **TLS version** | Minimum TLS version (TLS 1.2 or 1.3) |
-| **Cipher suites** | Allowed cipher list (Mozilla Modern/Intermediate) |
-| **HSTS** | HTTP Strict Transport Security header |
-| **OCSP Stapling** | Faster certificate verification |
-| **Security Headers** | X-Frame-Options, CSP, X-Content-Type-Options |
-
----
-
-## Security Audit
-
-Run a security audit on any connected server to check for common vulnerabilities:
-
-1. Go to **Security → Audit**
-2. Select the server
-3. Click **Run Audit**
-
-The audit checks:
-- Open ports and services
-- Outdated packages with security patches
-- World-writable files and directories
-- SUID/SGID binaries
-- Active cron jobs (potential persistence)
-- SSH configuration weaknesses
-- Weak passwords (admin accounts)
-
-Results are scored and actionable recommendations are shown.
-
-<Tip>
-Run security audits monthly or after any significant server changes to maintain a strong security posture.
-</Tip>
+  <Accordion title="Settings" icon="gear">
+    Security configuration options:
+    - Enable/disable individual security features
+    - Set notification preferences for security events
+    - Configure scan schedules
+    - Security hardening presets (apply recommended settings)
+  </Accordion>
+</AccordionGroup>

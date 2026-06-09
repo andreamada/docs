@@ -4,23 +4,23 @@ description: "Install AreaWP on your Linux server with a single command."
 icon: "download"
 ---
 
-## One-Line Install
+## One-Line Installer
 
-Run the following command on your Linux server (Ubuntu 20.04+, Debian 11+, or Fedora 35+) as root:
+Run this on your Linux server (Ubuntu 20.04+, Debian 11+, or Fedora 35+) as root:
 
 ```bash
 curl -fsSL https://releases.areawp.com/install.sh | sudo bash
 ```
 
-The installer will:
-1. Detect your OS and install system dependencies
-2. Install Python 3.11+, Node.js 20, PostgreSQL, Nginx, Docker
-3. Download and configure the AreaWP panel
-4. Build the frontend and start all services
-5. Display your panel URL and default credentials
+The installer:
+1. Detects your OS and installs system dependencies
+2. Sets up Python 3.11+, Node.js 20, PostgreSQL, Nginx, Docker
+3. Downloads and configures the AreaWP panel
+4. Builds the frontend and starts all services
+5. Displays the panel URL and default admin credentials
 
 <Info>
-Installation typically takes **3–8 minutes** depending on your server speed and network connection.
+Installation typically takes **3–8 minutes** depending on server speed and network connection.
 </Info>
 
 ---
@@ -29,7 +29,7 @@ Installation typically takes **3–8 minutes** depending on your server speed an
 
 <AccordionGroup>
   <Accordion title="Backend Service" icon="gear">
-    The Flask API runs as a **systemd service** (`areawp`) via Gunicorn with GeventWebSocket workers. It binds to `0.0.0.0:5000` and is proxied through Nginx on port 80/443.
+    Flask API running as a **systemd service** (`areawp`) via Gunicorn with GeventWebSocket workers, listening on `0.0.0.0:5000`.
 
     ```bash
     systemctl status areawp
@@ -39,7 +39,7 @@ Installation typically takes **3–8 minutes** depending on your server speed an
   </Accordion>
 
   <Accordion title="Frontend (Docker)" icon="box">
-    The React frontend is served by an **Nginx Docker container** on port 3847, proxied by the host Nginx on port 80/443. The container is managed via Docker Compose.
+    React frontend served by an **Nginx Docker container** on port 3847, proxied by host Nginx on port 80/443.
 
     ```bash
     docker compose --project-directory /opt/areawp ps
@@ -48,11 +48,11 @@ Installation typically takes **3–8 minutes** depending on your server speed an
   </Accordion>
 
   <Accordion title="Database (PostgreSQL)" icon="database">
-    PostgreSQL is installed on the host system and configured with a dedicated `areawp` database and user. Connection details are stored in `/opt/areawp/.env`.
+    PostgreSQL installed on the host with a dedicated `areawp` database and user. Connection string stored in `/opt/areawp/.env`.
   </Accordion>
 
   <Accordion title="Web Server (Nginx)" icon="globe">
-    Nginx is configured as the reverse proxy, handling SSL termination and routing traffic to the backend API and frontend container. Config is at `/etc/nginx/sites-available/areawp.conf`.
+    Nginx configured as reverse proxy, handling SSL termination and routing. Config at `/etc/nginx/sites-available/areawp.conf`.
   </Accordion>
 </AccordionGroup>
 
@@ -67,122 +67,75 @@ Installation typically takes **3–8 minutes** depending on your server speed an
 | `/opt/areawp/backend/` | Flask application |
 | `/opt/areawp/frontend/dist/` | Built React assets |
 | `/opt/areawp/venv/` | Python virtual environment |
-| `/etc/systemd/system/areawp.service` | Systemd service file |
+| `/etc/systemd/system/areawp.service` | Systemd unit file |
 | `/etc/nginx/sites-available/areawp.conf` | Nginx configuration |
-| `/var/log/areawp/` | Application logs |
 
 ---
 
-## Post-Installation
+## Setup Wizard
 
-After installation, the panel is available at `http://your-server-ip`. On first access, the setup wizard will guide you through:
+After installation, open the panel at `http://your-server-ip`. The setup wizard guides you through:
 
 <Steps>
-  <Step title="License Validation">
-    Enter your license key from [account.areawp.com](https://account.areawp.com). The key is validated against your domain.
+  <Step title="License Key">
+    Enter your license key from [account.areawp.com](https://account.areawp.com). Validated against your domain.
   </Step>
-
   <Step title="Admin Account">
-    Create the first admin user with your email address and a secure password.
+    Create the first admin user — email and password.
   </Step>
-
-  <Step title="Domain Configuration">
-    Set the primary domain for the panel. Nginx will be updated automatically.
+  <Step title="Domain">
+    Set the primary domain for the panel. Nginx updates automatically.
   </Step>
-
-  <Step title="SSL Certificate">
-    Provision a free Let's Encrypt SSL certificate for HTTPS access.
+  <Step title="SSL">
+    Provision a free Let's Encrypt certificate for HTTPS access.
   </Step>
 </Steps>
 
 ---
 
-## Managing the Installation
+## Updating
 
-### Useful Commands
-
-```bash
-# Check service status
-areawp status
-
-# Restart all services
-areawp restart
-
-# View logs
-areawp logs
-
-# Update to latest version
-areawp update
-```
-
-### Reinstall / Update
+Re-run the installer to update to the latest version — it is idempotent and will not wipe your data:
 
 ```bash
-# Re-run installer to update to latest version
 curl -fsSL https://releases.areawp.com/install.sh | sudo bash
 ```
-
-The installer is idempotent — running it again will update AreaWP without wiping your data.
-
----
-
-## Uninstall
-
-```bash
-# Stop services
-systemctl stop areawp
-docker compose --project-directory /opt/areawp down
-
-# Remove files
-rm -rf /opt/areawp
-rm -f /etc/systemd/system/areawp.service
-rm -f /etc/nginx/sites-enabled/areawp.conf
-systemctl daemon-reload
-```
-
-<Warning>
-This removes all panel data including your database. Make sure you have a backup before uninstalling.
-</Warning>
 
 ---
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Frontend health check failed">
-    The frontend Docker container cannot reach the backend. Check that the backend is listening on all interfaces:
+  <Accordion title="502 Bad Gateway">
+    Backend not reachable. Verify it's listening on all interfaces:
 
     ```bash
     ss -tlnp | grep 5000
     # Should show: 0.0.0.0:5000
     ```
 
-    If it shows `127.0.0.1:5000`, update the service file:
+    If it shows `127.0.0.1:5000`:
     ```bash
     sed -i 's/127.0.0.1:5000/0.0.0.0:5000/' /etc/systemd/system/areawp.service
     systemctl daemon-reload && systemctl restart areawp
     ```
   </Accordion>
 
-  <Accordion title="Nginx 502 Bad Gateway">
-    The backend service is not running or not reachable. Check:
-
+  <Accordion title="Frontend container unhealthy">
     ```bash
-    systemctl status areawp
+    docker logs areawp-frontend --tail=30
     curl http://127.0.0.1:5000/api/v1/system/health
     ```
   </Accordion>
 
   <Accordion title="Database connection error">
-    Check PostgreSQL is running and credentials match:
-
     ```bash
     systemctl status postgresql
     grep DATABASE_URL /opt/areawp/.env
     ```
   </Accordion>
 
-  <Accordion title="SSL certificate provisioning failed">
-    Ensure port 80 is open and the domain resolves to your server's IP. Then retry from Settings → SSL.
+  <Accordion title="SSL provisioning failed">
+    Ensure port 80 is open and the domain resolves to your server IP. Retry from **Settings → Site Settings → SSL**.
   </Accordion>
 </AccordionGroup>

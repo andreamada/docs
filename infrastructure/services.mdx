@@ -1,126 +1,91 @@
 ---
 title: "Services & Templates"
-description: "Deploy pre-built application templates for one-click site creation in SaaS and WaaS modes."
+description: "Browse and deploy application templates — the self-service catalog for client WordPress and app deployments."
 icon: "box"
 ---
 
 <Info>
-**Path:** Services (`/services`) → Templates (`/templates`)
+**Path:** Services (`/services`) → Templates (`/templates`) — Admin only; visible to users in SaaS/WaaS mode based on plan
 
-Services is the catalog of deployable application templates. It powers self-service deployments for both admins and clients in SaaS/WaaS mode.
+Services is the catalog of deployable application templates. In WaaS mode, it also powers the client-facing marketplace.
 </Info>
 
-## What are Services?
+## Template Catalog
 
-Services are pre-configured application stacks that can be deployed with a single click. They define:
-- Which Docker images to use
-- Environment variables and configuration
-- Database requirements
-- Nginx routing rules
-- Post-install scripts
+The Templates page shows all available app templates as a browsable grid. Each template card displays:
 
-### Use Cases
+- Screenshot or icon
+- Type and category badges
+- Name and author
+- Short description
+- Version
+- Price (free or paid)
+- **Install** / **Buy** / **Renew** button
+
+### Template Categories
+
+Filter templates by type:
 
 <CardGroup cols={2}>
-  <Card title="WordPress Hosting" icon="globe" color="#6366f1">
-    Pre-configured WordPress with plugins, themes, and settings for clients
+  <Card title="WordPress" icon="globe" color="#6366f1">
+    Pre-configured WordPress with plugins, themes, and starter content
   </Card>
-  <Card title="E-commerce Stores" icon="cart-shopping" color="#10b981">
-    WooCommerce or other e-commerce stacks ready to go
+  <Card title="E-commerce" icon="cart-shopping" color="#10b981">
+    WooCommerce or similar stacks ready to deploy
   </Card>
   <Card title="PHP Applications" icon="code" color="#f59e0b">
-    Custom PHP apps, Laravel, Symfony, or CodeIgniter
+    Laravel, Symfony, or plain PHP apps
   </Card>
-  <Card title="Static Sites" icon="file-code" color="#8b5cf6">
-    Static HTML/CSS/JS sites served via Nginx
+  <Card title="Static Sites" icon="file" color="#8b5cf6">
+    HTML/CSS/JS sites served via Nginx
   </Card>
 </CardGroup>
 
 ---
 
-## Templates
+## Browse vs. Installed Tabs
 
-**Path:** `/templates`
+**Browse** — full template catalog with search and category filter.
 
-The Templates page lists all available application templates.
-
-### Template Properties
-
-| Property | Description |
-|----------|-------------|
-| **Name** | Display name shown to clients |
-| **Description** | Short description of what the template provides |
-| **Category** | WordPress, PHP, Node.js, Static, etc. |
-| **PHP Version** | Default PHP version for the container |
-| **Docker Image** | Base image used for the container |
-| **Post-install Script** | Commands run after deployment |
-| **Variables** | User-configurable values (domain, admin email, etc.) |
-| **Visible to Users** | Whether clients can self-deploy this template |
+**Installed** — two sections:
+- **Pending** — extensions awaiting approval with their approval status
+- **Active** — installed extensions showing price, renewal type, expiry date, and action buttons
 
 ---
 
-## Creating a Template
+## Installing a Template
 
-<Steps>
-  <Step title="Go to Services → Templates">
-    Click **New Template**.
-  </Step>
-
-  <Step title="Configure the base">
-    Choose the Docker image and base stack (WordPress, PHP, Node.js, etc.).
-  </Step>
-
-  <Step title="Define variables">
-    Specify which values clients must provide at deployment time:
-
-    ```json
-    {
-      "variables": [
-        { "name": "domain", "label": "Domain Name", "type": "text", "required": true },
-        { "name": "admin_email", "label": "Admin Email", "type": "email", "required": true },
-        { "name": "site_title", "label": "Site Title", "type": "text", "default": "My Site" }
-      ]
-    }
-    ```
-  </Step>
-
-  <Step title="Add post-install hooks">
-    Define commands that run after the container is created:
-
-    ```bash
-    wp core install --url="${domain}" --title="${site_title}" --admin_user=admin --admin_email="${admin_email}"
-    wp plugin install woocommerce --activate
-    wp cache flush
-    ```
-  </Step>
-
-  <Step title="Set visibility">
-    Mark the template as **visible to users** to allow client self-service deployments, or keep it **admin-only**.
-  </Step>
-</Steps>
+1. Find the template in the Browse tab
+2. Click **Install** (free) or **Buy** (paid)
+3. For paid templates, a **Payment Modal** opens — select payment method and (if it's a WordPress plugin/theme) the target site
+4. After payment, the extension appears in the **Installed** tab
 
 ---
 
-## Client Self-Service
+## Managing Installed Templates
 
-When a template is marked as user-visible, clients can deploy their own sites from their dashboard without admin intervention.
+From the **Installed** tab:
 
-### Client Deployment Flow
+| Action | Description |
+|--------|-------------|
+| **Reinstall** | Re-install a free extension |
+| **Uninstall** | Remove the extension |
+| **Renew** | Renew a subscription-based extension |
+| **Cancel subscription** | Stop monthly billing (revocable before renewal) |
 
-1. Client logs in and goes to **My Sites**
-2. Clicks **Deploy New Site**
-3. Selects a template from the catalog
-4. Fills in the required variables (domain, preferences)
-5. Clicks **Deploy** — site is provisioned automatically
+---
 
-### Limiting Deployments
+## Admin — Submitting a Template
 
-You can restrict template usage per pricing plan. For example:
-- Free plan: only "Basic WordPress" template
-- Pro plan: all templates + WooCommerce
-- Enterprise plan: custom templates + priority provisioning
+Admins can add custom templates to the catalog:
 
-Configure this in **Administration → Pricing Plans**.
+1. Click **Submit Plugin/Theme** (top right)
+2. Fill in name, description, category, version, price
+3. Upload the ZIP file
+4. Set visibility (public / private)
+5. Submit — the template appears in the Browse tab immediately
+
+Use **Edit** and **Delete** to update or remove your custom templates.
 
 ---
 
@@ -128,9 +93,9 @@ Configure this in **Administration → Pricing Plans**.
 
 <Tabs>
   <Tab title="SaaS Mode">
-    In SaaS mode, Services is primarily used for **admin-managed templates**. Clients can deploy sites if self-service is enabled in their plan. The service catalog is scoped to what the admin has made available.
+    Templates visible to users are controlled per pricing plan. Admins can restrict which templates each plan can access under **Administration → Pricing Plans → Features**.
   </Tab>
   <Tab title="WaaS Mode">
-    In WaaS mode, Services powers the **client marketplace**. Clients browse WordPress-focused templates and deploy sites independently as part of their subscription. The full template library is accessible.
+    The full template marketplace is available to clients. They deploy templates directly from their portal as part of their subscription.
   </Tab>
 </Tabs>

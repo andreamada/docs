@@ -1,132 +1,102 @@
 ---
 title: "Subscriptions"
-description: "Manage client subscriptions, billing cycles, and plan assignments."
+description: "Full subscription lifecycle management — create, approve, extend, suspend, reject, and cancel client subscriptions."
 icon: "arrows-rotate"
 ---
 
 <Info>
 **Path:** Administration → Subscriptions (`/subscriptions`) — Admin only
-
-Subscriptions link users to pricing plans and define what features and resources they have access to.
 </Info>
-
-## Subscription Overview
-
-Each client account can have one active subscription. The subscription determines:
-- Which pricing plan the user is on
-- Billing period (monthly / yearly)
-- Current period start and end dates
-- Payment method used
-- Whether the subscription auto-renews
-
----
 
 ## Subscription List
 
-The Subscriptions page shows all active and historical subscriptions:
+The page shows all subscriptions with search and filter controls:
+
+| Filter | Options |
+|--------|---------|
+| **Search** | User name or email |
+| **Status** | Active / Pending / Cancelled / Past Due |
+| **Plan** | Filter by pricing plan |
+| **Payment Method** | Stripe / PayPal / Tap / Bank Transfer |
+
+**Table columns:**
 
 | Column | Description |
 |--------|-------------|
-| **User** | Client account name and email |
-| **Plan** | Pricing plan name |
-| **Status** | Active / Canceled / Expired / Suspended / Trial |
-| **Period** | Current billing period (start → end date) |
-| **Amount** | Monthly or yearly price |
-| **Payment** | Payment method (Stripe / Bank Transfer) |
-| **Renews on** | Next billing date |
+| **User** | Client name and email |
+| **Plan** | Pricing plan name and billing period |
+| **Status** | Status badge |
+| **Payment** | Payment method badge |
+| **Started** | Subscription start date |
+| **Expires** | Current period end date |
 
-### Subscription Statuses
+---
+
+## Subscription Statuses
 
 | Status | Description |
 |--------|-------------|
-| 🟢 **Active** | Subscription current and paid |
-| 🔵 **Trial** | Free trial period in progress |
-| 🟡 **Suspended** | Payment failed or manually suspended |
-| 🔴 **Canceled** | User or admin canceled — access until period end |
-| ⚫ **Expired** | Period ended with no renewal |
+| 🟢 **Active** | Paid and current |
+| 🔵 **Pending** | Awaiting admin approval (Bank Transfer) |
+| 🟡 **Past Due** | Payment failed — grace period |
+| 🔴 **Cancelled** | Canceled by user or admin |
+| ⚫ **Expired** | Period ended without renewal |
 
 ---
 
 ## Creating a Subscription
 
-Admins can manually create subscriptions for users (e.g. when payment is received offline):
-
-1. Go to **Subscriptions** → **New Subscription**
-2. Select the user
-3. Choose the pricing plan
-4. Set the billing period (monthly / yearly)
-5. Set the start and end date
-6. Choose payment status (paid, pending)
-7. Click **Create**
+Click **Create Subscription** to open a 2-step modal:
+1. **Select User** — search and pick the client account
+2. **Choose Plan** — select pricing plan and billing period
 
 ---
 
 ## Managing a Subscription
 
-Click any subscription to open the detail view:
+Click any row to open the detail view. Available actions:
 
-<AccordionGroup>
-  <Accordion title="Change Plan" icon="arrows-up-down">
-    Upgrade or downgrade the user to a different pricing plan. AreaWP handles proration if configured.
+### Approve
 
-    - **Upgrade** — Immediate plan change, charge the difference
-    - **Downgrade** — Takes effect at the end of the current period
-    - **Same plan** — Extend the current period
-  </Accordion>
+For **Pending** subscriptions (Bank Transfer payments waiting for manual confirmation). Clicking **Approve** activates the subscription immediately.
 
-  <Accordion title="Extend Period" icon="calendar">
-    Add days to the current billing period without charging again. Useful for compensating for outages or giving grace periods.
-  </Accordion>
+### Reject
 
-  <Accordion title="Suspend" icon="pause">
-    Pause access without canceling. The user cannot log in or access their sites. Auto-triggers when a payment fails.
-  </Accordion>
+Reject a pending subscription with a mandatory reason field. The user is notified.
 
-  <Accordion title="Cancel" icon="x">
-    Cancel the subscription. The user retains access until the current period ends, then the subscription expires.
-  </Accordion>
+### Extend
 
-  <Accordion title="Refund" icon="arrow-left">
-    For Stripe payments, initiate a refund from the subscription detail page without leaving AreaWP.
-  </Accordion>
-</AccordionGroup>
+Add days to the current billing period without charging:
+- Input number of days to add
+- Optional reason field (shown in the user's billing history)
+
+Useful for compensating for outages or providing goodwill extensions.
+
+### Change Status
+
+Manually set the subscription status (active, suspended, cancelled, etc.) with a reason.
+
+### Delete
+
+Permanently remove the subscription record. Use with caution — this removes billing history.
 
 ---
 
-## Automatic Renewals
+## Modals Summary
 
-When a subscription's end date approaches:
-
-1. **7 days before** — AreaWP sends a renewal reminder email to the client
-2. **On renewal date** — AreaWP attempts to charge the stored payment method
-3. **If payment succeeds** — Period extended, confirmation email sent
-4. **If payment fails** — Subscription suspended, failure email sent, retry in 3 days
-
-Configure renewal behavior in **Settings → Billing → Renewal**.
+| Modal | Purpose |
+|-------|---------|
+| **Create Subscription** | 2-step: select user → choose plan |
+| **Extend** | Add days + reason |
+| **Delete Confirmation** | Confirm permanent deletion |
+| **Status Change** | Set status manually |
+| **Reject** | Reject with reason |
 
 ---
 
 ## Bulk Operations
 
-Select multiple subscriptions from the list to:
-
-- **Send renewal reminders** — Manual reminder email
-- **Suspend all** — Suspend multiple accounts at once
-- **Export** — Export subscription data as CSV for accounting
-
----
-
-## Trial Subscriptions
-
-Offer free trials to new users:
-
-1. Go to **Administration → Settings → Billing**
-2. Enable **Free Trial**
-3. Set trial duration (e.g. 14 days)
-4. Set the default plan for trials
-
-When a user registers, they automatically start a trial. They must add a payment method before the trial ends to continue.
-
-<Tip>
-Trial subscriptions show in the subscription list with status **Trial** and a countdown to the trial end date.
-</Tip>
+Select multiple subscriptions from the list for bulk actions:
+- Send renewal reminder emails
+- Suspend multiple accounts
+- Export as CSV for accounting

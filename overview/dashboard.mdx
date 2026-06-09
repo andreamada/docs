@@ -1,135 +1,109 @@
 ---
 title: "Dashboard"
-description: "The AreaWP dashboard gives you a real-time overview of your servers, sites, and platform health."
-icon: "table-cells"
+description: "Real-time overview of your servers, sites, subscriptions, and platform health — role-aware for admins and clients."
+icon: "gauge"
 ---
 
 <Info>
-**Path:** Dashboard (home `/`)
+**Path:** Dashboard (`/`) — visible to all users
 
-The dashboard is the first page you see after logging in. It provides at-a-glance metrics for your entire infrastructure.
+The dashboard is the first page after login. What you see depends on your role — admins see full server metrics and infrastructure controls, clients see their subscription, sites, and support links.
 </Info>
 
-## Dashboard Layout
+## Admin Dashboard
 
-The dashboard is divided into several sections that update in real time via WebSocket.
+### Top Bar
 
-<CardGroup cols={3}>
-  <Card title="Server Metrics" icon="server" color="#6366f1">
-    CPU, RAM, disk, and network across all connected servers
+The admin header shows live server information for the currently selected server:
+
+| Element | Description |
+|---------|-------------|
+| **Hostname** | Server name with a live connection status dot |
+| **IP Address** | Public IP of the selected server |
+| **Kernel** | Linux kernel version |
+| **Uptime** | Time since last reboot |
+| **Server Selector** | Switch between local and remote managed servers |
+| **Clock** | Current time and timezone |
+| **Auto-refresh** | Polling interval: Off / 5s / 10s / 30s / 1m |
+
+### Setup Warnings
+
+If configuration is incomplete, alert banners appear at the top:
+- **Domain not configured** — panel domain not set
+- **Invalid license** — license key missing or suspended
+- **Mail not configured** — SMTP not set up
+
+Click any banner to jump directly to the relevant settings page.
+
+### Metric Widgets
+
+The admin dashboard shows a customizable grid of metric tiles:
+
+<CardGroup cols={2}>
+  <Card title="CPU" icon="microchip" color="#6366f1">
+    Usage percentage and core count, live
   </Card>
-  <Card title="Site Overview" icon="globe" color="#10b981">
-    Total sites, active deployments, and recent activity
+  <Card title="RAM" icon="server" color="#10b981">
+    Used / total memory with cached memory breakdown
   </Card>
-  <Card title="Platform Health" icon="shield-check" color="#f59e0b">
-    License status, pending tasks, and alerts
+  <Card title="Network" icon="wifi" color="#f59e0b">
+    Bytes sent and received per second
+  </Card>
+  <Card title="Disk" icon="database" color="#8b5cf6">
+    Usage percentage, used and free space
   </Card>
 </CardGroup>
 
----
-
-## Metric Cards
-
-The top row of the dashboard shows key counters:
-
-| Metric | Description |
-|--------|-------------|
-| **Servers** | Total connected agents (online / offline) |
-| **Sites** | Total deployed applications |
-| **Users** | Registered client accounts |
-| **Backups** | Recent backup operations |
-| **Subscriptions** | Active client subscriptions |
-| **Alerts** | Open security or health alerts |
+Additional widgets:
+- **Chart Panel** — Historical metrics graph with selectable time ranges
+- **Quick Actions** — Shortcut buttons for Servers, Docker, and Terminal; hardware specs display
+- **Applications Table** — All deployed apps with ID, name, type, status badge, and primary domain
 
 ---
 
-## Server Health
+## Client Dashboard
 
-The server health section lists all connected agents with their real-time resource usage:
+When a regular (non-admin) user logs in, the dashboard shows:
 
-- **CPU usage** — percentage across all cores
-- **RAM usage** — used / total memory
-- **Disk usage** — used / total storage
-- **Load average** — 1m, 5m, 15m averages
-- **Uptime** — time since last reboot
-- **Status** — Online / Offline / Warning
+### Welcome Section
+Personalized greeting with a prominent **New Site** button.
 
-Click any server row to navigate to that server's detail page.
+### Stats Cards
+Three counters at a glance:
 
----
+| Card | Shows |
+|------|-------|
+| **Applications** | Total WordPress / app count |
+| **Live Domains** | Number of active domains |
+| **Running** | Count of currently running sites |
 
-## Recent Activity
+### Subscription Widget
+Shows the client's current plan at a glance:
+- Plan name and trial/expiry status
+- Resource specs: CPU, RAM, Disk
+- Site usage tracker with progress bar
+- **Manage** button to open the Billing page
 
-The activity feed shows the last 20 actions performed on the platform:
+### Sites Grid
+The 6 most recently deployed sites displayed as cards:
+- Site name and URL
+- Running / stopped status indicator
+- WordPress version
+- Environment count
 
-- Site deployments and deletions
-- Backup completions
-- User registrations and login events
-- Security alerts (failed logins, blocked IPs)
-- Subscription changes and payments
-- System tasks and cron job executions
-
-<Tip>
-For full activity history, navigate to **Administration → Activity Overview** (`/activity`).
-</Tip>
-
----
-
-## Quick Actions
-
-The dashboard toolbar provides shortcuts for the most common tasks:
-
-| Action | Description |
-|--------|-------------|
-| **New Site** | Deploy a new WordPress site or app |
-| **Add Server** | Register a new managed server |
-| **Invite User** | Send a client invitation email |
-| **Create Backup** | Trigger a manual backup |
+### Support Links
+Configurable quick-access links to your support center, pulled from the appearance settings.
 
 ---
 
-## Platform Mode
+## Navigation & Sidebar
 
-The dashboard header shows whether you are in **SaaS** or **WaaS** mode. This affects which features are visible and how billing is configured. Change the platform mode in **Administration → Settings → Platform**.
+The left sidebar groups all features by category. Use the **sidebar presets** (from the user menu at the bottom) to show only the tools you need:
 
----
-
-## Sidebar Navigation
-
-The sidebar on the left organizes all platform features into categories. Admins see all sections; regular users see only what is relevant to their account.
-
-<AccordionGroup>
-  <Accordion title="Overview" icon="layout-dashboard">
-    Dashboard — the home screen with all platform metrics.
-  </Accordion>
-
-  <Accordion title="Infrastructure" icon="server">
-    Servers, WordPress, Services, Workflow, Databases, Docker, Git, Domains — everything related to hosting and deployment.
-  </Accordion>
-
-  <Accordion title="Operations" icon="gear">
-    Files, Monitoring, Backups, Cron Jobs, Security, Email, Terminal — day-to-day server management tasks.
-  </Accordion>
-
-  <Accordion title="Administration" icon="shield">
-    Activity, Users, Subscriptions, Transactions, Pricing Plans, Payment Gateways, Settings — admin-only business management.
-  </Accordion>
-
-  <Accordion title="System" icon="box">
-    Marketplace, Billing, Support — platform-level features for users and administrators.
-  </Accordion>
-</AccordionGroup>
-
-### Sidebar Presets
-
-Admins can switch between sidebar presets to show only the features relevant to their workflow:
-
-| Preset | Shows |
-|--------|-------|
-| **Full** | Everything |
-| **Web Hosting** | Domains, SSL, databases, core web tools |
-| **Email Admin** | Email server, DNS, monitoring, security |
-| **Docker / DevOps** | Docker, Git, monitoring, workflow |
+| Preset | Best For |
+|--------|----------|
+| **Full** | Access everything |
+| **Web Hosting** | Domains, SSL, databases |
+| **Email Admin** | Email server, DNS, security |
+| **Docker / DevOps** | Docker, Git, monitoring |
 | **Minimal** | Dashboard, servers, terminal only |
-
-Customize presets via **Settings → Sidebar** or from the user menu at the bottom of the sidebar.

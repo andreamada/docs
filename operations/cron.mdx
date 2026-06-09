@@ -1,138 +1,72 @@
 ---
 title: "Cron Jobs"
-description: "Schedule and manage recurring tasks on your servers."
+description: "View scheduled platform jobs, run them on demand, and browse the full execution log with status filtering."
 icon: "clock"
 ---
 
 <Info>
 **Path:** Cron Jobs (`/cron`) — Admin only
 
-The Cron Jobs section provides a UI for managing crontab entries on all connected servers.
+The Cron Jobs page manages AreaWP's internal scheduler. It is read-only — you can view jobs, run them manually, and browse logs, but schedule configuration happens within the features that own each job (Backups, Monitoring, etc.).
 </Info>
 
-## Overview
+## Scheduler Status Card
 
-AreaWP lets you create, edit, and monitor cron jobs across all your servers without manually editing `crontab` files via SSH.
-
-<CardGroup cols={2}>
-  <Card title="Visual Editor" icon="pen" color="#6366f1">
-    Build cron schedules with a visual picker — no cron syntax memorization
-  </Card>
-  <Card title="Execution Log" icon="list" color="#10b981">
-    View the output and status of every cron run
-  </Card>
-  <Card title="Multi-Server" icon="server" color="#f59e0b">
-    Manage cron jobs across all connected servers from one place
-  </Card>
-  <Card title="Notifications" icon="bell" color="#8b5cf6">
-    Get alerted when cron jobs fail
-  </Card>
-</CardGroup>
-
----
-
-## Creating a Cron Job
-
-1. Go to **Cron Jobs** → **New Cron Job**
-2. Select the target server
-3. Configure:
+Shows the current state of the AreaWP scheduler:
 
 | Field | Description |
 |-------|-------------|
-| **Name** | Descriptive label (for the UI only) |
-| **Command** | Shell command to execute |
-| **User** | System user to run the command as (default: `root` or `www-data`) |
-| **Schedule** | When to run (see below) |
-| **Working Directory** | Directory to `cd` into before running |
-| **Timeout** | Kill the job if it runs longer than N minutes |
-| **Enabled** | Toggle the job on/off without deleting it |
+| **Running** | Whether the scheduler service is active |
+| **Scheduler Type** | `areawp_scheduler` |
+| **Last Activity** | Timestamp of the most recent job execution |
 
 ---
 
-## Schedule Configuration
+## Tabs
 
-Use the visual schedule picker or enter a cron expression directly:
+### Scheduled Jobs
 
-### Common Schedules
-
-| Schedule | Cron Expression |
-|----------|----------------|
-| Every minute | `* * * * *` |
-| Every 5 minutes | `*/5 * * * *` |
-| Every hour | `0 * * * *` |
-| Every day at 2am | `0 2 * * *` |
-| Every Monday at midnight | `0 0 * * 1` |
-| First of month at 3am | `0 3 1 * *` |
-
-### Cron Expression Reference
-
-```
-┌─────────────── minute (0-59)
-│  ┌──────────── hour (0-23)
-│  │  ┌───────── day of month (1-31)
-│  │  │  ┌────── month (1-12)
-│  │  │  │  ┌─── day of week (0-7, 0 and 7 = Sunday)
-│  │  │  │  │
-*  *  *  *  *
-```
-
-<Tip>
-Use [crontab.guru](https://crontab.guru) to test and verify cron expressions.
-</Tip>
-
----
-
-## WordPress Cron Jobs
-
-AreaWP includes a built-in WordPress cron integration. Replace WP-Cron's default behavior (triggered by site visits) with a real server cron for better reliability:
-
-```bash
-# Run WordPress cron every 5 minutes
-*/5 * * * * www-data /usr/local/bin/wp --path=/var/www/mysite.com cron event run --due-now --quiet
-```
-
-AreaWP can generate these commands automatically for each WordPress site — click **Add WP-Cron** from the WordPress site settings.
-
----
-
-## Execution History
-
-Every cron job execution is logged:
+All jobs registered in the platform scheduler.
 
 | Column | Description |
 |--------|-------------|
-| **Started at** | Timestamp when the job began |
-| **Duration** | How long it ran |
-| **Exit code** | `0` = success, non-zero = error |
-| **Output** | stdout/stderr from the command |
-| **Status** | ✅ Success / ❌ Failed / ⏱ Timeout |
+| **Job Name** | Display name and optional description |
+| **Schedule** | Cron expression (e.g. `0 2 * * *`) |
+| **Last Run** | Relative time ("2m ago", "1h ago") |
+| **Last Status** | Success / Warning / Error / Never Run badge |
+| **Next Run** | Relative time ("in 5m", "in 2h") |
 
-Click any row to see the full command output.
+**Run Now** button per row — triggers the job immediately with a loading indicator. Each job runs independently; triggering one does not affect others.
+
+Paginated — navigate with controls at the bottom.
+
+### Executed Logs
+
+Full history of every job execution.
+
+**Filters:**
+- **Search** — filter by job name
+- **Status dropdown** — All / Success / Warning / Error
+
+| Column | Description |
+|--------|-------------|
+| **Job Name** | Which job ran |
+| **Status** | Icon + badge (Success / Warning / Error) |
+| **Started** | Absolute timestamp |
+| **Duration** | How long the job took |
+| **Triggered By** | Scheduled / Manual |
+| **Message** | Output message or error description |
+
+Paginated. Useful for diagnosing recurring failures or verifying critical jobs ran on schedule.
 
 ---
 
-## Notifications
+## Common Jobs
 
-Configure alerts for failed cron jobs:
-
-1. Go to **Settings → Notifications → Cron**
-2. Enable failure alerts
-3. Set the alert channels (email, Slack, webhook)
-
-<Info>
-By default, AreaWP suppresses success notifications to avoid email flooding. Enable success notifications in settings if you need confirmation that critical jobs ran.
-</Info>
-
----
-
-## System Cron Jobs
-
-Some AreaWP internal tasks also run as cron jobs. These are read-only in the UI:
-
-| Job | Schedule | Purpose |
-|-----|----------|---------|
-| License check | Every 6 hours | Validate license with the license server |
-| Certificate renewal check | Daily | Renew expiring SSL certificates |
-| Backup execution | Per schedule | Run configured backup jobs |
-| Monitor checks | Per interval | Run uptime monitor pings |
-| Cleanup | Daily at 3am | Remove old logs and temp files |
+| Job | Default Schedule | Purpose |
+|-----|-----------------|---------|
+| License check | Every 6 hours | Validate license with the server |
+| SSL renewal check | Daily at 2am | Renew expiring certificates |
+| Backup jobs | Per schedule config | Run configured backup schedules |
+| Uptime checks | Per monitor config | Ping monitored services |
+| System cleanup | Daily at 3am | Remove temp files and old logs |

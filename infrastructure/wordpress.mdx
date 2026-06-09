@@ -1,158 +1,87 @@
 ---
 title: "WordPress"
-description: "Deploy, manage, and automate WordPress sites across all your connected servers."
+description: "Deploy and manage WordPress sites — grid or table view, one-click WP Admin login, domain validation, and site templates."
 icon: "globe"
 ---
 
 <Info>
 **Path:** WordPress (`/wordpress`)
 
-The WordPress section lets you deploy new sites, manage existing ones, run bulk operations, and set up a CI/CD pipeline for WordPress projects.
+The WordPress page lists all deployed sites and is the starting point for creating new ones. Sub-section: WP Pipeline (`/wordpress/projects`) — available when a Git integration is configured.
 </Info>
 
-## Site Management
+## Site List
 
-Each WordPress site in AreaWP runs as an isolated Docker container with its own:
-- WordPress installation
-- MySQL/MariaDB database
-- Nginx configuration
-- PHP-FPM process
-- SSL certificate
+Sites are displayed in your choice of layout:
 
-### Deploying a New Site
+<Tabs>
+  <Tab title="Grid View">
+    Cards showing site name, URL, a color-coded status dot, WordPress version, environment count, and (for admins) the owning user. Quick-access buttons: **Visit Site** and **WordPress Admin**.
+  </Tab>
+  <Tab title="Table View">
+    Same data in rows — useful for scanning many sites. Columns: Name, Domain, Status, WP Version, Environments, Owner (admin), Actions.
+  </Tab>
+</Tabs>
 
-<Steps>
-  <Step title="Click New Site">
-    From the WordPress page, click **New Site**.
-  </Step>
+### Status Indicator
 
-  <Step title="Choose deployment type">
-    - **Fresh Install** — Clean WordPress with no plugins
-    - **From Template** — Use a saved site template with pre-installed plugins/themes
-    - **Clone Existing** — Duplicate an existing site
-    - **Import / Migrate** — Import from a `.zip` or another server
-  </Step>
-
-  <Step title="Configure the site">
-    | Field | Description |
-    |-------|-------------|
-    | Domain | Primary domain (e.g. `mysite.com`) |
-    | Server | Which connected agent handles this site |
-    | PHP version | 7.4, 8.0, 8.1, 8.2, 8.3 |
-    | Admin email | WordPress admin account email |
-    | Admin password | WordPress admin password |
-    | Auto SSL | Provision Let's Encrypt certificate |
-  </Step>
-
-  <Step title="Deploy">
-    Click **Deploy**. AreaWP creates the container, installs WordPress, configures the database, and sets up Nginx. The site is live in 60–90 seconds.
-  </Step>
-</Steps>
+| Status | Meaning |
+|--------|---------|
+| 🟢 Running | Container is up and serving requests |
+| 🔴 Stopped | Container is stopped |
 
 ---
 
-## Site Operations
+## Creating a Site
 
-From the site detail page, you can:
+Click the **Create Site** button to open the creation modal.
 
-<AccordionGroup>
-  <Accordion title="WordPress Admin" icon="lock">
-    Click **WP Admin** to open the WordPress dashboard with one click — no password required. AreaWP generates a secure auto-login link.
-  </Accordion>
+| Field | Description |
+|-------|-------------|
+| **Site Name** | Display name for the site |
+| **Domain** | Primary domain — checked for availability in real time |
+| **Admin Email** | WordPress admin account email |
+| **User** | Assign the site to a specific client (admin only) |
 
-  <Accordion title="Updates" icon="arrows-rotate">
-    Update WordPress core, plugins, and themes individually or in bulk. Schedule automatic updates for minor versions and security patches.
-  </Accordion>
+### Domain Validation
 
-  <Accordion title="Staging" icon="copy">
-    Create a staging copy of any site with one click. Push changes from staging to production when ready.
-  </Accordion>
+As you type the domain, AreaWP checks availability and shows:
+- 🔄 Checking...
+- ✅ Available
+- ❌ Already taken
+- ⚠️ Invalid format
 
-  <Accordion title="Clone" icon="files">
-    Clone a site to a new domain on the same or a different server. Useful for spinning up client sites from a template.
-  </Accordion>
+If a default domain is configured, a subdomain is auto-suggested based on the site name.
 
-  <Accordion title="Search & Replace" icon="magnifying-glass">
-    Run database search & replace (with serialized data handling) directly from the panel. Essential for domain migrations.
-  </Accordion>
+### License & Plan Checks
 
-  <Accordion title="PHP Version" icon="code">
-    Change the PHP version with zero downtime. The container rebuilds with the new PHP version in the background.
-  </Accordion>
-
-  <Accordion title="Caching" icon="bolt">
-    Toggle FastCGI page caching and Redis object caching per-site. Clear the cache from the panel with one click.
-  </Accordion>
-</AccordionGroup>
+If the user has no active subscription, has reached their plan's site limit, or there's a license issue, a contextual alert appears before the creation form — with a direct link to fix the underlying problem.
 
 ---
 
-## Bulk Operations
+## Site Actions
 
-Select multiple sites from the list to run operations across all of them simultaneously:
+From the grid or table, each site has two quick-action buttons:
 
-- **Bulk Update** — Update WordPress core, plugins, themes
-- **Bulk Backup** — Create snapshots of multiple sites
-- **Bulk Cache Clear** — Flush caches across all selected sites
-- **Bulk Clone** — Clone a site template to multiple domains
+| Button | Action |
+|--------|--------|
+| **Visit Site** | Opens the live domain in a new tab |
+| **WordPress Admin** | Opens the WP Admin dashboard with auto-login (disabled if site is stopped) |
 
 ---
 
-## WP Pipeline (CI/CD)
+## WP Pipeline
 
 **Path:** `/wordpress/projects`
 
 <Info>
-WP Pipeline is available when WordPress is installed on the server. It requires Git integration to be configured.
+WP Pipeline is available when the built-in Gitea integration is configured (see [Git](/infrastructure/git)).
 </Info>
 
-The WP Pipeline provides a Git-based CI/CD workflow for WordPress development.
+The WP Pipeline provides a Git-based deployment workflow for WordPress projects:
 
-### How It Works
-
-1. Connect a Git repository (GitHub, GitLab, Bitbucket)
-2. Define environments (development, staging, production)
-3. Push to a branch → AreaWP deploys automatically
-4. Run pre/post-deploy hooks (composer install, WP-CLI commands, cache clear)
-
-### Pipeline Configuration
-
-```yaml
-# .areawp-pipeline.yml
-environments:
-  staging:
-    branch: develop
-    server: server-1
-    domain: staging.mysite.com
-    hooks:
-      post-deploy:
-        - wp cache flush
-        - wp cron event run --due-now
-
-  production:
-    branch: main
-    server: server-1
-    domain: mysite.com
-    requires_approval: true
-    hooks:
-      post-deploy:
-        - wp cache flush
-        - wp search-replace staging.mysite.com mysite.com
-```
-
----
-
-## Templates
-
-Site templates let you pre-configure a WordPress setup (plugins, themes, settings) and deploy it instantly for new clients.
-
-### Creating a Template
-
-1. Set up a WordPress site exactly as you want
-2. Go to site settings → **Save as Template**
-3. Give it a name and description
-4. The template is available for future deployments
-
-<Tip>
-Templates are also available in **Services → Templates** for client-facing self-service deployments.
-</Tip>
+- Connect a repository to a WordPress site
+- Define environments (staging, production)
+- Push to a branch to trigger an automatic deployment
+- Configure pre and post-deploy hooks (WP-CLI commands, cache flush, etc.)
+- View deployment history and roll back with one click

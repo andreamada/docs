@@ -1,172 +1,112 @@
 ---
 title: "Settings"
-description: "Configure all platform-wide settings including branding, security, billing, and integrations."
+description: "Platform-wide configuration hub with 17 categories — profile, security, appearance, white-label, email, integrations, licensing, and more."
 icon: "gear"
 ---
 
 <Info>
 **Path:** Administration → Settings (`/settings`) — Admin only
 
-Settings is the central configuration hub for your AreaWP platform. Changes here affect all users and the platform globally.
+Settings uses a left sidebar navigation to switch between categories. Changes in most tabs take effect immediately on save.
 </Info>
 
 ## Settings Categories
 
-<CardGroup cols={3}>
-  <Card title="General" icon="gear" color="#6366f1">
-    Platform name, domain, language, timezone
-  </Card>
-  <Card title="White Label" icon="palette" color="#10b981">
-    Brand name, logo, colors
-  </Card>
-  <Card title="Security" icon="shield" color="#ef4444">
-    2FA enforcement, session timeout, login policy
-  </Card>
-  <Card title="Billing" icon="credit-card" color="#f59e0b">
-    Currency, tax, trial settings, invoices
-  </Card>
-  <Card title="Email" icon="envelope" color="#8b5cf6">
-    SMTP configuration and email templates
-  </Card>
-  <Card title="License" icon="key" color="#06b6d4">
-    License key and validation status
-  </Card>
-</CardGroup>
-
----
-
-## General Settings
-
-| Setting | Description |
-|---------|-------------|
-| **Platform name** | Your company/platform name |
-| **Primary domain** | The main domain for the panel (e.g. `panel.yourcompany.com`) |
-| **Default language** | UI language for new users |
-| **Timezone** | Server and UI timezone (affects cron and schedules) |
-| **Date format** | How dates are displayed in the UI |
-| **Registration** | Allow/disallow public user registration |
-| **Platform mode** | SaaS or WaaS |
+| Category | What You Configure |
+|----------|-------------------|
+| **Profile** | Account name, email, password |
+| **Security** | 2FA, session timeout, login policy, allowed IPs |
+| **Appearance** | Dashboard theme, colors |
+| **Languages** | UI language, timezone, date format |
+| **Sidebar** | Default sidebar preset for all users |
+| **White Label** | Brand name, logo, favicon, primary color |
+| **Notifications** | Email/Slack/webhook alert routing |
+| **Site Settings** | Default domain, registration, platform mode |
+| **Integrations** | Cloud provider API keys, third-party connections |
+| **Email** | SMTP configuration and email templates |
+| **Privacy / GDPR** | Cookie policy, data retention, privacy settings |
+| **SSO** | OAuth/SAML single sign-on providers |
+| **API** | API key management for external integrations |
+| **Migration** | Import/export history and tools |
+| **System Info** | Server specs, versions, environment details |
+| **Licensing** | License key validation and status |
 
 ---
 
 ## White Label
 
-Customize the platform appearance for your clients:
+Make the platform your own:
 
 | Setting | Description |
 |---------|-------------|
-| **Brand name** | Replaces "AreaWP" throughout the UI |
+| **Brand Name** | Replaces "AreaWP" throughout the UI |
 | **Logo (light mode)** | SVG or PNG, recommended 200×50px |
-| **Logo (dark mode)** | Logo variant for dark theme |
-| **Favicon** | Browser tab icon (32×32 ICO or PNG) |
-| **Mode** | `Text only` (replace text only) or `Full logo` (replace logo + text) |
-| **Primary color** | Main accent color (hex) |
-| **Support URL** | Link to your support portal |
-| **Hide version** | Remove version numbers from the footer |
-
-### White Label Mode
-
-<Tabs>
-  <Tab title="Text Only">
-    AreaWP logos are kept, but all text references to "AreaWP" are replaced with your brand name. Easiest to set up — just enter your brand name and save.
-  </Tab>
-  <Tab title="Full Logo">
-    Both the logos and all text references are replaced. Requires uploading your own logo files. Fully white-labeled experience.
-  </Tab>
-</Tabs>
+| **Logo (dark mode)** | Dark-mode variant |
+| **Favicon** | 32×32 ICO or PNG |
+| **Mode** | `Text only` — replace text; `Full logo` — replace logo + text |
+| **Primary Color** | Main accent color (hex) |
+| **Support URL** | Link shown in the sidebar support link |
+| **Hide Version** | Remove version numbers from the footer |
 
 ---
 
-## Security Settings
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Enforce 2FA for admins** | Off | Require 2FA for all admin accounts |
-| **Session timeout** | 120 min | Auto-logout after inactivity |
-| **Max login attempts** | 5 | Fail2ban trigger threshold |
-| **Password policy** | Medium | Minimum password strength |
-| **API rate limit** | 100 req/min | Requests per minute per IP |
-| **Allowed IP ranges** | Any | Restrict admin panel access by IP |
-
----
-
-## Email / SMTP
-
-Configure the outgoing email server for platform notifications, invoices, and user communications:
+## Email (SMTP)
 
 | Field | Description |
 |-------|-------------|
-| **SMTP host** | Mail server hostname (e.g. `smtp.sendgrid.net`) |
-| **SMTP port** | 587 (STARTTLS) or 465 (SMTPS) |
-| **Username** | SMTP authentication username |
-| **Password** | SMTP authentication password |
-| **From email** | Sender address (e.g. `noreply@yourplatform.com`) |
-| **From name** | Sender display name |
+| **SMTP Host** | Mail server hostname |
+| **SMTP Port** | 587 (STARTTLS) or 465 (SMTPS) |
+| **Username** | SMTP auth username |
+| **Password** | SMTP auth password |
+| **From Email** | Sender address |
+| **From Name** | Sender display name |
 
-### Testing SMTP
-
-Click **Send Test Email** after saving SMTP settings. AreaWP sends a test message to the admin email address to verify the configuration.
+Click **Send Test Email** after saving to verify the configuration.
 
 ### Email Templates
 
-Customize the content and branding of platform emails:
-
-| Template | Trigger |
-|---------|---------|
-| Welcome email | New user registration |
-| Email verification | Account created, requires verification |
-| Password reset | User requests password reset |
-| Invoice | Payment processed |
-| Subscription renewal | Upcoming renewal reminder |
-| Payment failed | Stripe charge failed |
-| Subscription canceled | Subscription canceled |
-| Backup complete | Backup job finished |
-| Backup failed | Backup job error |
+Customize the content and branding of platform emails — welcome, verification, password reset, invoice, renewal reminder, payment failed, cancellation, backup complete/failed.
 
 ---
 
-## License
+## Security
+
+| Setting | Default |
+|---------|---------|
+| **Enforce 2FA for Admins** | Off |
+| **Session Timeout** | 120 minutes |
+| **Max Login Attempts** | 5 |
+| **Password Policy** | Medium |
+| **API Rate Limit** | 100 req/min per IP |
+| **Allowed IP Ranges** | Any |
+
+---
+
+## Licensing
 
 | Field | Description |
 |-------|-------------|
-| **License key** | Your AreaWP license key (`xxxxx-xxxxx-xxxxx`) |
+| **License Key** | Your AreaWP license key |
 | **Status** | Active / Suspended / Expired |
-| **Domain** | Domain the license is registered to |
-| **Plan** | License tier (Starter / Pro / Business / Enterprise) |
-| **Max sites** | Site limit per your license |
+| **Domain** | Registered domain for this license |
+| **Plan** | License tier |
+| **Max Sites** | Site limit from your license |
 | **Expires** | License expiry date |
 
-### Validating / Refreshing
-
-Click **Validate License** to force a fresh check against the AreaWP license server. Use this after purchasing, renewing, or changing your domain.
+Click **Validate License** to force a fresh check against the license server. Useful after purchase, renewal, or domain change.
 
 <Info>
-License validation happens automatically every 6 hours. If the server is offline, AreaWP uses a cached result valid for up to 14 days.
+License validation runs automatically every 6 hours. If the server is offline, the cached result is valid for up to 14 days.
 </Info>
 
 ---
 
-## Notifications
+## Integrations
 
-Configure where platform alerts are sent:
+Connect cloud providers to enable VPS provisioning from **Servers → Cloud**:
 
-| Channel | Usage |
-|---------|-------|
-| **Email** | All critical alerts (payment failure, security events) |
-| **Slack** | Real-time operational alerts |
-| **Webhook** | Custom integrations |
-| **Telegram** | Team notifications |
-
-Configure notification rules by category: billing, security, backups, uptime, system.
-
----
-
-## Cloud Provider API Keys
-
-Connect cloud providers to enable VPS provisioning from AreaWP:
-
-| Provider | Key Type |
-|---------|---------|
+| Provider | Credential |
+|---------|-----------|
 | DigitalOcean | Personal Access Token |
 | Hetzner | API Token |
 | Vultr | API Key |
@@ -174,12 +114,10 @@ Connect cloud providers to enable VPS provisioning from AreaWP:
 
 ---
 
-## Sidebar Customization
+## SSO
 
-Adjust the default sidebar layout for all users:
+Configure single sign-on for admin and user accounts:
+- **OAuth providers** — GitHub, Google, Microsoft
+- **SAML** — enterprise identity providers
 
-1. Go to **Settings → Sidebar**
-2. Choose the default preset (Full, Web Hosting, DevOps, etc.)
-3. Save — new users start with this preset
-
-Users can still customize their own sidebar from the user menu.
+Each provider requires a client ID, client secret, and callback URL configuration on the provider side.

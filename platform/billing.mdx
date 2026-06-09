@@ -1,152 +1,92 @@
 ---
 title: "Billing"
-description: "Manage your subscription, payment method, and invoices from the client billing portal."
+description: "Client self-service billing portal — view your current plan, manage payment methods, renew or cancel, and download invoices."
 icon: "credit-card"
 ---
 
 <Info>
 **Path:** Billing (`/billing`) — Client users only
 
-The Billing section is the self-service portal for clients to manage their subscription and payment details. Admins see the full transaction history under Administration instead.
+The Billing page is the self-service portal for clients. Admins manage billing from **Administration → Subscriptions** and **Administration → Transactions** instead.
 </Info>
 
-## Billing Overview
+## Subscription Summary
 
-The Billing page gives clients a clear view of their current subscription and payment history:
+The top section shows the current subscription at a glance.
 
-<CardGroup cols={3}>
-  <Card title="Current Plan" icon="tag" color="#6366f1">
-    Active plan name, price, and features
-  </Card>
-  <Card title="Next Renewal" icon="calendar" color="#10b981">
-    Date and amount of next charge
-  </Card>
-  <Card title="Payment Method" icon="credit-card" color="#f59e0b">
-    Saved card or bank transfer status
-  </Card>
-</CardGroup>
+### Suspension Warning
 
----
+If the subscription is expired or suspended, a prominent warning banner appears at the top with instructions to renew or contact support.
 
-## Current Subscription
-
-The subscription summary shows:
+### Subscription Card
 
 | Field | Description |
 |-------|-------------|
-| **Plan** | Current pricing plan name |
-| **Status** | Active / Trial / Suspended / Canceled |
-| **Billing period** | Monthly or yearly |
-| **Period start** | When the current period began |
-| **Period end** | When the current period ends |
-| **Next charge** | Amount and date of next renewal |
-| **Payment method** | How renewals are charged |
+| **Plan Name** | Current pricing plan |
+| **Status** | Active / Trial / Suspended / Cancelled badge |
+| **Price** | Amount with tax breakdown |
+| **Billing Period** | Monthly or yearly |
+| **Payment Method** | How the subscription is charged |
+| **Next Renewal Date** | When the next charge is scheduled |
+| **Features** | List of included plan features |
+
+### Actions
+
+- **Renew** — opens the **Renew Plan Modal** to select payment method and confirm
+- **Change Plan** — opens the plan selector to upgrade or downgrade
+- **Cancel Subscription** — opens the **Cancel Dialog** with scheduling options
+- **Undo Cancellation** — reverses a pending cancellation before it takes effect
 
 ---
 
-## Managing Your Subscription
+## Renew Plan Modal
 
-### Upgrade / Downgrade
+Allows the client to renew before the current period ends:
 
-1. Click **Change Plan** on the Billing page
-2. Browse available plans and their features
-3. Select a new plan
-4. Confirm the change
-
-**Upgrades** take effect immediately. The difference in price is prorated for the remainder of the current period.
-
-**Downgrades** take effect at the start of the next billing period. You keep full access to the current plan until then.
-
-### Cancel Subscription
-
-1. Click **Cancel Subscription**
-2. Review what happens after cancellation (access until period end)
-3. Optionally provide a cancellation reason
-4. Confirm
-
-Your subscription remains **Active** until the end of the current period. After that, access is downgraded or removed based on platform settings.
-
-<Info>
-Canceling a subscription does not delete your sites or data immediately. Contact support to recover data after cancellation if needed.
-</Info>
+1. Select payment method
+2. If **Bank Transfer** is selected — bank account instructions are shown
+3. Confirm — for card/PayPal/Tap, redirected to payment gateway; for Bank Transfer, subscription stays Pending until admin approval
 
 ---
 
-## Payment Methods
+## Billing History
 
-### Adding a Card (Stripe)
-
-1. Click **Add Payment Method**
-2. Enter your card details in the Stripe-hosted form
-3. Card is saved securely by Stripe (AreaWP never stores raw card numbers)
-4. New card becomes the default for future renewals
-
-### Updating a Card
-
-Replace an expired or invalid card:
-
-1. Click **Update Payment Method**
-2. Enter new card details
-3. Save — future renewals use the new card
-
-### Bank Transfer
-
-If your platform uses Bank Transfer as a payment method, you'll see your invoices with payment instructions. After sending the transfer, contact support to have your payment confirmed.
-
----
-
-## Invoices
-
-All invoices are listed with download links:
+Table of all invoices:
 
 | Column | Description |
 |--------|-------------|
-| **Invoice #** | Unique invoice number |
+| **Invoice Number** | Unique identifier |
 | **Date** | Issue date |
-| **Description** | What was billed |
-| **Amount** | Total charged |
-| **Status** | Paid / Pending / Failed |
-| **PDF** | Download PDF invoice |
+| **Description** | Plan name and period |
+| **Amount** | Charged amount |
+| **Method** | Payment method used |
+| **Status** | Paid / Pending / Failed badge |
 
-Click any invoice to view full details including line items and tax breakdown.
-
----
-
-## Resource Usage
-
-The Billing page also shows your current resource usage vs plan limits:
-
-| Resource | Used | Limit |
-|---------|------|-------|
-| Sites | 2 | 5 |
-| Databases | 4 | 10 |
-| Storage | 12 GB | 20 GB |
-| Backups | 14 | — |
-
-<Tip>
-If you're approaching your plan limits, click **Upgrade Plan** to get more resources before you hit the cap and new deployments are blocked.
-</Tip>
+**Per-invoice actions:**
+- **View** — opens the invoice as a PDF in an iframe viewer
+- **Download** — save the PDF to your computer
 
 ---
 
-## Billing Help
+## Payment Return Screen
 
-Having billing issues?
+When returning from an external payment gateway (PayPal, Stripe redirect flow), the Billing page briefly shows a confirmation screen before returning to the normal billing view.
+
+---
+
+## Help
 
 <AccordionGroup>
   <Accordion title="Payment failed">
-    If your payment failed, check that your card is valid and has sufficient funds. Update your payment method and click **Retry Payment** to attempt the charge again immediately.
+    Check that your card is valid and has sufficient funds. Update your payment method and click **Renew** to retry immediately.
   </Accordion>
-
   <Accordion title="Subscription suspended">
-    If your subscription is suspended, add a valid payment method and click **Reactivate Subscription**. Your sites and data are preserved during suspension.
+    Add a valid payment method and renew. Your sites and data are preserved during suspension.
   </Accordion>
-
   <Accordion title="Request a refund">
-    Contact support with your invoice number to request a refund. Refunds are processed within 5–10 business days for card payments.
+    Contact support with your invoice number. Stripe refunds process in 5–10 business days.
   </Accordion>
-
   <Accordion title="Need a VAT invoice">
-    Ensure your billing details include your company name and VAT number under **Account → Profile**. Future invoices will include this information automatically.
+    Ensure your company name and VAT number are set in your account profile. Future invoices will include them automatically.
   </Accordion>
 </AccordionGroup>

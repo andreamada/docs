@@ -1,31 +1,27 @@
 ---
 title: "Servers"
-description: "Manage multiple Linux servers from a single dashboard using the AreaWP agent system."
+description: "Manage your entire server fleet — connect agents, monitor health, provision cloud servers, and apply configuration templates."
 icon: "server"
 ---
 
 <Info>
-**Path:** Servers (`/servers`)
+**Path:** Servers (`/servers`) — Admin only
 
-The Servers section is the hub for multi-server management. Connect unlimited Linux servers via the lightweight AreaWP agent and manage them all from one place.
+The Servers section is the hub for multi-server management. It contains four sub-sections: Agent Fleet, Fleet Monitor, Cloud Servers, and Server Templates.
 </Info>
 
-## Overview
-
-AreaWP uses an agent-based architecture. A small Go binary (the **agent**) is installed on each server you want to manage. The agent connects back to your panel over a secure WebSocket and handles all system operations.
-
 <CardGroup cols={2}>
-  <Card title="Agent Fleet" icon="users" href="#agent-fleet">
-    View and manage all connected servers
+  <Card title="Agent Fleet" icon="users" color="#6366f1">
+    Register and manage all connected servers
   </Card>
-  <Card title="Fleet Monitor" icon="chart-line" href="#fleet-monitor">
-    Real-time metrics across all servers
+  <Card title="Fleet Monitor" icon="chart-line" color="#10b981">
+    Real-time metrics heatmap and alerts across all servers
   </Card>
-  <Card title="Cloud Servers" icon="cloud" href="#cloud-servers">
-    Provision new VPS on cloud providers
+  <Card title="Cloud Servers" icon="cloud" color="#f59e0b">
+    Provision new VPS instances on cloud providers
   </Card>
-  <Card title="Server Templates" icon="file-code" href="#server-templates">
-    Save and reuse server configurations
+  <Card title="Server Templates" icon="file-code" color="#8b5cf6">
+    Define and enforce server configurations fleet-wide
   </Card>
 </CardGroup>
 
@@ -35,49 +31,64 @@ AreaWP uses an agent-based architecture. A small Go binary (the **agent**) is in
 
 **Path:** `/fleet`
 
-The Agent Fleet page lists every server with an installed agent.
+### Fleet Health Summary
 
-### Server Status
+Four stat cards at a glance:
 
-| Status | Meaning |
-|--------|---------|
-| 🟢 Online | Agent connected and responding |
-| 🔴 Offline | Agent not reachable |
-| 🟡 Warning | Connected but resource threshold exceeded |
+| Card | Shows |
+|------|-------|
+| **Total Agents** | All registered servers |
+| **Online** | Currently connected agents |
+| **Offline** | Unreachable agents |
+| **Success Rate** | Percentage of agents responding normally |
+
+Below the cards: uptime %, heartbeat latency, and queued command count. A **Version Distribution** card shows what percentage of your fleet is on each agent version.
+
+### Fleet Tabs
+
+<AccordionGroup>
+  <Accordion title="Dashboard" icon="gauge">
+    Health overview with uptime graphs, latency metrics, and version distribution across the fleet.
+  </Accordion>
+  <Accordion title="Versions" icon="tag">
+    All agent versions in the fleet — version number, release channel, published date, compatibility status, edit/delete actions.
+  </Accordion>
+  <Accordion title="Rollouts" icon="arrows-rotate">
+    Trigger fleet-wide agent upgrades. Choose a strategy:
+    - **All at once** — upgrade all agents simultaneously
+    - **Staged** — upgrade in batches with configurable delay
+    - **Canary** — upgrade a small percentage first, then roll out
+
+    Monitor rollout progress (processed / total / failed) and cancel any in-progress rollout.
+  </Accordion>
+  <Accordion title="Command Queue" icon="list">
+    Commands queued for offline agents. Retry any queued command manually.
+  </Accordion>
+  <Accordion title="Discovery" icon="magnifying-glass">
+    Scan the local network for new agents. Discovered servers appear as cards with hostname, IP, OS, and version. Add to the fleet with one click.
+  </Accordion>
+  <Accordion title="Approvals" icon="check">
+    Approve or reject pending agent registration requests.
+  </Accordion>
+</AccordionGroup>
 
 ### Connecting a New Server
 
 <Steps>
-  <Step title="Click Add Server">
-    On the Agent Fleet page, click **Add Server**.
-  </Step>
-
-  <Step title="Enter server details">
-    Give the server a name and optional description. Select the OS type.
-  </Step>
-
-  <Step title="Run the install command">
-    Copy the generated install command and run it on the target server as root:
-
+  <Step title="Run the install command on the target server">
     ```bash
     curl -fsSL https://your-panel.com/install.sh | sudo bash -s -- \
       --token "sk_reg_YOUR_TOKEN" \
       --server "https://your-panel.com"
     ```
   </Step>
-
-  <Step title="Agent connects automatically">
-    The agent registers with your panel within seconds. The server appears as **Online** in the fleet.
+  <Step title="Agent auto-registers">
+    The agent installs as a systemd service, connects via WebSocket, and appears in the **Approvals** tab (or the fleet list directly if auto-approve is on).
+  </Step>
+  <Step title="View agent diagnostics">
+    Click any agent to open the diagnostics modal — connection status, latency, command stats, recent sessions.
   </Step>
 </Steps>
-
-### Server Actions
-
-From the fleet list, you can:
-- **View details** — OS, kernel version, package updates available
-- **SSH Terminal** — open a browser-based terminal session
-- **Restart agent** — reconnect a disconnected agent
-- **Remove server** — unregister and optionally uninstall the agent
 
 ---
 
@@ -85,27 +96,24 @@ From the fleet list, you can:
 
 **Path:** `/fleet-monitor`
 
-The Fleet Monitor provides a real-time dashboard of all server metrics simultaneously.
+Real-time monitoring across all connected servers simultaneously.
 
-### Metrics Displayed
+| Tab | Content |
+|-----|---------|
+| **Overview** | Color-coded heatmap — CPU, memory, disk, container count, status per server |
+| **Comparison** | Select servers + metric + period → area chart with CSV export |
+| **Alerts** | Active/acknowledged/resolved alerts + threshold configuration |
+| **Anomalies & Forecast** | Z-score anomaly detection; capacity forecasting to 90%/100% |
+| **Fleet Search** | Search across servers, containers, and tags |
 
-| Metric | Update Frequency |
-|--------|----------------|
-| CPU usage (%) | Every 5 seconds |
-| Memory usage (GB / %) | Every 5 seconds |
-| Disk usage (GB / %) | Every 30 seconds |
-| Network in/out (Mbps) | Every 5 seconds |
-| Load average (1m/5m/15m) | Every 5 seconds |
-| Active connections | Every 10 seconds |
+### Heatmap Color Scale
 
-### Threshold Alerts
-
-Set resource thresholds in **Settings → Monitoring** to receive alerts when a server exceeds a limit:
-
-- CPU > 80% for more than 5 minutes
-- RAM > 90%
-- Disk > 85%
-- Load average > (number of CPUs × 2)
+| Color | Usage |
+|-------|-------|
+| 🟢 Green | 0–50% |
+| 🟡 Yellow | 50–75% |
+| 🟠 Orange | 75–90% |
+| 🔴 Red | 90–100% |
 
 ---
 
@@ -113,28 +121,11 @@ Set resource thresholds in **Settings → Monitoring** to receive alerts when a 
 
 **Path:** `/cloud`
 
-Provision new cloud VPS instances directly from AreaWP without leaving the panel.
+Provision cloud VPS instances directly from AreaWP (requires provider API key in Settings):
 
-### Supported Providers
+- DigitalOcean, Hetzner, Vultr, Linode
 
-| Provider | Regions | Instance Types |
-|---------|---------|---------------|
-| DigitalOcean | All regions | Droplets (shared/dedicated) |
-| Hetzner | EU + US | CX, CPX, CCX |
-| Vultr | All regions | Cloud Compute, High Frequency |
-| Linode (Akamai) | All regions | Nanode, Linode plans |
-
-### Provisioning a Server
-
-1. Go to **Servers → Cloud Servers**
-2. Click **New Server**
-3. Select your cloud provider (API key required)
-4. Choose region, instance type, and OS
-5. Click **Provision** — AreaWP creates the VPS and automatically installs the agent
-
-<Tip>
-Connect your cloud provider API keys in **Administration → Settings → Cloud Providers**.
-</Tip>
+After provisioning, the agent is automatically installed on the new server.
 
 ---
 
@@ -142,17 +133,17 @@ Connect your cloud provider API keys in **Administration → Settings → Cloud 
 
 **Path:** `/server-templates`
 
-Save your server configurations as templates to quickly provision new servers with identical setups.
+Define configuration templates and enforce them fleet-wide.
 
-### What Templates Store
+### Compliance Bar
 
-- Installed packages and versions
-- Nginx/Apache configuration
-- PHP versions and extensions
-- Firewall rules (UFW)
-- Cron jobs
-- Environment variables
+Shows at the top of the Templates page:
+- ✅ **Compliant** — servers matching the template
+- ⚠️ **Drifted** — servers that have diverged from the template
+- ❓ **Unknown** — servers not yet checked
 
-### Using a Template
+Enable **auto-remediate** on a template to re-apply it automatically when drift is detected.
 
-When provisioning a cloud server, select a saved template. AreaWP runs the template's provisioning script after the base OS is ready.
+### Template Library
+
+Pre-built templates (LEMP stack, WordPress server, Docker host, etc.) in the **Library** tab. Click **Use** to create a customizable copy.

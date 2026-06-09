@@ -1,125 +1,115 @@
 ---
 title: "Databases"
-description: "Create and manage MySQL and PostgreSQL databases across your connected servers."
+description: "Create and manage MySQL, PostgreSQL, and SQLite databases with a built-in query runner, table browser, user management, and backups."
 icon: "database"
 ---
 
 <Info>
 **Path:** Databases (`/databases`) — Admin only
 
-The Databases section provides a centralized interface for managing all databases on your connected servers.
+Manage databases across your connected servers — organized by engine type across four tabs.
 </Info>
 
-## Supported Engines
+## MySQL & PostgreSQL Tabs
 
-| Engine | Versions | Use Case |
-|--------|---------|---------|
-| **MySQL** | 5.7, 8.0, 8.4 | WordPress, PHP apps, general purpose |
-| **MariaDB** | 10.6, 10.11, 11.x | Drop-in MySQL replacement |
-| **PostgreSQL** | 14, 15, 16 | AreaWP panel, Python/Node apps |
+Both tabs follow the same layout.
 
----
+### Databases View
 
-## Creating a Database
+Lists all databases on the server with name, size, and type. Three actions per database:
 
-<Steps>
-  <Step title="Navigate to Databases">
-    Click **New Database** from the Databases page.
-  </Step>
+| Action | Description |
+|--------|-------------|
+| **View Tables** | Opens the Database Explorer modal |
+| **Backup** | Creates a dump of the database |
+| **Drop** | Permanently deletes the database |
 
-  <Step title="Choose server and engine">
-    Select which connected server to create the database on and which engine (MySQL/MariaDB/PostgreSQL).
-  </Step>
+### Users View
 
-  <Step title="Configure the database">
-    | Field | Description |
-    |-------|-------------|
-    | **Database Name** | The database identifier (lowercase, no spaces) |
-    | **Username** | Dedicated database user |
-    | **Password** | Auto-generated strong password (or set manually) |
-    | **Character Set** | Default: `utf8mb4` for MySQL, `UTF8` for PostgreSQL |
-    | **Collation** | Default: `utf8mb4_unicode_ci` |
-  </Step>
+Switch to the Users view (toggle button next to the Databases button) to see all database users with their username and host. Drop any user with the **Drop** action.
 
-  <Step title="Set permissions">
-    Choose what the user can do: ALL PRIVILEGES, SELECT only, or custom (INSERT, UPDATE, DELETE, etc.).
-  </Step>
-</Steps>
+### Creating a Database
 
----
+Click **Create Database** to open the creation modal:
 
-## Database Operations
-
-From each database's detail page:
-
-<AccordionGroup>
-  <Accordion title="phpMyAdmin / pgAdmin" icon="table">
-    Open the database admin interface directly from AreaWP. Authentication is handled automatically — no separate login required.
-  </Accordion>
-
-  <Accordion title="Import / Export" icon="arrows-up-down">
-    Import a `.sql` file or export the database as a SQL dump directly from the panel. Supports gzip compression for large databases.
-  </Accordion>
-
-  <Accordion title="Query Runner" icon="code">
-    Run SQL queries directly from the panel without opening phpMyAdmin. Results are displayed in a table view.
-  </Accordion>
-
-  <Accordion title="User Management" icon="users">
-    Add, remove, or modify database users and their permissions. Grant access to specific tables if needed.
-  </Accordion>
-
-  <Accordion title="Performance" icon="chart-bar">
-    View slow query logs, table sizes, index usage, and connection counts. Identify performance bottlenecks without SSH.
-  </Accordion>
-
-  <Accordion title="Clone Database" icon="copy">
-    Clone a database to the same server or a different connected server. Useful for creating staging copies.
-  </Accordion>
-</AccordionGroup>
+<Tabs>
+  <Tab title="MySQL">
+    | Field | Options |
+    |-------|---------|
+    | Database name | Lowercase alphanumeric |
+    | Charset | utf8mb4 (default), latin1, etc. |
+    | Collation | utf8mb4_unicode_ci (default) |
+    | Create user | Checkbox — auto-creates a dedicated user |
+    | Password | Auto-generated or manual |
+  </Tab>
+  <Tab title="PostgreSQL">
+    | Field | Options |
+    |-------|---------|
+    | Database name | Lowercase alphanumeric |
+    | Encoding | UTF8 (default), LATIN1, SQL_ASCII |
+    | Create user | Checkbox — auto-creates a dedicated user |
+    | Password | Auto-generated or manual |
+  </Tab>
+</Tabs>
 
 ---
 
-## Backups
+## Database Explorer
 
-Databases can be backed up independently from site backups:
+The explorer opens as a modal when you click **View Tables** on any database.
 
-1. Go to **Databases** → select a database → **Backup**
-2. Choose the backup destination (local, S3, Backblaze B2)
-3. Download or restore from any saved backup
+<CardGroup cols={2}>
+  <Card title="Table Sidebar" icon="list" color="#6366f1">
+    Searchable list of all tables with row counts. Click any table to load its schema and data.
+  </Card>
+  <Card title="SQL Runner" icon="code" color="#10b981">
+    Run any SQL query directly — supports Ctrl+Enter. Results appear in the table below.
+  </Card>
+</CardGroup>
 
-<Tip>
-For automated database backups, create a backup schedule in **Operations → Backups**.
-</Tip>
+### Columns View
 
----
+Shows each column's name, data type, and constraint badges:
+- **PK** — Primary Key
+- **NN** — Not Null
 
-## Connection Strings
+### Data View
 
-AreaWP displays the connection string for each database in a format ready to paste into your app's configuration:
-
-```env
-# MySQL / MariaDB
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=myapp_db
-DB_USER=myapp_user
-DB_PASSWORD=generated_password
-
-# PostgreSQL
-DATABASE_URL=postgresql://myapp_user:generated_password@localhost:5432/myapp_db
-```
+Editable table showing the rows in the selected table. Admins can edit cell values inline and delete rows. A separate **Edit** modal provides a form view for all columns of a selected row.
 
 ---
 
-## Remote Access
+## Docker Apps Tab
 
-By default, databases only accept connections from `localhost`. To allow remote connections:
+Lists Docker apps that have an associated database. Shows the app status and port, and provides a **View Databases** button that opens a modal with the database connection string.
 
-1. Go to the database settings → **Remote Access**
-2. Enter the allowed IP address or CIDR range
-3. AreaWP updates the database grants and firewall rules automatically
+---
 
-<Warning>
-Never expose database ports (3306, 5432) publicly. Always use IP whitelisting or SSH tunneling for remote access.
-</Warning>
+## Backups Tab
+
+Backup list for all databases. Filter by type (All / MySQL / PostgreSQL).
+
+| Column | Description |
+|--------|-------------|
+| **Database** | Database name |
+| **Filename** | Backup file name |
+| **Size** | File size |
+| **Created** | Backup timestamp |
+| **Type** | MySQL or PostgreSQL badge |
+
+Delete any backup from the list.
+
+---
+
+## SQLite Tab
+
+Scans the server filesystem for SQLite database files. Shows the database name, file path, and size. Click **Tables** to browse the schema and data using the same Explorer interface.
+
+---
+
+## Creating a Database User
+
+From the Users view, click **Create User** to add a new user:
+
+- **MySQL:** username, password (with auto-generate), host (`localhost` / `%` / `127.0.0.1`), and optional grant to an existing database
+- **PostgreSQL:** username, password, and optional grant to an existing database
